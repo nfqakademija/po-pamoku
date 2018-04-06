@@ -9,6 +9,8 @@ Prieš pradedant reikia:
 
  - `composer install`
  - `yarn install`
+ - `php bin/console doctrine:migrations:diff`
+ - `php bin/console doctrine:migrations:migrate`
 
 Ką mes turim:
 
