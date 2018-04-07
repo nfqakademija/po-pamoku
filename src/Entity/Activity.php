@@ -45,7 +45,7 @@ class Activity
     /**
      * @ORM\Column(type="float")
      */
-    private $priceFrom;
+    private $priceTo;
 
     /**
      * @ORM\Column(type="integer")
@@ -63,9 +63,9 @@ class Activity
     private $pathToLogo;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Subcategory")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Subcategory")
      */
-    private $subcategories;
+    private $subcategory;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Timetable")
