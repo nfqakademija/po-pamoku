@@ -19,16 +19,17 @@ class ClubRepository extends ServiceEntityRepository
         parent::__construct($registry, Club::class);
     }
 
-    /*
+
     public function findBySomething($value)
     {
-        return $this->createQueryBuilder('a')
-            ->where('a.something = :value')->setParameter('value', $value)
-            ->orderBy('a.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        $qb = $this->createQueryBuilder('c')
+            ->select('c','a')
+            ->leftJoin('App\Entity\Activity', 'a', 'WITH', 'c.activity_id = a.id')
+            ->andWhere('c.id = :id')
+            ->setParameter('id', $value)
+            ->getQuery();
+
+        return $qb->execute();
     }
-    */
+
 }
