@@ -72,9 +72,118 @@ class Activity
      */
     private $timetables;
 
+
     public function __construct()
     {
-        $this->subcategories = new ArrayCollection();
         $this->timetables = new ArrayCollection();
     }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function setName($name): void
+    {
+        $this->name = $name;
+    }
+
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    public function setDescription($description): void
+    {
+        $this->description = $description;
+    }
+
+    public function getLocation()
+    {
+        return $this->location;
+    }
+
+    public function setLocation($location): void
+    {
+        $this->location = $location;
+    }
+
+    public function getPriceFrom()
+    {
+        return $this->priceFrom;
+    }
+
+    public function setPriceFrom($priceFrom): void
+    {
+        $this->priceFrom = $priceFrom;
+    }
+
+    public function getPriceTo()
+    {
+        return $this->priceTo;
+    }
+
+    public function setPriceTo($priceTo): void
+    {
+        $this->priceTo = $priceTo;
+    }
+
+    public function getAgeFrom()
+    {
+        return $this->ageFrom;
+    }
+
+    public function setAgeFrom($ageFrom): void
+    {
+        $this->ageFrom = $ageFrom;
+    }
+
+    public function getAgeTo()
+    {
+        return $this->ageTo;
+    }
+
+    public function setAgeTo($ageTo): void
+    {
+        $this->ageTo = $ageTo;
+    }
+
+    public function getPathToLogo()
+    {
+        return $this->pathToLogo;
+    }
+
+    public function setPathToLogo($pathToLogo): void
+    {
+        $this->pathToLogo = $pathToLogo;
+    }
+
+    public function getSubcategory()
+    {
+        return $this->subcategory;
+    }
+
+    public function setSubcategory($subcategory): void
+    {
+        $this->subcategory = $subcategory;
+    }
+
+    public function getTimetables()
+    {
+        return $this->timetables;
+    }
+
+    public function addTimetable($timetable)
+    {
+        if ($this->timetables->contains($timetable)) {
+            return;
+        }
+        $this->timetables[] = $timetable;
+    }
+
 }

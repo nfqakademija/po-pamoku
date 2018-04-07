@@ -46,4 +46,62 @@ class Location
      */
     private $postcode;
 
+
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setCity($city): void
+    {
+        $this->city = $city;
+    }
+
+    public function getStreet()
+    {
+        return $this->street;
+    }
+
+    public function setStreet($street): void
+    {
+        $this->street = $street;
+    }
+
+    public function getHouse()
+    {
+        return $this->house;
+    }
+
+    public function setHouse($house): void
+    {
+        $this->house = $house;
+    }
+
+    public function getApartment()
+    {
+        return $this->apartment;
+    }
+
+    public function setApartment($apartment): void
+    {
+        $this->apartment = $apartment;
+    }
+
+    public function getPostcode()
+    {
+        return $this->postcode;
+    }
+
+    public function setPostcode($postcode): void
+    {
+        $this->postcode = $postcode;
+    }
+
+
+
 }
