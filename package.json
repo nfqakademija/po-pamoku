@@ -16,6 +16,7 @@
         "build": "encore production"
     },
     "dependencies": {
+        "axios": "^0.18.0",
         "history": "^4.7.2",
         "isomorphic-fetch": "^2.2.1",
         "prop-types": "^15.6.1",

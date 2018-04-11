@@ -64,16 +64,9 @@ class RestfulController extends FOSRestController implements ClassResourceInterf
 
         $form = $this->createForm(ActivityType::class, $s);
         $serializer = $this->get('jms_serializer');
-//        $response = $serializer->serialize($form->createView(), 'json');
+        $response = $serializer->serialize($form->createView(), 'json');
 
-        $encoders = array(new JsonEncoder());
-        $normalizers = array(new ());
-
-        $serializer = new Serializer($normalizers, $encoders);
-        $initialValues = $serializer->normalize($form);
-
-
-        return new Response($initialValues);
+        return new Response($response);
     }
 
     /**

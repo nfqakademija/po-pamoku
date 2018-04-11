@@ -1,8 +1,7 @@
-import fetch from 'isomorphic-fetch';
+import axios from 'axios';
 
 export function fetchBlogPosts() {
-    return fetch('api/activities', {
-        method: 'GET'
-    }).then(res => res.json())
+    return axios.get('api/activities'
+    ).then(res => res.data)
         .catch(err => err);
 }
