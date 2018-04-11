@@ -36,9 +36,11 @@ class Subcategory
         return $this->category;
     }
 
-    public function setCategory($category): void
+    public function setCategory($category): self
     {
         $this->category = $category;
+
+        return $this;
     }
 
     public function getName()
@@ -46,9 +48,11 @@ class Subcategory
         return $this->name;
     }
 
-    public function setName($name): void
+    public function setName($name): self
     {
         $this->name = $name;
+
+        return $this;
     }
 
     public function getId()

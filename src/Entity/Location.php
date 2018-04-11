@@ -57,9 +57,11 @@ class Location
         return $this->id;
     }
 
-    public function setCity($city): void
+    public function setCity($city): self
     {
         $this->city = $city;
+
+        return $this;
     }
 
     public function getStreet()
@@ -67,9 +69,11 @@ class Location
         return $this->street;
     }
 
-    public function setStreet($street): void
+    public function setStreet($street): self
     {
         $this->street = $street;
+
+        return $this;
     }
 
     public function getHouse()
@@ -77,9 +81,11 @@ class Location
         return $this->house;
     }
 
-    public function setHouse($house): void
+    public function setHouse($house): self
     {
         $this->house = $house;
+
+        return $this;
     }
 
     public function getApartment()
@@ -87,9 +93,11 @@ class Location
         return $this->apartment;
     }
 
-    public function setApartment($apartment): void
+    public function setApartment($apartment): self
     {
         $this->apartment = $apartment;
+
+        return $this;
     }
 
     public function getPostcode()
@@ -97,9 +105,11 @@ class Location
         return $this->postcode;
     }
 
-    public function setPostcode($postcode): void
+    public function setPostcode($postcode): self
     {
         $this->postcode = $postcode;
+
+        return $this;
     }
 
 

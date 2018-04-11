@@ -88,9 +88,11 @@ class Activity
         return $this->name;
     }
 
-    public function setName($name): void
+    public function setName($name): self
     {
         $this->name = $name;
+
+        return $this;
     }
 
     public function getDescription()
@@ -98,9 +100,11 @@ class Activity
         return $this->description;
     }
 
-    public function setDescription($description): void
+    public function setDescription($description): self
     {
         $this->description = $description;
+
+        return $this;
     }
 
     public function getLocation()
@@ -108,9 +112,11 @@ class Activity
         return $this->location;
     }
 
-    public function setLocation($location): void
+    public function setLocation($location): self
     {
         $this->location = $location;
+
+        return $this;
     }
 
     public function getPriceFrom()
@@ -118,9 +124,11 @@ class Activity
         return $this->priceFrom;
     }
 
-    public function setPriceFrom($priceFrom): void
+    public function setPriceFrom($priceFrom): self
     {
         $this->priceFrom = $priceFrom;
+
+        return $this;
     }
 
     public function getPriceTo()
@@ -128,9 +136,11 @@ class Activity
         return $this->priceTo;
     }
 
-    public function setPriceTo($priceTo): void
+    public function setPriceTo($priceTo): self
     {
         $this->priceTo = $priceTo;
+
+        return $this;
     }
 
     public function getAgeFrom()
@@ -138,9 +148,11 @@ class Activity
         return $this->ageFrom;
     }
 
-    public function setAgeFrom($ageFrom): void
+    public function setAgeFrom($ageFrom): self
     {
         $this->ageFrom = $ageFrom;
+
+        return $this;
     }
 
     public function getAgeTo()
@@ -148,9 +160,11 @@ class Activity
         return $this->ageTo;
     }
 
-    public function setAgeTo($ageTo): void
+    public function setAgeTo($ageTo): self
     {
         $this->ageTo = $ageTo;
+
+        return $this;
     }
 
     public function getPathToLogo()
@@ -158,9 +172,11 @@ class Activity
         return $this->pathToLogo;
     }
 
-    public function setPathToLogo($pathToLogo): void
+    public function setPathToLogo($pathToLogo): self
     {
         $this->pathToLogo = $pathToLogo;
+
+        return $this;
     }
 
     public function getSubcategory()
@@ -168,9 +184,11 @@ class Activity
         return $this->subcategory;
     }
 
-    public function setSubcategory($subcategory): void
+    public function setSubcategory($subcategory): self
     {
         $this->subcategory = $subcategory;
+
+        return $this;
     }
 
     public function getTimetables()
@@ -178,12 +196,14 @@ class Activity
         return $this->timetables;
     }
 
-    public function addTimetable($timetable)
+    public function addTimetable($timetable) : self
     {
         if ($this->timetables->contains($timetable)) {
-            return;
+            return $this;
         }
         $this->timetables[] = $timetable;
+
+        return $this;
     }
 
 }

@@ -44,8 +44,8 @@ class LoadSubcategory extends Fixture implements DependentFixtureInterface
         foreach (self::SUBCATEGORIES as $categoryName=>$subcategoryNames) {
             foreach ($subcategoryNames as $subcategoryName) {
                 $subcategory = new Subcategory();
-                $subcategory->setName($subcategoryName);
-                $subcategory->setCategory($this->getReference($categoryName));
+                $subcategory->setName($subcategoryName)
+                ->setCategory($this->getReference($categoryName));
                 $this->addReference($subcategoryName, $subcategory);
                 $manager->persist($subcategory);
             }

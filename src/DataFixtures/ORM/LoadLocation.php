@@ -30,11 +30,12 @@ class LoadLocation extends Fixture implements DependentFixtureInterface
     {
         for ($i = 21; $i <= 70; $i++) {
             $location = new Location();
-            $location->setApartment(rand(1, 84));
-            $location->setHouse(rand(1, 347));
-            $location->setCity($this->getReference(LoadCity::CITY_NAMES[array_rand(LoadCity::CITY_NAMES, 1)]));
-            $location->setStreet(array_rand(self::STREET_NAMES, 1));
-            $location->setPostcode(sprintf('%05d', rand(0, 99999)));
+            $location->setApartment(rand(1, 84))
+            ->setHouse(rand(1, 347))
+            ->setCity($this->getReference(LoadCity::CITY_NAMES[array_rand(LoadCity::CITY_NAMES, 1)]))
+            ->setStreet(array_rand(self::STREET_NAMES, 1))
+            ->setPostcode(sprintf('%05d', rand(0, 99999)));
+
             $this->addReference($i, $location);
             $manager->persist($location);
 

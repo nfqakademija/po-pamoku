@@ -40,9 +40,11 @@ class Category
         return $this->name;
     }
 
-    public function setName($name): void
+    public function setName($name): self
     {
         $this->name = $name;
+
+        return $this;
     }
     
 
