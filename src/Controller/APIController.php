@@ -41,7 +41,6 @@ class APIController extends Controller {
         return new JsonResponse($activityArr);
     }
 
-
     private function activityObjToArray($activity){
         $timetables = array();
         foreach ($activity->getTimetables() as $timetable){

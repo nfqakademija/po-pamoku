@@ -7,9 +7,7 @@
         <table id="activities" class="table table-striped">
             <thead>
             <tr>
-                <th>Būrelis</th>
-                <th>Miestas</th>
-                <th>Kaina</th>
+                <th>Activity Title</th>
                 <th>Actions</th>
             </tr>
             </thead>
@@ -17,10 +15,9 @@
             {% for activity in activities %}
                 <tr>
                     <td>{{ activity.name }}</td>
-                    <td>{{ activity.location.city.name }}</td>
-                    <td>{{ activity.priceFrom }} - {{ activity.priceTo }}</td>
                     <td>
                         <a href="/activity/{{ activity.id }}" class="btn btn-dark">Show</a>
+                        <a href="/activity/edit/{{ activity.id }}" class="btn btn-light">Edit</a>
                     </td>
                 </tr>
             {% endfor %}
