@@ -11,6 +11,18 @@
                 <li class="nav-item">
                     <a href="/" class="nav-link">Home</a>
                 </li>
+                {% if not app.user %}
+                    <li class="nav-item">
+                        <a href="{{ path('registration') }}" class="nav-link">Registruotis</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ path('login') }}" class="nav-link">Prisijungti</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a href="{{ path('logout') }}" class="nav-link">Atsijungti</a>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </div>

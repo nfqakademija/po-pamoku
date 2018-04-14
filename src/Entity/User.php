@@ -4,11 +4,14 @@
 namespace App\Entity;
 
 
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity()
+ * @UniqueEntity(fields={"email"}, message="Email must be unique")
  */
 class User implements UserInterface
 {
@@ -21,11 +24,14 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", unique=true)
+     * @Assert\NotBlank()
+     * @Assert\Email()
      */
     protected $email;
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank(groups={"Register"})
      */
     protected $plainPassword;
 
@@ -36,16 +42,19 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
      */
     protected $name;
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
      */
     protected $surname;
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
      */
     protected $phoneNumber;
 
@@ -63,6 +72,11 @@ class User implements UserInterface
     public function getPassword()
     {
         return $this->password;
+    }
+
+    public function setPassword($password)
+    {
+        $this->password = $password;
     }
 
     public function getSalt()
@@ -149,8 +163,5 @@ class User implements UserInterface
     {
         $this->role = $role;
     }
-
-
-
 
 }

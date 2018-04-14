@@ -1,6 +1,7 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    locale: 'en'
 
 services:
     # default configuration for services in *this* file
@@ -25,7 +26,7 @@ services:
 
     form_authenticator:
         class: App\Security\LoginFormAuthenticator
-        arguments: ['@security.csrf.token_manager', '@router', '@security.password_encoder']
+        arguments: ['@security.csrf.token_manager', '@router', '@security.password_encoder', '@doctrine.orm.entity_manager']
 
     password_hasher:
         class: App\Listeners\PasswordListener

@@ -1,10 +1,11 @@
 security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     encoders:
-        Entity\User : bcrypt
+        App\Entity\User:
+            algorithm: bcrypt
 
     providers:
-        users:
+        all_users:
             entity:
                 class: App\Entity\User
                 property: email
@@ -17,6 +18,12 @@ security:
             guard:
                 authenticators:
                     - form_authenticator
+            logout:
+                path: /logout
+        secured_area:
+            form_login:
+                csrf_token_generator: security.csrf.token_manager
+
 
 
 

@@ -16,7 +16,7 @@ class PasswordListener implements EventSubscriber
 
     public function __construct(UserPasswordEncoder $passwordEncoder)
     {
-        $this->passworEndocer = $passwordEncoder;
+        $this->passwordEncoder = $passwordEncoder;
     }
 
     public function prePersist(LifecycleEventArgs $args)

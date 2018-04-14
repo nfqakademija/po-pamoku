@@ -4,6 +4,8 @@
 namespace App\Security;
 
 
+use App\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,42 +29,39 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     private $csrfTokenManager;
     private $router;
     private $encoder;
+    private $em;
 
     public function __construct(CsrfTokenManagerInterface $csrfTokenManager,
                                 RouterInterface $router,
-                                UserPasswordEncoderInterface $encoder)
+                                UserPasswordEncoderInterface $encoder,
+                                EntityManagerInterface $em)
     {
         $this->csrfTokenManager = $csrfTokenManager;
         $this->router = $router;
         $this->encoder = $encoder;
+        $this->em = $em;
     }
 
     public function supports(Request $request)
     {
-        $isLogin = $request->getPathInfo() == '/login';
+        return $request->getPathInfo() == '/login' && $request->isMethod('POST');
+    }
 
-        if (!$isLogin) {
-            return;
-        }
-
+    public function getCredentials(Request $request)
+    {
         $csrfToken = $request->request->get('_csrf_token');
 
         if (false === $this->csrfTokenManager->isTokenValid(new CsrfToken('authenticate', $csrfToken))) {
             throw new InvalidCsrfTokenException('Invalid CSRF token.');
         }
 
-
-    }
-
-    public function getCredentials(Request $request)
-    {
-        $email = $request->request->get('_email');
-        $request->getSession()->set(Security::LAST_USERNAME, $email);
+        $email = $request->request->get('_username');
         $password = $request->request->get('_password');
+        $request->getSession()->set(Security::LAST_USERNAME, $email);
 
         return [
             'email' => $email,
-            'password' => $password
+            'password' => $password,
         ];
     }
 
@@ -70,19 +69,17 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     {
         $email = $credentials['email'];
 
-        return $userProvider->loadUserByUsername($email);
+        return $this->em->getRepository(User::class)->findOneBy(['email' => $email]);
     }
 
     public function checkCredentials($credentials, UserInterface $user)
     {
         $plainPassword = $credentials['password'];
 
-//        if ($this->encoder->isPasswordValid($user, $plainPassword)) {
-//            return true;
-        if ($plainPassword == 'iliketurtles') {
+        if ($this->encoder->isPasswordValid($user, $plainPassword)) {
             return true;
         }
-        return false;
+
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
@@ -90,7 +87,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         $targetPath = $this->getTargetPath($request->getSession(), $providerKey);
 
         if (!$targetPath) {
-            $targetPath = $this->router->generate('homepage');
+            $targetPath = $this->router->generate('activity_list');
         }
 
         return new RedirectResponse($targetPath);
@@ -101,15 +98,4 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         return $this->router->generate('login');
     }
 
-    public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
-    {
-        $data = array(
-            'message' => strtr($exception->getMessageKey(), $exception->getMessageData())
-
-            // or to translate this message
-            // $this->translator->trans($exception->getMessageKey(), $exception->getMessageData())
-        );
-
-        return new JsonResponse($data, Response::HTTP_FORBIDDEN);
-    }
 }

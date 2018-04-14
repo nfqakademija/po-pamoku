@@ -8,13 +8,16 @@ framework:
     # Remove or comment this section to explicitly disable session support.
     session:
         handler_id: ~
+        save_path: ~
+
 
     #esi: true
     #fragments: true
     php_errors:
         log: true
 
-    csrf_protection: ~
+    csrf_protection: { enabled: true }
+
 
     cache:
         # Put the unique name of your app here: the prefix seed
