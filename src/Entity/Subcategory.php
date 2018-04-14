@@ -30,4 +30,34 @@ class Subcategory
      * @ORM\Column(type="string")
      */
     private $name;
+
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    public function setCategory($category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function setName($name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
 }

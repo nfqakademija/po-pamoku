@@ -36,5 +36,48 @@ class Timetable
      */
     private $timeTo;
 
+    /**
+     * @return mixed
+     */
+    public function getWeekday()
+    {
+        return $this->weekday;
+    }
 
+
+    public function setWeekday($weekday): self
+    {
+        $this->weekday = $weekday;
+
+        return $this;
+    }
+
+    public function getTimeFrom()
+    {
+        return $this->timeFrom;
+    }
+
+    public function setTimeFrom($timeFrom): self
+    {
+        $this->timeFrom = $timeFrom;
+
+        return $this;
+    }
+
+    public function getTimeTo()
+    {
+        return $this->timeTo;
+    }
+
+    public function setTimeTo($timeTo): self
+    {
+        $this->timeTo = $timeTo;
+
+        return $this;
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
 }

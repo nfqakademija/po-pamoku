@@ -21,6 +21,25 @@ class City
      * @ORM\Column(type="string")
      */
     private $name;
+
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function setName($name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
 }
 
 
