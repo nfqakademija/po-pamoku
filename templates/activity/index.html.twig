@@ -23,6 +23,9 @@
             {% endfor %}
             </tbody>
         </table>
+        <div class="navigation">
+            {{ knp_pagination_render(activities) }}
+        </div>
     {% else %}
         <p>No activities to display</p>
     {% endif %}
