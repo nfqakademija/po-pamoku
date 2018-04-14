@@ -3,6 +3,7 @@
 {% block title %}Clubs{% endblock %}
 
 {% block body %}
+<div id="root"></div>
     {% if clubs %}
         <table id="clubs" class="table table-striped">
             <thead>
@@ -28,6 +29,8 @@
     {% endif %}
 {% endblock %}
 
-{% block javascripts %}
-    <script src="/js/main.js"></script>
-{% endblock %}
+
+    {% block javascripts %}
+        <script src="/js/main.js"></script>
+        <script src="{{asset("build/js/index.js")}}"></script>
+    {% endblock %}

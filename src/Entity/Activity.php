@@ -45,7 +45,7 @@ class Activity
     /**
      * @ORM\Column(type="float")
      */
-    private $priceFrom;
+    private $priceTo;
 
     /**
      * @ORM\Column(type="integer")
