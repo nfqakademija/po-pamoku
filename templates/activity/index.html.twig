@@ -21,6 +21,7 @@
                     <td>{{ activity.priceFrom }} - {{ activity.priceTo }}</td>
                     <td>
                         <a href="/activity/{{ activity.id }}" class="btn btn-dark">Show</a>
+                        <a href="/admin/activity/edit/{{ activity.id }}" class="btn btn-light">Edit</a>
                     </td>
                 </tr>
             {% endfor %}

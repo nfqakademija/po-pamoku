@@ -7,6 +7,7 @@
  */
 
 namespace App\Entity;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -28,11 +29,23 @@ class Location
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 50,
+     *      minMessage = "Gatvė negali būti trumpesnis nei {{ limit }} simboliai",
+     *      maxMessage = "Gatvė negali būti ilgesnis nei {{ limit }} simboliai"
+     * )
      */
     private $street;
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      max = 5,
+     *      maxMessage = "Gatvė negali būti ilgesnis nei {{ limit }} simboliai"
+     * )
      */
     private $house;
 
@@ -42,7 +55,14 @@ class Location
     private $apartment;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="integer")
+     * @Assert\Range(
+     *      min = 10000,
+     *      max = 99999,
+     *      minMessage = "Pašto kodą sudaro 5 skaitmenys",
+     *      maxMessage = "Pašto kodą sudaro 5 skaitmenys"
+     * )
+     *
      */
     private $postcode;
 

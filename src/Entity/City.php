@@ -3,6 +3,7 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -19,6 +20,13 @@ class City
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 50,
+     *      minMessage = "Miestas negali būti trumpesnis nei {{ limit }} simboliai",
+     *      maxMessage = "Miestas negali būti ilgesnis nei {{ limit }} simboliai"
+     * )
      */
     private $name;
 

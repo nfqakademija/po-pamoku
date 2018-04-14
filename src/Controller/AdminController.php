@@ -29,7 +29,7 @@ class AdminController extends Controller {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($userData);
             $entityManager->flush();
-            return $this->redirectToRoute('activity_edit', $id);
+            return $this->redirectToRoute('activity_list');
         }
         return $this->render('admin/activity/edit.html.twig', array(
             'form' => $form->createView(),

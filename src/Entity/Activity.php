@@ -25,6 +25,13 @@ class Activity
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 50,
+     *      minMessage = "Pavadinimas negali būti trumpesnis nei {{ limit }} simboliai",
+     *      maxMessage = "Pavadinimas negali būti ilgesnis nei {{ limit }} simboliai"
+     * )
      */
     private $name;
 
@@ -40,27 +47,64 @@ class Activity
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\Type(
+     *     type="float",
+     *     message="Laukelio reikšmė turėtų būti numeris"
+     * )
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 100,
+     *      minMessage = "Minimali galima kaina 0 Eurų",
+     *      maxMessage = "Maksimaili galima kaina 100 Eurų"
+     * )
      */
     private $priceFrom;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\Type(
+     *     type="float",
+     *     message="Laukelio reikšmė turėtų būti numeris"
+     * )
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 100,
+     *      minMessage = "Minimali galima kaina 0 Eurų",
+     *      maxMessage = "Maksimaili galima kaina 100 Eurų"
+     * )
      */
     private $priceTo;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Range(
+     *      min = 1,
+     *      max = 90,
+     *      minMessage = "Minimalus galimas amžius 1 metas",
+     *      maxMessage = "Maksimailus galimas amžius 90 metų"
+     * )
      */
     private $ageFrom;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Range(
+     *      min = 1,
+     *      max = 90,
+     *      minMessage = "Minimalus galimas amžius 1 metas",
+     *      maxMessage = "Maksimailus galimas amžius 90 metų"
+     * )
      */
     private $ageTo;
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\Type(
+     *     type="string",
+     *     message="Negalima reikšmė"
+     * )
      * @Assert\File(mimeTypes={ "image/*"  })
+     *
      */
     private $pathToLogo;
 
