@@ -31,7 +31,7 @@ class LoadActivity extends Fixture implements DependentFixtureInterface
             Mauris vehicula justo at diam pharetra, in egestas ex congue. Donec lobortis cursus ipsum, at pellentesque neque pretium eget. 
             Ut dignissim metus ut nisi venenatis, quis porttitor magna ornare. Pellentesque mollis erat 
             quis orci ullamcorper, sed volutpat lorem ultrices. Nunc vehicula, nibh quis imperdiet iaculis, ante lectus rhoncus lectus, eu ultricies ligula lacus ac purus. ")
-            ->setPathToLogo('/')
+            ->setPathToLogo('')
             ->setSubcategory($this->getReference(LoadSubcategory::SUB_NAMES[array_rand(LoadSubcategory::SUB_NAMES, 1)]))
             ->setLocation($this->getReference(rand(21, 70)))
             ->addTimetable($this->getReference(rand(1, 20)))
