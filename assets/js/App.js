@@ -83,6 +83,7 @@ class App extends React.Component {
                 </div>
               </div>)) : ('no data')} 
             </div>
+            <Activity />
         </div>
       );
     }

@@ -9,7 +9,7 @@ class Activity extends React.Component {
         };
     }
     componentDidMount() {
-        axios.get('/api/activities/' + id)
+        axios.get('/api/activities/')
             .then(function (response) {
                 this.setState({
                     activities: response.data
@@ -39,9 +39,7 @@ class Activity extends React.Component {
 
         return (
             <div className="container">
-                <div className="row">
-                    <p>Labas</p>
-                </div>
+               
             </div>
         );
     }

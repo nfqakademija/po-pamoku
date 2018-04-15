@@ -7,4 +7,4 @@ import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 
 ReactDOM.render(<App />, document.getElementById('root'));
-ReactDOM.render(<Activity />, document.getElementById('showActivity'));
+// ReactDOM.render(<Activity />, document.getElementById('showActivity'));
