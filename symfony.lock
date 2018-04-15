@@ -83,6 +83,18 @@
     "ocramius/proxy-manager": {
         "version": "2.1.1"
     },
+    "oneup/uploader-bundle": {
+        "version": "2.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "2.0",
+            "ref": "b19678d1535b9fe7cdf4647fd3483455e4fca458"
+        }
+    },
+    "paragonie/random_compat": {
+        "version": "v2.0.12"
+    },
     "psr/cache": {
         "version": "1.0.1"
     },
@@ -222,6 +234,9 @@
         }
     },
     "symfony/serializer": {
+        "version": "v4.0.8"
+    },
+    "symfony/templating": {
         "version": "v4.0.8"
     },
     "symfony/translation": {

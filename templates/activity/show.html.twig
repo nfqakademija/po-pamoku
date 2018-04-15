@@ -3,7 +3,24 @@
 {% block title %}{{ activity.name }}{% endblock %}
 
 {% block body %}
-    <h1>{{ activity.name }}</h1>
-    <hr>
-    <a href="/">Go Back</a>
+    {% if activity  %}
+        <a href="/">Atgal</a>
+
+        <h1>
+            {% if activity.pathToLogo is not empty  %}
+                <img src="{{ asset('uploads/' ~ activity.pathToLogo) }}"/>
+            {% endif %}
+            {{ activity.name }} - {{ activity.subcategory.name }}</h1>
+        <p>Adresas: {{ activity.location.street }} {{ activity.location.house }}{% if activity.location.apartment %}-{{ activity.location.apartment }}{% endif %},
+            {{ activity.location.city.name }} </p>
+
+        <p>Aprašymas</p>
+        <p>{{ activity.description }}</p>
+        <p>Kaina: {{ activity.priceFrom }} - {{ activity.priceTo }}</p>
+        <p>Amžius: {{ activity.ageFrom }} - {{ activity.ageTo }}</p>
+        <p>Tvarkaraštis:</p>
+        {% for timetable in activity.timetables %}
+            <p>{{ timetable.weekday.name }}: {{ timetable.timeFrom|date("H:i") }} - {{ timetable.timeTo|date("H:i") }}</p>
+        {% endfor %}
+    {% endif %}
 {% endblock %}

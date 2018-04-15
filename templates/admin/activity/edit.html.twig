@@ -3,6 +3,9 @@
 {% block title %}Edit activity{% endblock %}
 
 {% block body %}
+    {% if pathToLogo is not empty  %}
+        <img src="{{ asset('uploads/' ~ pathToLogo) }}"/>
+    {% endif %}
     {{ form_start(form) }}
     {{ form_widget(form) }}
     {{ form_end(form) }}

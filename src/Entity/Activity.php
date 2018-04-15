@@ -99,11 +99,7 @@ class Activity
 
     /**
      * @ORM\Column(type="string")
-     * @Assert\Type(
-     *     type="string",
-     *     message="Negalima reikšmė"
-     * )
-     * @Assert\File(mimeTypes={ "image/*"  })
+     * @Assert\File(mimeTypes={ "image/*"}, mimeTypesMessage="Failas turi būti paveikslėlio formato" )
      *
      */
     private $pathToLogo;
