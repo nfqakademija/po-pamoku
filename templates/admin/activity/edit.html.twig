@@ -3,10 +3,19 @@
 {% block title %}Edit activity{% endblock %}
 
 {% block body %}
-    {% if pathToLogo is not empty  %}
-        <img src="{{ asset('uploads/' ~ pathToLogo) }}"/>
-    {% endif %}
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    {{ form_end(form) }}
+<div class="container">
+    <div class="row mt-5 py-3">
+        <div class="col-12">
+            <div>
+                <a class="btn btn-light" href="/">Atgal</a>
+            </div>
+            {% if pathToLogo is not empty  %}
+                <img src="{{ asset('uploads/' ~ pathToLogo) }}"/>
+            {% endif %}
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
 {% endblock %}
