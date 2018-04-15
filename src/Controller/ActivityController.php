@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 
 class ActivityController extends Controller {
@@ -18,6 +19,22 @@ class ActivityController extends Controller {
         $activities = $this->getDoctrine()->getRepository(Activity::class)->findAll();
         return $this->render('activity/index.html.twig', array('activities' => $activities));
     }
+    /**
+     * @Route("/api/activities", name="activities_json")
+     */
+     public function getJson() {
+        $activities = $this->getDoctrine()->getRepository(Activity::class)->createQueryBuilder('e')->select('e')->getQuery()->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        return new JsonResponse($activities);
+    }
+
+    /**
+     * @Route("/api/activity/{id}", name="activity_id_json")
+     */
+    public function getIdJson($id) {
+        $activity = $this->getDoctrine()->getRepository(Activity::class)->createQueryBuilder('e')->select('e')->where('e.id = :id')->setParameter('id', $id)->getQuery()->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+        return new JsonResponse($activity);
+    }
+
 
     /**
      * @Route("/activity/edit/{id}", name="activity_club")
@@ -34,6 +51,6 @@ class ActivityController extends Controller {
      */
     public function show($id) {
         $activity = $this->getDoctrine()->getRepository(Activity::class)->find($id);
-        return $this->render('activity/show.html.twig', array('activity' => $activity));
+        return $this->render('activity/show.html.twig', array('id' => $id));
     }
 }

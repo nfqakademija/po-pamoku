@@ -3,7 +3,11 @@
 {% block title %}Activities{% endblock %}
 
 {% block body %}
-    {% if activities %}
+<div id="root">
+       
+</div>
+ 
+   {# {% if activities %}
         <table id="activities" class="table table-striped">
             <thead>
             <tr>
@@ -25,9 +29,10 @@
         </table>
     {% else %}
         <p>No activities to display</p>
-    {% endif %}
+    {% endif %} #}
 {% endblock %}
 
 {% block javascripts %}
     <script src="/js/main.js"></script>
+    <script src="{{asset("build/js/index.js")}}"></script>
 {% endblock %}

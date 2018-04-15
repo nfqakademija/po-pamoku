@@ -1,9 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ activity.name }}{% endblock %}
+{% block title %}{% endblock %}
 
 {% block body %}
-    <h1>{{ activity.name }}</h1>
+    <h1></h1>
     <hr>
     <a href="/">Go Back</a>
+    <div id="showActivity"></div>
+{% endblock %}
+{% block javascripts %}
+    <script src="{{asset("build/js/index.js")}}"></script>
+    <script>
+        var id = {{id}};
+       
+   </script>
+   
+   {{ parent() }}
 {% endblock %}
