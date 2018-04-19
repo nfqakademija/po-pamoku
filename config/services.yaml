@@ -25,5 +25,16 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
+    form_authenticator:
+        class: App\Security\LoginFormAuthenticator
+        arguments: ['@security.csrf.token_manager', '@router', '@security.password_encoder', '@doctrine.orm.entity_manager']
+
+    password_hasher:
+        class: App\Listeners\PasswordListener
+        arguments: ['@security.password_encoder']
+        tags:
+            - {name: doctrine.event_subscriber}
+
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

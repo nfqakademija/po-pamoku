@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div>
+    {{ form_start(form) }}
+                    {{ form_row(form.name, {
+                        'label': 'Vardas'
+                    }) }}
+                    {{ form_row(form.surname, {
+                        'label': 'Pavardė'
+                    }) }}
+                    {{ form_row(form.email, {
+                        'label': 'Elektroninio pašto adresas'
+                    }) }}
+                    {{ form_row(form.plainPassword.first, {
+                        'label': 'Slaptažodis'
+                    }) }}
+                    {{ form_row(form.plainPassword.second, {
+                        'label': 'Pakartoti slaptažodį'
+                    }) }}
+                    {{ form_row(form.phoneNumber, {
+                        'label': 'Telefono numeris'
+                    }) }}
+                    {{ form_row(form.role) }}
+                    <button type="submit" class="btn btn-primary" formnovalidate>Registruotis</button>
+{{ form_end(form) }}
+</div>
+{% endblock %}
