@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity()
- * @UniqueEntity(fields={"email"}, message="Email must be unique")
+ * @UniqueEntity(fields={"email"}, message="Toks elektroninio pašto addresas jau naudojamas")
  */
 class User implements UserInterface
 {
@@ -43,12 +43,14 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string")
      * @Assert\NotBlank()
+     * @Assert\Regex(pattern="/(\p{L}+)([- ][^0-9]?)/", message="Varde yra įvesta neleistinų ženklų")
      */
     protected $name;
 
     /**
      * @ORM\Column(type="string")
      * @Assert\NotBlank()
+     * @Assert\Regex(pattern="/(\p{L}+)([- ][^0-9]?)/", message="Pavardėje yra įvesta neleistinų ženklų")
      */
     protected $surname;
 
