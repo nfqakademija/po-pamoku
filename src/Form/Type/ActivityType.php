@@ -37,7 +37,12 @@ class ActivityType extends AbstractType
                 'class' => Subcategory::class,
                 'attr' => array('class' => 'form-control'),
             ))
-            ->add('timetables', CollectionType::class, array("entry_type" => TimetableType::class , "label" => "Tvarkaraštis"))
+            ->add('timetables', CollectionType::class, array(
+                "entry_type" => TimetableType::class ,
+                "label" => "Tvarkaraštis",
+                'allow_add'     => true,
+                'allow_delete'  => true,
+                ))
             ->add('save', SubmitType::class, array(
                 'label' => 'Išsaugoti',
                 'attr' => array('class' => 'btn btn-dark mt-3')

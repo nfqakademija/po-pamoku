@@ -110,7 +110,7 @@ class Activity
     private $subcategory;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Timetable")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Timetable", cascade={"persist"})
      */
     private $timetables;
 
