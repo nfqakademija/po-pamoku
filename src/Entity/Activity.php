@@ -114,6 +114,11 @@ class Activity
      */
     private $timetables;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\User")
+     */
+    private $user;
+
 
     public function __construct()
     {
@@ -247,5 +252,6 @@ class Activity
 
         return $this;
     }
+
 
 }

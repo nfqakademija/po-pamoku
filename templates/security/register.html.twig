@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div>
+<div class="row table">
     {{ form_start(form) }}
                     {{ form_row(form.name, {
                         'label': 'Vardas'
@@ -21,7 +21,6 @@
                     {{ form_row(form.phoneNumber, {
                         'label': 'Telefono numeris'
                     }) }}
-                    {{ form_row(form.role) }}
                     <button type="submit" class="btn btn-primary" formnovalidate>Registruotis</button>
 {{ form_end(form) }}
 </div>
