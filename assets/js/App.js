@@ -13,18 +13,15 @@ class App extends React.Component {
   }
 
  componentDidMount() {
-    // let versionElement = document.getElementById('version');
    axios.get('/api/activities')
       .then(function (response) {
         this.setState({
           activities: response.data
         });
         console.log(this.state.activities);
-        // versionElement.innerText = response.data["build/js/app.js"];
      }.bind(this))
       .catch(function (error) {
         console.error(error);
-        // versionElement.innerText = 'Error: '.error;
       });
   //  fetch('/api/activities')
   //    .then( response => {
@@ -50,11 +47,9 @@ class App extends React.Component {
          activities: response.data
        });
        console.log(this.state.activities);
-       // versionElement.innerText = response.data["build/js/app.js"];
      }.bind(this))
      .catch(function (error) {
        console.error(error);
-       // versionElement.innerText = 'Error: '.error;
      });
    
  }
