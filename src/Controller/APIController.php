@@ -14,61 +14,26 @@ class APIController extends Controller {
 
 
     /**
-     * @Route("/api/activity/{id}", name="api_activity")
+     * @Route("/api/activity/{page}/{limit}", defaults={"page"=1, "limit"=10}, name="api_activity_list")
      * @Method({"GET"})
      */
-    public function apiActivity($id) {
-
-        $activity = $this->getDoctrine()->getRepository(Activity::class)->find($id);
-
-        return new JsonResponse($this->activityObjToArray($activity));
-    }
-
-    /**
-     * @Route("/api/activity/{page}/{limit}", name="api_activity_list")
-     * @Method({"GET"})
-     */
-    public function index($page, $limit) {
+    public function index(Request $request, $page, $limit) {
 
         $activityArr = array();
+        $where = array("search" => '');
         $offset = ($page - 1) * $limit;
-        $activities = $this->getDoctrine()->getRepository(Activity::class)->findBy(array(),array('name' => 'ASC'),$limit ,$offset);
 
-        foreach ($activities as $activity){
-            $activityArr[$activity->getId()] = $this->activityObjToArray($activity);
+        $search = htmlspecialchars($request->get("search"));
+        if($search){
+            $where["search"] = $search;
         }
 
-        return new JsonResponse($activityArr);
-    }
-
-    private function activityObjToArray($activity){
-        $timetables = array();
-        foreach ($activity->getTimetables() as $timetable){
-            $timetables[$timetable->getId()] = array(
-                "weekday" => $timetable->getWeekday()->getName(),
-                "timeFrom" => $timetable->getTimeFrom()->format("H:i"),
-                "timeTo" => $timetable->getTimeTo()->format("H:i"),
-            );
+        $activities = $this->getDoctrine()->getRepository(Activity::class)->filter($where, array('id' => 'DESC'),$limit ,$offset);
+        foreach ($activities as &$activity){
+            $activity["timeFrom"] = $activity["timeFrom"]->format("H:i");
+            $activity["timeTo"] = $activity["timeTo"]->format("H:i");
         }
-        return array(
-            "id" => $activity->getId(),
-            "name" => $activity->getName(),
-            "description" => $activity->getDescription(),
-            "location" => array(
-                "city" => $activity->getLocation()->getCity()->getName(),
-                "street" => $activity->getLocation()->getStreet(),
-                "house" => $activity->getLocation()->getHouse(),
-                "apartment" => $activity->getLocation()->getApartment(),
-                "postcode" => $activity->getLocation()->getApartment(),
-            ),
-            "priceFrom" => $activity->getpriceFrom(),
-            "priceTo" => $activity->getpriceTo(),
-            "ageFrom" => $activity->getAgeFrom(),
-            "ageTo" => $activity->getAgeTo(),
-            "pathToLogo" => $activity->getPathToLogo(),
-            "subcategory" => $activity->getSubcategory()->getName(),
-            "timetables" => $timetables
 
-        );
+        return new JsonResponse($activities);
     }
 }

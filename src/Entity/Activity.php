@@ -8,11 +8,12 @@
 
 namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="App\Repository\ActivityRepository")
  */
 class Activity
 {
@@ -244,6 +245,15 @@ class Activity
             return $this;
         }
         $this->timetables[] = $timetable;
+
+        return $this;
+    }
+
+    public function removeTimetable(Timetable $timetable): self
+    {
+        if ($this->timetables->contains($timetable)) {
+            $this->timetables->removeElement($timetable);
+        }
 
         return $this;
     }
