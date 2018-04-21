@@ -3,24 +3,58 @@
 {% block title %}{{ activity.name }}{% endblock %}
 
 {% block body %}
+<div class="container">
+    <div class="row mt-5 py-4">
     {% if activity  %}
-        <a href="/">Atgal</a>
-
-        <h1>
-            {% if activity.pathToLogo is not empty  %}
-                <img src="{{ asset('uploads/' ~ activity.pathToLogo) }}"/>
-            {% endif %}
-            {{ activity.name }} - {{ activity.subcategory.name }}</h1>
-        <p>Adresas: {{ activity.location.street }} {{ activity.location.house }}{% if activity.location.apartment %}-{{ activity.location.apartment }}{% endif %},
+        <div class="col-12">
+            <a class="btn btn-light" href="/">Atgal</a>
+        </div>
+        <div class="col-12 col-lg-6">
+            <h1>{{ activity.name }} - {{ activity.subcategory.name }}</h1>
+            <p>Adresas: {{ activity.location.street }} {{ activity.location.house }}{% if activity.location.apartment %}-{{ activity.location.apartment }}{% endif %},
             {{ activity.location.city.name }} </p>
+            <p>Aprašymas</p>
+            <p>{{ activity.description }}</p>
+        </div>
+        <div class="col-12 col-lg-6">
+             
+            {% if activity.pathToLogo is not empty  %}
+            <img class="card-img-top" src="https://placeimg.com/640/480/any" alt="Card image cap" />
+                {# <img class="img-fluid" src="{{ asset('uploads/' ~ activity.pathToLogo) }}"/> #}
+            {% endif %}
 
-        <p>Aprašymas</p>
-        <p>{{ activity.description }}</p>
-        <p>Kaina: {{ activity.priceFrom }} - {{ activity.priceTo }}</p>
-        <p>Amžius: {{ activity.ageFrom }} - {{ activity.ageTo }}</p>
-        <p>Tvarkaraštis:</p>
-        {% for timetable in activity.timetables %}
-            <p>{{ timetable.weekday.name }}: {{ timetable.timeFrom|date("H:i") }} - {{ timetable.timeTo|date("H:i") }}</p>
-        {% endfor %}
+        </div>
+    </div>
+    <div class="row">
+         <div class="col-12 col-sm-4">
+             <ul class="list-group list-group-flush">
+                <li class="list-group-item list-group-item-secondary">Tvarkaraštis:</li>
+                {% for timetable in activity.timetables %}
+                <li class="list-group-item">{{ timetable.weekday.name }}: {{ timetable.timeFrom|date("H:i") }} - {{ timetable.timeTo|date("H:i") }}</li>
+            {% endfor %}
+                
+            </ul>
+              
+        </div>
+        <div class="col-12 col-sm-4">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item list-group-item-secondary">Kaina:</li>
+                <li class="list-group-item">{{ activity.priceFrom }} - {{ activity.priceTo }}</li>
+            </ul>
+        
+        </div>
+         <div class="col-12 col-sm-4">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item list-group-item-secondary">Amžius:</li>
+                <li class="list-group-item">{{ activity.ageFrom }} - {{ activity.ageTo }}</li>
+            </ul>
+        
+        </div>
+       
+        
+    </div> 
+      
     {% endif %}
+   
+</div>
 {% endblock %}

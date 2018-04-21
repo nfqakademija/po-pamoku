@@ -3,10 +3,24 @@
 {% block title %}Edit activity{% endblock %}
 
 {% block body %}
-    {% if pathToLogo is not empty  %}
-        <img src="{{ asset('uploads/' ~ pathToLogo) }}"/>
-    {% endif %}
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    {{ form_end(form) }}
+<div class="container">
+    <div class="row mt-5 py-3">
+        <div class="col-12">
+            <div class="mb-2">
+                <a class="btn btn-light" href="/">Atgal</a>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6">
+            {% if pathToLogo is not empty  %}
+                {# <img class="img-fluid" src="{{ asset('uploads/' ~ pathToLogo) }}"/> #}
+                <img class="card-img-top" src="https://placeimg.com/640/480/any" alt="Card image cap" />
+            {% endif %}
+        </div>
+        <div class="col-12">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
 {% endblock %}

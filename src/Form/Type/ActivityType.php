@@ -40,7 +40,7 @@ class ActivityType extends AbstractType
             ->add('timetables', CollectionType::class, array("entry_type" => TimetableType::class , "label" => "Tvarkaraštis"))
             ->add('save', SubmitType::class, array(
                 'label' => 'Išsaugoti',
-                'attr' => array('class' => 'btn btn-primary mt-3')
+                'attr' => array('class' => 'btn btn-dark mt-3')
             ))
         ;
 

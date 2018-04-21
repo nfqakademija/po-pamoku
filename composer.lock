@@ -2950,6 +2950,18 @@
         },
         {
             "name": "symfony/maker-bundle",
+<<<<<<< HEAD
+            "version": "v1.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/maker-bundle.git",
+                "reference": "8713152f523b337177163a328485ea6a39fae7ad"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/8713152f523b337177163a328485ea6a39fae7ad",
+                "reference": "8713152f523b337177163a328485ea6a39fae7ad",
+=======
             "version": "v1.4.0",
             "source": {
                 "type": "git",
@@ -2960,12 +2972,17 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/253cee42124de11dc0a5bb7c91e5375d7197be12",
                 "reference": "253cee42124de11dc0a5bb7c91e5375d7197be12",
+>>>>>>> masterCopy
                 "shasum": ""
             },
             "require": {
                 "doctrine/inflector": "^1.2",
                 "nikic/php-parser": "^4.0",
+<<<<<<< HEAD
+                "php": "^7.0.8",
+=======
                 "php": "^7.1.3",
+>>>>>>> masterCopy
                 "symfony/config": "^3.4|^4.0",
                 "symfony/console": "^3.4|^4.0",
                 "symfony/dependency-injection": "^3.4|^4.0",
@@ -2977,7 +2994,11 @@
             "require-dev": {
                 "allocine/twigcs": "^3.0",
                 "doctrine/doctrine-bundle": "^1.8",
+<<<<<<< HEAD
+                "doctrine/orm": "^2.3",
+=======
                 "doctrine/orm": "^2.6",
+>>>>>>> masterCopy
                 "friendsofphp/php-cs-fixer": "^2.8",
                 "symfony/phpunit-bridge": "^3.4|^4.0",
                 "symfony/process": "^3.4|^4.0"

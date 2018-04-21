@@ -3,13 +3,18 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{% block title %}Welcome!{% endblock %}</title>
     <link rel="stylesheet" href="https://bootswatch.com/4/cosmo/bootstrap.min.css">
-    {% block stylesheets %}{% endblock %}
+    {% block stylesheets %}
+    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset("build/js/index.css")}}">
+    {% endblock %}
 </head>
 <body>
 {{ include('inc/navbar.html.twig') }}
-<div class="container">
+<div>
     {% block body %}{% endblock %}
     <div id="check-root"></div>
 </div>
