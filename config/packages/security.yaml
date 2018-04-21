@@ -1,13 +1,31 @@
 security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    encoders:
+        App\Entity\User:
+            algorithm: bcrypt
+    
     providers:
-        in_memory: { memory: ~ }
+        all_users:
+            entity:
+                class: App\Entity\User
+                property: email
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
             anonymous: true
+            guard:
+                authenticators:
+                    - form_authenticator
+            logout:
+                path: /logout
+        secured_area:
+            form_login:
+                csrf_token_generator: security.csrf.token_manager
+
+
 
             # activate different ways to authenticate
 
