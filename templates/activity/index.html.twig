@@ -3,6 +3,7 @@
 {% block title %}Activities{% endblock %}
 
 {% block body %}
+
 <div class="jumbotron jumbotron-fluid hero mt-5">
 <div class="container">
 <h1 class="display-4 text-light">Po pamokų</h1>
@@ -10,10 +11,11 @@
 </div>
 
 </div>
-<div class="container">
+<div id="root"></div>
+{#<div class="container">
 
     {% if activities %}
-        {# <table id="activities" class="table table-striped"> #}
+       
  <div class="row">
             {% for activity in activities %}
                 <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
@@ -45,10 +47,10 @@
     {% else %}
         <p>No activities to display</p>
     {% endif %}
-    </div>
+    </div> #}
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{{asset("build/js/app.js")}}"></script>
+    <script src="{{asset("build/js/index.js")}}"></script>
 {% endblock %}
 

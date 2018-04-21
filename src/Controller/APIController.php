@@ -51,6 +51,7 @@ class APIController extends Controller {
             );
         }
         return array(
+            "id" => $activity->getId(),
             "name" => $activity->getName(),
             "description" => $activity->getDescription(),
             "location" => array(
