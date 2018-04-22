@@ -3,51 +3,32 @@
 {% block title %}Activities{% endblock %}
 
 {% block body %}
-
-<div class="jumbotron jumbotron-fluid hero mt-5">
-<div class="container">
-<h1 class="display-4 text-light">Po pamokų</h1>
-  <p class="lead text-grey">Visi būreliai vienoje vietoje. Raskite įdomiausius būrelius ir po pamokines veiklas!</p>
-</div>
-
-</div>
-<div id="root"></div>
-{#<div class="container">
-
-    {% if activities %}
-       
- <div class="row">
-            {% for activity in activities %}
-                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
-              <div class="card">
-                  <img class="card-img-top" src="https://placeimg.com/640/480/any" alt="Card image cap" />
-                  <div class="card-body">
-                    <h5 class="card-title">{{activity.name}}</h5>
-                  </div>
-                  <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Kaina: {{activity.priceFrom}} - {{activity.priceTo}}</li>
-                    <li class="list-group-item">Amžius: {{activity.ageFrom}} - {{activity.ageTo}}</li>
-                  </ul>
-                  <div class="card-body">
-                  <a href="/activity/{{ activity.id }}" class="btn btn-dark">Rodyti</a>
-                        <a href="/admin/activity/edit/{{ activity.id }}" class="btn btn-light">Redaguoti</a>
-                  </div>
+<div class="main">
+    <div class="hero">
+        <div class="container pt-4">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="display-4 hero-title">Po pamokų</h1>
                 </div>
-              </div>
-              
-            {% endfor %}
-            </div>   
-        <div class="row justify-content-center"> 
-        <div class="my-3">
-            <div class="navigation">
-                {{ knp_pagination_render(activities) }}
+                <div class="col-12 col-md-6">
+                        <p class="lead text-grey">Visi būreliai vienoje vietoje. Raskite įdomiausius būrelius ir po pamokines veiklas!</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 pt-4">
+                    <a href="{{ path('registration') }}" class="btn btn-main-register mr-2">Registruotis</a>
+                    <a href="{{ path('login') }}" class="btn btn-main-login">Prisijungti</a>
+                </div>
             </div>
         </div>
+    </div>
+    <div class="container">
+        <div class="search py-5">
+            <h1>Paieška</h1>
         </div>
-    {% else %}
-        <p>No activities to display</p>
-    {% endif %}
-    </div> #}
+    </div>
+    <div id="root"></div>
+</div>
 {% endblock %}
 
 {% block javascripts %}

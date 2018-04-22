@@ -5,19 +5,36 @@
 {% if error %}
     <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 {% endif %}
+<div class="registration-bg">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-7">
+                <div class="card mt-5">
+                    <div class="bg-blue">
+                        <div class="registration-aside">
+                            <h1 class="registration-header">Prisijungimas</h1>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <form action="{{ path('login') }}" method="post">
+                            <div>
+                                <label for="username">Vartotojo vardas:</label>
+                                <input type="text" id="username" name="_username" value="{{ last_username }}" />
+                            </div>
+                            <div>
+                                <label for="password">Slaptažodis:</label>
+                                <input type="password" id="password" name="_password" />
+                            </div>
+                            <input type="hidden" name="_csrf_token"
+                                value="{{ csrf_token('authenticate') }}">
 
-<form action="{{ path('login') }}" method="post">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="_username" value="{{ last_username }}" />
-
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="_password" />
-
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}">
-
-
-    <button type="submit">login</button>
-</form>
+                            <button class="btn btn-register" type="submit">Prisijungti</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
