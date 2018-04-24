@@ -19,7 +19,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('/api/activities')
+    axios.get('/api/activity?page=1&limit=9')
       .then(function (response) {
         this.setState({
           activities: Object.keys(response.data).map(i => response.data[i])

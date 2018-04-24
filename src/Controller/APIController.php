@@ -14,7 +14,7 @@ class APIController extends Controller {
 
 
     /**
-     * @Route("/api/activities", name="api_activity_list")
+     * @Route("/api/activity", name="api_activity_list")
      * @Method({"GET"})
      */
     public function index(Request $request) {
@@ -49,5 +49,44 @@ class APIController extends Controller {
         }
 
         return new JsonResponse($activities);
+    }
+
+    /**
+     * @Route("/api/activity/{id}", name="api_activity")
+     * @Method({"GET"})
+     */
+    public function apiActivity($id) {
+        $activity = $this->getDoctrine()->getRepository(Activity::class)->find($id);
+        return new JsonResponse($this->activityObjToArray($activity));
+    }
+
+    private function activityObjToArray($activity){
+        $timetables = array();
+        foreach ($activity->getTimetables() as $timetable){
+            $timetables[$timetable->getId()] = array(
+                "weekday" => $timetable->getWeekday()->getName(),
+                "timeFrom" => $timetable->getTimeFrom()->format("H:i"),
+                "timeTo" => $timetable->getTimeTo()->format("H:i"),
+            );
+        }
+        return array(
+            "id" => $activity->getId(),
+            "name" => $activity->getName(),
+            "description" => $activity->getDescription(),
+            "location" => array(
+                "city" => $activity->getLocation()->getCity()->getName(),
+                "street" => $activity->getLocation()->getStreet(),
+                "house" => $activity->getLocation()->getHouse(),
+                "apartment" => $activity->getLocation()->getApartment(),
+                "postcode" => $activity->getLocation()->getApartment(),
+            ),
+            "priceFrom" => $activity->getpriceFrom(),
+            "priceTo" => $activity->getpriceTo(),
+            "ageFrom" => $activity->getAgeFrom(),
+            "ageTo" => $activity->getAgeTo(),
+            "pathToLogo" => $activity->getPathToLogo(),
+            "subcategory" => $activity->getSubcategory()->getName(),
+            "timetables" => $timetables
+        );
     }
 }
