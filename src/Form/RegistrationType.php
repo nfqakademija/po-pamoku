@@ -70,7 +70,9 @@ class RegistrationType extends AbstractType
                     $form->add('role', HiddenType::class, [
                         'data' => 'ROLE_USER_OWNER',
                     ]);
-                    $form->add('activity', ActivityType::class);
+                    $form->add('activity', ActivityType::class, [
+                        'label' => false
+                    ]);
                 }
 
                 if ($role == 'user') {

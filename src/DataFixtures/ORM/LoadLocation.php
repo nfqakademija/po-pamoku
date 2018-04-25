@@ -33,7 +33,7 @@ class LoadLocation extends Fixture implements DependentFixtureInterface
             $location->setApartment(rand(1, 84))
             ->setHouse(rand(1, 347))
             ->setCity($this->getReference(LoadCity::CITY_NAMES[array_rand(LoadCity::CITY_NAMES, 1)]))
-            ->setStreet(array_rand(self::STREET_NAMES, 1))
+            ->setStreet(self::STREET_NAMES[array_rand(self::STREET_NAMES, 1)])
             ->setPostcode(sprintf('%05d', rand(0, 99999)));
 
             $this->addReference($i, $location);

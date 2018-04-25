@@ -65,6 +65,11 @@ class User implements UserInterface
      */
     protected $role;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Activity", mappedBy="user", cascade={"persist"})
+     */
+    protected $activity;
+
 
     public function getRoles()
     {
@@ -165,5 +170,17 @@ class User implements UserInterface
     {
         $this->role = $role;
     }
+
+    public function getActivity()
+    {
+        return $this->activity;
+    }
+
+    public function setActivity($activity): void
+    {
+        $this->activity = $activity;
+    }
+
+
 
 }

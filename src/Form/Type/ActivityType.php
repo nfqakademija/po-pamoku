@@ -24,7 +24,7 @@ class ActivityType extends AbstractType
     {
         $builder->add('name', TextType::class, array('label' => "Būrelio Pavadinimas", 'attr' => array('class' => 'form-control')))
             ->add('description', TextareaType::class, array('label' => "Būrelio aprašymas", 'attr' => array('class' => 'form-control')))
-            ->add('location', LocationType::class, array())
+            ->add('location', LocationType::class, array('label' => false))
             ->add('priceFrom', NumberType::class, array('label' => "Kaina nuo", 'scale' => 2,
                 'rounding_mode' => NumberToLocalizedStringTransformer::ROUND_DOWN, 'attr' => array('class' => 'form-control')))
             ->add('priceTo', NumberType::class, array('label' => "Kaina iki", 'scale' => 2,
@@ -37,7 +37,12 @@ class ActivityType extends AbstractType
                 'class' => Subcategory::class,
                 'attr' => array('class' => 'form-control'),
             ))
-            ->add('timetables', CollectionType::class, array("entry_type" => TimetableType::class , "label" => "Tvarkaraštis"))
+            ->add('timetables', CollectionType::class, array(
+                "entry_type" => TimetableType::class ,
+                "label" => "Tvarkaraštis",
+                'allow_add'     => true,
+                'allow_delete'  => true,
+                ))
             ->add('save', SubmitType::class, array(
                 'label' => 'Išsaugoti',
                 'attr' => array('class' => 'btn btn-dark mt-3')

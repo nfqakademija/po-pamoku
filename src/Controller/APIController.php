@@ -14,60 +14,40 @@ class APIController extends Controller {
 
 
     /**
-     * @Route("/api/activity/{id}", name="api_activity")
+     * @Route("/api/activities", name="api_activity_list")
      * @Method({"GET"})
      */
-    public function apiActivity($id) {
+    public function index(Request $request) {
 
-        $activity = $this->getDoctrine()->getRepository(Activity::class)->find($id);
+        $orderAttr = array("name", "priceFrom", "priceTo", "ageFrom", "ageTo");
+        $page = htmlspecialchars($request->get("page"));
+        $sort = htmlspecialchars($request->get("sort"));
+        $sortBy = htmlspecialchars($request->get("sortby"));
+        $limit = htmlspecialchars($request->get("limit"));
+        $where["search"] = htmlspecialchars($request->get("search"));
+        $where["priceFrom"] = htmlspecialchars($request->get("priceFrom"));
+        $where["priceTo"] = htmlspecialchars($request->get("priceTo"));
+        $where["ageFrom"] = htmlspecialchars($request->get("ageFrom"));
+        $where["ageTo"] = htmlspecialchars($request->get("ageTo"));
+        $where["timeFrom"] = htmlspecialchars($request->get("timeFrom"));
+        $where["timeTo"] = htmlspecialchars($request->get("timeTo"));
+        $where["weekday"] = htmlspecialchars($request->get("weekday"));
+        $where["city"] = htmlspecialchars($request->get("city"));
+        $where["category"] = htmlspecialchars($request->get("category"));
+        $where["subcategory"] = htmlspecialchars($request->get("subcategory"));
 
-        return new JsonResponse($this->activityObjToArray($activity));
-    }
-
-    /**
-     * @Route("/api/activity/{page}/{limit}", name="api_activity_list")
-     * @Method({"GET"})
-     */
-    public function index($page, $limit) {
-
-        $activityArr = array();
+        $page = is_numeric($page) ? $page : 1;
+        $limit = is_numeric($limit) ? $limit : 10;
+        $order = in_array($sort, array("asc","desc")) ? $sort : "ASC";
+        $orderBy = in_array($sortBy, $orderAttr) ? array($sortBy => $order) : array('name' => $order);
         $offset = ($page - 1) * $limit;
-        $activities = $this->getDoctrine()->getRepository(Activity::class)->findBy(array(),array('name' => 'ASC'),$limit ,$offset);
 
-        foreach ($activities as $activity){
-            $activityArr[$activity->getId()] = $this->activityObjToArray($activity);
+        $activities = $this->getDoctrine()->getRepository(Activity::class)->fetchFilteredData($where, $orderBy ,$limit ,$offset);
+        foreach ($activities as &$activity){
+            $activity["timeFrom"] = $activity["timeFrom"]->format("H:i");
+            $activity["timeTo"] = $activity["timeTo"]->format("H:i");
         }
 
-        return new JsonResponse($activityArr);
-    }
-
-    private function activityObjToArray($activity){
-        $timetables = array();
-        foreach ($activity->getTimetables() as $timetable){
-            $timetables[$timetable->getId()] = array(
-                "weekday" => $timetable->getWeekday()->getName(),
-                "timeFrom" => $timetable->getTimeFrom()->format("H:i"),
-                "timeTo" => $timetable->getTimeTo()->format("H:i"),
-            );
-        }
-        return array(
-            "name" => $activity->getName(),
-            "description" => $activity->getDescription(),
-            "location" => array(
-                "city" => $activity->getLocation()->getCity()->getName(),
-                "street" => $activity->getLocation()->getStreet(),
-                "house" => $activity->getLocation()->getHouse(),
-                "apartment" => $activity->getLocation()->getApartment(),
-                "postcode" => $activity->getLocation()->getApartment(),
-            ),
-            "priceFrom" => $activity->getpriceFrom(),
-            "priceTo" => $activity->getpriceTo(),
-            "ageFrom" => $activity->getAgeFrom(),
-            "ageTo" => $activity->getAgeTo(),
-            "pathToLogo" => $activity->getPathToLogo(),
-            "subcategory" => $activity->getSubcategory()->getName(),
-            "timetables" => $timetables
-
-        );
+        return new JsonResponse($activities);
     }
 }

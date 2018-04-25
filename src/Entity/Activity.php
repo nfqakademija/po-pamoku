@@ -8,11 +8,12 @@
 
 namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="App\Repository\ActivityRepository")
  */
 class Activity
 {
@@ -41,7 +42,7 @@ class Activity
     private $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Location")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Location", cascade={"persist"})
      */
     private $location;
 
@@ -110,12 +111,12 @@ class Activity
     private $subcategory;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Timetable")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Timetable", cascade={"persist"})
      */
     private $timetables;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User")
+     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="activity", cascade={"persist"})
      */
     private $user;
 
@@ -252,6 +253,29 @@ class Activity
 
         return $this;
     }
+
+
+    public function removeTimetable(Timetable $timetable): self
+    {
+        if ($this->timetables->contains($timetable)) {
+            $this->timetables->removeElement($timetable);
+        }
+
+        return $this;
+    }
+
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    public function setUser($user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
 
 
 }

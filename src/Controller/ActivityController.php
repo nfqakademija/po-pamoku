@@ -15,20 +15,9 @@ class ActivityController extends Controller {
      * @Route("/", name="activity_list")
      * @Method({"GET"})
      */
-    public function index(Request $request) {
+    public function index() {
 
-        $em    = $this->get('doctrine.orm.entity_manager');
-        $dql   = "SELECT a FROM App:Activity a";
-        $query = $em->createQuery($dql);
-
-        $paginator  = $this->get('knp_paginator');
-        $pagination = $paginator->paginate(
-            $query,
-            $request->query->getInt('page', 1),
-            $request->query->getInt('limit', 6)
-        );
-
-        return $this->render('activity/index.html.twig', array('activities' => $pagination));
+        return $this->render('activity/index.html.twig');
     }
 
     /**
