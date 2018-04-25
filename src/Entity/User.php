@@ -30,7 +30,6 @@ class User implements UserInterface
     protected $email;
 
     /**
-     * @ORM\Column(type="string")
      * @Assert\NotBlank(groups={"Register"})
      */
     protected $plainPassword;
