@@ -51,9 +51,6 @@ class RegistrationController extends Controller
                 }
             }
 
-            $activity = $userData->getActivity();
-            $activity->setUser($userData->getId());
-            $userData->setActivity($activity);
             $em->persist($userData);
             $em->flush();
 
