@@ -2,24 +2,25 @@
 namespace App\Controller;
 
 use App\Entity\Activity;
-use App\Entity\Location;
-use Symfony\Component\HttpFoundation\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
-
 use App\Form\Type\ActivityType;
 
-class AdminController extends Controller {
+class ActivityEditController extends Controller {
 
     /**
-     * @Route("/admin/activity/edit/{id}", name="activity_edit")
+     * @Route("/activity/edit/{id}", name="activity_edit")
      * Method({"GET", "POST"})
      */
     public function edit(Request $request, $id) {
+
+
         $activity = $this->getDoctrine()->getRepository(Activity::class)->find($id);
+
+        $this->denyAccessUnlessGranted('edit', $activity);
+
+
         $form = $this->createForm(ActivityType::class, $activity);
         $pathToLogo = $activity->getPathToLogo();
 

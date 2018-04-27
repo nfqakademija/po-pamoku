@@ -19,6 +19,8 @@ class RegistrationController extends Controller
      */
     public function registrationAction($role, Request $request, GuardAuthenticatorHandler $guardAuthenticatorHandler, LoginFormAuthenticator $formAuthenticator)
     {
+        $this->denyAccessUnlessGranted('edit', $request);
+
         $form = $this->createForm(RegistrationType::class);
 
         $form->handleRequest($request);
@@ -49,6 +51,9 @@ class RegistrationController extends Controller
                 }
             }
 
+            $activity = $userData->getActivity();
+            $activity->setUser($userData->getId());
+            $userData->setActivity($activity);
             $em->persist($userData);
             $em->flush();
 

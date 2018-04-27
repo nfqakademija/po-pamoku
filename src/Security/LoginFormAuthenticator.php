@@ -70,7 +70,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     {
         $targetPath = $this->getTargetPath($request->getSession(), $providerKey);
 
-        if (!$targetPath) {
+        if (!$targetPath || strpos($targetPath, 'login') || strpos($targetPath, 'register')) {
             $targetPath = $this->router->generate('activity_list');
         }
 

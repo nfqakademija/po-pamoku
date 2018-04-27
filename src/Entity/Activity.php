@@ -116,7 +116,7 @@ class Activity
     private $timetables;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="activity", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="activity")
      */
     private $user;
 
