@@ -9,25 +9,18 @@
 namespace App\Form;
 
 
-use App\Entity\Activity;
 use App\Entity\User;
 use App\Form\Type\ActivityType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Exception\LogicException;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Security\Core\Exception\LockedException;
 
 class RegistrationType extends AbstractType
 {
@@ -68,7 +61,7 @@ class RegistrationType extends AbstractType
 
                 if ($role == 'owner') {
                     $form->add('role', HiddenType::class, [
-                        'data' => 'ROLE_USER_OWNER',
+                        'data' => 'ROLE_OWNER',
                     ]);
                     $form->add('activity', ActivityType::class, [
                         'label' => false

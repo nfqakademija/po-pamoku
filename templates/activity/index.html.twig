@@ -16,7 +16,8 @@
             </div>
             <div class="row">
                 <div class="col-12 pt-4">
-                    <a href="{{ path('registration') }}" class="btn btn-main-register mr-2">Registruotis</a>
+                    <a href="{{ path('registration', {'role': 'owner'}) }}" class="btn btn-main-register mr-2">Vadovo registracija</a>
+                    <a href="{{ path('registration', {'role': 'user'}) }}" class="btn btn-main-register mr-2">Kliento registracija</a>
                     <a href="{{ path('login') }}" class="btn btn-main-login">Prisijungti</a>
                 </div>
             </div>

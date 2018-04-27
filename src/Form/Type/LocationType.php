@@ -22,8 +22,8 @@ class LocationType extends AbstractType
                 'attr' => array('class' => 'form-control'),
             ))
             ->add('street', TextType::class, array('label' => "Gatvė",'attr' => array('class' => 'form-control')) )
-            ->add('house', TextType::class, array('label' => "Namas",'attr' => array('class' => 'form-control')))
-            ->add('apartment', TextType::class, array('label' => "Butas",'required' => false,'attr' => array('class' => 'form-control')))
+            ->add('house', TextType::class, array('label' => "Namo nr.",'attr' => array('class' => 'form-control')))
+            ->add('apartment', TextType::class, array('label' => "Buto nr.",'required' => false,'attr' => array('class' => 'form-control')))
             ->add('postcode', TextType::class, array('label' => "Pašto kodas",'attr' => array('class' => 'form-control')));
 
     }

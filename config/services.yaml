@@ -27,7 +27,7 @@ services:
 
     form_authenticator:
         class: App\Security\LoginFormAuthenticator
-        arguments: ['@security.csrf.token_manager', '@router', '@security.password_encoder', '@doctrine.orm.entity_manager']
+        arguments: ['@router', '@security.password_encoder']
 
     password_hasher:
         class: App\Listeners\PasswordListener

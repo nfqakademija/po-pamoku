@@ -55,14 +55,8 @@ class Location
     private $apartment;
 
     /**
-     * @ORM\Column(type="integer")
-     * @Assert\Range(
-     *      min = 10000,
-     *      max = 99999,
-     *      minMessage = "Pašto kodą sudaro 5 skaitmenys",
-     *      maxMessage = "Pašto kodą sudaro 5 skaitmenys"
-     * )
-     *
+     * @ORM\Column(type="string")
+     * @Assert\Regex(pattern="/^[0-9]{5}$/", message="Pašto kodą turi sudaryti 5 skaitmenys.")
      */
     private $postcode;
 

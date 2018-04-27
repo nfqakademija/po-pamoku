@@ -56,6 +56,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string")
      * @Assert\NotBlank()
+     * @Assert\Regex(pattern="/(^(\+370)[0-9]{8})|((8)[0-9]{8})$/", message="Telefono numeris įvestas neteisingu formatu")
      */
     protected $phoneNumber;
 

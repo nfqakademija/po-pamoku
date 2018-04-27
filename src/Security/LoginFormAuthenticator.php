@@ -3,22 +3,15 @@
 
 namespace App\Security;
 
-
-use App\Entity\User;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Form\LoginType;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Core\Exception\AuthenticationException;
-use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
-use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Symfony\Component\Security\Csrf\CsrfToken;
-use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
@@ -26,20 +19,18 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 {
     use TargetPathTrait;
 
-    private $csrfTokenManager;
     private $router;
     private $encoder;
-    private $em;
+    private $factory;
 
-    public function __construct(CsrfTokenManagerInterface $csrfTokenManager,
-                                RouterInterface $router,
+    public function __construct(RouterInterface $router,
                                 UserPasswordEncoderInterface $encoder,
-                                EntityManagerInterface $em)
+                                FormFactoryInterface $factory
+                                )
     {
-        $this->csrfTokenManager = $csrfTokenManager;
         $this->router = $router;
         $this->encoder = $encoder;
-        $this->em = $em;
+        $this->factory = $factory;
     }
 
     public function supports(Request $request)
@@ -49,19 +40,13 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     public function getCredentials(Request $request)
     {
-        $csrfToken = $request->request->get('_csrf_token');
-
-        if (false === $this->csrfTokenManager->isTokenValid(new CsrfToken('authenticate', $csrfToken))) {
-            throw new InvalidCsrfTokenException('Invalid CSRF token.');
-        }
-
-        $email = $request->request->get('_username');
-        $password = $request->request->get('_password');
-        $request->getSession()->set(Security::LAST_USERNAME, $email);
+        $form = $this->factory->create(LoginType::class);
+        $form->handleRequest($request);
+        $data = $form->getData();
 
         return [
-            'email' => $email,
-            'password' => $password,
+            'email' => $data['_username'],
+            'password' => $data['_password'],
         ];
     }
 
