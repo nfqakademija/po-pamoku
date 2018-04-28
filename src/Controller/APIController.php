@@ -35,7 +35,6 @@ class APIController extends Controller
             "ageFrom",
             "ageTo",
             "city",
-            "street",
             "category",
             "subcategory",
             "timeFrom",
@@ -72,6 +71,39 @@ class APIController extends Controller
         }
         
         return new JsonResponse(['count' => $count, 'Activities' => $activities]);
+    }
+    
+    /**
+     * @Route("/api/filter/init", name="api_filtters_defaults")
+     * @Method({"GET"})
+     */
+    public function initFilters()
+    {
+        $cities = $this->getDoctrine()->getRepository(City::class)->findBy([], ["name" => "ASC"]);
+        $categories = $this->getDoctrine()->getRepository(Category::class)->findBy([], ["name" => "ASC"]);
+        $weekdays = [
+            "Pirmadienis",
+            "Antradienis",
+            "Trečiadienis",
+            "Ketvirtadienis",
+            "Penktadienis",
+            "Šeštadienis",
+            "Sekmadienis",
+        ];
+        $mins = ["00", "30"];
+        $times = [];
+        for ($i = 6; $i < 22; $i++) {
+            for ($j = 0; $j < count($mins); $j++) {
+                $times[] = $i . ":" . $mins[$j];
+            }
+        }
+        
+        return new JsonResponse([
+            'cities' => Utils::normalize($cities),
+            'categories' => Utils::normalize($categories),
+            'times' => $times,
+            'weekdays' => $weekdays,
+        ]);
     }
     
     /**
