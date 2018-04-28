@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    <table class="table">
+        {% for key, val in profileVars %}
+            {% if key != 'Būrelis' %}
+                <tr>
+                    <th>{{ key }}</th>
+                    <td>{{ val }}</td>
+                </tr>
+            {% elseif is_granted('ROLE_OWNER')%}
+                <tr>
+                    <th>{{ key }}</th>
+                    <td>
+                        <a href="{{ path('activity_show', {'id': val }) }}" class="btn btn-secondary">
+                            Peržiūrėti
+                        </a>
+                        <a href="{{ path('activity_edit', {'id': val }) }}" class="btn btn-secondary">
+                            Redaguoti
+                        </a>
+                    </td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+    </table>
+    <a href="{{ path('profile_edit', {'id': app.user.id}) }}" class="btn btn-secondary">Redaguoti profilį</a>
+    <a href="{{ path('change_password', {'id': app.user.id}) }}" class="btn btn-secondary">Keisti slaptažodį</a>
+
+{% endblock %}

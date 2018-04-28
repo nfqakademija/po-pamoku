@@ -3,14 +3,14 @@
 
 namespace App\Entity;
 
-
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @UniqueEntity(fields={"email"}, message="Toks elektroninio pašto addresas jau naudojamas")
  */
 class User implements UserInterface
@@ -30,7 +30,7 @@ class User implements UserInterface
     protected $email;
 
     /**
-     * @Assert\NotBlank(groups={"Register"})
+     * @Assert\NotBlank(groups={"Register", "Update"})
      */
     protected $plainPassword;
 
@@ -181,6 +181,21 @@ class User implements UserInterface
         $this->activity = $activity;
         $activity->setUser($this);
     }
+
+    public function getOldPassword()
+    {
+        return $this->getPassword();
+    }
+
+
+    public function setOldPassword($oldPassword): void
+    {
+        $this->oldPassword = $oldPassword;
+    }
+
+
+
+
 
 
 

@@ -37,9 +37,12 @@ class PasswordListener implements EventSubscriber
             return;
         }
 
-        if (!$entity->getPlainPasswoes()) {
+        if (!$entity->getPlainPassword()) {
             return;
         }
+
+        $encoded = $this->passwordEncoder->encodePassword($entity, $entity->getPlainPassword());
+        $entity->setPassword($encoded);
 
         $em = $args->getEntityManager();
         $meta = $em->getClassMetadata(get_class($entity));
