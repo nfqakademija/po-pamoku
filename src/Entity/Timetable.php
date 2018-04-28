@@ -1,89 +1,89 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: juste
+ * Date: 18.4.7
+ * Time: 00.28
+ */
+
+namespace App\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * @ORM\Entity()
+ */
+class Timetable
+{
 	/**
-	 * Created by PhpStorm.
-	 * User: juste
-	 * Date: 18.4.7
-	 * Time: 00.28
+	 * @ORM\Id
+	 * @ORM\GeneratedValue
+	 * @ORM\Column(type="integer")
 	 */
-	
-	namespace App\Entity;
-	
-	use Doctrine\ORM\Mapping as ORM;
-	use Symfony\Component\Validator\Constraints as Assert;
+	private $id;
 	
 	/**
-	 * @ORM\Entity()
+	 * @ORM\ManyToOne(targetEntity="App\Entity\Weekday")
 	 */
-	class Timetable
+	private $weekday;
+	
+	/**
+	 * @ORM\Column(type="time")
+	 * @Assert\Time()
+	 */
+	private $timeFrom;
+	
+	/**
+	 * @ORM\Column(type="time")
+	 * @Assert\Time()
+	 */
+	private $timeTo;
+	
+	/**
+	 * @return mixed
+	 */
+	public function getWeekday()
 	{
-		/**
-		 * @ORM\Id
-		 * @ORM\GeneratedValue
-		 * @ORM\Column(type="integer")
-		 */
-		private $id;
-		
-		/**
-		 * @ORM\ManyToOne(targetEntity="App\Entity\Weekday")
-		 */
-		private $weekday;
-		
-		/**
-		 * @ORM\Column(type="time")
-		 * @Assert\Time()
-		 */
-		private $timeFrom;
-		
-		/**
-		 * @ORM\Column(type="time")
-		 * @Assert\Time()
-		 */
-		private $timeTo;
-		
-		/**
-		 * @return mixed
-		 */
-		public function getWeekday()
-		{
-			return $this->weekday;
-		}
-		
-		
-		public function setWeekday($weekday): self
-		{
-			$this->weekday = $weekday;
-			
-			return $this;
-		}
-		
-		public function getTimeFrom()
-		{
-			return $this->timeFrom;
-		}
-		
-		public function setTimeFrom($timeFrom): self
-		{
-			$this->timeFrom = $timeFrom;
-			
-			return $this;
-		}
-		
-		public function getTimeTo()
-		{
-			return $this->timeTo;
-		}
-		
-		public function setTimeTo($timeTo): self
-		{
-			$this->timeTo = $timeTo;
-			
-			return $this;
-		}
-		
-		public function getId()
-		{
-			return $this->id;
-		}
-		
-		
+		return $this->weekday;
 	}
+	
+	
+	public function setWeekday($weekday): self
+	{
+		$this->weekday = $weekday;
+		
+		return $this;
+	}
+	
+	public function getTimeFrom()
+	{
+		return $this->timeFrom;
+	}
+	
+	public function setTimeFrom($timeFrom): self
+	{
+		$this->timeFrom = $timeFrom;
+		
+		return $this;
+	}
+	
+	public function getTimeTo()
+	{
+		return $this->timeTo;
+	}
+	
+	public function setTimeTo($timeTo): self
+	{
+		$this->timeTo = $timeTo;
+		
+		return $this;
+	}
+	
+	public function getId()
+	{
+		return $this->id;
+	}
+	
+	
+}
