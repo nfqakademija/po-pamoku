@@ -13,16 +13,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class ProfileController extends Controller
 {
     /**
-     * @Route("/profile/{id}", name="profile")
+     * @Route("/profile", name="profile")
      */
-    public function showProfile($id)
+    public function showProfile()
     {
-        $userRepo = $this->getDoctrine()->getRepository(User::class);
-        $user = $userRepo->find($id);
-        
+        $user = $this->getUser();
+
         $this->denyAccessUnlessGranted('viewProfile', $user);
-        
-        $profile = $userRepo->findProfileInformation($id);
+
+        $userRepo = $this->getDoctrine()->getRepository(User::class);
+        $profile = $userRepo->findProfileInformation($user->getId());
         
         $profileVars = [
             'Vardas' => $profile[0]['name'],
@@ -38,12 +38,11 @@ class ProfileController extends Controller
     }
     
     /**
-     * @Route("/profile/edit/{id}", name="profile_edit")
+     * @Route("/profile/edit", name="profile_edit")
      */
-    public function editProfile(Request $request, $id)
+    public function editProfile(Request $request)
     {
-        $userRepo = $this->getDoctrine()->getRepository(User::class);
-        $user = $userRepo->find($id);
+        $user = $this->getUser();
         
         $this->denyAccessUnlessGranted('editProfile', $user);
         
@@ -56,7 +55,7 @@ class ProfileController extends Controller
             $em->persist($data);
             $em->flush();
             
-            return $this->redirectToRoute('profile', ['id' => $id]);
+            return $this->redirectToRoute('profile');
         }
         
         return $this->render('profile/edit.html.twig', [
@@ -65,12 +64,11 @@ class ProfileController extends Controller
     }
     
     /**
-     * @Route("/profile/changepassword/{id}", name="change_password")
+     * @Route("/profile/changepassword", name="change_password")
      */
-    public function changePassword(Request $request, $id)
+    public function changePassword(Request $request)
     {
-        $userRepo = $this->getDoctrine()->getRepository(User::class);
-        $user = $userRepo->find($id);
+        $user = $this->getUser();
         
         $this->denyAccessUnlessGranted('changePassword', $user);
         
@@ -86,7 +84,7 @@ class ProfileController extends Controller
             $em->persist($user);
             $em->flush();
             
-            return $this->redirectToRoute('profile', ['id' => $id]);
+            return $this->redirectToRoute('profile');
         }
         
         return $this->render('profile/changePassword.html.twig', [
