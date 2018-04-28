@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profilio redagavimas{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row mt-5 py-3">
+            <div class="col-12">
+                <div class="mb-2">
+                    <a class="btn btn-light" href="/">Atgal</a>
+                </div>
+            </div>
+            <div class="col-12">
+                {{ form_start(profileForm) }}
+                {{ form_widget(profileForm) }}
+                <button type="submit" class="btn btn-register" formnovalidate>Keisti</button>
+                {{ form_end(profileForm) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

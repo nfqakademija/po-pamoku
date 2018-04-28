@@ -28,6 +28,7 @@
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.0",
         "symfony/dotenv": "^4.0",
+        "symfony/var-dumper": "^4.0",
         "symfony/web-server-bundle": "^4.0"
     },
     "config": {
