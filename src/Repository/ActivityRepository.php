@@ -21,14 +21,23 @@ class ActivityRepository extends ServiceEntityRepository
 		parent::__construct($registry, Activity::class);
 	}
 	
+	public function countTotal()
+	{
+		$qb = $this->createQueryBuilder('a');
+		
+		$qb = $qb->select($qb->expr()->count('a'))
+			->getQuery();
+		return $qb->getSingleScalarResult();
+	}
+	
 	public function fetchFilteredData($criteria = [], $orderBy = ["name" => "ASC"], $limit = 10, $offset = 0)
 	{
+		
 		$qb = $this->createQueryBuilder('a')
 			->select('a.id as id', 'a.name as name', 'a.priceFrom as priceFrom', 'a.priceTo as priceTo',
 				'a.ageFrom as ageFrom', 'a.ageTo as ageTo', 'c.name as city', 'l.street as street',
 				'l.postcode as postcode', 'ca.name as category', 'sc.name as subcategory',
-				'tt.timeFrom as timeFrom',
-				'tt.timeTo as timeTo', 'w.name as weekday')
+				'tt.timeFrom as timeFrom', 'tt.timeTo as timeTo', 'w.name as weekday')
 			->leftJoin('a.location', 'l')
 			->leftJoin('l.city', 'c')
 			->leftJoin('a.subcategory', 'sc')
@@ -109,7 +118,6 @@ class ActivityRepository extends ServiceEntityRepository
 				->setParameter('timeTo', $timeTo);
 		}
 		if (!empty($this->filters["weekday"])) {
-			var_dump($this->filters["weekday"]);
 			$qb = $qb
 				->andWhere('w.name = :weekday')
 				->setParameter('weekday', $this->filters["weekday"]);

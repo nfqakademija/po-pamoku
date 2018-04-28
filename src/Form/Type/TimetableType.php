@@ -10,28 +10,24 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
-
 class TimetableType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
-
-        $builder->add('Weekday', EntityType::class, array(
-                'label' => "Savitės Diena",
-                'class' => Weekday::class,
-                'attr' => array('class' => 'form-control'),
-            ))
-            ->add('timeFrom', TimeType::class, array('label' => "Laikas nuo", 'attr' => array('class' => 'form-control')))
-            ->add('timeTo', TimeType::class, array('label' => "Laikas iki", 'attr' => array('class' => 'form-control')))
-
-        ;
-    }
-
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults(array(
-            'data_class' => Timetable::class,
-        ));
-    }
-
+	public function buildForm(FormBuilderInterface $builder, array $options)
+	{
+		$builder->add('Weekday', EntityType::class, [
+			'label' => "Savitės Diena",
+			'class' => Weekday::class,
+			'attr' => ['class' => 'form-control'],
+		])
+			->add('timeFrom', TimeType::class, ['label' => "Laikas nuo", 'attr' => ['class' => 'form-control']])
+			->add('timeTo', TimeType::class, ['label' => "Laikas iki", 'attr' => ['class' => 'form-control']]);
+	}
+	
+	public function configureOptions(OptionsResolver $resolver)
+	{
+		$resolver->setDefaults([
+			'data_class' => Timetable::class,
+		]);
+	}
+	
 }
