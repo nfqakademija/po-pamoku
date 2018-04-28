@@ -22,31 +22,30 @@ class ActivityType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('name', TextType::class,
-            ['label' => "Būrelio Pavadinimas", 'attr' => ['class' => 'form-control']])
+            ['label' => "Būrelio Pavadinimas"])
             ->add('description', TextareaType::class,
-                ['label' => "Būrelio aprašymas", 'attr' => ['class' => 'form-control']])
+                ['label' => "Būrelio aprašymas"])
             ->add('location', LocationType::class, ['label' => false])
             ->add('priceFrom', NumberType::class, [
                 'label' => "Kaina nuo",
                 'scale' => 2,
                 'rounding_mode' => NumberToLocalizedStringTransformer::ROUND_DOWN,
-                'attr' => ['class' => 'form-control'],
             ])
             ->add('priceTo', NumberType::class, [
                 'label' => "Kaina iki",
                 'scale' => 2,
                 'rounding_mode' => NumberToLocalizedStringTransformer::ROUND_DOWN,
-                'attr' => ['class' => 'form-control'],
             ])
             ->add('ageFrom', NumberType::class,
-                ['label' => "Amžius nuo", 'scale' => 0, 'attr' => ['class' => 'form-control']])
+                ['label' => "Amžius nuo", 'scale' => 0])
             ->add('ageTo', NumberType::class,
-                ['label' => "Amžius iki", 'scale' => 0, 'attr' => ['class' => 'form-control']])
-            ->add('pathToLogo', FileType::class, ['label' => 'Paveikslėlis', 'required' => false, "data_class" => null])
+                ['label' => "Amžius iki", 'scale' => 0,])
+            ->add('pathToLogo', FileType::class, [
+                'label' => 'Logotipas',
+                'data_class' => null])
             ->add('Subcategory', EntityType::class, [
                 'label' => "Būrelio tipas",
                 'class' => Subcategory::class,
-                'attr' => ['class' => 'form-control'],
             ])
             ->add('timetables', CollectionType::class, [
                 "entry_type" => TimetableType::class,
@@ -54,10 +53,7 @@ class ActivityType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
             ])
-            ->add('save', SubmitType::class, [
-                'label' => 'Išsaugoti',
-                'attr' => ['class' => 'btn btn-dark mt-3'],
-            ]);
+        ;
     }
     
     public function configureOptions(OptionsResolver $resolver)

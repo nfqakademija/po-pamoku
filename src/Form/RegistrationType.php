@@ -39,6 +39,7 @@ class RegistrationType extends AbstractType
             ->add('email', EmailType::class)
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
+                'invalid_message' => 'Slaptažodžiai nesutampa.'
             ])
             ->add('phoneNumber');
         

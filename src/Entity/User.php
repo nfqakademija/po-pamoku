@@ -22,13 +22,13 @@ class User implements UserInterface
     
     /**
      * @ORM\Column(type="string", unique=true)
-     * @Assert\NotBlank()
-     * @Assert\Email()
+     * @Assert\NotBlank(message="Prašome užpildyti šį lauką")
+     * @Assert\Email(message="Neteisingai įvestas elektroninio pašto adresas")
      */
     protected $email;
     
     /**
-     * @Assert\NotBlank(groups={"Register", "Update"})
+     * @Assert\NotBlank(groups={"Register", "Update"}, message="Prašome užpildyti šį lauką")
      */
     protected $plainPassword;
     
@@ -39,21 +39,21 @@ class User implements UserInterface
     
     /**
      * @ORM\Column(type="string")
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Prašome užpildyti šį lauką")
      * @Assert\Regex(pattern="/^[\p{L}\s-]+$/", message="Varde yra įvesta neleistinų ženklų")
      */
     protected $name;
     
     /**
      * @ORM\Column(type="string")
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Prašome užpildyti šį lauką")
      * @Assert\Regex(pattern="/^[\p{L}\s-]+$/", message="Pavardėje yra įvesta neleistinų ženklų")
      */
     protected $surname;
     
     /**
      * @ORM\Column(type="string")
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Prašome užpildyti šį lauką")
      * @Assert\Regex(pattern="/(^(\+370)[0-9]{8})|((8)[0-9]{8})$/", message="Telefono numeris įvestas neteisingu formatu")
      */
     protected $phoneNumber;
@@ -65,6 +65,7 @@ class User implements UserInterface
     
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Activity", mappedBy="user", cascade={"persist", "remove"})
+     * @Assert\Valid()
      */
     protected $activity;
     

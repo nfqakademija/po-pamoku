@@ -27,7 +27,7 @@ class Activity
     
     /**
      * @ORM\Column(type="string")
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Prašome užpildyti šį lauką")
      * @Assert\Length(
      *      min = 2,
      *      max = 50,
@@ -39,16 +39,19 @@ class Activity
     
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(message="Prašome aprašyti šį lauką")
      */
     private $description;
     
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Location", cascade={"persist"})
+     * @Assert\Valid()
      */
     private $location;
     
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotNull(message="Prašome užpildyti šį lauką")
      * @Assert\Type(
      *     type="float",
      *     message="Laukelio reikšmė turėtų būti numeris"
@@ -64,6 +67,7 @@ class Activity
     
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotNull(message="Prašome užpildyti šį lauką")
      * @Assert\Type(
      *     type="float",
      *     message="Laukelio reikšmė turėtų būti numeris"
@@ -79,10 +83,11 @@ class Activity
     
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotNull(message="Prašome užpildyti šį lauką")
      * @Assert\Range(
      *      min = 1,
      *      max = 90,
-     *      minMessage = "Minimalus galimas amžius 1 metas",
+     *      minMessage = "Minimalus galimas amžius 1 metai",
      *      maxMessage = "Maksimailus galimas amžius 90 metų"
      * )
      */
@@ -90,6 +95,7 @@ class Activity
     
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotNull(message="Prašome užpildyti šį lauką")
      * @Assert\Range(
      *      min = 1,
      *      max = 90,
@@ -101,6 +107,7 @@ class Activity
     
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotNull(message="Prašome įkelti logotipą.")
      * @Assert\File(mimeTypes={ "image/*"}, mimeTypesMessage="Failas turi būti paveikslėlio formato" )
      *
      */

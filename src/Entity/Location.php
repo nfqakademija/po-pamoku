@@ -30,7 +30,7 @@ class Location
     
     /**
      * @ORM\Column(type="string")
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Prašome užpildyti šį lauką")
      * @Assert\Length(
      *      min = 2,
      *      max = 50,
@@ -42,21 +42,21 @@ class Location
     
     /**
      * @ORM\Column(type="string")
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Prašome užpildyti šį lauką")
      * @Assert\Length(
      *      max = 5,
-     *      maxMessage = "Gatvė negali būti ilgesnis nei {{ limit }} simboliai"
+     *      maxMessage = "Namo nr. negali būti ilgesnis nei {{ limit }} simboliai"
      * )
      */
     private $house;
     
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $apartment;
     
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      * @Assert\Regex(pattern="/^[0-9]{5}$/", message="Pašto kodą turi sudaryti 5 skaitmenys.")
      */
     private $postcode;
