@@ -30,7 +30,6 @@ class User implements UserInterface
     protected $email;
 
     /**
-     * @ORM\Column(type="string")
      * @Assert\NotBlank(groups={"Register"})
      */
     protected $plainPassword;
@@ -57,6 +56,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string")
      * @Assert\NotBlank()
+     * @Assert\Regex(pattern="/(^(\+370)[0-9]{8})|((8)[0-9]{8})$/", message="Telefono numeris įvestas neteisingu formatu")
      */
     protected $phoneNumber;
 
@@ -64,6 +64,11 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     protected $role;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Activity", mappedBy="user", cascade={"persist"})
+     */
+    protected $activity;
 
 
     public function getRoles()
@@ -165,5 +170,17 @@ class User implements UserInterface
     {
         $this->role = $role;
     }
+
+    public function getActivity()
+    {
+        return $this->activity;
+    }
+
+    public function setActivity($activity): void
+    {
+        $this->activity = $activity;
+    }
+
+
 
 }

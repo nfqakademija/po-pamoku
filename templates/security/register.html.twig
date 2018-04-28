@@ -35,8 +35,13 @@
                     {{ form_row(form.phoneNumber, {
                         'label': 'Telefono numeris'
                     }) }}
+
+
+                    {% for child in form.children %}
+                        {{ form_row(child) }}
+                        {% endfor %}
+
                  
-                    {{ form_row(form.role) }}
                     <button type="submit" class="btn btn-register" formnovalidate>Registruotis</button>
 {{ form_end(form) }}
 </div>

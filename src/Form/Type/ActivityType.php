@@ -24,7 +24,7 @@ class ActivityType extends AbstractType
     {
         $builder->add('name', TextType::class, array('label' => "Būrelio Pavadinimas", 'attr' => array('class' => 'form-control')))
             ->add('description', TextareaType::class, array('label' => "Būrelio aprašymas", 'attr' => array('class' => 'form-control')))
-            ->add('location', LocationType::class, array())
+            ->add('location', LocationType::class, array('label' => false))
             ->add('priceFrom', NumberType::class, array('label' => "Kaina nuo", 'scale' => 2,
                 'rounding_mode' => NumberToLocalizedStringTransformer::ROUND_DOWN, 'attr' => array('class' => 'form-control')))
             ->add('priceTo', NumberType::class, array('label' => "Kaina iki", 'scale' => 2,

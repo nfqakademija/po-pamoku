@@ -11,7 +11,7 @@ Encore
     // .enableVersioning(Encore.isProduction())
 
     // uncomment to define the assets of the project
-     .addEntry('js/app', './assets/js/app.js')
+     .addEntry('js/app', './assets/js/App.js')
     .addEntry('js/index', './assets/js/index.js')
     // .addStyleEntry('css/app', './assets/css/app.scss')
 
