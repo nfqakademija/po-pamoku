@@ -3,6 +3,8 @@ security:
     encoders:
         App\Entity\User:
             algorithm: bcrypt
+
+    always_authenticate_before_granting: true
     
     providers:
         all_users:
@@ -21,6 +23,8 @@ security:
                     - form_authenticator
             logout:
                 path: /logout
+            user_checker: App\Security\BannedUserChecker
+
         secured_area:
             form_login:
                 csrf_token_generator: security.csrf.token_manager

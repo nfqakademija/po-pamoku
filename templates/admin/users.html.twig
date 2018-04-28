@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vartotojų sąrašas{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row mt-5 py-3">
+            <div class="col-12">
+                <div class="mb-2">
+                </div>
+            </div>
+            <div class="col-12">
+                <table class="table">
+                    <tr>
+                        <th>Vardas</th>
+                        <th>Pavardė</th>
+                        <th>Rolė</th>
+                        <th>Būsena</th>
+                        <th></th>
+                    </tr>
+                {% for user in users %}
+                    {% if user.roles != 'ROLE_ADMIN' %}
+                        <tr>
+                            <td>{{ user.name }}</td>
+                            <td>{{ user.surname }}</td>
+                            {% if user.roles == 'ROLE_USER' %}
+                                <td>Klientas</td>
+                            {% elseif user.roles == 'ROLE_OWNER' %}
+                                <td>Vadovas</td>
+                            {% endif %}
+                            {% if user.isblocked %}
+                                <td>Užblokuotas</td>
+                            {% else %}
+                                <td>Aktyvus</td>
+                            {% endif %}
+                            <td><a href="{{ path('admin_user_profile_action', {'id':user.id}) }}" class="btn btn-secondary">Peržiūrėti profilį</a></td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

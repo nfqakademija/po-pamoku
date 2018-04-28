@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    <table class="table">
+        <tr>
+            <th>Vardas</th>
+            <td>{{ user.name }}</td>
+        </tr>
+        <tr>
+            <th>Pavardė</th>
+            <td>{{ user.surname }}</td>
+        </tr>
+        <tr>
+            <th>Elektroninis paštas</th>
+            <td>{{ user.email }}</td>
+        </tr>
+        <tr>
+            <th>Telefonas</th>
+            <td>{{ user.phone }}</td>
+        </tr>
+        {% if 'ROLE_OWNER' in user.roles %}
+            <tr>
+                <th>Būrelis</th>
+                <td><a href="{{ path('activity_show', {'id': user.activity}) }}" class="btn btn-secondary">Peržiūrėti</a></td>
+            </tr>
+        {% endif %}
+    </table>
+    {{ form_start(form) }}
+        {% if user.isblocked == true %}
+            {{ form_row(form.blockAction, {
+                'label': "Atblokuoti",
+                'attr': {'class': 'btn btn-primary'}
+            }) }}
+        {% else %}
+            {{ form_row(form.blockAction, {
+                'label': "Užblokuoti",
+                'attr': {'class': 'btn btn-primary'}
+            }) }}
+        {% endif %}
+    {{ form_end(form) }}
+{% endblock %}

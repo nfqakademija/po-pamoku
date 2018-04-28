@@ -68,6 +68,11 @@ class User implements UserInterface
      * @Assert\Valid()
      */
     protected $activity;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $isBlocked;
     
     
     public function getRoles()
@@ -104,9 +109,10 @@ class User implements UserInterface
         return $this->id;
     }
     
-    public function setId($id): void
+    public function setId($id): self
     {
         $this->id = $id;
+        return $this;
     }
     
     public function getEmail()
@@ -114,9 +120,10 @@ class User implements UserInterface
         return $this->email;
     }
     
-    public function setEmail($email): void
+    public function setEmail($email): self
     {
         $this->email = $email;
+        return $this;
     }
     
     public function getPlainPassword()
@@ -135,9 +142,10 @@ class User implements UserInterface
         return $this->name;
     }
     
-    public function setName($name): void
+    public function setName($name): self
     {
         $this->name = $name;
+        return $this;
     }
     
     public function getSurname()
@@ -145,9 +153,10 @@ class User implements UserInterface
         return $this->surname;
     }
     
-    public function setSurname($surname): void
+    public function setSurname($surname): self
     {
         $this->surname = $surname;
+        return $this;
     }
     
     public function getPhoneNumber()
@@ -155,9 +164,10 @@ class User implements UserInterface
         return $this->phoneNumber;
     }
     
-    public function setPhoneNumber($phoneNumber): void
+    public function setPhoneNumber($phoneNumber): self
     {
         $this->phoneNumber = $phoneNumber;
+        return $this;
     }
     
     public function getRole()
@@ -165,9 +175,10 @@ class User implements UserInterface
         return $this->role;
     }
     
-    public function setRole($role): void
+    public function setRole($role): self
     {
         $this->role = $role;
+        return $this;
     }
     
     public function getActivity()
@@ -175,22 +186,22 @@ class User implements UserInterface
         return $this->activity;
     }
     
-    public function setActivity($activity): void
+    public function setActivity($activity): self
     {
         $this->activity = $activity;
         $activity->setUser($this);
+        return $this;
     }
-    
-    public function getOldPassword()
+
+    public function getIsBlocked()
     {
-        return $this->getPassword();
+        return $this->isBlocked;
     }
-    
-    
-    public function setOldPassword($oldPassword): void
+
+    public function setIsBlocked($isBlocked): self
     {
-        $this->oldPassword = $oldPassword;
+        $this->isBlocked = $isBlocked;
+        return $this;
     }
-    
     
 }
