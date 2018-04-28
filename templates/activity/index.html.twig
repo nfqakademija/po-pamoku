@@ -6,12 +6,12 @@
 <div class="main">
     <div class="hero">
         <div class="container pt-4">
-            <div class="row">
+            <div class="row justify-content-center">
                 <div class="col-12">
-                    <h1 class="display-4 hero-title">Po pamokų</h1>
+                    <h1 class="hero-title">Po pamokų</h1>
                 </div>
                 <div class="col-12 col-md-6">
-                        <p class="lead text-grey">Visi būreliai vienoje vietoje. Raskite įdomiausius būrelius ir po pamokines veiklas!</p>
+                    <p class="text-white text-center">Visi būreliai vienoje vietoje. Raskite įdomiausius būrelius ir po pamokines veiklas!</p>
                 </div>
             </div>
             <div class="row">
@@ -34,5 +34,18 @@
 
 {% block javascripts %}
     <script src="{{asset("build/js/index.js")}}"></script>
+    <script>
+          window.onscroll = function () { scrollFunction() };
+        let nav = document.getElementById("navbar");
+        function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+           nav.classList.remove("nav-trans");
+           nav.classList.add("nav-white");
+        } else {
+           nav.classList.remove("nav-white");
+           nav.classList.add("nav-trans");
+        }
+        }
+    </script>
 {% endblock %}
 
