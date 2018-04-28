@@ -24,7 +24,7 @@ class Activity
      * @ORM\Column(type="integer")
      */
     private $id;
-
+    
     /**
      * @ORM\Column(type="string")
      * @Assert\NotBlank()
@@ -36,17 +36,17 @@ class Activity
      * )
      */
     private $name;
-
+    
     /**
      * @ORM\Column(type="text")
      */
     private $description;
-
+    
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Location", cascade={"persist"})
      */
     private $location;
-
+    
     /**
      * @ORM\Column(type="float")
      * @Assert\Type(
@@ -61,7 +61,7 @@ class Activity
      * )
      */
     private $priceFrom;
-
+    
     /**
      * @ORM\Column(type="float")
      * @Assert\Type(
@@ -76,7 +76,7 @@ class Activity
      * )
      */
     private $priceTo;
-
+    
     /**
      * @ORM\Column(type="integer")
      * @Assert\Range(
@@ -87,7 +87,7 @@ class Activity
      * )
      */
     private $ageFrom;
-
+    
     /**
      * @ORM\Column(type="integer")
      * @Assert\Range(
@@ -98,185 +98,184 @@ class Activity
      * )
      */
     private $ageTo;
-
+    
     /**
      * @ORM\Column(type="string")
      * @Assert\File(mimeTypes={ "image/*"}, mimeTypesMessage="Failas turi būti paveikslėlio formato" )
      *
      */
     private $pathToLogo;
-
+    
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Subcategory")
      */
     private $subcategory;
-
+    
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Timetable", cascade={"persist"})
      */
     private $timetables;
-
+    
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="activity")
      */
     private $user;
-
-
+    
+    
     public function __construct()
     {
         $this->timetables = new ArrayCollection();
     }
-
+    
     public function getId()
     {
         return $this->id;
     }
-
+    
     public function getName()
     {
         return $this->name;
     }
-
+    
     public function setName($name): self
     {
         $this->name = $name;
-
+        
         return $this;
     }
-
+    
     public function getDescription()
     {
         return $this->description;
     }
-
+    
     public function setDescription($description): self
     {
         $this->description = $description;
-
+        
         return $this;
     }
-
+    
     public function getLocation()
     {
         return $this->location;
     }
-
+    
     public function setLocation($location): self
     {
         $this->location = $location;
-
+        
         return $this;
     }
-
+    
     public function getPriceFrom()
     {
         return $this->priceFrom;
     }
-
+    
     public function setPriceFrom($priceFrom): self
     {
         $this->priceFrom = $priceFrom;
-
+        
         return $this;
     }
-
+    
     public function getPriceTo()
     {
         return $this->priceTo;
     }
-
+    
     public function setPriceTo($priceTo): self
     {
         $this->priceTo = $priceTo;
-
+        
         return $this;
     }
-
+    
     public function getAgeFrom()
     {
         return $this->ageFrom;
     }
-
+    
     public function setAgeFrom($ageFrom): self
     {
         $this->ageFrom = $ageFrom;
-
+        
         return $this;
     }
-
+    
     public function getAgeTo()
     {
         return $this->ageTo;
     }
-
+    
     public function setAgeTo($ageTo): self
     {
         $this->ageTo = $ageTo;
-
+        
         return $this;
     }
-
+    
     public function getPathToLogo()
     {
         return $this->pathToLogo;
     }
-
+    
     public function setPathToLogo($pathToLogo): self
     {
         $this->pathToLogo = $pathToLogo;
-
+        
         return $this;
     }
-
+    
     public function getSubcategory()
     {
         return $this->subcategory;
     }
-
+    
     public function setSubcategory($subcategory): self
     {
         $this->subcategory = $subcategory;
-
+        
         return $this;
     }
-
+    
     public function getTimetables()
     {
         return $this->timetables;
     }
-
-    public function addTimetable($timetable) : self
+    
+    public function addTimetable($timetable): self
     {
         if ($this->timetables->contains($timetable)) {
             return $this;
         }
         $this->timetables[] = $timetable;
-
+        
         return $this;
     }
-
-
+    
+    
     public function removeTimetable(Timetable $timetable): self
     {
         if ($this->timetables->contains($timetable)) {
             $this->timetables->removeElement($timetable);
         }
-
+        
         return $this;
     }
-
+    
     public function getUser()
     {
         return $this->user;
     }
-
+    
     public function setUser($user): self
     {
         $this->user = $user;
-
+        
         return $this;
     }
-
-
-
+    
+    
 }

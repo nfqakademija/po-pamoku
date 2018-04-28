@@ -8,7 +8,6 @@
 
 namespace App\Security;
 
-
 use App\Entity\Activity;
 use App\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -21,35 +20,33 @@ class EditVoter extends Voter
         if ($attribute !== 'edit') {
             return false;
         }
-
+        
         if (!$subject instanceof Activity) {
-
             return false;
         }
-
+        
         return true;
     }
-
+    
     protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
     {
         $user = $token->getUser();
-
+        
         if (!$user instanceof User) {
-
             return false;
         }
-
+        
         switch ($attribute) {
             case 'edit':
                 return $this->canEdit($subject, $user);
         }
     }
-
+    
     private function canEdit(Activity $activity, User $user)
     {
         if ($user->getId() === $activity->getUser()->getId()) {
             return true;
         }
     }
-
+    
 }

@@ -8,7 +8,6 @@
 
 namespace App\Form;
 
-
 use App\Form\Model\ChangePasswordModel;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -18,7 +17,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ChangePasswordType extends AbstractType
 {
-
+    
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -27,15 +26,15 @@ class ChangePasswordType extends AbstractType
             ])
             ->add('newPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
-                'first_options'  => ['label' => 'Naujas slaptažodis'],
-                'second_options' => ['label' => 'Pakartoti slaptažodį']
+                'first_options' => ['label' => 'Naujas slaptažodis'],
+                'second_options' => ['label' => 'Pakartoti slaptažodį'],
             ]);
     }
-
+    
     public function setDefaultOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => ChangePasswordModel::class,
-        ));
+        ]);
     }
 }

@@ -15,56 +15,56 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 class LoadSubcategory extends Fixture implements DependentFixtureInterface
 {
-	public const SUBCATEGORIES = [
-		'Sportas' => [
-			'Plaukimas',
-			'Krepšinis',
-			'Futbolas',
-		],
-		'Menai' => [
-			'Tapyba',
-		],
-		'Kalbos' => [
-			'Anglų',
-			'Rusų',
-			'Lenkų',
-		],
-		'Technologijos' => [
-			'Robotika',
-		],
-	];
-	
-	public const SUB_NAMES = [
-		'Plaukimas',
-		'Krepšinis',
-		'Futbolas',
-		'Tapyba',
-		'Anglų',
-		'Rusų',
-		'Lenkų',
-		'Robotika',
-	];
-	
-	public function load(ObjectManager $manager)
-	{
-		foreach (self::SUBCATEGORIES as $categoryName => $subcategoryNames) {
-			foreach ($subcategoryNames as $subcategoryName) {
-				$subcategory = new Subcategory();
-				$subcategory->setName($subcategoryName)
-					->setCategory($this->getReference($categoryName));
-				$this->addReference($subcategoryName, $subcategory);
-				$manager->persist($subcategory);
-			}
-		}
-		
-		$manager->flush();
-	}
-	
-	public function getDependencies()
-	{
-		return [
-			LoadCategory::class,
-		];
-	}
-	
+    public const SUBCATEGORIES = [
+        'Sportas' => [
+            'Plaukimas',
+            'Krepšinis',
+            'Futbolas',
+        ],
+        'Menai' => [
+            'Tapyba',
+        ],
+        'Kalbos' => [
+            'Anglų',
+            'Rusų',
+            'Lenkų',
+        ],
+        'Technologijos' => [
+            'Robotika',
+        ],
+    ];
+    
+    public const SUB_NAMES = [
+        'Plaukimas',
+        'Krepšinis',
+        'Futbolas',
+        'Tapyba',
+        'Anglų',
+        'Rusų',
+        'Lenkų',
+        'Robotika',
+    ];
+    
+    public function load(ObjectManager $manager)
+    {
+        foreach (self::SUBCATEGORIES as $categoryName => $subcategoryNames) {
+            foreach ($subcategoryNames as $subcategoryName) {
+                $subcategory = new Subcategory();
+                $subcategory->setName($subcategoryName)
+                    ->setCategory($this->getReference($categoryName));
+                $this->addReference($subcategoryName, $subcategory);
+                $manager->persist($subcategory);
+            }
+        }
+        
+        $manager->flush();
+    }
+    
+    public function getDependencies()
+    {
+        return [
+            LoadCategory::class,
+        ];
+    }
+    
 }

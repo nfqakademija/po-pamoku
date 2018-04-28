@@ -16,11 +16,12 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 class Utils
 {
-	public static function normalize($obj){
-		$encoders = [new XmlEncoder(), new JsonEncoder()];
-		$normalizers = [new DateTimeNormalizer("H:i"), new ObjectNormalizer()];
-		$serializer = new Serializer($normalizers, $encoders);
-		
-		return $serializer->normalize($obj);
-	}
+    public static function normalize($obj)
+    {
+        $encoders = [new XmlEncoder(), new JsonEncoder()];
+        $normalizers = [new DateTimeNormalizer("H:i"), new ObjectNormalizer()];
+        $serializer = new Serializer($normalizers, $encoders);
+        
+        return $serializer->normalize($obj);
+    }
 }

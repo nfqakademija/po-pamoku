@@ -8,7 +8,6 @@
 
 namespace App\Form;
 
-
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -22,23 +21,23 @@ class ProfileType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => 'Vardas'
+                'label' => 'Vardas',
             ])
             ->add('surname', TextType::class, [
-                'label' => 'Pavardė'
+                'label' => 'Pavardė',
             ])
             ->add('email', EmailType::class, [
-                'label' => 'Elektroninis paštas'
+                'label' => 'Elektroninis paštas',
             ])
             ->add('phoneNumber', TextType::class, [
-                'label' => 'Telefono nr.'
+                'label' => 'Telefono nr.',
             ]);
     }
-
+    
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => User::class
+            'data_class' => User::class,
         ]);
     }
 }
