@@ -1,31 +1,164 @@
 import React from 'react';
+const axios = require('axios');
+
 
 class Filter extends React.Component {
     constructor() {
         super();
 
         this.state = {
-            name: null,
-            pavarde: null,
+            categories: [],
+            cities: [],
+            times: [],
+            weekdays: [],
+            category: '',
+            cityId: '',
+            weekday: '',
+            time: '',
+            search: '',
+            age: '',
+            price: ''
         };
     }
 
+    componentDidMount() {
+           this.getFilters();
+    }
+
+getFilters() {
+    axios.get('/api/filter/init')
+        .then(function (response) {
+            this.setState({
+                categories: response.data.categories,
+                cities: response.data.cities,
+                times: response.data.times,
+                weekdays: response.data.weekdays
+            });
+        }.bind(this))
+        .catch(function (error) {
+            console.error(error);
+        });
+}
+
     render() {
         const { onChange } = this.props;
-        // const values = { ...this.state };
-
+        const { categories, cities, times, weekdays, category, cityId, time, weekday, search, age, price } = this.state;
         return (
-            <div>
-                <label>Name</label>
-                <input name="name" onChange={(value) => {
-                    this.setState({ name: value });
 
-                    onchange(values);
+            <div>
+
+                <label>Paieška</label>
+                <input name="search" type="text" onChange={(event) => {
+                    this.setState({ search: event.currentTarget.value }, () => {
+                        let copy = Object.assign({ category, cityId, time, weekday, search, age, price }, this.state);
+                        onChange(copy);
+                    });
+                        
+
+                    
                 }} />
-                <input name="name" onChange={(value) => {
+                {/* <input name="name" onChange={(value) => {
                     this.setState({ pavarde: value })
 
-                    onchange(values);
+                    onChange(values);
+                }} /> */}
+
+                <label>Kategorija</label><br />
+                <select name="category" onChange={(event) => {
+
+                    function filterByName(item) {
+                        if (item.name == event.target.value) {
+                            return true;
+                        }
+                    }
+                    let selectedCategory = categories.filter(filterByName);
+
+                    this.setState({ category: selectedCategory[0].id }, () => {
+                        let copy = Object.assign({ category, cityId, time, weekday, search, age, price }, this.state);
+                        console.log(this.state.category);
+                        onChange(copy);
+                    }
+
+                    );
+                }}> {
+                    categories.length !== 0 ? (categories.map((category, index) =>
+                        <option key={"category" + index}>
+                            {category.name}
+                        </option>)) : ('no data')
+                }
+                </select><br/>
+
+                <label>Miestas</label><br/>
+                <select name="city" onChange={(event) => {
+
+                    function filterByName(item) {
+                        if (item.name == event.target.value) {
+                            return true;
+                        } 
+                    }
+                    let selectedCity = cities.filter(filterByName);
+
+                    this.setState({ cityId: selectedCity[0].id }, () => {
+                        let copy = Object.assign({ category, cityId, time, weekday, search, age, price }, this.state);
+                        onChange(copy);
+                    });
+                }}> {
+                        cities.length !== 0 ? (cities.map((city, index) =>
+                            <option key={"city" + index}>
+                                {city.name}
+                            </option>)) : ('no data')
+                    }
+                </select><br/>
+
+                <label>Savaitės dienos</label><br/>
+                <select name="weekday" onChange={(event) => {
+                    this.setState({ weekday: event.target.value }, () => {
+                        let copy = Object.assign({ category, cityId, time, weekday, search, age, price }, this.state);
+                        onChange(copy);
+                        }
+                    );
+                    
+                }}> {
+                        weekdays.length !== 0 ? (weekdays.map((weekday, index) =>
+                            <option key={"weekday" + index}>
+                                {weekday}
+                            </option>)) : ('no data')
+                    }
+                </select><br />
+
+                <label>Būrelio pradžia</label><br/>
+                <select name="time" onChange={(event) => {
+                    this.setState({ time: event.target.value }, () => {
+                        let copy = Object.assign({ category, cityId, time, weekday, search, age, price }, this.state);
+                        onChange(copy);
+                    }
+                    );
+                }}> {
+                        times.length !== 0 ? (times.map((time, index) =>
+                            <option key={"time" + index}>
+                                {time}
+                            </option>)) : ('no data')
+                    }
+                </select><br />
+                
+                <label>Amžius</label><br/>
+                <input name="age" type="number" onChange={(event) => {
+                    this.setState({ age: event.target.value }, () => {
+                        let copy = Object.assign({ category, cityId, time, weekday, search, age, price }, this.state);
+                        onChange(copy);
+                    }
+                    );
+
+                }} />
+
+                <label>Kaina</label><br/>
+                <input name="price" type="number" onChange={(event) => {
+                    this.setState({ price: event.target.value }, () => {
+                        let copy = Object.assign({ category, cityId, time, weekday, search, age, price }, this.state);
+                        onChange(copy);
+                    }
+                    );
+
                 }} />
             </div>
         )

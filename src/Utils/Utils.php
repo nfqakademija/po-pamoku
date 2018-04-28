@@ -24,4 +24,9 @@ class Utils
         
         return $serializer->normalize($obj);
     }
+    
+    public static function generateUniqueFileName()
+    {
+        return md5(uniqid());
+    }
 }

@@ -35,7 +35,6 @@ class APIController extends Controller
             "ageFrom",
             "ageTo",
             "city",
-            "street",
             "category",
             "subcategory",
             "timeFrom",
@@ -61,14 +60,17 @@ class APIController extends Controller
         $offset = ($page - 1) * $limit;
         
         $activities = $this->getDoctrine()->getRepository(Activity::class)
-            ->fetchFilteredData($params, $orderBy, $limit, $offset);
+            ->fetchFilteredData($params, $orderBy);
+        
+        $count = count($activities);
+        $activities = array_slice($activities, $offset, $limit);
         
         foreach ($activities as &$activity) {
             $activity["timeFrom"] = $activity["timeFrom"]->format("H:i");
             $activity["timeTo"] = $activity["timeTo"]->format("H:i");
         }
         
-        return new JsonResponse($activities);
+        return new JsonResponse(['count' => $count, 'Activities' => $activities]);
     }
     
     /**
@@ -79,13 +81,51 @@ class APIController extends Controller
     {
         $cities = $this->getDoctrine()->getRepository(City::class)->findBy([], ["name" => "ASC"]);
         $categories = $this->getDoctrine()->getRepository(Category::class)->findBy([], ["name" => "ASC"]);
-        $activitiesCount = $this->getDoctrine()->getRepository(Activity::class)->countTotal();
+        $weekdays = [
+            "Pirmadienis",
+            "Antradienis",
+            "Trečiadienis",
+            "Ketvirtadienis",
+            "Penktadienis",
+            "Šeštadienis",
+            "Sekmadienis",
+        ];
+        $mins = ["00", "30"];
+        $times = [];
+        for ($i = 6; $i < 22; $i++) {
+            for ($j = 0; $j < count($mins); $j++) {
+                $times[] = $i . ":" . $mins[$j];
+            }
+        }
         
         return new JsonResponse([
             'cities' => Utils::normalize($cities),
             'categories' => Utils::normalize($categories),
-            'activitiesCount' => $activitiesCount,
+            'times' => $times,
+            'weekdays' => $weekdays,
         ]);
+    }
+    
+    /**
+     * @Route("/api/filter/city", name="api_filtters_city")
+     * @Method({"GET"})
+     */
+    public function cityFilters()
+    {
+        $cities = $this->getDoctrine()->getRepository(City::class)->findBy([], ["name" => "ASC"]);
+        
+        return new JsonResponse(Utils::normalize($cities));
+    }
+    
+    /**
+     * @Route("/api/filter/category", name="api_filtters_category")
+     * @Method({"GET"})
+     */
+    public function categoryFilters()
+    {
+        $categories = $this->getDoctrine()->getRepository(Category::class)->findBy([], ["name" => "ASC"]);
+        
+        return new JsonResponse(Utils::normalize($categories));
     }
     
     /**

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Location;
 use App\Form\RegistrationType;
 use App\Security\LoginFormAuthenticator;
+use App\Utils\Utils;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -35,7 +36,7 @@ class RegistrationController extends Controller
             if ($role === 'owner') {
                 $file = $userData->getActivity()->getPathToLogo();
                 
-                $fileName = $this->generateUniqueFileName() . '.' . $file->guessExtension();
+                $fileName = Utils::generateUniqueFileName() . '.' . $file->guessExtension();
                 
                 $file->move(
                     $this->getParameter('uploads_directory'),
@@ -69,13 +70,5 @@ class RegistrationController extends Controller
         return $this->render('security/register.html.twig', [
             'form' => $form->createView(),
         ]);
-    }
-    
-    /**
-     * @return string
-     */
-    private function generateUniqueFileName()
-    {
-        return md5(uniqid());
     }
 }

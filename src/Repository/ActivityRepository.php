@@ -21,16 +21,16 @@ class ActivityRepository extends ServiceEntityRepository
         parent::__construct($registry, Activity::class);
     }
     
-    public function countTotal()
-    {
-        $qb = $this->createQueryBuilder('a');
-        
-        $qb = $qb->select($qb->expr()->count('a'))
-            ->getQuery();
-        return $qb->getSingleScalarResult();
-    }
+//    public function countTotal()
+//    {
+//        $qb = $this->createQueryBuilder('a');
+//
+//        $qb = $qb->select($qb->expr()->count('a'))
+//            ->getQuery();
+//        return $qb->getSingleScalarResult();
+//    }
     
-    public function fetchFilteredData($criteria = [], $orderBy = ["name" => "ASC"], $limit = 10, $offset = 0)
+    public function fetchFilteredData($criteria = [], $orderBy = ["name" => "ASC"])
     {
         $qb = $this->createQueryBuilder('a')
             ->select('a.id as id', 'a.name as name', 'a.priceFrom as priceFrom', 'a.priceTo as priceTo',
@@ -51,8 +51,6 @@ class ActivityRepository extends ServiceEntityRepository
         
         $qb = $qb
             ->orderBy(key($orderBy), array_values($orderBy)[0])
-            ->setFirstResult($offset)
-            ->setMaxResults($limit)
             ->groupBy("a.id")
             ->getQuery();
         
@@ -118,22 +116,22 @@ class ActivityRepository extends ServiceEntityRepository
         }
         if (!empty($this->filters["weekday"])) {
             $qb = $qb
-                ->andWhere('w.name = :weekday')
+                ->andWhere('w.id = :weekday')
                 ->setParameter('weekday', $this->filters["weekday"]);
         }
         if (!empty($this->filters["category"])) {
             $qb = $qb
-                ->andWhere('c.name = :category')
+                ->andWhere('c.id = :category')
                 ->setParameter('category', $this->filters["category"]);
         }
         if (!empty($this->filters["subcategory"])) {
             $qb = $qb
-                ->andWhere('sc.name = :subcategory')
+                ->andWhere('sc.id = :subcategory')
                 ->setParameter('subcategory', $this->filters["subcategory"]);
         }
         if (!empty($this->filters["city"])) {
             $qb = $qb
-                ->andWhere('c.name = :city')
+                ->andWhere('c.id = :city')
                 ->setParameter('city', $this->filters["city"]);
         }
         

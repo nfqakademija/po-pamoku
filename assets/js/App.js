@@ -8,48 +8,73 @@ class App extends React.Component {
     super(props);
     this.state = {
       activities: [],
-      currentPageNumber: 1
+      currentPageNumber: 1,
+      totalActivities: 1,
+      addFilter: false,
+      searchValue: null
     };
+    this.onFilterChange = this.onFilterChange.bind(this);
   }
   
  getActivities(page) {
    axios.get('/api/activity?page=' + page + '&limit=9')
      .then(function (response) {
        this.setState({
-         activities: Object.keys(response.data).map(i => response.data[i]),
-         currentPageNumber: page
-       });
+         activities: Object.keys(response.data).map(i => response.data[i])[1],
+         currentPageNumber: page,
+         totalActivities: Object.keys(response.data).map(i => response.data[i])[0]
+       }); 
+      //  console.log(this.state);
      }.bind(this))
      .catch(function (error) {
        console.error(error);
      });
 }
-
-  componentDidMount() {
-
-    this.getActivities(1);
-
+  searchActivities(page, value) {
+    console.log(value);
+    axios.get('/api/activity?page=' + page + '&limit=9&search=' + value.search + '&city=' + value.cityId + '&category=' + value.category)
+      .then(function (response) {
+        this.setState({
+          activities: Object.keys(response.data).map(i => response.data[i])[1],
+          totalActivities: Object.keys(response.data).map(i => response.data[i])[0],
+          addFilter: true
+        });
+      }.bind(this))
+      .catch(function (error) {
+        console.error(error);
+      });
   }
+  
+  componentDidMount() {
+    this.getActivities(1);
+  }
+
   handleSelect(number) {
     console.log('handle select', number);
     this.setState({ currentPageNumber: number });
-    this.getActivities(number);
+    if (this.state.addFilter === true) {
+      this.searchActivities(number, this.state.searchValue);
+    } else {
+      this.getActivities(number);
+    }
   }
 
-
-  onFilterChange(values)  {
-    console.log(values);
+  onFilterChange(value) {
+    this.setState({searchValue: value});
+    this.searchActivities(1, value);
   }
 
   render() {
     const { activities, currentPage, activitiesPerPage } = this.state;
-    
+    let totalPages = Math.ceil(this.state.totalActivities / 9);
 
     return (
       <div className="container">
-      <Filter 
-        onChange={this.onFilterChange}
-      />
+
+        <Filter
+          onChange={this.onFilterChange}
+        />
+
         <div className="row activities py-3">
 
            {activities.length !== 0 ? (activities.map((activity, index) =>  
@@ -60,6 +85,9 @@ class App extends React.Component {
                   <h5 className="activity-title">{activity.name}</h5>
                   <p>Kaina: {activity.priceFrom}-{activity.priceTo} eur</p>
                   <p>{activity.city}</p>
+                  <p>{activity.category}</p>
+                  <p>{activity.subcategory}</p>
+                  <p>{activity.ageFrom} - {activity.ageTo}</p>
                   <a className="btn btn-more" href={"/activity/" + activity.id}> Plačiau </a>
                 </div>
               </div>
@@ -69,7 +97,7 @@ class App extends React.Component {
 
         <Pagination
           bsSize="medium"
-          items={6}
+          items={totalPages}
           activepage={this.state.currentPageNumber}
           onSelect={this.handleSelect.bind(this)} />
         
