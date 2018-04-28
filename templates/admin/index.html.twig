@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+<div class="container justify-content-center pt-lg-5 row">
+    <a href="{{ path('profile', {'id': 'x'}) }}" class="btn btn-success">Rodyti profilį</a>
+    <a href="{{ path('admin_user_list') }}" class="btn btn-primary">Rodyti vartotojų sąrašą</a>
+</div>
+{% endblock %}
