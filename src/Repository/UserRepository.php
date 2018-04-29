@@ -19,7 +19,7 @@ class UserRepository extends EntityRepository
         
         return $qb->execute();
     }
-
+    
     public function findAllUsersForAdmin()
     {
         $qb = $this->createQueryBuilder('u')
@@ -27,11 +27,10 @@ class UserRepository extends EntityRepository
             ->select('u.id as id', 'u.name as name', 'u.surname as surname',
                 'u.role as roles', 'u.isBlocked as isblocked')
             ->getQuery();
-
+        
         return $qb->execute();
-
     }
-
+    
     public function findOneUserForAdmin($id)
     {
         $qb = $this->createQueryBuilder('u')
@@ -42,7 +41,7 @@ class UserRepository extends EntityRepository
             ->where('u.id =:id')
             ->setParameter('id', $id)
             ->getQuery();
-
+        
         return $qb->execute();
     }
     

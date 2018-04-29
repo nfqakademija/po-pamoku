@@ -121,7 +121,7 @@ class ActivityRepository extends ServiceEntityRepository
         }
         if (!empty($this->filters["category"])) {
             $qb = $qb
-                ->andWhere('c.id = :category')
+                ->andWhere('ca.id = :category')
                 ->setParameter('category', $this->filters["category"]);
         }
         if (!empty($this->filters["subcategory"])) {
