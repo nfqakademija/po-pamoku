@@ -20,22 +20,13 @@ class ActivityRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Activity::class);
     }
-
-//    public function countTotal()
-//    {
-//        $qb = $this->createQueryBuilder('a');
-//
-//        $qb = $qb->select($qb->expr()->count('a'))
-//            ->getQuery();
-//        return $qb->getSingleScalarResult();
-//    }
     
     public function fetchFilteredData($criteria = [], $orderBy = ["name" => "ASC"])
     {
         $qb = $this->createQueryBuilder('a')
             ->select('a.id as id', 'a.name as name', 'a.priceFrom as priceFrom', 'a.priceTo as priceTo',
-                'a.ageFrom as ageFrom', 'a.ageTo as ageTo', 'c.name as city', 'l.street as street',
-                'l.postcode as postcode', 'ca.name as category', 'sc.name as subcategory')
+                'a.ageFrom as ageFrom', 'a.ageTo as ageTo', 'c.name as city', 'l.street as street', 'l.house as house',
+                'l.apartment as apartment', 'l.postcode as postcode', 'ca.name as category', 'sc.name as subcategory')
             ->leftJoin('a.location', 'l')
             ->leftJoin('l.city', 'c')
             ->leftJoin('a.subcategory', 'sc')
@@ -59,21 +50,15 @@ class ActivityRepository extends ServiceEntityRepository
     private function filters($qb)
     {
         if (!empty($this->filters["search"])) {
+            $search = "%" . $this->filters["search"] . "%";
             $qb = $qb
-                ->orWhere('a.name like :name')
-                ->orWhere('c.name like :city')
+                ->orWhere('a.name like :name OR w.name like :weekday')
                 ->orWhere('l.street like :street')
                 ->orWhere('l.postcode like :postcode')
-                ->orWhere('ca.name like :category')
-                ->orWhere('sc.name like :subcategory')
-                ->orWhere('w.name like :weekday')
-                ->setParameter('name', "%" . $this->filters["search"] . "%")
-                ->setParameter('city', "%" . $this->filters["search"] . "%")
-                ->setParameter('street', "%" . $this->filters["search"] . "%")
-                ->setParameter('postcode', "%" . $this->filters["search"] . "%")
-                ->setParameter('category', "%" . $this->filters["search"] . "%")
-                ->setParameter('subcategory', "%" . $this->filters["search"] . "%")
-                ->setParameter('weekday', "%" . $this->filters["search"] . "%");
+                ->setParameter('name', $search)
+                ->setParameter('street', $search)
+                ->setParameter('postcode', $search)
+                ->setParameter('weekday', $search);
         }
     
         if (!empty($this->filters["price"]) && is_numeric($this->filters["price"])) {
@@ -96,8 +81,6 @@ class ActivityRepository extends ServiceEntityRepository
                 ->andWhere('tt.timeTo >= :time')
                 ->setParameter('time', $this->filters["time"]);
         }
-        
-        
         if (!empty($this->filters["weekday"])) {
             $qb = $qb
                 ->andWhere('w.id = :weekday')
