@@ -84,13 +84,13 @@ class Filter extends React.Component {
                     }
                     let selectedCategory = categories.filter(filterByName);
                     if (selectedCategory.length === 0) {
-                        this.setState({ category: '' }, () => {
+                        this.setState({ category: '', subcategory: '' }, () => {
                             let copy = Object.assign({ category, cityId, time, weekday, search, age, price, subcategory }, this.state);
                             onChange(copy);
                         });
                     } else {
 
-                        this.setState({ category: selectedCategory[0].id }, () => {
+                        this.setState({ category: selectedCategory[0].id, subcategory: '' }, () => {
                             this.getSubcategories(this.state.category);
                             let copy = Object.assign({ category, cityId, time, weekday, search, age, price, subcategory }, this.state);
                             onChange(copy);

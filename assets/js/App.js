@@ -1,5 +1,6 @@
 import React from 'react';
 import Filter from './components/Filter.js';
+import Sort from './components/Sort.js';
 import { Pagination } from '@react-bootstrap/pagination';
 const axios = require('axios');
 
@@ -16,7 +17,7 @@ class App extends React.Component {
     this.onFilterChange = this.onFilterChange.bind(this);
   }
  getActivities(page) {
-   axios.get('/api/activity?page=' + page + '&limit=9')
+   axios.get('/api/activity?page=' + page + '&limit=12')
      .then(function (response) {
        this.setState({
          activities: Object.keys(response.data).map(i => response.data[i])[1],
@@ -65,7 +66,7 @@ class App extends React.Component {
 
   render() {
     const { activities, currentPage, activitiesPerPage } = this.state;
-    let totalPages = Math.ceil(this.state.totalActivities / 9);
+    let totalPages = Math.ceil(this.state.totalActivities / 12);
 // console.log(activities);
     return (
       <div className="container">
@@ -73,11 +74,12 @@ class App extends React.Component {
         <Filter
           onChange={this.onFilterChange}
         />
+        <Sort />
 
         <div className="row activities py-3">
 
            {activities.length !== 0 ? (activities.map((activity, index) =>  
-            <div key={"currentAct" + index} className="col-md-4 col-sm-6 col-xs-6 py-3">
+            <div key={"currentAct" + index} className="col-md-3 col-sm-6 col-xs-6 py-3">
               <div className="activity-card">
                 <img className="img-fluid" src="https://placeimg.com/640/480/any" alt="Card image cap" />
                 <div className="activity-text">
