@@ -69,18 +69,30 @@ getFilters() {
                     function filterByName(item) {
                         if (item.name == event.target.value) {
                             return true;
+                        } else {
+                            return false;
                         }
                     }
                     let selectedCategory = categories.filter(filterByName);
-
-                    this.setState({ category: selectedCategory[0].id }, () => {
-                        let copy = Object.assign({ category, cityId, time, weekday, search, age, price }, this.state);
-                        console.log(this.state.category);
-                        onChange(copy);
+                    console.log(selectedCategory);
+                    if(selectedCategory.length === 0) {
+                        this.setState({ category: '' }, () => {
+                            let copy = Object.assign({ category, cityId, time, weekday, search, age, price }, this.state);
+                            console.log(this.state.category);
+                            onChange(copy);
+                        });
+                    } else {
+                        this.setState({ category: selectedCategory[0].id }, () => {
+                            let copy = Object.assign({ category, cityId, time, weekday, search, age, price }, this.state);
+                            console.log(this.state.category);
+                            onChange(copy);
+                        }
+                        );
                     }
-
-                    );
-                }}> {
+                
+                }}> 
+                    <option name="categoryPlaceholder">Kategorija</option>
+                {
                     categories.length !== 0 ? (categories.map((category, index) =>
                         <option key={"category" + index}>
                             {category.name}
@@ -89,20 +101,33 @@ getFilters() {
                 </select><br/>
 
                 <label>Miestas</label><br/>
+                
                 <select name="city" onChange={(event) => {
 
                     function filterByName(item) {
                         if (item.name == event.target.value) {
                             return true;
-                        } 
+                        } else {
+                            return false;
+                        }
                     }
                     let selectedCity = cities.filter(filterByName);
-
-                    this.setState({ cityId: selectedCity[0].id }, () => {
-                        let copy = Object.assign({ category, cityId, time, weekday, search, age, price }, this.state);
-                        onChange(copy);
-                    });
-                }}> {
+                    if (selectedCity.length === 0) {
+                        this.setState({ cityId: '' }, () => {
+                            let copy = Object.assign({ category, cityId, time, weekday, search, age, price }, this.state);
+                            onChange(copy);
+                        });
+                    } else {
+                        this.setState({ cityId: selectedCity[0].id }, () => {
+                            let copy = Object.assign({ category, cityId, time, weekday, search, age, price }, this.state);
+                            onChange(copy);
+                        });
+                    }
+                    
+                }}> 
+                    <option name="cityPlaceholder">Miestas</option>
+                
+                    {
                         cities.length !== 0 ? (cities.map((city, index) =>
                             <option key={"city" + index}>
                                 {city.name}
@@ -112,13 +137,23 @@ getFilters() {
 
                 <label>Savaitės dienos</label><br/>
                 <select name="weekday" onChange={(event) => {
-                    this.setState({ weekday: event.target.value }, () => {
-                        let copy = Object.assign({ category, cityId, time, weekday, search, age, price }, this.state);
-                        onChange(copy);
+                    if (event.target.value === 'Savaitės diena') {
+                        this.setState({ weekday: '' }, () => {
+                            let copy = Object.assign({ category, cityId, time, weekday, search, age, price }, this.state);
+                            onChange(copy);
                         }
-                    );
-                    
-                }}> {
+                        );
+                    } else {
+                        this.setState({ weekday: event.target.value }, () => {
+                            let copy = Object.assign({ category, cityId, time, weekday, search, age, price }, this.state);
+                            onChange(copy);
+                        }
+                        );
+                    }
+                  
+                }}> 
+                    <option name="weekdayPlaceholder">Savaitės diena</option>
+                {
                         weekdays.length !== 0 ? (weekdays.map((weekday, index) =>
                             <option key={"weekday" + index}>
                                 {weekday}
@@ -128,12 +163,23 @@ getFilters() {
 
                 <label>Būrelio pradžia</label><br/>
                 <select name="time" onChange={(event) => {
-                    this.setState({ time: event.target.value }, () => {
-                        let copy = Object.assign({ category, cityId, time, weekday, search, age, price }, this.state);
-                        onChange(copy);
+                    if (event.target.value === 'Laikas') {
+                        this.setState({ time: '' }, () => {
+                            let copy = Object.assign({ category, cityId, time, weekday, search, age, price }, this.state);
+                            onChange(copy);
+                        }
+                        );
+                    } else {
+                        this.setState({ time: event.target.value }, () => {
+                            let copy = Object.assign({ category, cityId, time, weekday, search, age, price }, this.state);
+                            onChange(copy);
+                        }
+                        );
                     }
-                    );
-                }}> {
+                    
+                }}> 
+                    <option name="timePlaceholder">Laikas</option>
+                {
                         times.length !== 0 ? (times.map((time, index) =>
                             <option key={"time" + index}>
                                 {time}
