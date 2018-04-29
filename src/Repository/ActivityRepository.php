@@ -35,8 +35,7 @@ class ActivityRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('a')
             ->select('a.id as id', 'a.name as name', 'a.priceFrom as priceFrom', 'a.priceTo as priceTo',
                 'a.ageFrom as ageFrom', 'a.ageTo as ageTo', 'c.name as city', 'l.street as street',
-                'l.postcode as postcode', 'ca.name as category', 'sc.name as subcategory',
-                'tt.timeFrom as timeFrom', 'tt.timeTo as timeTo', 'w.name as weekday')
+                'l.postcode as postcode', 'ca.name as category', 'sc.name as subcategory')
             ->leftJoin('a.location', 'l')
             ->leftJoin('l.city', 'c')
             ->leftJoin('a.subcategory', 'sc')
@@ -76,44 +75,29 @@ class ActivityRepository extends ServiceEntityRepository
                 ->setParameter('subcategory', "%" . $this->filters["search"] . "%")
                 ->setParameter('weekday', "%" . $this->filters["search"] . "%");
         }
-        if (!empty($this->filters["priceFrom"]) || !empty($this->filters["priceTo"])) {
-            $priceFrom = isset($this->filters["priceFrom"]) && is_numeric($this->filters["priceFrom"]) ? $this->filters["priceFrom"] : 0;
-            $priceTo = isset($this->filters["priceTo"]) && is_numeric($this->filters["priceTo"]) ? $this->filters["priceTo"] : 100;
+    
+        if (!empty($this->filters["price"]) && is_numeric($this->filters["price"])) {
             $qb = $qb
-                ->andWhere('a.priceFrom >= :priceFrom')
-                ->andWhere('a.priceTo <= :priceTo')
-                ->setParameter('priceFrom', $priceFrom)
-                ->setParameter('priceTo', $priceTo);
+                ->andWhere('a.priceFrom <= :price')
+                ->andWhere('a.priceTo >= :price')
+                ->setParameter('price', $this->filters["price"]);
         }
-        if (!empty($this->filters["ageFrom"]) || !empty($this->filters["ageTo"])) {
-            $ageFrom = isset($this->filters["ageFrom"]) && is_numeric($this->filters["ageFrom"]) ? $this->filters["ageFrom"] : 0;
-            $ageTo = isset($this->filters["ageTo"]) && is_numeric($this->filters["ageTo"]) ? $this->filters["ageTo"] : 100;
+        
+        if (!empty($this->filters["age"]) && is_numeric($this->filters["age"])) {
             $qb = $qb
-                ->andWhere('a.ageFrom >= :ageFrom')
-                ->andWhere('a.ageTo <= :ageTo')
-                ->setParameter('ageFrom', $ageFrom)
-                ->setParameter('ageTo', $ageTo);
+                ->andWhere('a.ageFrom <= :age')
+                ->andWhere('a.ageTo >= :age')
+                ->setParameter('age', $this->filters["age"]);
         }
-        if (!empty($this->filters["timeFrom"]) || !empty($this->filters["timeTo"])) {
-            if (isset($this->filters["timeFrom"]) && preg_match("/^(?:2[0-3]|[01][0-9]):[0-5][0-9]$/",
-                    $this->filters["timeFrom"])) {
-                $timeFrom = $this->filters["timeFrom"];
-            } else {
-                $timeFrom = date("H:i", mktime(0, 0));
-            }
-            
-            if (isset($this->filters["timeTo"]) && preg_match("/^(?:2[0-3]|[01][0-9]):[0-5][0-9]$/",
-                    $this->filters["timeTo"])) {
-                $timeTo = $this->filters["timeTo"];
-            } else {
-                $timeTo = date("H:i", mktime(23, 59));
-            }
+    
+        if (!empty($this->filters["time"]) && preg_match("/^(?:2[0-3]|[01][0-9]):[0-5][0-9]$/",$this->filters["time"])) {
             $qb = $qb
-                ->andWhere('tt.timeFrom >= :timeFrom')
-                ->andWhere('tt.timeTo <= :timeTo')
-                ->setParameter('timeFrom', $timeFrom)
-                ->setParameter('timeTo', $timeTo);
+                ->andWhere('tt.timeFrom <= :time')
+                ->andWhere('tt.timeTo >= :time')
+                ->setParameter('time', $this->filters["time"]);
         }
+        
+        
         if (!empty($this->filters["weekday"])) {
             $qb = $qb
                 ->andWhere('w.id = :weekday')

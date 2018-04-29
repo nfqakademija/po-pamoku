@@ -30,15 +30,12 @@ class APIController extends Controller
             "sortBy",
             "limit",
             "search",
-            "priceFrom",
-            "priceTo",
-            "ageFrom",
-            "ageTo",
+            "price",
+            "age",
             "city",
             "category",
             "subcategory",
-            "timeFrom",
-            "timeTo",
+            "time",
             "weekday",
         ];
         
@@ -64,11 +61,7 @@ class APIController extends Controller
         
         $count = count($activities);
         $activities = array_slice($activities, $offset, $limit);
-        
-        foreach ($activities as &$activity) {
-            $activity["timeFrom"] = $activity["timeFrom"]->format("H:i");
-            $activity["timeTo"] = $activity["timeTo"]->format("H:i");
-        }
+
         
         return new JsonResponse(['count' => $count, 'Activities' => $activities]);
     }
