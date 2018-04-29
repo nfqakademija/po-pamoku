@@ -32,6 +32,7 @@ class ActivityRepository extends ServiceEntityRepository
     
     public function fetchFilteredData($criteria = [], $orderBy = ["name" => "ASC"])
     {
+        
         $qb = $this->createQueryBuilder('a')
             ->select('a.id as id', 'a.name as name', 'a.priceFrom as priceFrom', 'a.priceTo as priceTo',
                 'a.ageFrom as ageFrom', 'a.ageTo as ageTo', 'c.name as city', 'l.street as street',
@@ -48,6 +49,8 @@ class ActivityRepository extends ServiceEntityRepository
             $this->filters = $criteria;
             $qb = $this->filters($qb);
         }
+    
+        
         
         $qb = $qb
             ->orderBy(key($orderBy), array_values($orderBy)[0])
@@ -86,13 +89,16 @@ class ActivityRepository extends ServiceEntityRepository
                 ->setParameter('priceTo', $priceTo);
         }
         if (!empty($this->filters["ageFrom"]) || !empty($this->filters["ageTo"])) {
+            
             $ageFrom = isset($this->filters["ageFrom"]) && is_numeric($this->filters["ageFrom"]) ? $this->filters["ageFrom"] : 0;
             $ageTo = isset($this->filters["ageTo"]) && is_numeric($this->filters["ageTo"]) ? $this->filters["ageTo"] : 100;
             $qb = $qb
-                ->andWhere('a.ageFrom >= :priceFrom')
+                ->andWhere('a.ageFrom >= :ageFrom')
                 ->andWhere('a.ageTo <= :ageTo')
                 ->setParameter('ageFrom', $ageFrom)
                 ->setParameter('ageTo', $ageTo);
+    
+            var_dump($ageFrom);
         }
         if (!empty($this->filters["timeFrom"]) || !empty($this->filters["timeTo"])) {
             if (isset($this->filters["timeFrom"]) && preg_match("/^(?:2[0-3]|[01][0-9]):[0-5][0-9]$/",
