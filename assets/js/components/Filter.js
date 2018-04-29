@@ -57,11 +57,6 @@ getFilters() {
 
                     
                 }} />
-                {/* <input name="name" onChange={(value) => {
-                    this.setState({ pavarde: value })
-
-                    onChange(values);
-                }} /> */}
 
                 <label>Kategorija</label><br />
                 <select name="category" onChange={(event) => {
@@ -144,7 +139,7 @@ getFilters() {
                         }
                         );
                     } else {
-                        this.setState({ weekday: event.target.value }, () => {
+                        this.setState({ weekday: weekdays.indexOf(event.target.value) + 1 }, () => {
                             let copy = Object.assign({ category, cityId, time, weekday, search, age, price }, this.state);
                             onChange(copy);
                         }

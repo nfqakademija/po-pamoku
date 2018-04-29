@@ -15,7 +15,6 @@ class App extends React.Component {
     };
     this.onFilterChange = this.onFilterChange.bind(this);
   }
-  
  getActivities(page) {
    axios.get('/api/activity?page=' + page + '&limit=9')
      .then(function (response) {
@@ -33,7 +32,7 @@ class App extends React.Component {
   searchActivities(page, value) {
     console.log(value);
     axios.get('/api/activity?page=' + page + '&limit=9&search=' + value.search + '&city=' + value.cityId + '&category=' + value.category + 
-      '&weekday=' + value.weekday + '&timeFrom=' + value.time + '&ageFrom' + value.age + '&priceFrom' + value.price)
+      '&weekday=' + value.weekday + '&time=' + value.time + '&age=' + value.age + '&price=' + value.price)
       .then(function (response) {
         this.setState({
           activities: Object.keys(response.data).map(i => response.data[i])[1],
@@ -68,7 +67,7 @@ class App extends React.Component {
   render() {
     const { activities, currentPage, activitiesPerPage } = this.state;
     let totalPages = Math.ceil(this.state.totalActivities / 9);
-
+console.log(activities);
     return (
       <div className="container">
 
@@ -89,8 +88,8 @@ class App extends React.Component {
                   <p>{activity.category}</p>
                   <p>{activity.subcategory}</p>
                   <p>{activity.ageFrom} - {activity.ageTo}</p>
-                  <p>{activity.weekday}</p>
-                  <p>{activity.timeFrom} - {activity.timeTo}</p>
+                  {/* <p>{activity.weekday}</p> */}
+                  {/* <p>{activity.time} - {activity.timeTo}</p> */}
                   <a className="btn btn-more" href={"/activity/" + activity.id}> Plačiau </a>
                 </div>
               </div>
