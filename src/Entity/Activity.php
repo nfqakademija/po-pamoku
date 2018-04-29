@@ -106,12 +106,10 @@ class Activity
     private $ageTo;
     
     /**
-     * @ORM\Column(type="string")
-     * @Assert\NotNull(message="Prašome įkelti logotipą.")
+     * @ORM\Column(type="string", nullable=true)
      * @Assert\File(mimeTypes={ "image/*"}, mimeTypesMessage="Failas turi būti paveikslėlio formato" )
-     *
      */
-    private $pathToLogo;
+    private $pathToLogo = null;
     
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Subcategory")

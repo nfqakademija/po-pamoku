@@ -21,7 +21,7 @@ class User implements UserInterface
     protected $id;
     
     /**
-     * @ORM\Column(type="string", unique=true)
+     * @ORM\Column(type="string", length=150, unique=true)
      * @Assert\NotBlank(message="Prašome užpildyti šį lauką")
      * @Assert\Email(message="Neteisingai įvestas elektroninio pašto adresas")
      */
@@ -72,7 +72,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="boolean")
      */
-    protected $isBlocked;
+    protected $isBlocked = false;
     
     
     public function getRoles()
