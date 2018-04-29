@@ -23,7 +23,7 @@ class App extends React.Component {
          activities: Object.keys(response.data).map(i => response.data[i])[1],
          currentPageNumber: page,
          totalActivities: Object.keys(response.data).map(i => response.data[i])[0]
-       }); 
+       });
      }.bind(this))
      .catch(function (error) {
        console.error(error);
@@ -31,7 +31,7 @@ class App extends React.Component {
 }
   searchActivities(page, value) {
     console.log(value);
-    axios.get('/api/activity?page=' + page + '&limit=9&search=' + value.search + '&city=' + value.cityId + '&category=' + value.category + 
+    axios.get('/api/activity?page=' + page + '&limit=12&search=' + value.search + '&city=' + value.cityId + '&category=' + value.category + 
       '&weekday=' + value.weekday + '&time=' + value.time + '&age=' + value.age + '&price=' + value.price + '&subcategory=' + value.subcategory)
       .then(function (response) {
         this.setState({
@@ -69,12 +69,16 @@ class App extends React.Component {
     let totalPages = Math.ceil(this.state.totalActivities / 12);
 // console.log(activities);
     return (
-      <div className="container">
-
+      <div>
+        <div className="container py-5">
         <Filter
           onChange={this.onFilterChange}
         />
-        <Sort />
+      </div>
+      <div className="container">
+
+       
+        {/* <Sort /> */}
 
         <div className="row activities py-3">
 
@@ -84,17 +88,16 @@ class App extends React.Component {
                 <img className="img-fluid" src="https://placeimg.com/640/480/any" alt="Card image cap" />
                 <div className="activity-text">
                   <h5 className="activity-title">{activity.name}</h5>
-                  <p>Kaina: {activity.priceFrom}-{activity.priceTo} eur</p>
-                  <p>{activity.city}</p>
-                  <p>{activity.category}</p>
-                  <p>{activity.subcategory}</p>
-                  <p>{activity.ageFrom} - {activity.ageTo}</p>
+                    <p>Kaina: {activity.priceFrom}-{activity.priceTo} €</p>
+                  <p>{activity.city}, {activity.street} g. {activity.house}</p>
+                    <p>{activity.category} / <span className="text-secondary">{activity.subcategory}</span></p>
+                  {/* <p>{activity.ageFrom} - {activity.ageTo}</p> */}
                   {/* <p>{activity.weekday}</p> */}
                   {/* <p>{activity.time} - {activity.timeTo}</p> */}
                   <a className="btn btn-more" href={"/activity/" + activity.id}> Plačiau </a>
                 </div>
               </div>
-            </div>)) : ('no data')}
+            </div>)) : ('Deja, būrelių nėra')}
             
         </div>
 
@@ -104,6 +107,7 @@ class App extends React.Component {
           activepage={this.state.currentPageNumber}
           onSelect={this.handleSelect.bind(this)} />
         
+      </div>
       </div>
     );
     }
