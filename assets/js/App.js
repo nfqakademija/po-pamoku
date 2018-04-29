@@ -23,7 +23,6 @@ class App extends React.Component {
          currentPageNumber: page,
          totalActivities: Object.keys(response.data).map(i => response.data[i])[0]
        }); 
-      //  console.log(this.state);
      }.bind(this))
      .catch(function (error) {
        console.error(error);
@@ -32,7 +31,7 @@ class App extends React.Component {
   searchActivities(page, value) {
     console.log(value);
     axios.get('/api/activity?page=' + page + '&limit=9&search=' + value.search + '&city=' + value.cityId + '&category=' + value.category + 
-      '&weekday=' + value.weekday + '&time=' + value.time + '&age=' + value.age + '&price=' + value.price)
+      '&weekday=' + value.weekday + '&time=' + value.time + '&age=' + value.age + '&price=' + value.price + '&subcategory=' + value.subcategory)
       .then(function (response) {
         this.setState({
           activities: Object.keys(response.data).map(i => response.data[i])[1],
@@ -67,7 +66,7 @@ class App extends React.Component {
   render() {
     const { activities, currentPage, activitiesPerPage } = this.state;
     let totalPages = Math.ceil(this.state.totalActivities / 9);
-console.log(activities);
+// console.log(activities);
     return (
       <div className="container">
 
