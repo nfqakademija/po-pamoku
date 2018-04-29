@@ -224,7 +224,9 @@ footer {
 svg {
   width: 20px;
   margin: 5px;
+  cursor: pointer;
 }
+
 .copyright {
   font-size: 14px;
   color: #ffffffbd;
@@ -278,4 +280,12 @@ svg {
 }
 textarea {
   width: 100%;
+}
+.footer-link {
+  color: #fff;
+}
+.footer-link:hover {
+  text-decoration: none;
+  border-bottom: 1px solid #fff;
+  color: #fff;
 }
