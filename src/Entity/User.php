@@ -40,14 +40,14 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string")
      * @Assert\NotBlank(message="Prašome užpildyti šį lauką")
-     * @Assert\Regex(pattern="/^[\p{L}\s-]+$/", message="Varde yra įvesta neleistinų ženklų")
+     * @Assert\Regex(pattern="/^[\p{L}\s-]+$/u", message="Varde yra įvesta neleistinų ženklų")
      */
     protected $name;
     
     /**
      * @ORM\Column(type="string")
      * @Assert\NotBlank(message="Prašome užpildyti šį lauką")
-     * @Assert\Regex(pattern="/^[\p{L}\s-]+$/", message="Pavardėje yra įvesta neleistinų ženklų")
+     * @Assert\Regex(pattern="/^[\p{L}\s-]+$/u", message="Pavardėje yra įvesta neleistinų ženklų")
      */
     protected $surname;
     
