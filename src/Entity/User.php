@@ -72,7 +72,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="boolean")
      */
-    protected $isBlocked = false;
+    protected $isBlocked;
     
     
     public function getRoles()

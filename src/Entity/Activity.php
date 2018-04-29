@@ -109,7 +109,7 @@ class Activity
      * @ORM\Column(type="string", nullable=true)
      * @Assert\File(mimeTypes={ "image/*"}, mimeTypesMessage="Failas turi būti paveikslėlio formato" )
      */
-    private $pathToLogo = null;
+    private $pathToLogo;
     
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Subcategory")

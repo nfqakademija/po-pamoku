@@ -53,6 +53,8 @@ class RegistrationController extends Controller
                     $userData->getActivity()->setLocation($locationFound);
                 }
             }
+
+            $userData->setIsBlocked(false);
             
             $em->persist($userData);
             $em->flush();
