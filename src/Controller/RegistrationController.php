@@ -54,7 +54,7 @@ class RegistrationController extends Controller
                 }
             }
 
-            $userData->setIsBlocked(true);
+            $userData->setIsBlocked(false);
             
             $em->persist($userData);
             $em->flush();
