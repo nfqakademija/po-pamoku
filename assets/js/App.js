@@ -57,6 +57,10 @@ class App extends React.Component {
     } else {
       this.getActivities(number);
     }
+    let top = document.getElementById('toTop').offsetTop;
+    window.scrollTo({
+      top: top
+    });
   }
 
   onFilterChange(value) {
@@ -71,9 +75,11 @@ class App extends React.Component {
     return (
       <div>
         <div className="container py-5">
+          <div id="toTop"></div>
         <Filter
           onChange={this.onFilterChange}
         />
+        
       </div>
       <div className="container">
 
@@ -94,7 +100,7 @@ class App extends React.Component {
                   {/* <p>{activity.ageFrom} - {activity.ageTo}</p> */}
                   {/* <p>{activity.weekday}</p> */}
                   {/* <p>{activity.time} - {activity.timeTo}</p> */}
-                  <a className="btn btn-more" href={"/activity/" + activity.id}> Plačiau </a>
+                    <a className="btn btn-light" href={"/activity/" + activity.id}> Plačiau </a>
                 </div>
               </div>
             </div>)) : ('Deja, būrelių nėra')}
