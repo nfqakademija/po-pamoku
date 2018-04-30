@@ -56,6 +56,18 @@ class LoadUser extends Fixture
         'ROLE_OWNER'
     ];
 
+    const LETTERS = [
+        'ą' => 'a',
+        'č' => 'c',
+        'ę' => 'e',
+        'ė' => 'e',
+        'į' => 'i',
+        'š' => 's',
+        'ų' => 'u',
+        'ū' => 'u',
+        'ž' => 'z'
+    ];
+
 
 
 
@@ -101,7 +113,7 @@ class LoadUser extends Fixture
                     $user->setSurname($surname);
                     $user->setName($name);
                     $email = strtolower($user->getName()) . strtolower($user->getSurname()) . rand(1, 100) . '@email.com';
-                    $user->setEmail($email)
+                    $user->setEmail(strtr($email,self::LETTERS))
                         ->setIsBlocked(false)
                         ->setPlainPassword('password');
             }
@@ -114,8 +126,8 @@ class LoadUser extends Fixture
 
                 $user->setSurname($surname);
                 $user->setName($name);
-                $email = strtolower($user->getName()) . strtolower($user->getSurname()) . '@email.com';
-                $user->setEmail($email)
+                $email = strtolower($user->getName()) . strtolower($user->getSurname()) . rand(1, 10) . '@email.com';
+                $user->setEmail(strtr($email,self::LETTERS))
                     ->setIsBlocked(false)
                     ->setPlainPassword('password');
             }
