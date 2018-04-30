@@ -13,6 +13,9 @@
     </div>
 </header>
 <div class="container">
+    <div class="my-1">
+        <a href="{{ path('admin_user_list') }}" class="btn btn-light">Atgal</a>
+    </div>
     <table class="table">
         <tr>
             <th>Vardas</th>
@@ -46,7 +49,7 @@
         {% else %}
             {{ form_row(form.blockAction, {
                 'label': "Užblokuoti",
-                'attr': {'class': 'btn btn-primary'}
+                'attr': {'class': 'btn btn-danger'}
             }) }}
         {% endif %}
     {{ form_end(form) }}
