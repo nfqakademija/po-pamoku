@@ -43,7 +43,7 @@ class RegistrationController extends Controller
                     $fileName
                 );
                 
-                $userData->getActivity()->setPathToLogo($fileName);
+                $userData->getActivity()->setPathToLogo('/uploads/' .$fileName);
                 
                 $location = $userData->getActivity()->getLocation();
                 

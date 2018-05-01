@@ -18,11 +18,9 @@
         </div>
         <div class="col-12 col-lg-6">
             {% if activity.pathToLogo is not empty  %}
-            
-                <img class="img-fluid" src="{{ asset('uploads/' ~ activity.pathToLogo) }}"/>
-                {% else %}
-             <img class="card-img-top" src="https://placeimg.com/640/480/any" alt="Card image cap" />
-
+                <img class="img-fluid" src="{{ asset( activity.pathToLogo) }}"/>
+            {% else %}
+                <img class="card-img-top" src="https://placeimg.com/640/480/any" alt="Card image cap" />
             {% endif %}
 
         </div>

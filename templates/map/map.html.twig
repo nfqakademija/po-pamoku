@@ -17,7 +17,7 @@
 {% block title %}Map{% endblock %}
 
 {% block body %}
-    <div id="map-container">
+    <div id="map-container" data-url="{{ path('api_activity_list', {'page': '1', 'limit': '99999' }) }}">
         <div id="map"></div>
     </div>
     <button onclick="geoFindMe()">Show my location</button>

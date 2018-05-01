@@ -1,38 +1,47 @@
 const mapvars = {};
 mapvars.infoWindow = null;
 mapvars.map = null;
-mapvars.data = data;
+mapvars.data = null;
 
 function initialize() {
-    const center = new google.maps.LatLng(55, 24);
+    const url = $('#map-container').attr('data-url');
 
-    mapvars.map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 7,
-        center: center,
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
-    });
+    fetch(url)
+    .then(res => res.json())
+    .then((out) => {
+        mapvars.data = out;
+        //mapvars.data = data;
+        const center = new google.maps.LatLng(55, 24);
 
-    mapvars.infoWindow = new google.maps.InfoWindow();
-    const markers = [];
-    const imageUrl = 'http://chart.apis.google.com/chart?cht=mm&chs=24x32&chco=' +
-        '2da2c5,557bc1,7E55BD&ext=.png';
-    const markerImage = new google.maps.MarkerImage(imageUrl,
-        new google.maps.Size(24, 32));
-
-    for (let i = 0; i < mapvars.data.photos.length; i++) {
-        let dataPhoto = mapvars.data.photos[i];
-        let latLng = new google.maps.LatLng(dataPhoto.latitude, dataPhoto.longitude);
-        let marker = new google.maps.Marker({
-            position: latLng,
-            icon: markerImage
+        mapvars.map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 7,
+            center: center,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
         });
-        let fn = mapvars.markerClickFunction(dataPhoto, latLng);
-        google.maps.event.addListener(marker, 'click', fn);
-        markers.push(marker);
-    }
-    const markerCluster = new MarkerClusterer(mapvars.map, markers);
+
+        mapvars.infoWindow = new google.maps.InfoWindow();
+        const markers = [];
+        const imageUrl = 'http://chart.apis.google.com/chart?cht=mm&chs=24x32&chco=' +
+            '2da2c5,557bc1,7E55BD&ext=.png';
+        const markerImage = new google.maps.MarkerImage(imageUrl,
+            new google.maps.Size(24, 32));
+
+        for (let i = 0; i < mapvars.data.Activities.length; i++) {
+            let data = mapvars.data.Activities[i];
+            let latLng = new google.maps.LatLng(data.lat, data.lng);
+            let marker = new google.maps.Marker({
+                position: latLng,
+                icon: markerImage
+            });
+            let fn = mapvars.markerClickFunction(data, latLng);
+            google.maps.event.addListener(marker, 'click', fn);
+            markers.push(marker);
+        }
+        const markerCluster = new MarkerClusterer(mapvars.map, markers);
+    })
+        .catch(err => { throw err });
 }
-mapvars.markerClickFunction = function (pic, latlng) {
+mapvars.markerClickFunction = function (data, latlng) {
     return function(e) {
         e.cancelBubble = true;
         e.returnValue = false;
@@ -40,20 +49,15 @@ mapvars.markerClickFunction = function (pic, latlng) {
             e.stopPropagation();
             e.preventDefault();
         }
-        console.log(pic);
-        let title = pic.photo_title;
-        let url = pic.photo_url;
-        let fileurl = pic.photo_file_url;
+        console.log(data);
+        let title = data.name;
+        let fileurl =  data.pathToLogo;
 
         let infoHtml = '<div class="info"><h3>' + title +
             '</h3><div class="info-body">' +
-            '<a href="' + url + '" target="_blank"><img src="' +
-            fileurl + '" class="info-img"/></a></div>' +
-            '<a href="http://www.panoramio.com/" target="_blank">' +
-            '<img src="http://maps.google.com/intl/en_ALL/mapfiles/' +
-            'iw_panoramio.png"/></a><br/>' +
-            '<a href="' + pic.owner_url + '" target="_blank">' + pic.owner_name +
-            '</a></div></div>';
+            '<img src="' + fileurl + '" class="info-img"/></div>' +
+            '<p></p>'+
+            '</div></div>';
 
         mapvars.infoWindow.setContent(infoHtml);
         mapvars.infoWindow.setPosition(latlng);
@@ -70,10 +74,10 @@ function geoFindMe() {
     }
 
     function success(position) {
-        const latitude  = position.coords.latitude;
-        const longitude = position.coords.longitude;
+        const lat  = position.coords.lat;
+        const lng = position.coords.lng;
 
-        console.log('Lat: ' + latitude + ', Long:' + longitude);
+        console.log('Lat: ' + lat + ', Long:' + lng);
     }
 
     function error() {

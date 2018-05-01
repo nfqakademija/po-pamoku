@@ -37,7 +37,7 @@ class ActivityEditController extends Controller
                     $this->getParameter('uploads_directory'),
                     $fileName
                 );
-                $userData->setPathToLogo($fileName);
+                $userData->setPathToLogo('/uploads/' . $fileName);
             } else {
                 $userData->setPathToLogo($pathToLogo);
             }

@@ -25,9 +25,9 @@ class ActivityRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('a')
             ->select('a.id as id', 'a.name as name', 'a.priceFrom as priceFrom', 'a.priceTo as priceTo',
-                'a.ageFrom as ageFrom', 'a.ageTo as ageTo', 'c.name as city', 'l.street as street', 'l.house as house',
-                'l.apartment as apartment', 'l.postcode as postcode', 'l.lat as lat', 'l.lng as lng',
-                'ca.name as category', 'sc.name as subcategory')
+                'a.pathToLogo as pathToLogo', 'a.ageFrom as ageFrom', 'a.ageTo as ageTo', 'c.name as city',
+                'l.street as street', 'l.house as house', 'l.apartment as apartment', 'l.postcode as postcode',
+                'l.lat as lat', 'l.lng as lng', 'ca.name as category', 'sc.name as subcategory')
             ->leftJoin('a.location', 'l')
             ->leftJoin('l.city', 'c')
             ->leftJoin('a.subcategory', 'sc')
@@ -61,7 +61,7 @@ class ActivityRepository extends ServiceEntityRepository
                 ->setParameter('postcode', $search)
                 ->setParameter('weekday', $search);
         }
-    
+        
         if (!empty($this->filters["price"]) && is_numeric($this->filters["price"])) {
             $qb = $qb
                 ->andWhere('a.priceFrom <= :price')
@@ -75,8 +75,9 @@ class ActivityRepository extends ServiceEntityRepository
                 ->andWhere('a.ageTo >= :age')
                 ->setParameter('age', $this->filters["age"]);
         }
-    
-        if (!empty($this->filters["time"]) && preg_match("/^(?:2[0-3]|[01][0-9]):[0-5][0-9]$/",$this->filters["time"])) {
+        
+        if (!empty($this->filters["time"]) && preg_match("/^(?:2[0-3]|[01][0-9]):[0-5][0-9]$/",
+                $this->filters["time"])) {
             $qb = $qb
                 ->andWhere('tt.timeFrom <= :time')
                 ->andWhere('tt.timeTo >= :time')
