@@ -6,7 +6,7 @@
  * Time: 12.19
  */
 
-namespace App\Form;
+namespace App\Form\Type;
 
 use App\Form\Model\ChangePasswordModel;
 use Symfony\Component\Form\AbstractType;

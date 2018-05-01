@@ -26,7 +26,8 @@ class ActivityRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('a')
             ->select('a.id as id', 'a.name as name', 'a.priceFrom as priceFrom', 'a.priceTo as priceTo',
                 'a.ageFrom as ageFrom', 'a.ageTo as ageTo', 'c.name as city', 'l.street as street', 'l.house as house',
-                'l.apartment as apartment', 'l.postcode as postcode', 'ca.name as category', 'sc.name as subcategory')
+                'l.apartment as apartment', 'l.postcode as postcode', 'l.lat as lat', 'l.lng as lng',
+                'ca.name as category', 'sc.name as subcategory')
             ->leftJoin('a.location', 'l')
             ->leftJoin('l.city', 'c')
             ->leftJoin('a.subcategory', 'sc')

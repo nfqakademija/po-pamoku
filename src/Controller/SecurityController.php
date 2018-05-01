@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Form\LoginType;
+use App\Form\Type\LoginType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;

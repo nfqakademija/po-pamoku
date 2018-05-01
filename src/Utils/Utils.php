@@ -33,10 +33,10 @@ class Utils
     
     public static function fetchLocationByAddress(string $address): array
     {
-        $queryUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address='.$address.'&key=AIzaSyDxFs6BvSj-oMOLNcgaNqpCFJeml4LXEX4';
+        $key = 'AIzaSyDxFs6BvSj-oMOLNcgaNqpCFJeml4LXEX4';
+        $queryUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address='.urlencode($address).'&key='.$key;
         $dataJson = @file_get_contents($queryUrl);
         $data = json_decode($dataJson, true);
-        
         return self::parseLocation($data);
     }
     

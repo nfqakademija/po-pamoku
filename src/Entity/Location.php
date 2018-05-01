@@ -8,7 +8,6 @@
 
 namespace App\Entity;
 
-use App\Utils\Utils;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -25,7 +24,7 @@ class Location
     private $id;
     
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\City")
+     * @ORM\ManyToOne(targetEntity="App\Entity\City",cascade={"persist"})
      */
     private $city;
     
@@ -70,16 +69,6 @@ class Location
      * @ORM\Column(type="float")
      */
     private $lng;
-    
-    public function __construct()
-    {
-        $address = $this->getStreet().' '.$this->getHouse().', '.$this->getCity();
-        $data = Utils::fetchLocationByAddress($address);
-        $this->setLat($data['lat']);
-        $this->setLng($data['lng']);
-        $this->setPostcode($data['postcode']);
-    }
-    
     
     public function getCity()
     {
