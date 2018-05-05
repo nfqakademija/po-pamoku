@@ -79,12 +79,39 @@ class App extends React.Component {
           >Map</button>
       );
 
+      const geo = (
+          <button
+          onClick={() => {
+                if (!navigator.geolocation){
+                  console.log('Geolocation is not supported by your browser');
+                  return;
+                }
+
+                  function success(position) {
+                      const lat  = position.coords.lat;
+                      const lng = position.coords.lng;
+
+                      console.log('Lat: ' + lat + ', Long:' + lng);
+                  }
+
+                  function error() {
+                      alert("Unable to retrieve your location");
+                  }
+
+                  navigator.geolocation.getCurrentPosition(success, error);
+                }
+              }
+          >Rasti mano vietą</button>
+      );
+
       if (isMap) {
           return (
               <div>
                   {btnSwitch}
 
                   <MapComponent/>
+
+                  {geo}
               </div>
           );
       }

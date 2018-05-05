@@ -1,5 +1,4 @@
 import React from 'react';
-
 const axios = require('axios');
 
 
@@ -42,7 +41,6 @@ class Filter extends React.Component {
                 console.error(error);
             });
     }
-
     // /api/filter/subcategory/{category}
     getSubcategories(category) {
         axios.get('/api/filter/subcategory/' + category)
@@ -59,23 +57,22 @@ class Filter extends React.Component {
     }
 
     render() {
-        const {onChange} = this.props;
-        const {categories,
-            cities,
-            times, weekdays, category, cityId, time, weekday, search, age, price, subcategories, subcategory} = this.state;
-        const values =;
-
+        const { onChange } = this.props;
+        const { categories, cities, times, weekdays, category, cityId, time, weekday, search, age, price, subcategories, subcategory } = this.state;
         return (
 
             <div>
 
                 <label>Paieška</label>
                 <input name="search" type="text" onChange={(event) => {
-                    this.setState({search: event.currentTarget.value}, () => onChange({...this.state}));
+                    this.setState({ search: event.currentTarget.value }, () => {
+                        let copy = Object.assign({ category, cityId, time, weekday, search, age, price, subcategory }, this.state);
+                        onChange(copy);
+                    });
 
-                }}/>
+                }} />
 
-                <label>Kategorija</label><br/>
+                <label>Kategorija</label><br />
                 <select name="category" onChange={(event) => {
 
                     function filterByName(item) {
@@ -85,38 +82,19 @@ class Filter extends React.Component {
                             return false;
                         }
                     }
-
                     let selectedCategory = categories.filter(filterByName);
                     if (selectedCategory.length === 0) {
-                        this.setState({category: '', subcategory: ''}, () => {
-                            let copy = Object.assign({
-                                category,
-                                cityId,
-                                time,
-                                weekday,
-                                search,
-                                age,
-                                price,
-                                subcategory
-                            }, this.state);
+                        this.setState({ category: '', subcategory: '' }, () => {
+                            let copy = Object.assign({ category, cityId, time, weekday, search, age, price, subcategory }, this.state);
                             onChange(copy);
                         });
                     } else {
 
-                        this.setState({category: selectedCategory[0].id, subcategory: ''}, () => {
-                                this.getSubcategories(this.state.category);
-                                let copy = Object.assign({
-                                    category,
-                                    cityId,
-                                    time,
-                                    weekday,
-                                    search,
-                                    age,
-                                    price,
-                                    subcategory
-                                }, this.state);
-                                onChange(copy);
-                            }
+                        this.setState({ category: selectedCategory[0].id, subcategory: '' }, () => {
+                            this.getSubcategories(this.state.category);
+                            let copy = Object.assign({ category, cityId, time, weekday, search, age, price, subcategory }, this.state);
+                            onChange(copy);
+                        }
                         );
                     }
 
@@ -128,7 +106,7 @@ class Filter extends React.Component {
                                 {category.name}
                             </option>)) : ('no data')
                     }
-                </select><br/>
+                </select><br />
 
                 <div>
                     {
@@ -144,36 +122,17 @@ class Filter extends React.Component {
                                             return false;
                                         }
                                     }
-
                                     let selectedSubcategory = subcategories.filter(filterByName);
                                     if (selectedSubcategory.length === 0) {
-                                        this.setState({subcategory: ''}, () => {
-                                            let copy = Object.assign({
-                                                category,
-                                                cityId,
-                                                time,
-                                                weekday,
-                                                search,
-                                                age,
-                                                price,
-                                                subcategory
-                                            }, this.state);
+                                        this.setState({ subcategory: '' }, () => {
+                                            let copy = Object.assign({ category, cityId, time, weekday, search, age, price, subcategory }, this.state);
                                             onChange(copy);
                                         });
                                     } else {
                                         this.setState({
                                             subcategory: selectedSubcategory[0].id,
                                         }, () => {
-                                            let copy = Object.assign({
-                                                category,
-                                                cityId,
-                                                time,
-                                                weekday,
-                                                search,
-                                                age,
-                                                price,
-                                                subcategory
-                                            }, this.state);
+                                            let copy = Object.assign({ category, cityId, time, weekday, search, age, price, subcategory }, this.state);
                                             onChange(copy);
                                         });
                                     }
@@ -192,7 +151,7 @@ class Filter extends React.Component {
                     }
                 </div>
 
-                <label>Miestas</label><br/>
+                <label>Miestas</label><br />
 
                 <select name="city" onChange={(event) => {
 
@@ -203,34 +162,15 @@ class Filter extends React.Component {
                             return false;
                         }
                     }
-
                     let selectedCity = cities.filter(filterByName);
                     if (selectedCity.length === 0) {
-                        this.setState({cityId: ''}, () => {
-                            let copy = Object.assign({
-                                category,
-                                cityId,
-                                time,
-                                weekday,
-                                search,
-                                age,
-                                price,
-                                subcategory
-                            }, this.state);
+                        this.setState({ cityId: '' }, () => {
+                            let copy = Object.assign({ category, cityId, time, weekday, search, age, price, subcategory }, this.state);
                             onChange(copy);
                         });
                     } else {
-                        this.setState({cityId: selectedCity[0].id}, () => {
-                            let copy = Object.assign({
-                                category,
-                                cityId,
-                                time,
-                                weekday,
-                                search,
-                                age,
-                                price,
-                                subcategory
-                            }, this.state);
+                        this.setState({ cityId: selectedCity[0].id }, () => {
+                            let copy = Object.assign({ category, cityId, time, weekday, search, age, price, subcategory }, this.state);
                             onChange(copy);
                         });
                     }
@@ -244,39 +184,21 @@ class Filter extends React.Component {
                                 {city.name}
                             </option>)) : ('no data')
                     }
-                </select><br/>
+                </select><br />
 
-                <label>Savaitės dienos</label><br/>
+                <label>Savaitės dienos</label><br />
                 <select name="weekday" onChange={(event) => {
                     if (event.target.value === 'Savaitės diena') {
-                        this.setState({weekday: ''}, () => {
-                                let copy = Object.assign({
-                                    category,
-                                    cityId,
-                                    time,
-                                    weekday,
-                                    search,
-                                    age,
-                                    price,
-                                    subcategory
-                                }, this.state);
-                                onChange(copy);
-                            }
+                        this.setState({ weekday: '' }, () => {
+                            let copy = Object.assign({ category, cityId, time, weekday, search, age, price, subcategory }, this.state);
+                            onChange(copy);
+                        }
                         );
                     } else {
-                        this.setState({weekday: weekdays.indexOf(event.target.value) + 1}, () => {
-                                let copy = Object.assign({
-                                    category,
-                                    cityId,
-                                    time,
-                                    weekday,
-                                    search,
-                                    age,
-                                    price,
-                                    subcategory
-                                }, this.state);
-                                onChange(copy);
-                            }
+                        this.setState({ weekday: weekdays.indexOf(event.target.value) + 1 }, () => {
+                            let copy = Object.assign({ category, cityId, time, weekday, search, age, price, subcategory }, this.state);
+                            onChange(copy);
+                        }
                         );
                     }
 
@@ -288,39 +210,21 @@ class Filter extends React.Component {
                                 {weekday}
                             </option>)) : ('no data')
                     }
-                </select><br/>
+                </select><br />
 
-                <label>Būrelio pradžia</label><br/>
+                <label>Būrelio pradžia</label><br />
                 <select name="time" onChange={(event) => {
                     if (event.target.value === 'Laikas') {
-                        this.setState({time: ''}, () => {
-                                let copy = Object.assign({
-                                    category,
-                                    cityId,
-                                    time,
-                                    weekday,
-                                    search,
-                                    age,
-                                    price,
-                                    subcategory
-                                }, this.state);
-                                onChange(copy);
-                            }
+                        this.setState({ time: '' }, () => {
+                            let copy = Object.assign({ category, cityId, time, weekday, search, age, price, subcategory }, this.state);
+                            onChange(copy);
+                        }
                         );
                     } else {
-                        this.setState({time: event.target.value}, () => {
-                                let copy = Object.assign({
-                                    category,
-                                    cityId,
-                                    time,
-                                    weekday,
-                                    search,
-                                    age,
-                                    price,
-                                    subcategory
-                                }, this.state);
-                                onChange(copy);
-                            }
+                        this.setState({ time: event.target.value }, () => {
+                            let copy = Object.assign({ category, cityId, time, weekday, search, age, price, subcategory }, this.state);
+                            onChange(copy);
+                        }
                         );
                     }
 
@@ -332,48 +236,29 @@ class Filter extends React.Component {
                                 {time}
                             </option>)) : ('no data')
                     }
-                </select><br/>
+                </select><br />
 
-                <label>Amžius</label><br/>
+                <label>Amžius</label><br />
                 <input name="age" type="number" onChange={(event) => {
-                    this.setState(({age: event.target.value}), () => {
-                            let copy = Object.assign({
-                                category,
-                                cityId,
-                                time,
-                                weekday,
-                                search,
-                                age,
-                                price,
-                                subcategory
-                            }, this.state);
-                            onChange(copy);
-                        }
+                    this.setState({ age: event.target.value }, () => {
+                        let copy = Object.assign({ category, cityId, time, weekday, search, age, price, subcategory }, this.state);
+                        onChange(copy);
+                    }
                     );
 
-                }}/>
+                }} />
 
-                <label>Kaina</label><br/>
+                <label>Kaina</label><br />
                 <input name="price" type="number" onChange={(event) => {
-                    this.setState({price: event.target.value}, () => {
-                            let copy = Object.assign({
-                                category,
-                                cityId,
-                                time,
-                                weekday,
-                                search,
-                                age,
-                                price,
-                                subcategory
-                            }, this.state);
-                            onChange(copy);
-                        }
+                    this.setState({ price: event.target.value }, () => {
+                        let copy = Object.assign({ category, cityId, time, weekday, search, age, price, subcategory }, this.state);
+                        onChange(copy);
+                    }
                     );
 
-                }}/>
+                }} />
             </div>
         )
     }
 }
-
 export default Filter;

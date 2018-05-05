@@ -1,47 +1,67 @@
-import { compose, withHandlers, withProps } from "recompose";
-import { GoogleMap, Marker, withGoogleMap, withScriptjs } from 'react-google-maps';
+import React from 'react';
+import { compose, withProps, withHandlers } from "recompose";
+import { GoogleMap, Marker, withGoogleMap, withScriptjs, InfoWindow } from 'react-google-maps';
 import { MarkerClusterer } from "react-google-maps/lib/components/addons/MarkerClusterer";
-
-
 
 const MapWithAMarkerClusterer = compose(
     withProps({
         googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyDxFs6BvSj-oMOLNcgaNqpCFJeml4LXEX4&v=3.exp&libraries=geometry,drawing,places",
-        loadingElement: <div style={{ height: `100%` }} />,
-        containerElement: <div style={{ height: `400px` }} />,
+        loadingElement: <div style={{ height: `90%` }} />,
+        containerElement: <div style={{ height: `600px` }} />,
         mapElement: <div style={{ height: `100%` }} />,
+        center: { lat: 55, lng: 24 },
     }),
     withHandlers({
-        onMarkerClustererClick: () => (markerClusterer) => {
-            const clickedMarkers = markerClusterer.getMarkers()
-            console.log(`Current clicked markers length: ${clickedMarkers.length}`)
-            console.log(clickedMarkers)
+        onToggleOpen: () => (marker) => {
+            if(marker.isOpen === undefined){
+                marker.isOpen = false;
+            }
+            console.log(marker.isOpen);
+            marker.isOpen = !marker.isOpen;
+            console.log(marker.isOpen);
         },
     }),
     withScriptjs,
     withGoogleMap
-)((props) => {
-        return (
-            <GoogleMap
-                defaultZoom={3}
-                defaultCenter={{ lat: 25.0391667, lng: 121.525 }}
-            >
-                <MarkerClusterer
-                    onClick={props.onMarkerClustererClick}
-                    averageCenter
-                    enableRetinaIcons
-                    gridSize={60}
+)(props =>
+    <GoogleMap
+        defaultZoom={7}
+        defaultCenter={props.center}
+    >
+
+        <MarkerClusterer
+            averageCenter
+            enableRetinaIcons
+            gridSize={60}
+        >
+            {props.markers.map(marker => (
+                <Marker
+                    key={marker.id}
+                    position={{ lat: marker.lat, lng: marker.lng }}
+                    onClick={() => props.onToggleOpen(marker)}
                 >
-                    {props.markers.map(marker => (
-                        <Marker
-                            key={marker.photo_id}
-                            position={{ lat: marker.latitude, lng: marker.longitude }}
-                        />
-                    ))}
-                </MarkerClusterer>
-            </GoogleMap>
-        );
-    }
+                    {!marker.isOpen &&
+                    <InfoWindow
+                        onCloseClick={() => props.onToggleOpen(marker)}>
+                            <div style={{ width: `250px`}}>
+                                <h5>{marker.name}</h5>
+                                <div style={{ width: '250px',
+                                    height: '150px',
+                                    lineHeight: '100px',
+                                    margin: '2px 0',
+                                    textAlign: 'center',
+                                    overflow: 'hidden'}}>
+                                    <img style={{ width: `250px`}} src={marker.pathToLogo}/>
+                                </div>
+                                <p>Adresas: {marker.street} {marker.house}, {marker.city}</p>
+                                <p>Kaina: {marker.priceFrom} - {marker.priceTo}, Amžius: {marker.ageFrom} - {marker.ageTo}</p>
+                                <a href={"/activity/" + marker.id}> Plačiau </a>
+                            </div>
+                    </InfoWindow>}
+                </Marker>
+            ))}
+        </MarkerClusterer>
+    </GoogleMap>
 );
 
 export default MapWithAMarkerClusterer;

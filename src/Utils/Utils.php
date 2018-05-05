@@ -33,7 +33,7 @@ class Utils
     
     public static function fetchLocationByAddress(string $address): array
     {
-        $key = 'AIzaSyDxFs6BvSj-oMOLNcgaNqpCFJeml4LXEX4';
+        $key = getenv('MAP_API_KEY');
         $queryUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address='.urlencode($address).'&key='.$key;
         $dataJson = @file_get_contents($queryUrl);
         $data = json_decode($dataJson, true);
