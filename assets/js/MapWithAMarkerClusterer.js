@@ -1,5 +1,8 @@
 import { compose, withHandlers, withProps } from "recompose";
-import { GoogleMap, Marker, MarkerClusterer, withGoogleMap, withScriptjs } from 'react-google-maps';
+import { GoogleMap, Marker, withGoogleMap, withScriptjs } from 'react-google-maps';
+import { MarkerClusterer } from "react-google-maps/lib/components/addons/MarkerClusterer";
+
+
 
 const MapWithAMarkerClusterer = compose(
     withProps({
