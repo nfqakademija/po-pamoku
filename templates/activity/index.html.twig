@@ -12,42 +12,33 @@
                 </div>
                 <div class="col-12 col-md-6">
                     <p class="text-white text-center">Visi būreliai vienoje vietoje. Raskite įdomiausius būrelius ir po pamokines veiklas!</p>
+                    
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12 pt-4 text-center">
-                    {% if not app.user %}
-                        <a href="{{ path('registration', {'role': 'owner'}) }}" class="btn btn-main-register mr-2">Vadovo registracija</a>
-                        <a href="{{ path('registration', {'role': 'user'}) }}" class="btn btn-main-register mr-2">Kliento registracija</a>
+            <div class="row justify-content-center">
+                {% if not app.user %}
+    <p class="col-12 text-center text-white">REGISTRACIJA</p>
+                            <a href="{{ path('registration', {'role': 'user'}) }}" class="btn btn-main-register mr-2">Ieškau būrelio</a>
+
+                        <a href="{{ path('registration', {'role': 'owner'}) }}" class="btn btn-main-register mr-2">Siūlau būrelį</a>
+                    {# <div class="col-12 col-sm-6">
                         <a href="{{ path('login') }}" class="btn btn-main-login">Prisijungti</a>
-                    {% endif %}
-                </div>
+                    </div> #}
+                {% endif %}
             </div>
         </div>
     </div>
-    <div class="container">
+    {# <div class="container">
         <div class="search py-5">
             <h1>Paieška</h1>
         </div>
-    </div>
+    </div> #}
     <div id="root"></div>
 </div>
 {% endblock %}
 
 {% block javascripts %}
     <script src="{{asset("build/js/index.js")}}"></script>
-    <script>
-          window.onscroll = function () { scrollFunction() };
-        let nav = document.getElementById("navbar");
-        function scrollFunction() {
-        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-           nav.classList.remove("nav-trans");
-           nav.classList.add("nav-white");
-        } else {
-           nav.classList.remove("nav-white");
-           nav.classList.add("nav-trans");
-        }
-        }
-    </script>
+    
 {% endblock %}
 

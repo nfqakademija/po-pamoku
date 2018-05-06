@@ -20,6 +20,7 @@ class LoadActivity extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager)
     {
         for ($i = 1; $i <= 50; $i++) {
+            $j = $i+1;
             $activity = new Activity();
             $activity->setName("Būrelis " . $i)
                 ->setAgeFrom(rand(1, 17))
@@ -38,7 +39,9 @@ class LoadActivity extends Fixture implements DependentFixtureInterface
                 ->addTimetable($this->getReference(rand(1, 20)))
                 ->addTimetable($this->getReference(rand(1, 20)))
                 ->setPriceFrom(10)
-                ->setPriceTo(20);
+                ->setPriceTo(20)
+                ->setUser($this->getReference("user$j"));
+
             
             $manager->persist($activity);
         }
@@ -52,6 +55,7 @@ class LoadActivity extends Fixture implements DependentFixtureInterface
             LoadSubcategory::class,
             LoadLocation::class,
             LoadTimetable::class,
+            LoadUser::class
         ];
     }
 }

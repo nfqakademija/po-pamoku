@@ -36,7 +36,7 @@ class App extends React.Component {
 }
   searchActivities(page, value) {
     console.log(value);
-    axios.get('/api/activity?page=' + page + '&limit=9&search=' + value.search + '&city=' + value.cityId + '&category=' + value.category +
+    axios.get('/api/activity?page=' + page + '&limit=12&search=' + value.search + '&city=' + value.cityId + '&category=' + value.category +
       '&weekday=' + value.weekday + '&time=' + value.time + '&age=' + value.age + '&price=' + value.price + '&subcategory=' + value.subcategory)
       .then(function (response) {
         this.setState({
@@ -62,20 +62,22 @@ class App extends React.Component {
     } else {
       this.getActivities(number);
     }
+    let top = document.getElementById('toTop').offsetTop;
+    window.scrollTo({
+      top: top
+    });
   }
 
-  onFilterChange(values) {
-    this.setState({searchValue: values});
-    this.searchActivities(1, values);
+  onFilterChange(value) {
+    this.setState({searchValue: value});
+    this.searchActivities(1, value);
   }
 
   render() {
-
-      const { activities, currentPage, activitiesPerPage, isMap } = this.state;
-      let totalPages = Math.ceil(this.state.totalActivities / 12);
+    const { activities, currentPage, activitiesPerPage } = this.state;
+    let totalPages = Math.ceil(this.state.totalActivities / 12);
 // console.log(activities);
-
-      const btnSwitch = (
+const btnSwitch = (
           <button
               onClick={() => this.setState({ isMap: !isMap })}
           >Map</button>
@@ -123,48 +125,48 @@ class App extends React.Component {
                   {geo}
               </div>
           );
-      }
+      }    return (
+      <div>
+        <div className="containerpy-5">{btnSwitch}
+<div id="toTop"></div>
+        <Filter
+          onChange={this.onFilterChange}/>
 
-      return (
-          <div className="container">
+      </div>
+      <div className="container">
 
-              {btnSwitch}
+        {/*<Sort />*/}
 
-              <Filter
-                  onChange={this.onFilterChange}
-              />
-              <Sort />
+        <div className="row activities py-3">
 
-              <div className="row activities py-3">
-
-                  {activities.length !== 0 ? (activities.map((activity, index) =>
-                      <div key={"currentAct" + index} className="col-md-3 col-sm-6 col-xs-6 py-3">
-                          <div className="activity-card">
-                              <img className="img-fluid" src="https://placeimg.com/640/480/any" alt="Card image cap" />
-                              <div className="activity-text">
-                                  <h5 className="activity-title">{activity.name}</h5>
-                                  <p>Kaina: {activity.priceFrom}-{activity.priceTo} eur</p>
-                                  <p>{activity.city}</p>
-                                  <p>{activity.category}</p>
-                                  <p>{activity.subcategory}</p>
-                                  <p>{activity.ageFrom} - {activity.ageTo}</p>
-                                  {/* <p>{activity.weekday}</p> */}
-                                  {/* <p>{activity.time} - {activity.timeTo}</p> */}
-                                  <a className="btn btn-more" href={"/activity/" + activity.id}> Plačiau </a>
-                              </div>
-                          </div>
-                      </div>)) : ('no data')}
-
+           {activities.length !== 0 ? (activities.map((activity, index) =>  
+            <div key={"currentAct" + index} className="col-md-3 col-sm-6 col-xs-6 py-3">
+              <div className="activity-card">
+                <img className="img-fluid" src="https://placeimg.com/640/480/any" alt="Card image cap" />
+                <div className="activity-text">
+                  <h5 className="activity-title">{activity.name}</h5>
+                    <p>Kaina: {activity.priceFrom}-{activity.priceTo} €</p>
+                  <p>{activity.city}, {activity.street} g. {activity.house}</p>
+                    <p>{activity.category} / <span className="text-secondary">{activity.subcategory}</span></p>
+                  {/* <p>{activity.ageFrom} - {activity.ageTo}</p> */}
+                  {/* <p>{activity.weekday}</p> */}
+                  {/* <p>{activity.time} - {activity.timeTo}</p> */}
+                    <a className="btn btn-light" href={"/activity/" + activity.id}> Plačiau </a>
+                </div>
               </div>
+            </div>)) : ('Deja, būrelių nėra')}
+            
+        </div>
 
-              <Pagination
-                  bsSize="medium"
-                  items={totalPages}
-                  activepage={this.state.currentPageNumber}
-                  onSelect={this.handleSelect.bind(this)} />
-
-          </div>
-      );
+        <Pagination
+          bsSize="medium"
+          items={totalPages}
+          activepage={this.state.currentPageNumber}
+          onSelect={this.handleSelect.bind(this)} />
+        
+      </div>
+      </div>
+    );
     }
   }
 

@@ -35,15 +35,15 @@ class RegistrationController extends Controller
             
             if ($role === 'owner') {
                 $file = $userData->getActivity()->getPathToLogo();
-                
-                $fileName = Utils::generateUniqueFileName() . '.' . $file->guessExtension();
-                
-                $file->move(
-                    $this->getParameter('uploads_directory'),
-                    $fileName
-                );
-                
-                $userData->getActivity()->setPathToLogo('/uploads/' .$fileName);
+                if ($file) {
+                    $fileName = Utils::generateUniqueFileName() . '.' . $file->guessExtension();
+                    $file->move(
+                        $this->getParameter('uploads_directory'),
+                        $fileName
+                    );
+
+                    $userData->getActivity()->setPathToLogo('/uploads/' .$fileName);
+                }
                 
                 $location = $userData->getActivity()->getLocation();
                 

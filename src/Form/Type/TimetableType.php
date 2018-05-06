@@ -15,7 +15,7 @@ class TimetableType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('Weekday', EntityType::class, [
-            'label' => "Savitės Diena",
+            'label' => "Savaitės Diena",
             'class' => Weekday::class,
             'attr' => ['class' => 'form-control'],
         ])

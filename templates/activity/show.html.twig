@@ -3,6 +3,15 @@
 {% block title %}{{ activity.name }}{% endblock %}
 
 {% block body %}
+<header class="bg-profile">
+    <div class="container">
+        <div class="row align-items-end min-height">
+            <div class="col-12">
+                <h2 class="text-white pb-4">{{ activity.name }}</h2>
+            </div>
+        </div>
+    </div>
+</header>
 <div class="container">
     <div class="row mt-5 py-4">
     {% if activity  %}
@@ -25,7 +34,7 @@
 
         </div>
     </div>
-    <div class="row">
+    <div class="row pb-5">
          <div class="col-12 col-sm-4">
              <ul class="list-group list-group-flush">
                 <li class="list-group-item list-group-item-secondary">Tvarkaraštis:</li>
