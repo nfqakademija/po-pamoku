@@ -9,16 +9,13 @@ const MapWithAMarkerClusterer = compose(
         loadingElement: <div style={{ height: `90%` }} />,
         containerElement: <div style={{ height: `600px` }} />,
         mapElement: <div style={{ height: `100%` }} />,
-        center: { lat: 55, lng: 24 },
     }),
     withHandlers({
         onToggleOpen: () => (marker) => {
             if(marker.isOpen === undefined){
                 marker.isOpen = false;
             }
-            console.log(marker.isOpen);
             marker.isOpen = !marker.isOpen;
-            console.log(marker.isOpen);
         },
     }),
     withScriptjs,
@@ -26,7 +23,7 @@ const MapWithAMarkerClusterer = compose(
 )(props =>
     <GoogleMap
         defaultZoom={7}
-        defaultCenter={props.center}
+        defaultCenter={{ lat: props.lat, lng: props.lng }}
     >
 
         <MarkerClusterer

@@ -10,12 +10,14 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      activities: [],
-      currentPageNumber: 1,
-      totalActivities: 1,
-      addFilter: false,
-      searchValue: null,
+        activities: [],
+        currentPageNumber: 1,
+        totalActivities: 1,
+        addFilter: false,
+        searchValue: null,
         isMap: false,
+        lat: 55.0,
+        lng: 24.0
     };
     this.onFilterChange = this.onFilterChange.bind(this);
   }
@@ -82,23 +84,30 @@ class App extends React.Component {
       const geo = (
           <button
           onClick={() => {
+
                 if (!navigator.geolocation){
-                  console.log('Geolocation is not supported by your browser');
+                  alert('Geolocation is not supported by your browser');
                   return;
                 }
 
                   function success(position) {
-                      const lat  = position.coords.lat;
+                      const lat = position.coords.lat;
                       const lng = position.coords.lng;
-
-                      console.log('Lat: ' + lat + ', Long:' + lng);
+                      if(lat === undefined || lng === undefined){
+                          this.setState({ lat: 54.6963489, lng: 25.2766971 });
+                      }
+                      else{
+                          this.setState({ lat: lat, lng: lng });
+                      }
                   }
 
                   function error() {
+                      this.setState({ lat: 54.6963489, lng: 25.2766971 });
                       alert("Unable to retrieve your location");
                   }
 
                   navigator.geolocation.getCurrentPosition(success, error);
+
                 }
               }
           >Rasti mano vietą</button>
@@ -109,7 +118,7 @@ class App extends React.Component {
               <div>
                   {btnSwitch}
 
-                  <MapComponent/>
+                  <MapComponent lat={this.state.lat} lng={this.state.lng} />
 
                   {geo}
               </div>
