@@ -142,16 +142,37 @@ const btnSwitch = (
            {activities.length !== 0 ? (activities.map((activity, index) =>  
             <div key={"currentAct" + index} className="col-md-3 col-sm-6 col-xs-6 py-3">
               <div className="activity-card">
-                <img className="img-fluid" src="https://placeimg.com/640/480/any" alt="Card image cap" />
+              <div className="card-image">
+                  <img className="img-fluid" src="https://placeimg.com/640/480/any" alt="Card image cap" />
+                  <div className="like-btn">
+                    <i className="far fa-heart"></i>
+                  </div>
+                  {/* <img className="" src="build/images/football.png" alt="Card image cap" /> */}
+              </div>
+               
                 <div className="activity-text">
                   <h5 className="activity-title">{activity.name}</h5>
+                    <p className="location"><i className="fas fa-map-marker"></i>{activity.city}, {activity.street} g. {activity.house}</p>
                     <p>Kaina: {activity.priceFrom}-{activity.priceTo} €</p>
-                  <p>{activity.city}, {activity.street} g. {activity.house}</p>
+                  
                     <p>{activity.category} / <span className="text-secondary">{activity.subcategory}</span></p>
                   {/* <p>{activity.ageFrom} - {activity.ageTo}</p> */}
                   {/* <p>{activity.weekday}</p> */}
                   {/* <p>{activity.time} - {activity.timeTo}</p> */}
-                    <a className="btn btn-light" href={"/activity/" + activity.id}> Plačiau </a>
+                  <hr />
+                  <div className="stars">
+                    <i className="fas fa-star"></i>
+                    <i className="fas fa-star"></i>
+                    <i className="fas fa-star"></i>
+                    <i className="fas fa-star"></i>
+                    <i className="fas fa-star"></i>
+                    {/* <img className="" src="build/images/star.png" alt="Card image cap" /> 
+                    <img className="" src="build/images/star.png" alt="Card image cap" /> 
+                    <img className="" src="build/images/star.png" alt="Card image cap" />
+                    <img className="" src="build/images/star.png" alt="Card image cap" />
+                    <img className="" src="build/images/star.png" alt="Card image cap" />  */}
+                    <a className="btn card-btn" href={"/activity/" + activity.id}> Plačiau </a>
+                  </div>
                 </div>
               </div>
             </div>)) : ('Deja, būrelių nėra')}

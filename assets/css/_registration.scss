@@ -1,0 +1,64 @@
+.registration-bg {
+  padding: 80px 0 40px;
+  background:  #e8e8e8;
+  }
+  .registration-aside {
+   background-color: transparent;
+    padding: 60px 30px;
+    color: #fff;
+ }
+ .registration-header {
+   font-weight: 300;
+ }
+ .registration-form {
+   padding: 60px;
+ }
+ .btn.btn-register {
+   /* background-color: #f7e9a5; */
+    color: #464646;
+    color: #fff;
+    background-color: #3ecf8e;
+    border-radius: .25rem;
+ }
+ .btn.btn-register:hover {
+       background-color: #74f9bd;
+    color: #464646;
+ }
+ form div {
+   margin-bottom: 20px;
+ }
+form label {
+  min-width: 200px;
+  display: block;
+  margin: 0;
+  font-size: 14px;
+    color: #5f5f5f;
+}
+input {
+  border: none;
+  border-bottom: 1px solid #e5e5e5;
+  width: 100%;
+  background: transparent;
+}
+select {
+  color: #5f5f5f;
+}
+input:focus {
+  outline: none;
+  border-bottom: 1px solid #7e55bdf7;
+}
+select {
+  border: none;
+}
+select:focus {
+  outline: none;
+}
+form ul {
+  padding: 0;
+    margin: 0;
+    list-style: none;
+}
+form li {
+  color: #e91e63;
+    font-size: 13px;
+}
