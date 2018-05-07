@@ -1,0 +1,40 @@
+.activity-card {
+   position: relative;
+   box-shadow: 1px 1px 8px 0px rgba(0, 0, 0, 0.2);
+   cursor: pointer;
+ }
+ .activity-text {
+    background: #ffffff;
+    padding: 10px 20px;
+ }
+ .activity-title {
+    color: #7f7f7f;
+    font-weight: 400;
+    margin: 10px 0 15px;
+ }
+ .activity-card:hover > .overlay {
+   opacity: 1;
+ }
+ .card-btn {
+  text-transform: uppercase;
+  color: #673AB7;
+}
+.stars {
+  color: rgb(255, 215, 95);
+}
+.location {
+  color: #5f5f5f;
+}
+.card-image {
+  position: relative;
+}
+.like-btn {
+  position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: #ff3a72;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 27px;
+    font-size: 20px;
+}

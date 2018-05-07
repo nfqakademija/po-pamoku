@@ -1,0 +1,122 @@
+@import '_navBar.scss';
+@import '_pagination.scss';
+@import '_activityCard.scss';
+@import '_registration.scss';
+@import '_footer.scss';
+
+
+body {
+  font-family: 'Lato', sans-serif;
+  min-height: 100vh;
+}
+.card {
+  border: none!important;
+  box-shadow: 1px 1px 8px 0px rgba(0, 0, 0, 0.2);
+  margin: 10px;
+  width: 100%;
+  border-radius: 0!important;
+}
+
+ .hero {
+    background: linear-gradient(to left bottom, #2da2c5eb, rgba(126, 85, 189, 0.94)), url("../img/mainBg.jpg");
+    background-position: top;
+    background-size: cover;
+    min-height: 600px;
+    position: relative;
+    display: flex;
+    align-items: center;
+ }
+ .hero-title {
+   color: #ffffff;
+    text-align: center;
+    font-size: 60px;
+ }
+ .btn.btn-main-register {
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: .25rem;
+ }
+ .btn.btn-main-register:hover {
+  background: #fff;
+  color: #35a1c5;
+ }
+ .btn.btn-main-login {
+   color: #fff;
+    background-color: #3ecf8e;
+    border-radius: .25rem;
+ }
+ .btn.btn-main-login:hover {
+    background-color: #74f9bd;
+    color: #464646;
+}
+ .btn-more {
+    color: #fff;
+    background: #79a4b2;
+ }
+ 
+ .svg {
+   position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 10vw;
+ }
+
+.page-item.active .page-link {
+    background-color: #343a40!important;
+    border-color: #343a40!important;
+}
+.page-link {
+    color: #343a40!important;
+    border: none!important;
+}
+.page-item.active .page-link {
+    color: #fff!important;
+}
+
+ .bg-blue {
+    background: linear-gradient(to left bottom, #2da2c5f5, #7e55bdf7), url("../img/mainBg.jpg");
+    background-position: center;
+    background-size: cover;
+ }
+  .bg-profile {
+    background: linear-gradient(to left bottom, #2da2c5f5, #7e55bdf7), url("../img/mainBg.jpg");
+    background-position: center;
+    background-size: cover;
+ }
+ .min-height{
+    min-height: 40vh;
+ }
+
+.page {
+    background: transparent;
+    border: none;
+    color: #32355b;
+    cursor: pointer;
+}
+.page:focus {
+    outline: none;
+}
+.filter {
+    padding: 4px;
+    border-radius: 2px;
+    border: 1px solid #9e9e9e;
+}
+.filter:focus {
+    border: 1px solid #673AB7;
+}
+.remove-tag {
+    padding: 4px 11px 6px;
+    background: #fff;
+    color: #673AB7;
+    border-radius: 18px;
+    text-transform: uppercase;
+}
+.remove-tag:hover {
+    background: #673AB7;
+    color: #fff;
+    text-decoration: none;
+}
+textarea {
+    width: 100%;
+}
+

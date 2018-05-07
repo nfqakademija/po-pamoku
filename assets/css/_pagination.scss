@@ -1,0 +1,17 @@
+.pagination {
+  justify-content: center;
+  margin-bottom: 40px;
+}
+.pagination > li {
+  padding: 5px;
+}
+.pagination > li > a {
+  color: #32355b;
+    padding: 2px 9px;
+    border-radius: 14px;
+}
+.pagination > li > a:hover, .pagination > li > a:active {
+      background: #b1b1b1;
+      text-decoration: none;
+      color: #fff;
+}

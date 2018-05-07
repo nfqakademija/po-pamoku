@@ -1,0 +1,37 @@
+.navbar-brand {
+  font-family: 'Pacifico', cursive;
+  
+}
+.navbar-brand.logo {
+font-size: 28px;
+ }
+  nav {
+   transition: all 300ms;
+ }
+ nav a:hover {
+   color: #fff;
+ }
+ .nav-trans a:hover > span {
+   border-bottom: 2px solid #fff;
+    padding-bottom: 4px;
+ }
+.nav-trans {
+background: transparent;
+}
+.nav-trans a {
+  color: #fff;
+}
+.nav-white {
+background: #fff;
+box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, 0.2);
+}
+.nav-white a {
+  color: #673AB7;
+}
+.nav-white a:hover {
+  color: teal;
+}
+.nav-white a:hover > span {
+   border-bottom: 2px solid teal;
+    padding-bottom: 4px;
+}
