@@ -6,7 +6,7 @@
  * Time: 11.48
  */
 
-namespace App\Form;
+namespace App\Form\Type;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;

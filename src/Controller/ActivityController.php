@@ -30,4 +30,13 @@ class ActivityController extends Controller
         $activity = $this->getDoctrine()->getRepository(Activity::class)->find($id);
         return $this->render('activity/show.html.twig', ['activity' => $activity]);
     }
+    
+    /**
+     * @Route("/map", name="activity_map")
+     * @Method({"GET"})
+     */
+    public function map()
+    {
+        return $this->render('map/map.html.twig');
+    }
 }

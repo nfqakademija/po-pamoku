@@ -3,9 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\ChangePasswordType;
+use App\Form\Type\ChangePasswordType;
 use App\Form\Model\ChangePasswordModel;
-use App\Form\ProfileType;
+use App\Form\Type\ProfileType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;

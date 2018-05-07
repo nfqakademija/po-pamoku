@@ -6,7 +6,7 @@
  * Time: 19.18
  */
 
-namespace App\Form;
+namespace App\Form\Type;
 
 use App\Entity\User;
 use App\Form\Type\ActivityType;

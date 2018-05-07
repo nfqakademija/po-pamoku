@@ -24,7 +24,7 @@ class Location
     private $id;
     
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\City")
+     * @ORM\ManyToOne(targetEntity="App\Entity\City",cascade={"persist"})
      */
     private $city;
     
@@ -57,10 +57,18 @@ class Location
     
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Assert\Regex(pattern="/^[0-9]{5}$/", message="Pašto kodą turi sudaryti 5 skaitmenys.")
      */
     private $postcode;
     
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $lat;
+    
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $lng;
     
     public function getCity()
     {
@@ -126,6 +134,29 @@ class Location
         
         return $this;
     }
-    
+
+    public function getLat(): ?float
+    {
+        return $this->lat;
+    }
+
+    public function setLat(float $lat): self
+    {
+        $this->lat = $lat;
+
+        return $this;
+    }
+
+    public function getLng(): ?float
+    {
+        return $this->lng;
+    }
+
+    public function setLng(float $lng): self
+    {
+        $this->lng = $lng;
+
+        return $this;
+    }
     
 }
