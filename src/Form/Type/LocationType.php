@@ -36,6 +36,8 @@ class LocationType extends AbstractType
                 $location['lng'] = $data['lng'];
                 $location['lat'] = $data['lat'];
                 $location['postcode'] = $data['postcode'];
+                $location['street'] = $data['street'];
+                $location['city'] = $data['city'];
                 $event->setData($location);
 
             });

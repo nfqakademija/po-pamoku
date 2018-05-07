@@ -34,21 +34,30 @@ class Utils
     public static function fetchLocationByAddress(string $address): array
     {
         $key = getenv('MAP_API_KEY');
-        $queryUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address='.urlencode($address).'&key='.$key;
+        $queryUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address=' . urlencode($address) . '&key=' . $key;
         $dataJson = @file_get_contents($queryUrl);
         $data = json_decode($dataJson, true);
-        return self::parseLocation($data);
+        if (isset($data)) {
+            return self::parseLocation($data);
+        }
+        return [];
     }
     
-    private static function parseLocation(array $data): array
+    private static function parseLocation($data): array
     {
-        $results = $data['results'][0];
-        $location = $results['geometry']['location'];
-        $lat = $location['lat'];
-        $lng = $location['lng'];
-        $address_components  = array_values($results['address_components']);
-        $postcode = $address_components[6]['long_name'];
+        $street = $city = $postcode = $lat = $lng = null;
         
-        return ['lat' => $lat, 'lng' => $lng, 'postcode' => $postcode];
+        $results = $data['results'];
+        if (isset($results[0])) {
+            $results = $results[0];
+            $location = $results['geometry']['location'];
+            $lat = $location['lat'];
+            $lng = $location['lng'];
+            $address_components = array_values($results['address_components']);
+            $street = $address_components[2]['short_name'];
+            $city = $address_components[3]['short_name'];
+            $postcode = $address_components[6]['short_name'];
+        }
+        return ['lat' => $lat, 'lng' => $lng, 'postcode' => $postcode, 'street' => $street, 'city' => $city];
     }
 }
