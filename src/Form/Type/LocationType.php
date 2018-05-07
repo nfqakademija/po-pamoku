@@ -2,27 +2,43 @@
 
 namespace App\Form\Type;
 
-use App\Entity\City;
 use App\Entity\Location;
+use App\Utils\Utils;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class LocationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('city', EntityType::class, [
-            'label' => "Miestas",
-            'class' => City::class,
-        ])
+        $builder->add('city', CityType::class, ['label' => false])
             ->add('street', TextType::class, ['label' => "Gatvė"])
             ->add('house', TextType::class, ['label' => "Namo nr."])
             ->add('apartment', TextType::class,
                 ['label' => "Buto nr.", 'required' => false])
-            ->add('postcode', TextType::class, ['label' => "Pašto kodas"]);
+            ->add('lng', HiddenType::class)
+            ->add('lat', HiddenType::class)
+            ->add('postcode', HiddenType::class);
+    
+        $builder->addEventListener(
+            FormEvents::PRE_SUBMIT,
+            function (FormEvent $event) {
+    
+                $location = $event->getData();
+                
+                $address = $location["street"] . ' ' . $location['house'] . ', ' . $location["city"]["name"];
+                $data = Utils::fetchLocationByAddress($address);
+                $location['lng'] = $data['lng'];
+                $location['lat'] = $data['lat'];
+                $location['postcode'] = $data['postcode'];
+                $event->setData($location);
+
+            });
     }
     
     public function configureOptions(OptionsResolver $resolver)

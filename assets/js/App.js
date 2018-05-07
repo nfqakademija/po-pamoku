@@ -2,17 +2,22 @@ import React from 'react';
 import Filter from './components/Filter.js';
 import Sort from './components/Sort.js';
 import { Pagination } from '@react-bootstrap/pagination';
+import MapComponent from "./MapComponent";
+
 const axios = require('axios');
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      activities: [],
-      currentPageNumber: 1,
-      totalActivities: 1,
-      addFilter: false,
-      searchValue: null
+        activities: [],
+        currentPageNumber: 1,
+        totalActivities: 1,
+        addFilter: false,
+        searchValue: null,
+        isMap: false,
+        lat: 55.0,
+        lng: 24.0
     };
     this.onFilterChange = this.onFilterChange.bind(this);
   }
@@ -31,7 +36,7 @@ class App extends React.Component {
 }
   searchActivities(page, value) {
     console.log(value);
-    axios.get('/api/activity?page=' + page + '&limit=12&search=' + value.search + '&city=' + value.cityId + '&category=' + value.category + 
+    axios.get('/api/activity?page=' + page + '&limit=12&search=' + value.search + '&city=' + value.cityId + '&category=' + value.category +
       '&weekday=' + value.weekday + '&time=' + value.time + '&age=' + value.age + '&price=' + value.price + '&subcategory=' + value.subcategory)
       .then(function (response) {
         this.setState({
@@ -44,7 +49,7 @@ class App extends React.Component {
         console.error(error);
       });
   }
-  
+
   componentDidMount() {
     this.getActivities(1);
   }
@@ -72,19 +77,65 @@ class App extends React.Component {
     const { activities, currentPage, activitiesPerPage } = this.state;
     let totalPages = Math.ceil(this.state.totalActivities / 12);
 // console.log(activities);
-    return (
+const btnSwitch = (
+          <button
+              onClick={() => this.setState({ isMap: !isMap })}
+          >Map</button>
+      );
+
+      const geo = (
+          <button
+          onClick={() => {
+
+                if (!navigator.geolocation){
+                  alert('Geolocation is not supported by your browser');
+                  return;
+                }
+
+                  function success(position) {
+                      const lat = position.coords.lat;
+                      const lng = position.coords.lng;
+                      if(lat === undefined || lng === undefined){
+                          this.setState({ lat: 54.6963489, lng: 25.2766971 });
+                      }
+                      else{
+                          this.setState({ lat: lat, lng: lng });
+                      }
+                  }
+
+                  function error() {
+                      this.setState({ lat: 54.6963489, lng: 25.2766971 });
+                      alert("Unable to retrieve your location");
+                  }
+
+                  navigator.geolocation.getCurrentPosition(success, error);
+
+                }
+              }
+          >Rasti mano vietą</button>
+      );
+
+      if (isMap) {
+          return (
+              <div>
+                  {btnSwitch}
+
+                  <MapComponent lat={this.state.lat} lng={this.state.lng} />
+
+                  {geo}
+              </div>
+          );
+      }    return (
       <div>
-        <div className="container py-5">
-          <div id="toTop"></div>
+        <div className="containerpy-5">{btnSwitch}
+<div id="toTop"></div>
         <Filter
-          onChange={this.onFilterChange}
-        />
-        
+          onChange={this.onFilterChange}/>
+
       </div>
       <div className="container">
 
-       
-        {/* <Sort /> */}
+        {/*<Sort />*/}
 
         <div className="row activities py-3">
 

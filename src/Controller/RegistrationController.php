@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Location;
-use App\Form\RegistrationType;
+use App\Form\Type\RegistrationType;
 use App\Security\LoginFormAuthenticator;
 use App\Utils\Utils;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -42,7 +42,7 @@ class RegistrationController extends Controller
                         $fileName
                     );
 
-                    $userData->getActivity()->setPathToLogo($fileName);
+                    $userData->getActivity()->setPathToLogo('/uploads/' .$fileName);
                 }
                 
                 $location = $userData->getActivity()->getLocation();

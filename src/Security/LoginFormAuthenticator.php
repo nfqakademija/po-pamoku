@@ -2,7 +2,7 @@
 
 namespace App\Security;
 
-use App\Form\LoginType;
+use App\Form\Type\LoginType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;

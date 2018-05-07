@@ -16,6 +16,7 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 class Utils
 {
+    
     public static function normalize($obj)
     {
         $encoders = [new XmlEncoder(), new JsonEncoder()];
@@ -28,5 +29,26 @@ class Utils
     public static function generateUniqueFileName()
     {
         return md5(uniqid());
+    }
+    
+    public static function fetchLocationByAddress(string $address): array
+    {
+        $key = getenv('MAP_API_KEY');
+        $queryUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address='.urlencode($address).'&key='.$key;
+        $dataJson = @file_get_contents($queryUrl);
+        $data = json_decode($dataJson, true);
+        return self::parseLocation($data);
+    }
+    
+    private static function parseLocation(array $data): array
+    {
+        $results = $data['results'][0];
+        $location = $results['geometry']['location'];
+        $lat = $location['lat'];
+        $lng = $location['lng'];
+        $address_components  = array_values($results['address_components']);
+        $postcode = $address_components[6]['long_name'];
+        
+        return ['lat' => $lat, 'lng' => $lng, 'postcode' => $postcode];
     }
 }

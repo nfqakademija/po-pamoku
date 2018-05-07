@@ -20,11 +20,14 @@
     "axios": "^0.18.0",
     "boom": "^7.2.0",
     "hoek": "^4.2.1",
+    "markerclustererplus": "^2.1.4",
     "npm": "^6.0.0",
     "prop-types": "^15.6.1",
     "react": "^16.3.1",
     "react-bootstrap": "^0.32.1",
     "react-dom": "^16.3.1",
-    "react-router-dom": "^4.2.2"
+    "react-google-maps": "^9.4.5",
+    "react-router-dom": "^4.2.2",
+    "recompose": "^0.27.0"
   }
 }
