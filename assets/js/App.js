@@ -76,10 +76,11 @@ class App extends React.Component {
   render() {
     const { activities, currentPage, activitiesPerPage } = this.state;
     let totalPages = Math.ceil(this.state.totalActivities / 12);
+
 // console.log(activities);
 const btnSwitch = (
           <button
-              onClick={() => this.setState({ isMap: !isMap })}
+              onClick={() => this.setState({ isMap: !this.state.isMap })}
           >Map</button>
       );
 
@@ -115,7 +116,7 @@ const btnSwitch = (
           >Rasti mano vietą</button>
       );
 
-      if (isMap) {
+      if (this.state.isMap) {
           return (
               <div>
                   {btnSwitch}
