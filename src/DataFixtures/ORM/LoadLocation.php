@@ -1,52 +1,59 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ruta
- * Date: 18.4.7
- * Time: 12.27
- */
 
 namespace App\DataFixtures\ORM;
 
+use App\Entity\City;
 use App\Entity\Location;
+use App\Utils\Utils;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class LoadLocation extends Fixture implements DependentFixtureInterface
+class LoadLocation extends Fixture
 {
-    public const STREET_NAMES = [
-        'Lietaus',
-        'Miško',
-        'Debesų',
-        'Upės',
-        'Ežerų',
-        'Sodų',
-        'Pievos',
-    ];
-    
     public function load(ObjectManager $manager)
     {
+        $dataArray = [];
+        $handler = fopen('public/data/Addresses.csv', 'r');
+        while (($data = fgetcsv($handler, 5000, ';')) !== FALSE) {
+            $dataArray[] = $data;
+        }
         for ($i = 21; $i <= 70; $i++) {
             $location = new Location();
-            $location->setApartment(rand(1, 84))
-                ->setHouse(rand(1, 347))
-                ->setCity($this->getReference(LoadCity::CITY_NAMES[array_rand(LoadCity::CITY_NAMES, 1)]))
-                ->setStreet(self::STREET_NAMES[array_rand(self::STREET_NAMES, 1)])
-                ->setPostcode(sprintf('%05d', rand(0, 99999)));
-            
+            $locationData = $dataArray[array_rand($dataArray, 1)];
+            $cityName = $locationData[4];
+            if ($this->hasReference($cityName)) {
+                $location->setCity($this->getReference($cityName));
+            } else {
+                $city = new City();
+                $city->setName($cityName);
+                $location->setCity($city);
+                $this->addReference($cityName, $city);
+            }
+            $location
+                ->setApartment(rand(1, 84))
+                ->setHouse($locationData[2])
+                ->setStreet($locationData[1])
+            ;
+
+            $address = $locationData[1] . ' ' . $locationData[2] . ', ' . $locationData[4];
+            $data = Utils::fetchLocationByAddress($address);
+            $location
+                ->setLng($data['lng'])
+                ->setLat($data['lat'])
+                ->setPostcode($data['postcode'])
+                ;
             $this->addReference($i, $location);
             $manager->persist($location);
         }
-        
         $manager->flush();
     }
-    
-    public function getDependencies()
-    {
-        return [
-            LoadCity::class,
-        ];
-    }
-    
+
+
+
 }
+
+
+
+
+
+

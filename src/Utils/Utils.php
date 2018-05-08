@@ -46,7 +46,6 @@ class Utils
     private static function parseLocation($data): array
     {
         $street = $city = $postcode = $lat = $lng = null;
-        
         $results = $data['results'];
         if (isset($results[0])) {
             $results = $results[0];
@@ -54,9 +53,16 @@ class Utils
             $lat = $location['lat'];
             $lng = $location['lng'];
             $address_components = array_values($results['address_components']);
+            foreach ($address_components as $component) {
+                if (in_array('postal_code', $component['types'])) {
+                    $postcode = $component['short_name'];
+                }
+            }
             $street = $address_components[2]['short_name'];
             $city = $address_components[3]['short_name'];
-            $postcode = $address_components[6]['short_name'];
+            if (!isset($postcode)) {
+                $postcode = null;
+            }
         }
         return ['lat' => $lat, 'lng' => $lng, 'postcode' => $postcode, 'street' => $street, 'city' => $city];
     }

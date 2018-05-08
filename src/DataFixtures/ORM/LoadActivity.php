@@ -34,7 +34,7 @@ class LoadActivity extends Fixture implements DependentFixtureInterface
                 ->setPathToLogo('')
                 ->setSubcategory($this->getReference(LoadSubcategory::SUB_NAMES[array_rand(LoadSubcategory::SUB_NAMES,
                     1)]))
-                ->setLocation($this->getReference(rand(21, 70)))
+                ->setLocation($this->getReference($i+20))
                 ->addTimetable($this->getReference(rand(1, 20)))
                 ->addTimetable($this->getReference(rand(1, 20)))
                 ->addTimetable($this->getReference(rand(1, 20)))

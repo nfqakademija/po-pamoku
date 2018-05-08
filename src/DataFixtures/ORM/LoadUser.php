@@ -112,7 +112,7 @@ class LoadUser extends Fixture
                 }
                     $user->setSurname($surname);
                     $user->setName($name);
-                    $email = strtolower($user->getName()) . strtolower($user->getSurname()) . rand(1, 100) . '@email.com';
+                    $email = strtolower($user->getName()) . strtolower($user->getSurname()) . $i . '@email.com';
                     $user->setEmail(strtr($email,self::LETTERS))
                         ->setIsBlocked(false)
                         ->setPlainPassword('password');
@@ -126,7 +126,7 @@ class LoadUser extends Fixture
 
                 $user->setSurname($surname);
                 $user->setName($name);
-                $email = strtolower($user->getName()) . strtolower($user->getSurname()) . rand(1, 10) . '@email.com';
+                $email = strtolower($user->getName()) . strtolower($user->getSurname()) . $i . '@email.com';
                 $user->setEmail(strtr($email,self::LETTERS))
                     ->setIsBlocked(false)
                     ->setPlainPassword('password');
