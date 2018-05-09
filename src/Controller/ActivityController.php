@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Activity;
-use Symfony\Component\HttpFoundation\Response;
+use App\Form\Type\CommentType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -25,10 +25,24 @@ class ActivityController extends Controller
     /**
      * @Route("/activity/{id}", name="activity_show")
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
         $activity = $this->getDoctrine()->getRepository(Activity::class)->find($id);
-        return $this->render('activity/show.html.twig', ['activity' => $activity]);
+        $form = $this->createForm(CommentType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $comment = $form->getData();
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($comment);
+            $em->flush();
+        }
+
+        return $this->render('activity/show.html.twig', [
+            'activity' => $activity,
+            'form' => $form->createView()
+        ]);
     }
     
     /**

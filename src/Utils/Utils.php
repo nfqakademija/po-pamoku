@@ -25,6 +25,23 @@ class Utils
         
         return $serializer->normalize($obj);
     }
+
+    public static function normalizeComments($obj)
+    {
+        $encoders = [new XmlEncoder(), new JsonEncoder()];
+        $normalizers = [new DateTimeNormalizer('Y-m-d H:i:s'), new ObjectNormalizer()];
+        $serializer = new Serializer($normalizers, $encoders);
+
+        return $serializer->normalize($obj, null, [
+            'attributes' => [
+                'commentText',
+                'createdAt',
+                'user' => [
+                    'name',
+                    'surname'
+                ]
+            ]]);
+    }
     
     public static function generateUniqueFileName()
     {

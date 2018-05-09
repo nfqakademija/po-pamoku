@@ -34,6 +34,10 @@ class Comment
      */
     protected $commentText;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     */
+    protected $user;
 
     public function getId()
     {
@@ -83,6 +87,18 @@ class Comment
         return $this;
     }
 
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    public function setUser($user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+    
     /**
      * @ORM\PrePersist
      */

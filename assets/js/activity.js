@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import Comments from './Comments'
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<Comments />, document.getElementById('comments'));

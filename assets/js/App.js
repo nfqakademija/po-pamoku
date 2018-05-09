@@ -79,7 +79,7 @@ class App extends React.Component {
 // console.log(activities);
 const btnSwitch = (
           <button
-              onClick={() => this.setState({ isMap: !isMap })}
+              onClick={() => this.setState({ isMap: !this.state.isMap })}
           >Map</button>
       );
 
@@ -115,7 +115,7 @@ const btnSwitch = (
           >Rasti mano vietą</button>
       );
 
-      if (isMap) {
+      if (this.state.isMap) {
           return (
               <div>
                   {btnSwitch}

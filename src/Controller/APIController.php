@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Activity;
 use App\Entity\Category;
 use App\Entity\City;
+use App\Entity\Comment;
 use App\Entity\Location;
 use App\Entity\Subcategory;
 use App\Utils\Utils;
@@ -143,6 +144,16 @@ class APIController extends Controller
         
         return new JsonResponse(Utils::normalize($activity));
     }
-    
+
+    /**
+     * @Route("/api/comments/{id}", name="api_comments")
+     * @Method({"GET"})
+     */
+    public function apiComments($id)
+    {
+        $comments = $this->getDoctrine()->getRepository(Comment::class)->findBy(['activity'=>$id]);
+
+        return new JsonResponse(Utils::normalizeComments($comments));
+    }
     
 }
