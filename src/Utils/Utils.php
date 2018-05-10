@@ -35,7 +35,15 @@ class Utils
     {
         $key = getenv('MAP_API_KEY');
         $queryUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address=' . urlencode($address) . '&key=' . $key;
-        $dataJson = @file_get_contents($queryUrl);
+
+        $arrContextOptions=array(
+            "ssl"=>[
+                "verify_peer"=>false,
+                "verify_peer_name"=>false,
+            ],
+        );
+
+        $dataJson = file_get_contents($queryUrl, false, stream_context_create($arrContextOptions));
         $data = json_decode($dataJson, true);
         if (isset($data)) {
             return self::parseLocation($data);
