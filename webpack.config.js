@@ -11,20 +11,23 @@ Encore
     // .enableVersioning(Encore.isProduction())
 
     // uncomment to define the assets of the project
-     .addEntry('js/app', './assets/js/App.js')
+    .addEntry('js/app', './assets/js/App.js')
     .addEntry('js/index', './assets/js/index.js')
-    .addEntry('js/comment', './assets/js/PostComment.js')
     .addEntry('js/comments', './assets/js/activity.js')
 
     .addStyleEntry('css/app', './assets/css/app.scss')
 
     // uncomment if you use Sass/SCSS files
-     .enableSassLoader()
+    .enableSassLoader()
 
     // uncomment for legacy applications that require $/jQuery as a global variable
-     .autoProvidejQuery()
+    .autoProvidejQuery()
 
-     .enableReactPreset()
+    .enableReactPreset()
+
+    .configureBabel((config) => {
+        config.presets.push('stage-2');
+    })
 ;
 
 module.exports = Encore.getWebpackConfig();

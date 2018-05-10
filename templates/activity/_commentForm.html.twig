@@ -1,0 +1,8 @@
+{{ form_start(form, {
+    'class': 'form-inline',
+    'attr': {'id': 'commentForm'}
+}) }}
+        {{ form_errors(form) }}
+        {{ form_row(form.commentText) }}
+<button type="submit" class="btn btn-primary" formnovalidate>Siųsti atsiliepimą</button>
+{{ form_end(form) }}

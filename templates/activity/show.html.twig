@@ -64,25 +64,17 @@
     </div> 
       
     {% endif %}
-    <div id="comments"></div>
     <div id='comment'>
-        {{ form_start(form, {
-            'class': 'form-inline',
-            'novalidate': 'novalidate',
-            'attr': {'id': 'commentForm'}
-        }) }}
-        {{ form_errors(form) }}
-        {{ form_row(form.commentText) }}
-        <button type="submit" class="btn btn-primary">Siųsti atsiliepimą</button>
-        {{ form_end(form) }}
+    {{ include('activity/_commentForm.html.twig') }}
 
     </div>
-   
+    <div id="comments"></div>
+
+
 </div>
 {% endblock %}
 
 {% block javascripts %}
-<script src="{{ asset('build/js/comment.js') }}"></script>
     <script src="{{ asset('build/js/comments.js') }}"></script>
 {{ parent() }}
 {% endblock %}

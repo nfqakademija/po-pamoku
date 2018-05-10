@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Activity;
 use App\Form\Type\CommentType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -37,6 +38,14 @@ class ActivityController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($comment);
             $em->flush();
+        }
+
+        if ($form->isSubmitted() && !$form->isValid()) {
+            $html =  $this->render('activity/_commentForm.html.twig', [
+                'form' => $form->createView()
+            ]);
+
+            return new Response($html, 400);
         }
 
         return $this->render('activity/show.html.twig', [
