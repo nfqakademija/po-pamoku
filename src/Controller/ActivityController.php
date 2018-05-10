@@ -38,10 +38,16 @@ class ActivityController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($comment);
             $em->flush();
+
+            $html = $this->renderView('activity/_commentForm.html.twig', [
+                'form' => $form->createView()
+            ]);
+
+            return new Response($html, 300);
         }
 
         if ($form->isSubmitted() && !$form->isValid()) {
-            $html =  $this->render('activity/_commentForm.html.twig', [
+            $html =  $this->renderView('activity/_commentForm.html.twig', [
                 'form' => $form->createView()
             ]);
 

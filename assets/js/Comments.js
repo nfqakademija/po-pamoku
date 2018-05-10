@@ -20,7 +20,7 @@ class Comments extends React.Component {
         super(props);
         this.state = {
             comments: [],
-            id: props.id
+            id: props.id,
         };
     }
 
@@ -36,11 +36,14 @@ class Comments extends React.Component {
         let commentForm = e.currentTarget;
         let data = new FormData(commentForm);
         axios.post(commentForm.action, data)
-            .then(commentForm.reset())
+            .then(response => {
+                document.getElementById('comment').innerHTML = response.data;
+                document.getElementById('commentForm').onsubmit = this.handleCommentPosting;
+            })
             .then(this.getData())
             .catch(error => {
                 document.getElementById('comment').innerHTML = error.response.data;
-                console.log(error.response);
+                document.getElementById('commentForm').onsubmit = this.handleCommentPosting;
             });
     };
 
