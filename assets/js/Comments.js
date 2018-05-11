@@ -39,22 +39,25 @@ class Comments extends React.Component {
         let data = new FormData(commentForm);
         axios.post(commentForm.action, data)
             .then(response => {
-                document.getElementById('comment').innerHTML = response.data;
-                document.getElementById('commentForm').onsubmit = this.handleCommentPosting;
+                commentForm.closest('div').innerHTML = response.data;
             })
             .then(this.getData())
             .catch(error => {
-                document.getElementById('comment').innerHTML = error.response.data;
-                document.getElementById('commentForm').onsubmit = this.handleCommentPosting;
+                commentForm.closest('div').innerHTML = error.response.data;
             });
     };
 
     componentWillMount() {
         document.getElementById('commentForm').onsubmit = this.handleCommentPosting;
+
     }
 
     componentDidMount() {
         this.getData();
+    }
+
+    componentWillUpdate() {
+        document.getElementById('commentForm').onsubmit = this.handleCommentPosting;
     }
 
     render() {

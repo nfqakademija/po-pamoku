@@ -3,9 +3,11 @@
 {% else %}
     {{ form_start(form, {
         'class': 'form-inline',
-        'attr': {'id': 'commentForm'}
+        'attr': {
+            'id': 'commentForm',
+            'name': 'comment'
+        }
     }) }}
-    {{ form_errors(form) }}
     {{ form_row(form.commentText) }}
     {% if not post %}
         <h2>Komentarą būrelio puslapyje galima palikti kartą per 24h</h2>

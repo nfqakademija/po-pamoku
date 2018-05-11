@@ -131,6 +131,16 @@ class Activity
      */
     private $commentCount;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $ratingCount;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $rating;
+
 
     
     public function __construct()
@@ -301,7 +311,27 @@ class Activity
         return $this;
     }
 
+    public function getRatingCount()
+    {
+        return $this->ratingCount;
+    }
 
-    
-    
+    public function setRatingCount($ratingCount): self
+    {
+        $this->ratingCount = $ratingCount;
+
+        return $this;
+    }
+
+    public function getRating()
+    {
+        return $this->rating;
+    }
+
+    public function setRating($rating): self
+    {
+        $this->rating = $rating;
+
+        return $this;
+    }
 }
