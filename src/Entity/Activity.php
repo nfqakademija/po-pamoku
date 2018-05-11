@@ -125,11 +125,18 @@ class Activity
      * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="activity")
      */
     private $user;
-    
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $commentCount;
+
+
     
     public function __construct()
     {
         $this->timetables = new ArrayCollection();
+        $this->comment = new ArrayCollection();
     }
     
     public function getId()
@@ -281,6 +288,20 @@ class Activity
         
         return $this;
     }
+
+    public function getCommentCount()
+    {
+        return $this->commentCount;
+    }
+
+    public function setCommentCount($commentCount): self
+    {
+        $this->commentCount = $commentCount;
+
+        return $this;
+    }
+
+
     
     
 }

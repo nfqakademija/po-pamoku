@@ -64,6 +64,17 @@
     </div> 
       
     {% endif %}
-   
+
+    <div id='comment'>
+        {{ include('activity/_commentForm.html.twig') }}
+    </div>
+    <div id="comments"></div>
+
+
 </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('build/js/comments.js') }}"></script>
+{{ parent() }}
 {% endblock %}
