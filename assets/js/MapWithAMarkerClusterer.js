@@ -14,34 +14,24 @@ const MapWithAMarkerClusterer = compose(
         id: null,
     }), {
             onToggleOpen: () => (id) => {  
-                console.log('id', id)
-                
+
                 return ({
                     id,
             })}
-        }),
-        withHandlers({
-            onA: (asd) => {
-                console.log('asd', asd)
-
-                return this.props;
-            },
         }),
     withScriptjs,
     withGoogleMap
 )(props =>
     <GoogleMap
-        defaultZoom={7}
-        defaultCenter={{ lat: props.lat, lng: props.lng }}
+        zoom={props.zoom}
+        center={{ lat: props.lat, lng: props.lng }}
     >
 
         <MarkerClusterer
-            averageCenter
             enableRetinaIcons
             gridSize={60}
         >
-            {props.markers.map(marker => {     
-                                
+            {props.markers.map(marker => {
                 return (
                 <Marker
                     key={marker.id}
@@ -51,8 +41,7 @@ const MapWithAMarkerClusterer = compose(
                         {!!props.id && props.id === marker.id &&
                     <InfoWindow
                     
-                            onCloseClick={() => {props.onToggleOpen(marker);
-                            console.log(marker);}}>
+                            onCloseClick={() => {props.onToggleOpen(marker);}}>
                             <div style={{ width: `250px`}}>
                                 <h5>{marker.name}</h5>
                                 <div style={{ width: '250px',
