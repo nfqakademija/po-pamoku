@@ -20,6 +20,7 @@ class App extends React.Component {
         lng: 24.0
     };
     this.onFilterChange = this.onFilterChange.bind(this);
+    this.my = this.my.bind(this);
   }
  getActivities(page) {
    axios.get('/api/activity?page=' + page + '&limit=12')
@@ -73,66 +74,72 @@ class App extends React.Component {
     this.searchActivities(1, value);
   }
 
+  my() {
+    // if (!navigator.geolocation) {
+    //   alert('Geolocation is not supported by your browser');
+      
+    //   return;
+    // }
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+
+        const lat = position.coords.lat;
+        const lng = position.coords.lng;
+        if (lat === undefined || lng === undefined) {
+          this.setState({ lat: 54.6963489, lng: 25.2766971 });
+        }
+        else {
+          this.setState({ lat: lat, lng: lng });
+        }
+      }, 
+    () => {
+      
+      this.setState({ lat: 54.6963489, lng: 25.2766971 });
+      alert("Unable to retrieve your location");
+    });
+  };
+
   render() {
-    const { activities, currentPage, activitiesPerPage } = this.state;
+    const { activities, 
+      currentPage, 
+      activitiesPerPage,
+      lat,
+      lng,
+    } = this.state;
     let totalPages = Math.ceil(this.state.totalActivities / 12);
+
 // console.log(activities);
 const btnSwitch = (
           <button
               onClick={() => this.setState({ isMap: !this.state.isMap })}
-          >Map</button>
+          >Lokacija</button>
       );
 
       const geo = (
           <button
-          onClick={() => {
-
-                if (!navigator.geolocation){
-                  alert('Geolocation is not supported by your browser');
-                  return;
-                }
-
-                  function success(position) {
-                      const lat = position.coords.lat;
-                      const lng = position.coords.lng;
-                      if(lat === undefined || lng === undefined){
-                          this.setState({ lat: 54.6963489, lng: 25.2766971 });
-                      }
-                      else{
-                          this.setState({ lat: lat, lng: lng });
-                      }
-                  }
-
-                  function error() {
-                      this.setState({ lat: 54.6963489, lng: 25.2766971 });
-                      alert("Unable to retrieve your location");
-                  }
-
-                  navigator.geolocation.getCurrentPosition(success, error);
-
-                }
-              }
+          onClick={() => this.my}
           >Rasti mano vietą</button>
       );
 
       if (this.state.isMap) {
           return (
-              <div>
+              <div className="container">
                   {btnSwitch}
 
-                  <MapComponent lat={this.state.lat} lng={this.state.lng} />
+                  <MapComponent lat={lat} lng={lng} />
 
                   {geo}
               </div>
           );
       }    return (
       <div>
-        <div className="containerpy-5">{btnSwitch}
-<div id="toTop"></div>
-        <Filter
+        <div className="container py-5">{btnSwitch}
+            <div id="toTop"></div>
+          <Filter
           onChange={this.onFilterChange}/>
 
-      </div>
+        </div>
       <div className="container">
 
         {/*<Sort />*/}
