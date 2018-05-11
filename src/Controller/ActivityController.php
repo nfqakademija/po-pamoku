@@ -3,7 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Activity;
+use App\Entity\Comment;
+use App\Entity\User;
 use App\Form\Type\CommentType;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -30,7 +33,6 @@ class ActivityController extends Controller
     {
         $activity = $this->getDoctrine()->getRepository(Activity::class)->find($id);
         $form = $this->createForm(CommentType::class);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -40,15 +42,17 @@ class ActivityController extends Controller
             $em->flush();
 
             $html = $this->renderView('activity/_commentForm.html.twig', [
-                'form' => $form->createView()
+                'form' => $form->createView(),
+                'post' => $this->userCanPostComments($id)
             ]);
 
-            return new Response($html, 300);
+            return new Response($html, 200);
         }
 
         if ($form->isSubmitted() && !$form->isValid()) {
             $html =  $this->renderView('activity/_commentForm.html.twig', [
-                'form' => $form->createView()
+                'form' => $form->createView(),
+                'post' => $this->userCanPostComments($id)
             ]);
 
             return new Response($html, 400);
@@ -56,7 +60,8 @@ class ActivityController extends Controller
 
         return $this->render('activity/show.html.twig', [
             'activity' => $activity,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'post' => $this->userCanPostComments($id)
         ]);
     }
     
@@ -67,5 +72,17 @@ class ActivityController extends Controller
     public function map()
     {
         return $this->render('map/map.html.twig');
+    }
+
+    public function userCanPostComments($id)
+    {
+        $user = $this->getUser();
+        if ($user instanceof User) {
+            $repo = $this->getDoctrine()->getRepository(Comment::class)->findAllPastDay($user, $id);
+            if (!$repo) {
+                return true;
+            }
+        }
+        return false;
     }
 }

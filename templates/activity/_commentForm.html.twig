@@ -1,8 +1,18 @@
-{{ form_start(form, {
-    'class': 'form-inline',
-    'attr': {'id': 'commentForm'}
-}) }}
-        {{ form_errors(form) }}
-        {{ form_row(form.commentText) }}
-<button type="submit" class="btn btn-primary" formnovalidate>Siųsti atsiliepimą</button>
-{{ form_end(form) }}
+{% if not app.user %}
+    <h2>Tik registruoti vartotojai gali rašyti komentarus</h2>
+{% else %}
+    {{ form_start(form, {
+        'class': 'form-inline',
+        'attr': {'id': 'commentForm'}
+    }) }}
+    {{ form_errors(form) }}
+    {{ form_row(form.commentText) }}
+    {% if not post %}
+        <h2>Komentarą būrelio puslapyje galima palikti kartą per 24h</h2>
+    {% else %}
+        <button type="submit" class="btn btn-primary" formnovalidate>Siųsti atsiliepimą</button>
+    {% endif %}
+    {{ form_end(form) }}
+{% endif %}
+
+

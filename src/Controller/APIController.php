@@ -152,8 +152,7 @@ class APIController extends Controller
     public function apiComments($id)
     {
         $comments = $this->getDoctrine()->getRepository(Comment::class)->findBy(['activity'=>$id]);
-
         return new JsonResponse(Utils::normalizeComments($comments));
     }
-    
+
 }

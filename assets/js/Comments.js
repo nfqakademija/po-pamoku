@@ -2,16 +2,18 @@ import React from 'react';
 
 const axios = require('axios');
 
+
 const ViewComments = (props) => {
     let comments = props.comments;
     return (
-        (comments && comments.map((comment, id) =>
+        (comments.map((comment, id) =>
             <div key={id}>
                 <div>{comment.commentText}</div>
                 <div>{comment.createdAt}</div>
                 <div>{comment.user.name} {comment.user.surname}</div>
             </div>
-        ))
+        )
+        )
     );
 };
 
@@ -57,9 +59,11 @@ class Comments extends React.Component {
 
     render() {
         return (
+            (this.state.comments &&
             <div>
                 <ViewComments comments={this.state.comments}/>
             </div>
+            )
         );
     }
 

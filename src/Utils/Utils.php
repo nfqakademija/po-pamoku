@@ -34,6 +34,7 @@ class Utils
 
         return $serializer->normalize($obj, null, [
             'attributes' => [
+                'id',
                 'commentText',
                 'createdAt',
                 'user' => [
