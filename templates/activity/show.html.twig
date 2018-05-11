@@ -22,6 +22,7 @@
             <h1>{{ activity.name }} - {{ activity.subcategory.name }}</h1>
             <p>Adresas: {{ activity.location.street }} {{ activity.location.house }}{% if activity.location.apartment %}-{{ activity.location.apartment }}{% endif %},
             {{ activity.location.city.name }} </p>
+            <p>Įvertinimas: {{ activity.rating }} (Įvertinimų kiekis: {{ activity.ratingCount }}) )</p>
             <p>Aprašymas</p>
             <p>{{ activity.description }}</p>
         </div>
@@ -64,8 +65,12 @@
     </div> 
       
     {% endif %}
-
-    <div id='comment'>
+    <h2>
+        <div id="rating">
+            {{ include('activity/_ratingForm.html.twig') }}
+        </div>
+    </h2>
+    <div id="comment">
         {{ include('activity/_commentForm.html.twig') }}
     </div>
     <div id="comments"></div>

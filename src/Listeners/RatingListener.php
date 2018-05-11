@@ -3,47 +3,41 @@
 namespace App\Listeners;
 
 
-use App\Entity\Comment;
+use App\Entity\Rating;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 
-class CommentListener implements EventSubscriber
+class RatingListener implements EventSubscriber
 {
     public function postPersist(LifecycleEventArgs $args)
     {
-        $this->updateComments($args);
-    }
-
-    public function postRemove(LifecycleEventArgs $args)
-    {
-        $this->updateComments($args);
-    }
-
-    public function updateComments (LifecycleEventArgs $args)
-    {
         $entity = $args->getEntity();
 
-        if (!$entity instanceof Comment) {
+        if (!$entity instanceof Rating) {
             return;
         }
 
         $em = $args->getEntityManager();
-        $repo = $em->getRepository(Comment::class);
+        $repo = $em->getRepository(Rating::class);
 
         $activity = $entity->getActivity();
-        $commentCount = $repo->countCommentsByActivity($activity);
-
-        $activity->setCommentCount($commentCount);
-
+        $ratings = $repo->countRatingsByActivity($activity);
+        $activity->setRatingCount($ratings['countRating']);
+        $activity->setRating($ratings['avgRating']);
+        dump($activity);
         $meta = $em->getClassMetadata(get_class($activity));
         $em->getUnitOfWork()->recomputeSingleEntityChangeSet($meta, $activity);
         $em->persist($activity);
         $em->flush();
     }
 
+    public function postUpdate(LifecycleEventArgs $args) {
+        $this->postPersist($args);
+    }
+
     public function getSubscribedEvents()
     {
-        return ['postPersist', 'postRemove'];
+        return ['postPersist', 'postUpdate'];
     }
 
 }

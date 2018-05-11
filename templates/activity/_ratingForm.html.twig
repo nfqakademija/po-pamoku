@@ -1,0 +1,17 @@
+{{ form_start(ratingForm, {
+        'name': 'ratingForm',
+        'attr': {
+            'id': 'ratingForm'
+        }
+    }) }}
+    {% for radioRate in ratingForm.rating %}
+        {{ form_label(radioRate, null, {'label_attr': {'class':'radio-inline'}}) }}
+        {{ form_widget(radioRate, {'attr': {'class': 'radio-inline'}}) }}
+    {% endfor %}
+    {% if rate %}
+        <button type="submit" class="btn btn-primary" formnovalidate>Pakeisti įvertinimą</button>
+    {% else %}
+        <button type="submit" class="btn btn-primary" formnovalidate>Įvertinti</button>
+    {% endif %}
+
+{{ form_end(ratingForm) }}
