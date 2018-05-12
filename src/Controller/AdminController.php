@@ -1,15 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: juste
- * Date: 18.4.28
- * Time: 20.52
- */
 
 namespace App\Controller;
 
 
+use App\Entity\Comment;
 use App\Entity\User;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -17,28 +13,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class AdminController extends Controller
 {
-//    /**
-//     * @Route("/a/createadmin", name="admin_create")
-//     */
-//    public function createAdmin()
-//    {
-//        $em = $this->getDoctrine()->getManager();
-//        $admin = new User();
-//        $admin->setPlainPassword('admin');
-//        $admin->setEmail('admin@admin.com');
-//        $admin->setIsBlocked(false);
-//        $admin->setName('Admin');
-//        $admin->setSurname('Admin');
-//        $admin->setPhoneNumber('87456321');
-//        $admin->setRole('ROLE_ADMIN');
-//
-//        $em->persist($admin);
-//        $em->flush();
-//
-//        return new JsonResponse('');
-//    }
-
-
     /**
      * @Route("/admin/profile", name="admin_profile")
      */
@@ -85,6 +59,50 @@ class AdminController extends Controller
         }
 
         return $this->render('admin/userprofile.html.twig', ['user' => $user[0], 'form' => $form->createView()]);
+    }
+
+    /**
+     * @Route("/admin/user/{id}/comments/", name="admin_user_comments_action")
+     */
+    public function userCommentsAction($id)
+    {
+        $repo = $this->getDoctrine()->getRepository(Comment::class);
+        $comments = $repo->findAllCommentsByUserId($id);
+
+
+
+        return $this->render('admin/comments.html.twig', [
+            'comments' => $comments,
+            'user' => $id,
+            'form' => $this->createDeleteForm()->createView()]);
+    }
+
+    /**
+     * @Route("/admin/user/{user}/comments/delete/{id}", name="admin_delete_comment_action")
+     * @Method("DELETE")
+     */
+    public function deleteCommentsAction(Request $request, $id, $user)
+    {
+        $repo = $this->getDoctrine()->getRepository(Comment::class);
+        $comment = $repo->find($id);
+        $form = $this->createDeleteForm();
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($comment);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('admin_user_comments_action', ['id'=> $user]);
+
+    }
+
+    private function createDeleteForm()
+    {
+        return $this->createFormBuilder()
+                    ->setMethod('DELETE')
+                    ->getForm();
     }
 
 }
