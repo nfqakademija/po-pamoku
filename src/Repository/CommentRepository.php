@@ -34,4 +34,15 @@ class CommentRepository extends EntityRepository
 
         return $query;
     }
+
+    public function findAllCommentsByUserId($id)
+    {
+        $query = $this->createQueryBuilder('c')
+            ->where('c.user = :user')
+            ->setParameter('user', $id)
+            ->leftJoin('c.activity', 'a')
+            ->getQuery();
+
+        return $query->execute();
+    }
 }

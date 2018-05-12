@@ -39,6 +39,10 @@
                 <td><a href="{{ path('activity_show', {'id': user.activity}) }}" class="btn btn-secondary">Peržiūrėti</a></td>
             </tr>
         {% endif %}
+        <tr>
+            <th>Komentarai</th>
+            <td><a href="{{ path('admin_user_comments_action', {'id': user.id}) }}" class="btn btn-primary">Peržiūrėti</a></td>
+        </tr>
     </table>
     {{ form_start(form) }}
         {% if user.isblocked == true %}
