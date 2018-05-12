@@ -17,7 +17,8 @@ class App extends React.Component {
         searchValue: null,
         isMap: false,
         lat: 55.0,
-        lng: 24.0
+        lng: 24.0,
+        zoom: 7
     };
     this.onFilterChange = this.onFilterChange.bind(this);
     this.my = this.my.bind(this);
@@ -75,28 +76,28 @@ class App extends React.Component {
   }
 
   my() {
-    // if (!navigator.geolocation) {
-    //   alert('Geolocation is not supported by your browser');
+    if (!navigator.geolocation) {
+      alert('Geolocation is not supported by your browser');
       
-    //   return;
-    // }
-
+      return;
+    }
     navigator.geolocation.getCurrentPosition(
       (position) => {
 
         const lat = position.coords.lat;
         const lng = position.coords.lng;
+
+        alert(lng);
         if (lat === undefined || lng === undefined) {
-          this.setState({ lat: 54.6963489, lng: 25.2766971 });
+            this.setState({ lat: 54.6963489, lng: 25.2766971, zoom: 15 });
         }
         else {
-          this.setState({ lat: lat, lng: lng });
+          this.setState({ lat: lat, lng: lng , zoom: 15});
         }
       }, 
     () => {
-      
-      this.setState({ lat: 54.6963489, lng: 25.2766971 });
-      alert("Unable to retrieve your location");
+        this.setState({ lat: 54.6963489, lng: 25.2766971, zoom: 15 });
+      //alert("Unable to retrieve your location");
     });
   };
 
@@ -109,8 +110,11 @@ class App extends React.Component {
     } = this.state;
     let totalPages = Math.ceil(this.state.totalActivities / 12);
 
-// console.log(activities);
 const btnSwitch = (
+    <div>
+        <button
+            onClick={() => this.setState({ isMap: false })}
+        >Sąrašas</button>
           <button
               className="btn map-btn mt-3"
               onClick={() => {
@@ -123,18 +127,48 @@ const btnSwitch = (
                 <i className="fas fa-map-marker"></i>
                 <span className="location-btn pl-2">Lokacija</span>
           </button>
+        </div>
       );
 
       const geo = (
           <button
           className="btn myPlace-btn"
-          onClick={() => this.my}
+          onClick={this.my}
           >Rasti mano vietą</button>
       );
     
       return (
       <div>
       
+          {/* onClick={this.my}
+          >Rasti mano vietą</button>
+      );
+
+      if (this.state.isMap) {
+          return (
+              <div className="container">
+                  <div className="container py-5">
+                      <div id="toTop"></div>
+                      <Filter
+                          onChange={this.onFilterChange}/>
+                      {btnSwitch}
+                      {geo}
+                  </div>
+
+                  <MapComponent zoom={this.state.zoom} lat={this.state.lat} lng={this.state.lng} />
+
+
+              </div>
+          );
+      }    return (
+      <div>
+          <div className="container py-5">
+              <div id="toTop"></div>
+              <Filter
+                  onChange={this.onFilterChange}/>
+              {btnSwitch}
+
+          </div> */}
       <div className="container">
       <div className="row" id="rowRelative">
         <div className="col-3 pt-5" id="filter">
@@ -155,7 +189,7 @@ const btnSwitch = (
                     <div className="py-3">
                       {geo}
                     </div>
-                    <MapComponent lat={lat} lng={lng} />
+                    <MapComponent zoom={this.state.zoom} lat={this.state.lat} lng={this.state.lng} />
                   </div>
                 }
                 <div className="row activities pb-3 pt-5">

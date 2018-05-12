@@ -125,11 +125,28 @@ class Activity
      * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="activity")
      */
     private $user;
-    
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $commentCount;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $ratingCount;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $rating;
+
+
     
     public function __construct()
     {
         $this->timetables = new ArrayCollection();
+        $this->comment = new ArrayCollection();
     }
     
     public function getId()
@@ -281,6 +298,40 @@ class Activity
         
         return $this;
     }
-    
-    
+
+    public function getCommentCount()
+    {
+        return $this->commentCount;
+    }
+
+    public function setCommentCount($commentCount): self
+    {
+        $this->commentCount = $commentCount;
+
+        return $this;
+    }
+
+    public function getRatingCount()
+    {
+        return $this->ratingCount;
+    }
+
+    public function setRatingCount($ratingCount): self
+    {
+        $this->ratingCount = $ratingCount;
+
+        return $this;
+    }
+
+    public function getRating()
+    {
+        return $this->rating;
+    }
+
+    public function setRating($rating): self
+    {
+        $this->rating = $rating;
+
+        return $this;
+    }
 }
