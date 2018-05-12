@@ -4,10 +4,15 @@
             'id': 'ratingForm'
         }
     }) }}
+    <div class="row">
     {% for radioRate in ratingForm.rating %}
-        {{ form_label(radioRate, null, {'label_attr': {'class':'radio-inline'}}) }}
-        {{ form_widget(radioRate, {'attr': {'class': 'radio-inline'}}) }}
+        {# {{ form_label(radioRate, null, {'label_attr': {'class':'radio-inline'}}) }} #}
+        <div class="position-relative">
+            {{ form_widget(radioRate, {'attr': {'class': 'radio-inline'}}) }}
+            <i class="fas fa-star star"></i>
+        </div>
     {% endfor %}
+    </div>
     {% if rate %}
         <button type="submit" class="btn btn-primary" formnovalidate>Pakeisti įvertinimą</button>
     {% else %}

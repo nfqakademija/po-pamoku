@@ -1,0 +1,41 @@
+.radio-inline {
+    display: inline;
+    width: auto;
+        position: absolute;
+    top: 14px;
+    left: 10px;
+    opacity: 0;
+    cursor: pointer;
+}
+.star {
+    font-size: 28px;
+    color: #9e9e9e;
+    cursor: pointer;
+}
+.star:hover {
+        color: #ffec40;
+}
+.radio-inline:hover ~.star {
+    color: #ffec40;
+}
+.rating {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+  text-align: center;
+}
+.rating > span {
+  display: inline-block;
+  position: relative;
+  width: 1.1em;
+}
+.rating > span:hover,
+.rating > span:hover ~ span {
+  color: transparent;
+}
+.rating > span:hover:before,
+.rating > span:hover ~ span:before {
+   content: "\2605";
+   position: absolute;
+   left: 0; 
+   color: gold;
+}
