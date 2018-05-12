@@ -113,21 +113,18 @@ class App extends React.Component {
 const btnSwitch = (
     <div>
         <button
-            onClick={() => this.setState({ isMap: false })}
-        >Sąrašas</button>
-          <button
-              className="btn map-btn mt-3"
-              onClick={() => {
-                  this.setState({ isMap: !this.state.isMap });
-                  let top = document.getElementById('toTop').offsetTop;
-                  window.scrollTo({
-                    top: top
-                  });
-              }}>
-                <i className="fas fa-map-marker"></i>
-                <span className="location-btn pl-2">Lokacija</span>
-          </button>
-        </div>
+            className="btn map-btn mt-3"
+            onClick={() => {
+                this.setState({ isMap: !this.state.isMap });
+                let top = document.getElementById('toTop').offsetTop;
+                window.scrollTo({
+                  top: top
+                });
+            }}>
+              <i className="fas fa-map-marker"></i>
+              <span className="location-btn pl-2">Lokacija</span>
+        </button>
+      </div>
       );
 
       const geo = (
@@ -186,9 +183,17 @@ const btnSwitch = (
                 {/*<Sort />*/}
                 {this.state.isMap && 
                   <div className="container pt-5" id="map">
+                  <div className="row">
+                    <div className="py-3 px-3">
+                      <button className="btn map-btn"
+                        onClick={() => this.setState({ isMap: false })}>
+                        Sąrašas
+                      </button>
+                    </div>
                     <div className="py-3">
                       {geo}
                     </div>
+                  </div>                
                     <MapComponent zoom={this.state.zoom} lat={this.state.lat} lng={this.state.lng} />
                   </div>
                 }
