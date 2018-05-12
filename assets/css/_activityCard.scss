@@ -2,6 +2,13 @@
    position: relative;
    box-shadow: 1px 1px 8px 0px rgba(0, 0, 0, 0.2);
    cursor: pointer;
+   p {
+     margin: 0;
+     font-size: 14px;
+   }
+    .location {
+   font-size: 12.5px;
+ }
  }
  .activity-text {
     background: #ffffff;
@@ -10,12 +17,15 @@
  .activity-title {
     color: #7f7f7f;
     font-weight: 400;
-    margin: 10px 0 15px;
+    font-size: 18px;
+    margin: 0;
  }
  .activity-card:hover > .overlay {
    opacity: 1;
  }
+
  .card-btn {
+   padding: 8px 0 0;
   text-transform: uppercase;
   color: #673AB7;
 }
@@ -34,7 +44,17 @@
     right: 10px;
     background: #ff3a72;
     color: #fff;
-    padding: 5px 10px;
-    border-radius: 27px;
-    font-size: 20px;
+    padding: 5px 8px 3px;
+    border-radius: 50%;
+    font-size: 18px;
+}
+.price {
+  position: absolute;
+    top: 0;
+    right: 0;
+    color: #fff;
+    padding: 4px 8px 4px 4px;
+    font-size: 14px;
+    background: #0000006e;
+    border-bottom-left-radius: 10px;
 }

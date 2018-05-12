@@ -61,12 +61,9 @@ class Filter extends React.Component {
         const { categories, cities, times, weekdays, category, cityId, time, weekday, search, age, price, subcategories, subcategory } = this.state;
         return (
 
-            <div className="row">
-            <div className="col-12">
-                <h2>Paieška</h2>
-            </div>
-                     <div className="col-3 py-2">
-                    <label>Pavadinimas</label>
+            <div className="">
+                     <div className="pt-2">
+                    <label>Pavadinimas</label><br />
                     <input className="filter" name="search" type="text" onChange={(event) => {
                         this.setState({ search: event.currentTarget.value }, () => {
                             let copy = Object.assign({ category, cityId, time, weekday, search, age, price, subcategory }, this.state);
@@ -75,22 +72,22 @@ class Filter extends React.Component {
 
                     }} />
                 </div>
-            
-            <div className="col-3 py-2">
-                <label>Kaina</label><br />
-                    <input className="filter" name="price" type="number" onChange={(event) => {
-                    this.setState({ price: event.target.value }, () => {
-                        let copy = Object.assign({ category, cityId, time, weekday, search, age, price, subcategory }, this.state);
-                        onChange(copy);
-                    }
-                    );
+            <div className="d-flex">
+                <div className="pt-2 mr-4">
+                    <label>Kaina</label><br />
+                        <input className="filter filter-small" name="price" type="number" onChange={(event) => {
+                        this.setState({ price: event.target.value }, () => {
+                            let copy = Object.assign({ category, cityId, time, weekday, search, age, price, subcategory }, this.state);
+                            onChange(copy);
+                        }
+                        );
 
-                }} />
+                    }} />
             
-            </div>
-                <div className="col-3 py-2">
+                </div>
+                <div className="pt-2">
                     <label>Amžius</label><br />
-                    <input className="filter" name="age" type="number" onChange={(event) => {
+                    <input className="filter filter-small" name="age" type="number" onChange={(event) => {
                         this.setState({ age: event.target.value }, () => {
                             let copy = Object.assign({ category, cityId, time, weekday, search, age, price, subcategory }, this.state);
                             onChange(copy);
@@ -99,10 +96,11 @@ class Filter extends React.Component {
 
                     }} />
                 </div>
-                <div className="col-3 py-2">
+            </div>
+                <div className="pt-2 mr-2">
                     <label>Miestas</label><br />
 
-                    <select name="city" className="filter" onChange={(event) => {
+                    <select name="city" className="filter filter-select" onChange={(event) => {
 
                         function filterByName(item) {
                             if (item.name == event.target.value) {
@@ -135,9 +133,9 @@ class Filter extends React.Component {
                         }
                     </select>
                 </div>
-                <div className="col-3 py-2">
+                <div className="pt-2 mr-2">
                     <label>Kategorija</label><br/>
-                    <select name="category" className="filter" onChange={(event) => {
+                    <select name="category" className="filter filter-select" onChange={(event) => {
 
                         function filterByName(item) {
                             if (item.name == event.target.value) {
@@ -216,9 +214,9 @@ class Filter extends React.Component {
                     }
                 </div> */}
 
-                <div className="col-3 py-2">
+                <div className="pt-2 mr-2">
                 <label>Savaitės dienos</label><br />
-                <select name="weekday" className="filter" onChange={(event) => {
+                    <select name="weekday" className="filter filter-select" onChange={(event) => {
                     if (event.target.value === 'Savaitės diena') {
                         this.setState({ weekday: '' }, () => {
                             let copy = Object.assign({ category, cityId, time, weekday, search, age, price, subcategory }, this.state);
@@ -243,9 +241,9 @@ class Filter extends React.Component {
                     }
                 </select>
             </div>
-                <div className="col-3 py-2">
+                <div className="pt-2 mr-2">
                 <label>Būrelio laikas</label><br />
-                <select name="time" className="filter" onChange={(event) => {
+                    <select name="time" className="filter filter-select" onChange={(event) => {
                     if (event.target.value === 'Laikas') {
                         this.setState({ time: '' }, () => {
                             let copy = Object.assign({ category, cityId, time, weekday, search, age, price, subcategory }, this.state);

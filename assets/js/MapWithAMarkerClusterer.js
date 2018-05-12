@@ -51,21 +51,26 @@ const MapWithAMarkerClusterer = compose(
                         {!!props.id && props.id === marker.id &&
                     <InfoWindow
                     
-                            onCloseClick={() => {props.onToggleOpen(marker);
-                            console.log(marker);}}>
-                            <div style={{ width: `250px`}}>
+                            onCloseClick={() => props.onToggleOpen(marker)}>
+                            <div className="view-box">
                                 <h5>{marker.name}</h5>
-                                <div style={{ width: '250px',
-                                    height: '150px',
-                                    lineHeight: '100px',
-                                    margin: '2px 0',
-                                    textAlign: 'center',
-                                    overflow: 'hidden'}}>
-                                    <img style={{ width: `250px`}} src={marker.pathToLogo}/>
+                                <div className="image-box">
+                                    <img src={marker.pathToLogo}/>
                                 </div>
-                                <p>Adresas: {marker.street} {marker.house}, {marker.city}</p>
-                                <p>Kaina: {marker.priceFrom} - {marker.priceTo}, Amžius: {marker.ageFrom} - {marker.ageTo}</p>
-                                <a href={"/activity/" + marker.id}> Plačiau </a>
+                                <p>
+                                    <i className="fas fa-map-marker"></i>
+                                    <span className="pl-2">{marker.street} {marker.house}, {marker.city}</span>
+                                    
+                                </p>
+                                <p>
+                                    <i className="fas fa-user"></i>
+                                    <span className="pl-2">Amžius: {marker.ageFrom} - {marker.ageTo}</span>
+                                </p>
+                                <p>
+                                    <i className="fas fa-euro-sign"></i>
+                                    <span className="pl-2">{marker.priceFrom} - {marker.priceTo}</span>
+                                    <a className="float-right" href={"/activity/" + marker.id}> Plačiau </a>
+                                </p>
                             </div>
                     </InfoWindow>}
                 </Marker>

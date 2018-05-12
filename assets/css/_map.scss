@@ -1,0 +1,34 @@
+.map-btn {
+    background: #3ecf8e;
+    color: #fff;
+    border-radius: 4px;
+}
+.map-btn:hover {
+    background: #38bb80;
+}
+.myPlace-btn {
+    border-radius: 4px;
+    color: #fff;
+    background: #ff3a72;
+}
+.myPlace-btn:hover {
+    background: #e13666;
+}
+.view-box {
+    width: 250px;
+    p {
+        margin-bottom: 10px;
+        color: #727272;
+    }
+}
+.image-box {
+    width: 250px;
+    height: 150px;
+    line-height: 100px;
+    margin: 2px 0;
+    text-align: center;
+    overflow: hidden;
+    img {
+        width: 250px;
+    }
+}

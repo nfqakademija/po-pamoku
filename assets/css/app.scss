@@ -3,6 +3,8 @@
 @import '_activityCard.scss';
 @import '_registration.scss';
 @import '_footer.scss';
+@import '_filter.scss';
+@import '_map.scss';
 
 
 body {
@@ -46,8 +48,7 @@ body {
     border-radius: .25rem;
  }
  .btn.btn-main-login:hover {
-    background-color: #74f9bd;
-    color: #464646;
+    background-color: #38bb80;
 }
  .btn-more {
     color: #fff;
@@ -95,14 +96,6 @@ body {
 }
 .page:focus {
     outline: none;
-}
-.filter {
-    padding: 4px;
-    border-radius: 2px;
-    border: 1px solid #9e9e9e;
-}
-.filter:focus {
-    border: 1px solid #673AB7;
 }
 .remove-tag {
     padding: 4px 11px 6px;

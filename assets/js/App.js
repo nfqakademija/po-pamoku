@@ -112,87 +112,99 @@ class App extends React.Component {
 // console.log(activities);
 const btnSwitch = (
           <button
-              onClick={() => this.setState({ isMap: !this.state.isMap })}
-          >Lokacija</button>
+              className="btn map-btn mt-3"
+              onClick={() => {
+                  this.setState({ isMap: !this.state.isMap });
+                  let top = document.getElementById('toTop').offsetTop;
+                  window.scrollTo({
+                    top: top
+                  });
+              }}>
+                <i className="fas fa-map-marker"></i>
+                <span className="location-btn pl-2">Lokacija</span>
+          </button>
       );
 
       const geo = (
           <button
+          className="btn myPlace-btn"
           onClick={() => this.my}
           >Rasti mano vietą</button>
       );
-
-      if (this.state.isMap) {
-          return (
-              <div className="container">
-                  {btnSwitch}
-
-                  <MapComponent lat={lat} lng={lng} />
-
-                  {geo}
-              </div>
-          );
-      }    return (
+    
+      return (
       <div>
-        <div className="container py-5">{btnSwitch}
-            <div id="toTop"></div>
-          <Filter
-          onChange={this.onFilterChange}/>
-
-        </div>
+      
       <div className="container">
-
-        {/*<Sort />*/}
-
-        <div className="row activities py-3">
-
-           {activities.length !== 0 ? (activities.map((activity, index) =>  
-            <div key={"currentAct" + index} className="col-md-3 col-sm-6 col-xs-6 py-3">
-              <div className="activity-card">
-              <div className="card-image">
-                  <img className="img-fluid" src="https://placeimg.com/640/480/any" alt="Card image cap" />
-                  <div className="like-btn">
-                    <i className="far fa-heart"></i>
-                  </div>
-                  {/* <img className="" src="build/images/football.png" alt="Card image cap" /> */}
-              </div>
-               
-                <div className="activity-text">
-                  <h5 className="activity-title">{activity.name}</h5>
-                    <p className="location"><i className="fas fa-map-marker"></i>{activity.city}, {activity.street} g. {activity.house}</p>
-                    <p>Kaina: {activity.priceFrom}-{activity.priceTo} €</p>
-                  
-                    <p>{activity.category} / <span className="text-secondary">{activity.subcategory}</span></p>
-                  {/* <p>{activity.ageFrom} - {activity.ageTo}</p> */}
-                  {/* <p>{activity.weekday}</p> */}
-                  {/* <p>{activity.time} - {activity.timeTo}</p> */}
-                  <hr />
-                  <div className="stars">
-                    <i className="fas fa-star"></i>
-                    <i className="fas fa-star"></i>
-                    <i className="fas fa-star"></i>
-                    <i className="fas fa-star"></i>
-                    <i className="fas fa-star"></i>
-                    {/* <img className="" src="build/images/star.png" alt="Card image cap" /> 
-                    <img className="" src="build/images/star.png" alt="Card image cap" /> 
-                    <img className="" src="build/images/star.png" alt="Card image cap" />
-                    <img className="" src="build/images/star.png" alt="Card image cap" />
-                    <img className="" src="build/images/star.png" alt="Card image cap" />  */}
-                    <a className="btn card-btn" href={"/activity/" + activity.id}> Plačiau </a>
-                  </div>
-                </div>
-              </div>
-            </div>)) : ('Deja, būrelių nėra')}
-            
+      <div className="row" id="rowRelative">
+        <div className="col-3 pt-5" id="filter">
+                {/* <div className="pt-4 pb-2">
+                  <h2>Paieška</h2>
+                </div> */}
+                {btnSwitch}
+            <Filter
+              onChange={this.onFilterChange} />
+                <div id="toTop"></div>
+                
         </div>
+        <div id="spacer"></div>
+        <div className="col-9">
+                {/*<Sort />*/}
+                {this.state.isMap && 
+                  <div className="container pt-5" id="map">
+                    <div className="py-3">
+                      {geo}
+                    </div>
+                    <MapComponent lat={lat} lng={lng} />
+                  </div>
+                }
+                <div className="row activities pb-3 pt-5">
 
-        <Pagination
-          bsSize="medium"
-          items={totalPages}
-          activepage={this.state.currentPageNumber}
-          onSelect={this.handleSelect.bind(this)} />
-        
-      </div>
+                  {activities.length !== 0 ? (activities.map((activity, index) =>
+                    <div key={"currentAct" + index} className="col-xs-6 col-sm-6 col-lg-4 py-3">
+                      <div className="activity-card">
+                        <div className="card-image">
+                          <img className="img-fluid" src="https://placeimg.com/640/480/any" alt="Card image cap" />
+                          <div className="like-btn">
+                            <i className="far fa-heart"></i>
+                          </div>
+                          <div className="price">
+                            {activity.priceFrom}-{activity.priceTo} €
+                          </div>
+                        </div>
+
+                        <div className="activity-text">
+                          <h5 className="activity-title">
+                            {activity.name}
+                            {/* <div className="stars">
+                              <i className="fas fa-star"></i>
+                              <i className="fas fa-star"></i>
+                              <i className="fas fa-star"></i>
+                              <i className="fas fa-star"></i>
+                              <i className="fas fa-star"></i>
+                            </div> */}
+                          </h5>
+                          <p className="location">
+                          {activity.city}, {activity.street} {activity.house}
+                          </p>
+                          <p className="d-flex justify-content-between align-items-baseline">
+                            <span>{activity.subcategory}</span>
+                            <a className="card-btn" href={"/activity/" + activity.id}> Plačiau </a>
+                          </p>
+                         
+                        </div>
+                      </div>
+                    </div>)) : ('Deja, būrelių nėra')}
+                </div>
+        </div>
+        </div>
+          <Pagination
+            bsSize="medium"
+            items={totalPages}
+            activepage={this.state.currentPageNumber}
+            onSelect={this.handleSelect.bind(this)} />
+          
+        </div>
       </div>
     );
     }
