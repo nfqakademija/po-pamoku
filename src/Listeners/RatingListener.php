@@ -24,7 +24,6 @@ class RatingListener implements EventSubscriber
         $ratings = $repo->countRatingsByActivity($activity);
         $activity->setRatingCount($ratings['countRating']);
         $activity->setRating($ratings['avgRating']);
-        dump($activity);
         $meta = $em->getClassMetadata(get_class($activity));
         $em->getUnitOfWork()->recomputeSingleEntityChangeSet($meta, $activity);
         $em->persist($activity);
