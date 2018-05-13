@@ -25,11 +25,11 @@
 
 
 .rate-area {
-//   float: left;
 display: flex;
 flex-direction: row-reverse;
 justify-content: flex-end;
   border-style: none;
+  font-size: 30px;
   label {
       width: 0;
   }
@@ -41,7 +41,6 @@ justify-content: flex-end;
 }
 
 .rate-area:not(:checked) > label {
-//   float: right;
   width: 1em;
   padding: 0 .1em;
   overflow: hidden;

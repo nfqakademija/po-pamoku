@@ -37,7 +37,6 @@ class App extends React.Component {
      });
 }
   searchActivities(page, value) {
-    console.log(value);
     axios.get('/api/activity?page=' + page + '&limit=12&search=' + value.search + '&city=' + value.cityId + '&category=' + value.category +
       '&weekday=' + value.weekday + '&time=' + value.time + '&age=' + value.age + '&price=' + value.price + '&subcategory=' + value.subcategory)
       .then(function (response) {
@@ -57,7 +56,6 @@ class App extends React.Component {
   }
 
   handleSelect(number) {
-    console.log('handle select', number);
     this.setState({ currentPageNumber: number });
     if (this.state.addFilter === true) {
       this.searchActivities(number, this.state.searchValue);
@@ -122,7 +120,7 @@ const btnSwitch = (
                 });
             }}>
               <i className="fas fa-map-marker"></i>
-              <span className="location-btn pl-2">Lokacija</span>
+              <span className="location-btn pl-2">Žemėlapis</span>
         </button>
       </div>
       );
@@ -169,9 +167,6 @@ const btnSwitch = (
       <div className="container">
       <div className="row" id="rowRelative">
         <div className="col-3 pt-5" id="filter">
-                {/* <div className="pt-4 pb-2">
-                  <h2>Paieška</h2>
-                </div> */}
                 {btnSwitch}
             <Filter
               onChange={this.onFilterChange} />
@@ -194,7 +189,7 @@ const btnSwitch = (
                       {geo}
                     </div>
                   </div>                
-                    <MapComponent zoom={this.state.zoom} lat={this.state.lat} lng={this.state.lng} />
+                  <MapComponent zoom={this.state.zoom} lat={this.state.lat} lng={this.state.lng} filters={this.state.searchValue} />
                   </div>
                 }
                 <div className="row activities pb-3 pt-5">
@@ -215,13 +210,6 @@ const btnSwitch = (
                         <div className="activity-text">
                           <h5 className="activity-title">
                             {activity.name}
-                            {/* <div className="stars">
-                              <i className="fas fa-star"></i>
-                              <i className="fas fa-star"></i>
-                              <i className="fas fa-star"></i>
-                              <i className="fas fa-star"></i>
-                              <i className="fas fa-star"></i>
-                            </div> */}
                           </h5>
                           <p className="location">
                           {activity.city}, {activity.street} {activity.house}
@@ -242,7 +230,6 @@ const btnSwitch = (
             items={totalPages}
             activepage={this.state.currentPageNumber}
             onSelect={this.handleSelect.bind(this)} />
-          
         </div>
       </div>
     );
