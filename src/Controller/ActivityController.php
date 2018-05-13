@@ -8,6 +8,7 @@ use App\Entity\Rating;
 use App\Entity\User;
 use App\Form\Type\CommentType;
 use App\Form\Type\RatingType;
+use App\Repository\CommentRepository;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
