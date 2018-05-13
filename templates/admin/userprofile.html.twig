@@ -14,7 +14,7 @@
 </header>
 <div class="container py-5">
     <div class="my-2">
-        <a href="{{ path('admin_user_list') }}" class="btn btn-light">Atgal</a>
+        <a href="{{ path('admin_user_list') }}" class="btn btn-light border-rad">Atgal</a>
     </div>
     <table class="table">
         <tr>
@@ -36,12 +36,12 @@
         {% if 'ROLE_OWNER' in user.roles %}
             <tr>
                 <th>Būrelis</th>
-                <td><a href="{{ path('activity_show', {'id': user.activity}) }}" class="btn btn-secondary">Peržiūrėti</a></td>
+                <td><a href="{{ path('activity_show', {'id': user.activity}) }}" class="btn btn-register">Peržiūrėti</a></td>
             </tr>
         {% endif %}
         <tr>
             <th>Komentarai</th>
-            <td><a href="{{ path('admin_user_comments_action', {'id': user.id}) }}" class="btn btn-primary">Peržiūrėti</a></td>
+            <td><a href="{{ path('admin_user_comments_action', {'id': user.id}) }}" class="btn btn-register">Peržiūrėti</a></td>
         </tr>
     </table>
     {{ form_start(form) }}
@@ -53,7 +53,7 @@
         {% else %}
             {{ form_row(form.blockAction, {
                 'label': "Užblokuoti",
-                'attr': {'class': 'btn btn-danger'}
+                'attr': {'class': 'btn btn-danger border-rad'}
             }) }}
         {% endif %}
     {{ form_end(form) }}

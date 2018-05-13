@@ -1,7 +1,6 @@
 .activity-card {
    position: relative;
-   box-shadow: 1px 1px 8px 0px rgba(0, 0, 0, 0.2);
-   cursor: pointer;
+  //  box-shadow: 1px 1px 8px 0px rgba(0, 0, 0, 0.2);
    p {
      margin: 0;
      font-size: 14px;
@@ -12,28 +11,27 @@
  }
  .activity-text {
     background: #ffffff;
-    padding: 10px 20px;
+    padding: 10px 4px;
  }
  .activity-title {
-    color: #7f7f7f;
+    // color: #7f7f7f;
     font-weight: 400;
-    font-size: 18px;
+    font-size: 17px;
     margin: 0;
- }
- .activity-card:hover > .overlay {
-   opacity: 1;
  }
 
  .card-btn {
-   padding: 8px 0 0;
-  text-transform: uppercase;
-  color: #673AB7;
+  color: #d8d8d8;
+    font-size: 40px;
+    &:hover {
+       color: #d8d8d8;
+    }
 }
 .stars {
   color: rgb(255, 215, 95);
 }
-.location {
-  color: #5f5f5f;
+.grey-text {
+  color: #7f7f7f;
 }
 .card-image {
   position: relative;
@@ -47,6 +45,7 @@
     padding: 5px 8px 3px;
     border-radius: 50%;
     font-size: 18px;
+    z-index: 2;
 }
 .price {
   position: absolute;
@@ -57,4 +56,22 @@
     font-size: 14px;
     background: #0000006e;
     border-bottom-left-radius: 10px;
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #000000b5;
+  display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity:0;
+    cursor: pointer;
+    z-index: 3;
+    transition: all, 0.3s;
+}
+.activity-card:hover .overlay {
+  opacity: 1;
 }

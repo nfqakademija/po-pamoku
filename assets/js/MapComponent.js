@@ -25,7 +25,7 @@ class MapComponent extends React.PureComponent {
 
     componentDidMount() {
         axios.get('/api/activity?page=1&limit=99999')
-            .then(function (response) {
+            .then(function (response){
                 this.setState({
                     markers: Object.keys(response.data).map(i => response.data[i])[1],
                 });

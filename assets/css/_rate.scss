@@ -23,7 +23,7 @@
 //     color: #ffec40;
 // }
 
-
+#ratingForm {
 .rate-area {
 display: flex;
 flex-direction: row-reverse;
@@ -75,6 +75,11 @@ justify-content: flex-end;
   position: relative;
   top: 2px;
   left: 2px;
+}
+.rate-subText {
+      font-style: italic;
+    font-size: 12px;
+}
 }
 
 

@@ -1,0 +1,23 @@
+.comment-details {
+    color: #878787;
+    font-size: 13px;
+}
+.comment-text {
+    font-size: 18px;
+}
+#comment_commentText {
+    border-radius: 4px;
+    border-color: #dfdddd;
+    margin: 17px 0 23px;
+    display: block;
+    max-width: 530px;
+}
+.rate-text {
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+#commentForm {
+    label {
+        display: none;
+    }
+}

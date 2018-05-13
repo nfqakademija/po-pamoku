@@ -7,10 +7,11 @@ const ViewComments = (props) => {
     let comments = props.comments;
     return (
         (comments.map((comment, id) =>
-            <div key={id}>
-                <div>{comment.commentText}</div>
-                <div>{comment.createdAt}</div>
-                <div>{comment.user.name} {comment.user.surname}</div>
+            <div className="col-12" key={id}>
+                <div className="row my-3">
+                    <div className="col-12 comment-details">{comment.createdAt}/ {comment.user.name} {comment.user.surname}</div>
+                    <div className="col-12 pt-2 comment-text">{comment.commentText}</div>
+                </div>
             </div>
         )
         )
@@ -71,8 +72,10 @@ class Comments extends React.Component {
     render() {
         return (
             (this.state.comments &&
-            <div>
-                <ViewComments comments={this.state.comments}/>
+            <div className="container">
+                <div className="row no-gutters my-5">
+                    <ViewComments comments={this.state.comments}/>
+                </div>
             </div>
             )
         );

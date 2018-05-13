@@ -16,76 +16,64 @@
     <div class="row pb-4 pt-2">
     {% if activity  %}
         <div class="col-12 my-3">
-            <a class="btn btn-light" href="/">Atgal</a>
+            <a class="btn btn-light border-rad" href="/">Atgal</a>
         </div>
-        <div class="col-12 col-lg-6">
-
-        <table class="table">
-  <tbody>
-    <tr>
-      <th scope="row">Įvertinimas</th>
-      <td>{{ activity.rating }} (Įvertinimų kiekis: {{ activity.ratingCount }})</td>
-    </tr>
-    <tr>
-      <th scope="row">Kaina</th>
-      <td>{{ activity.priceFrom }} - {{ activity.priceTo }}</td>
-    </tr>
-    <tr>
-      <th scope="row">Amžius</th>
-      <td>{{ activity.ageFrom }} - {{ activity.ageTo }}</td>
-    </tr>
-     <tr>
-      <th scope="row">Adresas</th>
-      <td>{{ activity.location.street }} {{ activity.location.house }}{% if activity.location.apartment %}-{{ activity.location.apartment }}{% endif %},
-            {{ activity.location.city.name }}</td>
-    </tr>
-     <tr>
-      <th scope="row">Tvarkaraštis</th>
-      <td>
-          {% for timetable in activity.timetables %}
-                <p class="info-value">{{ timetable.weekday.name }}:</p>
-                <p>{{ timetable.timeFrom|date("H:i") }} - {{ timetable.timeTo|date("H:i") }}</p>
-                {% endfor %}
-      </td>
-    </tr>
-  </tbody>
-</table>
-    </div>
-        <div class="col-12 col-lg-6">
+        <div class="col-12 col-lg-4">
             {% if activity.pathToLogo is not empty  %}
-                <img class="img-fluid" src="{{ asset( activity.pathToLogo) }}"/>
+                <img class="img-fluid mb-3" src="{{ asset( activity.pathToLogo) }}"/>
             {% else %}
-                <img class="card-img-top" src="https://placeimg.com/640/480/any" alt="Card image cap" />
+                <img class="card-img-top mb-3" src="https://placeimg.com/640/480/any" alt="Card image cap" />
             {% endif %}
-
+            <ul class="info-list">
+                <li>
+                <span>
+                <i class="fas fa-star"></i></span>{{ activity.rating }}/5</li>
+                <li><span><i class="fas fa-euro-sign"></i></span>{{ activity.priceFrom }} - {{ activity.priceTo }}</li>
+                <li><span><i class="fas fa-user"></i></span>{{ activity.ageFrom }} - {{ activity.ageTo }}</li>
+                <li><span><i class="fas fa-map-marker"></i></span>{{ activity.location.street }} {{ activity.location.house }}{% if activity.location.apartment %}-{{ activity.location.apartment }}{% endif %},
+                            {{ activity.location.city.name }}</li>
+                <li><span><i class="fas fa-calendar-alt"></i>Tvarkaraštis</span>
+                    <ul>
+                         {% for timetable in activity.timetables %}
+                                <li class="">{{ timetable.weekday.name }}:
+                                {{ timetable.timeFrom|date("H:i") }} - {{ timetable.timeTo|date("H:i") }}</li>
+                                {% endfor %}
+                    </ul>
+                </li>
+                   
+            </ul>
+        </div>
+        <div class="col-1"></div>
+             <div class="col-6">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Aprašymas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="review-tab" data-toggle="tab" href="#reviewTab" role="tab" aria-controls="profile" aria-selected="false">Atsiliepimai</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <p class="px-2 mt-4 pb-5">{{ activity.description }}</p>
+                </div>
+                <div class="tab-pane fade" id="reviewTab" role="tabpanel" aria-labelledby="review-tab">
+                    <div class="row">
+                        <div class="py-4 px-2 col-12" id="rating">
+                            <h3 class="pb-3">Reitingas</h3>
+                            {{ include('activity/_ratingForm.html.twig') }}
+                        </div>
+                        <div class="py-4 px-2 col-12" id="comment">
+                            <h3 class="pb-3">Komentarai</h3>
+                            {{ include('activity/_commentForm.html.twig') }}
+                            <div id="comments"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
         {% endif %}
-
-      
-
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item">
-            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Aprašymas</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Atsiliepimai</a>
-        </li>
-    </ul>
-    <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-            <p class="py-4 px-2">{{ activity.description }}</p>
-        </div>
-        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-            <div class="py-4 px-2" id="rating">
-                {{ include('activity/_ratingForm.html.twig') }}
-            </div>
-            <div class="py-4 px-2" id="comment">
-                {{ include('activity/_commentForm.html.twig') }}
-            </div>
-            <div id="comments"></div>
-        </div>
-    </div>
 
 
 
