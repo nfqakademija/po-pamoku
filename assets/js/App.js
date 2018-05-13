@@ -122,7 +122,7 @@ const btnSwitch = (
                 });
             }}>
               <i className="fas fa-map-marker"></i>
-              <span className="location-btn pl-2">Lokacija</span>
+              <span className="location-btn pl-2">Žemėlapis</span>
         </button>
       </div>
       );
@@ -206,13 +206,6 @@ const btnSwitch = (
                         <div className="activity-text">
                           <h5 className="activity-title">
                             {activity.name}
-                            {/* <div className="stars">
-                              <i className="fas fa-star"></i>
-                              <i className="fas fa-star"></i>
-                              <i className="fas fa-star"></i>
-                              <i className="fas fa-star"></i>
-                              <i className="fas fa-star"></i>
-                            </div> */}
                           </h5>
                           <p className="location">
                           {activity.city}, {activity.street} {activity.house}
@@ -233,7 +226,6 @@ const btnSwitch = (
             items={totalPages}
             activepage={this.state.currentPageNumber}
             onSelect={this.handleSelect.bind(this)} />
-          
         </div>
       </div>
     );

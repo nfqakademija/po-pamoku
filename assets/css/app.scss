@@ -114,3 +114,23 @@ textarea {
     width: 100%;
 }
 
+.info-title {
+    width: 40%;
+    padding: 4px 10px;
+    margin-right: 20px;
+    color: #414141;
+    margin: 0;
+}
+.info-value {
+    margin:0;
+    font-size: 12px;
+}
+.info-item {
+    display: flex;
+    align-items: baseline;
+    border-bottom: 1px solid #e1e1e1;
+    padding: 10px;
+}
+.info-item:last-child {
+    border: none;
+}
