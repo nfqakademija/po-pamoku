@@ -40,33 +40,30 @@ const MapWithAMarkerClusterer = compose(
                         onClick={() => props.onToggleOpen(marker.id)}
                     >
                         {!!props.id && props.id === marker.id &&
-                            <InfoWindow
-
-                                onCloseClick={() => props.onToggleOpen(marker)}>
-                                <div className="view-box">
-                                    <h5>{marker.name}</h5>
-                                    <div className="image-box">
-                                        <img src={marker.pathToLogo} />
-                                    </div>
-                                    <p>
-                                        <i className="fas fa-map-marker"></i>
-                                        <span className="pl-2">{marker.street} {marker.house}, {marker.city}</span>
-
-                                    </p>
-                                    <p>
-                                        <i className="fas fa-user"></i>
-                                        <span className="pl-2">Amžius: {marker.ageFrom} - {marker.ageTo}</span>
-                                    </p>
-                                    <p>
-                                        <i className="fas fa-euro-sign"></i>
-                                        <span className="pl-2">{marker.priceFrom} - {marker.priceTo}</span>
-                                        <a className="float-right" href={"/activity/" + marker.id}> Plačiau </a>
-                                    </p>
+                    <InfoWindow>
+                            <div className="view-box">
+                                <h5>{marker.name}</h5>
+                                <div className="image-box">
+                                    <img src={marker.pathToLogo}/>
                                 </div>
-                            </InfoWindow>}
-                    </Marker>
-                )
-            })}
+                                <p>
+                                    <i className="fas fa-map-marker"></i>
+                                    <span className="pl-2">{marker.street} {marker.house}, {marker.city}</span>
+                                    
+                                </p>
+                                <p>
+                                    <i className="fas fa-user"></i>
+                                    <span className="pl-2">Amžius: {marker.ageFrom} - {marker.ageTo}</span>
+                                </p>
+                                <p>
+                                    <i className="fas fa-euro-sign"></i>
+                                    <span className="pl-2">{marker.priceFrom} - {marker.priceTo}</span>
+                                    <a className="float-right" href={"/activity/" + marker.id}> Plačiau </a>
+                                </p>
+                            </div>
+                    </InfoWindow>}
+                </Marker>
+            )})}
         </MarkerClusterer>
     </GoogleMap>
 );

@@ -24,7 +24,7 @@ class Subcategory
     private $id;
     
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", cascade={"persist"})
      */
     private $category;
     
