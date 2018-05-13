@@ -23,6 +23,7 @@ class Comments extends React.Component {
         this.state = {
             comments: [],
             id: props.id,
+            commentForm: props.form
         };
     }
 
@@ -32,6 +33,13 @@ class Comments extends React.Component {
                 comments: Object.keys(response.data).map(i => response.data[i])
             }));
     };
+
+    setOnSubmit = () => {
+        if (typeof(this.state.commentForm) != 'undefined' && this.state.commentForm != null)
+        {
+            this.state.commentForm.onsubmit = this.handleCommentPosting
+        }
+    }
 
     handleCommentPosting = (e) => {
         e.preventDefault();
@@ -48,16 +56,16 @@ class Comments extends React.Component {
     };
 
     componentWillMount() {
-        document.getElementById('commentForm').onsubmit = this.handleCommentPosting;
-
+        this.getData();
+        this.setOnSubmit();
     }
 
     componentDidMount() {
         this.getData();
     }
 
-    componentDidUpdate() {
-        document.getElementById('commentForm').onsubmit = this.handleCommentPosting;
+    componentWillUpdate() {
+        this.setOnSubmit();
     }
 
     render() {

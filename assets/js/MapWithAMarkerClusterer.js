@@ -13,11 +13,12 @@ const MapWithAMarkerClusterer = compose(
     withStateHandlers(() => ({
         id: null,
     }), {
-            onToggleOpen: () => (id) => {  
+            onToggleOpen: () => (id) => {
 
                 return ({
                     id,
-            })}
+                })
+            }
         }),
     withScriptjs,
     withGoogleMap
@@ -33,15 +34,13 @@ const MapWithAMarkerClusterer = compose(
         >
             {props.markers.map(marker => {
                 return (
-                <Marker
-                    key={marker.id}
-                    position={{ lat: marker.lat, lng: marker.lng }}
+                    <Marker
+                        key={marker.id}
+                        position={{ lat: marker.lat, lng: marker.lng }}
                         onClick={() => props.onToggleOpen(marker.id)}
-                >
+                    >
                         {!!props.id && props.id === marker.id &&
-                    <InfoWindow
-                    
-                            onCloseClick={() => props.onToggleOpen(marker)}>
+                    <InfoWindow>
                             <div className="view-box">
                                 <h5>{marker.name}</h5>
                                 <div className="image-box">
