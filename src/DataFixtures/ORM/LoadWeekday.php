@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ruta
- * Date: 18.4.7
- * Time: 11.27
- */
 
 namespace App\DataFixtures\ORM;
 
@@ -14,7 +8,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 class LoadWeekday extends Fixture
 {
-    public const WEEKDAY_NAMES = [
+    const WEEKDAY_NAMES = [
         'Pirmadienis',
         'Antradienis',
         'Trečiadienis',

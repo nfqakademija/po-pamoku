@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ruta
- * Date: 18.4.7
- * Time: 13.14
- */
 
 namespace App\DataFixtures\ORM;
 
