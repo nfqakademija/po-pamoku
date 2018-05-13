@@ -18,7 +18,8 @@ class App extends React.Component {
         isMap: false,
         lat: 55.0,
         lng: 24.0,
-        zoom: 7
+        zoom: 7,
+        query: '/api/activity?page=1&limit=99999'
     };
     this.onFilterChange = this.onFilterChange.bind(this);
     this.my = this.my.bind(this);
@@ -41,16 +42,18 @@ class App extends React.Component {
       '&weekday=' + value.weekday + '&time=' + value.time + '&age=' + value.age + '&price=' + value.price + '&subcategory=' + value.subcategory)
       .then(function (response) {
         this.setState({
-          activities: Object.keys(response.data).map(i => response.data[i])[1],
-          totalActivities: Object.keys(response.data).map(i => response.data[i])[0],
-          addFilter: true
+            activities: Object.keys(response.data).map(i => response.data[i])[1],
+            totalActivities: Object.keys(response.data).map(i => response.data[i])[0],
+            addFilter: true,
+            isMap: false,
+            query: '/api/activity?page=1&limit=99999&search=' + value.search + '&city=' + value.cityId + '&category=' +
+            value.category + '&weekday=' + value.weekday + '&time=' + value.time + '&age=' + value.age +
+            '&price=' + value.price + '&subcategory=' + value.subcategory,
         });
       }.bind(this))
       .catch(function (error) {
         console.error(error);
       });
-      this.setState({ isMap: !this.state.isMap });
-      this.setState({ isMap: !this.state.isMap });
   }
 
   componentDidMount() {
@@ -178,14 +181,14 @@ const btnSwitch = (
         <div id="spacer"></div>
         <div className="col-9">
                 {/*<Sort />*/}
-                {this.state.isMap && 
+                {this.state.isMap &&
                   <div className="container pt-5" id="map">
                   <div className="row">
                     <div className="py-3">
                       {geo}
                     </div>
                   </div>                
-                    <MapComponent filters={this.state.searchValue} zoom={this.state.zoom} lat={this.state.lat} lng={this.state.lng} />
+                    <MapComponent query={this.state.query} zoom={this.state.zoom} lat={this.state.lat} lng={this.state.lng} />
                   </div>
                 }
                 <div className="row activities pb-3 pt-5">

@@ -24,14 +24,7 @@ class MapComponent extends React.PureComponent {
 // }
 
     componentDidMount() {
-        const filters = this.props.filters;
-        let query = '/api/activity?page=1&limit=99999';
-        if(filters !== null){
-            query += '&search=' + filters.search + '&city=' + filters.cityId + '&category=' +
-                filters.category + '&weekday=' + filters.weekday + '&time=' + filters.time + '&age=' + filters.age +
-                '&price=' + filters.price + '&subcategory=' + filters.subcategory;
-        }
-        axios.get(query)
+        axios.get(this.props.query)
             .then(function (response) {
                 this.setState({
                     markers: Object.keys(response.data).map(i => response.data[i])[1],
