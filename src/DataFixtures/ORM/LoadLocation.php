@@ -14,7 +14,7 @@ class LoadLocation extends Fixture
     {
         $locationDataFile = 'public/data/Addresses.csv';
         $data = Utils::getData($locationDataFile);
-        for ($i = 21; $i <= 70; $i++) {
+        for ($i = 101; $i <= 201; $i++) {
             $location = $this->createLocation($data);
             $this->addReference($i, $location);
             $manager->persist($location);
