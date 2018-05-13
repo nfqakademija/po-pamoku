@@ -1,5 +1,5 @@
 {% if not app.user %}
-    <h2>Tik registruoti vartotojai gali rašyti komentarus</h2>
+    <p>Tik registruoti vartotojai gali rašyti komentarus</p>
 {% else %}
     {{ form_start(form, {
         'class': 'form-inline',
@@ -10,9 +10,9 @@
     }) }}
     {{ form_row(form.commentText) }}
     {% if not post %}
-        <h2>Komentarą būrelio puslapyje galima palikti kartą per 24h</h2>
+        <p>Komentarą būrelio puslapyje galima palikti kartą per 24h</p>
     {% else %}
-        <button type="submit" class="btn btn-primary" formnovalidate>Siųsti atsiliepimą</button>
+        <button type="submit" class="btn btn-green" formnovalidate>Siųsti atsiliepimą</button>
     {% endif %}
     {{ form_end(form) }}
 {% endif %}

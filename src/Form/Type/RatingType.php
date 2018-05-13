@@ -33,11 +33,11 @@ class RatingType extends AbstractType
             ->add('rating', ChoiceType::class, [
                 'label' => 'Įvertinti būrelį',
                 'choices' => [
-                    1 => 1,
-                    2 => 2,
-                    3 => 3,
+                    5 => 5,
                     4 => 4,
-                    5 => 5
+                    3 => 3,
+                    2 => 2,
+                    1 => 1
                 ],
                 'multiple' => false,
                 'expanded' => true,

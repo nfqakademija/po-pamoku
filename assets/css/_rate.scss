@@ -1,41 +1,82 @@
-.radio-inline {
-    display: inline;
-    width: auto;
-        position: absolute;
-    top: 14px;
-    left: 10px;
-    opacity: 0;
-    cursor: pointer;
+// .radio-inline {
+//     display: inline;
+//     width: auto;
+//     position: absolute;
+//     top: 14px;
+//     left: 10px;
+//     opacity: 0;
+//     cursor: pointer;
+// }
+
+// .star {
+//     font-size: 28px;
+//     color: #9e9e9e;
+//     cursor: pointer;
+// }
+// .star:hover {
+//         color: #ffec40;
+// }
+// .radio-inline:hover ~.star:before {
+//     color: #ffec40;
+// }
+// .star:hover ~.star {
+//     color: #ffec40;
+// }
+
+
+.rate-area {
+//   float: left;
+display: flex;
+flex-direction: row-reverse;
+justify-content: flex-end;
+  border-style: none;
+  label {
+      width: 0;
+  }
 }
-.star {
-    font-size: 28px;
-    color: #9e9e9e;
-    cursor: pointer;
+
+.rate-area:not(:checked) > input {
+  position: absolute;
+  clip: rect(0,0,0,0);
 }
-.star:hover {
-        color: #ffec40;
+
+.rate-area:not(:checked) > label {
+//   float: right;
+  width: 1em;
+  padding: 0 .1em;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+  line-height: 1.2;
+  color: lightgrey;
 }
-.radio-inline:hover ~.star {
-    color: #ffec40;
+
+.rate-area:not(:checked) > label:before { 
+    content: '★ '; 
 }
-.rating {
-  unicode-bidi: bidi-override;
-  direction: rtl;
-  text-align: center;
+
+.rate-area > input:checked ~ label {
+  color: gold;
 }
-.rating > span {
-  display: inline-block;
+
+.rate-area:not(:checked) > label:hover,
+ .rate-area:not(:checked) > label:hover ~ label { 
+    color: gold; 
+}
+
+.rate-area > input:checked + label:hover,
+ .rate-area > input:checked + label:hover ~ label,
+  .rate-area > input:checked ~ label:hover,
+   .rate-area > input:checked ~ label:hover ~ label,
+    .rate-area > label:hover ~ input:checked ~ label {
+  color: gold;
+}
+
+.rate-area > label:active {
   position: relative;
-  width: 1.1em;
+  top: 2px;
+  left: 2px;
 }
-.rating > span:hover,
-.rating > span:hover ~ span {
-  color: transparent;
-}
-.rating > span:hover:before,
-.rating > span:hover ~ span:before {
-   content: "\2605";
-   position: absolute;
-   left: 0; 
-   color: gold;
-}
+
+
+
