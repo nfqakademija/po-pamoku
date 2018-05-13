@@ -27,7 +27,7 @@
             <ul class="info-list">
                 <li>
                 <span>
-                <i class="fas fa-star"></i></span>{{ activity.rating }}/5</li>
+                <i class="fas fa-star"></i></span>{{ activity.rating|round(2) }}/5</li>
                 <li><span><i class="fas fa-euro-sign"></i></span>{{ activity.priceFrom }} - {{ activity.priceTo }}</li>
                 <li><span><i class="fas fa-user"></i></span>{{ activity.ageFrom }} - {{ activity.ageTo }}</li>
                 <li><span><i class="fas fa-map-marker"></i></span>{{ activity.location.street }} {{ activity.location.house }}{% if activity.location.apartment %}-{{ activity.location.apartment }}{% endif %},
