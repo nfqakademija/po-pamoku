@@ -21,13 +21,11 @@ class ChangePasswordType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('oldPassword', PasswordType::class, [
-                'label' => 'Dabartinis slaptažodis',
-            ])
+            ->add('oldPassword', PasswordType::class)
             ->add('newPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
-                'first_options' => ['label' => 'Naujas slaptažodis'],
-                'second_options' => ['label' => 'Pakartoti slaptažodį'],
+                'first_options' => ['label' => 'New password'],
+                'second_options' => ['label' => 'Repeat new password'],
             ]);
     }
     

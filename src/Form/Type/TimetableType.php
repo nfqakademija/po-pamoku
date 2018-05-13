@@ -15,12 +15,11 @@ class TimetableType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('Weekday', EntityType::class, [
-            'label' => "Savaitės Diena",
             'class' => Weekday::class,
-            'attr' => ['class' => 'form-control'],
+            'attr' => ['class' => 'form-control']
         ])
-            ->add('timeFrom', TimeType::class, ['label' => "Laikas nuo", 'attr' => ['class' => 'form-control']])
-            ->add('timeTo', TimeType::class, ['label' => "Laikas iki", 'attr' => ['class' => 'form-control']]);
+            ->add('timeFrom', TimeType::class, ['attr' => ['class' => 'form-control']])
+            ->add('timeTo', TimeType::class, ['attr' => ['class' => 'form-control']]);
     }
     
     public function configureOptions(OptionsResolver $resolver)

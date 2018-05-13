@@ -20,18 +20,10 @@ class ProfileType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class, [
-                'label' => 'Vardas',
-            ])
-            ->add('surname', TextType::class, [
-                'label' => 'Pavardė',
-            ])
-            ->add('email', EmailType::class, [
-                'label' => 'Elektroninis paštas',
-            ])
-            ->add('phoneNumber', TextType::class, [
-                'label' => 'Telefono nr.',
-            ]);
+            ->add('name', TextType::class)
+            ->add('surname', TextType::class)
+            ->add('email', EmailType::class)
+            ->add('phoneNumber', TextType::class);
     }
     
     public function configureOptions(OptionsResolver $resolver)

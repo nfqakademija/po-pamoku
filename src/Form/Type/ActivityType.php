@@ -21,37 +21,33 @@ class ActivityType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name', TextType::class,
-            ['label' => "Būrelio Pavadinimas"])
-            ->add('description', TextareaType::class,
-                ['label' => "Būrelio aprašymas"])
+        $builder->add('name', TextType::class)
+            ->add('description', TextareaType::class)
             ->add('location', LocationType::class, ['label' => false])
             ->add('priceFrom', NumberType::class, [
-                'label' => "Kaina nuo",
                 'scale' => 2,
                 'rounding_mode' => NumberToLocalizedStringTransformer::ROUND_DOWN,
             ])
             ->add('priceTo', NumberType::class, [
-                'label' => "Kaina iki",
                 'scale' => 2,
                 'rounding_mode' => NumberToLocalizedStringTransformer::ROUND_DOWN,
             ])
             ->add('ageFrom', NumberType::class,
-                ['label' => "Amžius nuo", 'scale' => 0])
+                ['scale' => 0])
             ->add('ageTo', NumberType::class,
-                ['label' => "Amžius iki", 'scale' => 0,])
+                ['scale' => 0,])
             ->add('pathToLogo', FileType::class, [
-                'label' => 'Logotipas',
                 'data_class' => null])
             ->add('Subcategory', EntityType::class, [
-                'label' => "Būrelio tipas",
                 'class' => Subcategory::class,
             ])
             ->add('timetables', CollectionType::class, [
-                "entry_type" => TimetableType::class,
-                "label" => "Tvarkaraštis",
+                'entry_type' => TimetableType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
+                'entry_options' => [
+                    'label' => false
+                ]
             ])
         ;
     }

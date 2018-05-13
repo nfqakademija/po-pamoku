@@ -19,34 +19,16 @@
                 <div class="col-12 col-md-7">
                     <div class="registration-form">
                         {{ form_start(form) }}
-                    
-                        {{ form_row(form.name, {
-                                        'label': 'Vardas'
-                                    }) }}
-                                
-                                    {{ form_row(form.surname, {
-                                        'label': 'Pavardė'
-                                    }) }}
-                                    {{ form_row(form.email, {
-                                        'label': 'Elektroninio pašto adresas'
-                                    }) }}
-                                    {{ form_row(form.plainPassword.first, {
-                                        'label': 'Slaptažodis'
-                                    }) }}
-                                    {{ form_row(form.plainPassword.second, {
-                                        'label': 'Pakartoti slaptažodį'
-                                    }) }}
-                                
-                                    {{ form_row(form.phoneNumber, {
-                                        'label': 'Telefono numeris'
-                                    }) }}
-
-
-                                    {% for child in form.children %}
-                                        {{ form_row(child) }}
-                                        {% endfor %}
-
-                            <button type="submit" class="btn btn-register" formnovalidate>Registruotis</button>
+                        {{ form_row(form.name) }}
+                        {{ form_row(form.surname) }}
+                        {{ form_row(form.email) }}
+                        {{ form_row(form.plainPassword.first) }}
+                        {{ form_row(form.plainPassword.second) }}
+                        {{ form_row(form.phoneNumber) }}
+                        {% for child in form.children %}
+                            {{ form_row(child) }}
+                        {% endfor %}
+                        <button type="submit" class="btn btn-register" formnovalidate>Registruotis</button>
                         {{ form_end(form) }}
                     </div>
                 </div>

@@ -22,13 +22,13 @@ class User implements UserInterface
     
     /**
      * @ORM\Column(type="string", length=150, unique=true)
-     * @Assert\NotBlank(message="Prašome užpildyti šį lauką")
-     * @Assert\Email(message="Neteisingai įvestas elektroninio pašto adresas")
+     * @Assert\NotBlank()
+     * @Assert\Email()
      */
     protected $email;
     
     /**
-     * @Assert\NotBlank(groups={"Register", "Update"}, message="Prašome užpildyti šį lauką")
+     * @Assert\NotBlank(groups={"Register", "Update"})
      */
     protected $plainPassword;
     
@@ -39,22 +39,22 @@ class User implements UserInterface
     
     /**
      * @ORM\Column(type="string")
-     * @Assert\NotBlank(message="Prašome užpildyti šį lauką")
-     * @Assert\Regex(pattern="/^[\p{L}\s-]+$/u", message="Varde yra įvesta neleistinų ženklų")
+     * @Assert\NotBlank()
+     * @Assert\Regex(pattern="/^[\p{L}\s-]+$/u", message="There are illegal symbols in your name.")
      */
     protected $name;
     
     /**
      * @ORM\Column(type="string")
-     * @Assert\NotBlank(message="Prašome užpildyti šį lauką")
-     * @Assert\Regex(pattern="/^[\p{L}\s-]+$/u", message="Pavardėje yra įvesta neleistinų ženklų")
+     * @Assert\NotBlank()
+     * @Assert\Regex(pattern="/^[\p{L}\s-]+$/u", message="There are illegal symbols in your surname.")
      */
     protected $surname;
     
     /**
      * @ORM\Column(type="string")
-     * @Assert\NotBlank(message="Prašome užpildyti šį lauką")
-     * @Assert\Regex(pattern="/(^(\+370)[0-9]{8})|((8)[0-9]{8})$/", message="Telefono numeris įvestas neteisingu formatu")
+     * @Assert\NotBlank()
+     * @Assert\Regex(pattern="/(^(\+370)[0-9]{8})|((8)[0-9]{8})$/", message="Phone number format is wronk.")
      */
     protected $phoneNumber;
     

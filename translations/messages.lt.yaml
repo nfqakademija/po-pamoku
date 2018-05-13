@@ -1,4 +1,31 @@
+Block: Užblokuoti
+Unblock: Atblokuoti
+Username: Elektroninis paštas
+Password: Slaptažodis
+Name: Vardas
+Surname: Pavardė
+Email: Elektroninio pašto adresas
+Repeat password: Pakartoti slaptažodį
+Phone number: Telefono numeris
+Description: Aprašymas
+City: Miestas
+Street: Gatvė
+House: Namo nr.
+Apartment: Buto nr.
+Price from: "Kaina: nuo"
+Price to: "Kaina: iki"
+Age from: "Amžius: nuo"
+Age to: "Amžius: iki"
+Path to logo: Logotipas
+Subcategory: Subkategorijs
+Timetables: Tvarkaraštis
+Weekday: Savaitės diena
+Time from: "Laikas: nuo"
+Time to: "Laikas: iki"
 Comment text: Komentaras
+Old password: Dabartinis slaptažodis
+New password: Naujas slaptažodis
+Repeat new password: Pakartoti naują slaptažodį
 1: 1
 2: 2
 3: 3

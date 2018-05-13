@@ -17,12 +17,8 @@
                                 <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                             {% endif %}
                             {{ form_start(form) }}
-                                {{ form_row(form._username, {
-                                    'label': 'Elektroninis paštas'
-                                }) }}
-                                {{ form_row(form._password, {
-                                    'label': 'Slaptažodis'
-                                }) }}
+                                {{ form_row(form._username) }}
+                                {{ form_row(form._password) }}
                                 <button class="btn btn-register" type="submit">Prisijungti</button>
                         {{ form_end(form) }}
                         
