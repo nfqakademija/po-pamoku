@@ -56,7 +56,7 @@ class Comments extends React.Component {
         this.getData();
     }
 
-    componentWillUpdate() {
+    componentDidUpdate() {
         document.getElementById('commentForm').onsubmit = this.handleCommentPosting;
     }
 

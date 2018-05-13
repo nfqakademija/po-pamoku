@@ -4,6 +4,7 @@ namespace App\DataFixtures\ORM;
 
 use App\Entity\City;
 use App\Entity\Location;
+use App\Utils\Utils;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
@@ -12,7 +13,7 @@ class LoadLocation extends Fixture
     public function load(ObjectManager $manager)
     {
         $locationDataFile = 'public/data/Addresses.csv';
-        $data = $this->getData($locationDataFile);
+        $data = Utils::getData($locationDataFile);
         for ($i = 21; $i <= 70; $i++) {
             $location = $this->createLocation($data);
             $this->addReference($i, $location);
@@ -32,14 +33,14 @@ class LoadLocation extends Fixture
         $locationData = $data[array_rand($data, 1)];
         $cityName = $locationData[4];
         $city = $this->createCity($cityName);
-            $location
-                ->setApartment(rand(1, 84))
-                ->setCity($city)
-                ->setHouse($locationData[2])
-                ->setLat($locationData[6])
-                ->setLng($locationData[7])
-                ->setPostcode($locationData[5])
-                ->setStreet($locationData[1]);
+        $location
+            ->setApartment(rand(1, 84))
+            ->setCity($city)
+            ->setHouse($locationData[2])
+            ->setLat($locationData[6])
+            ->setLng($locationData[7])
+            ->setPostcode($locationData[5])
+            ->setStreet($locationData[1]);
 
             return $location;
     }
@@ -61,21 +62,6 @@ class LoadLocation extends Fixture
 
         return $city;
     }
-
-    /**
-     * @param string $dataFile
-     * @return array
-     */
-    private function getData(string $dataFile): array
-    {
-        $dataArray = [];
-        $handler = fopen($dataFile, 'r');
-        while (($data = fgetcsv($handler, 5000, ';')) !== FALSE) {
-            $dataArray[] = $data;
-        }
-        return $dataArray;
-    }
-
 }
 
 

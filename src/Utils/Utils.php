@@ -92,4 +92,18 @@ class Utils
         }
         return ['lat' => $lat, 'lng' => $lng, 'postcode' => $postcode, 'street' => $street, 'city' => $city];
     }
+
+    /**
+     * @param string $dataFile
+     * @return array
+     */
+    public static function getData(string $dataFile): array
+    {
+        $dataArray = [];
+        $handler = fopen($dataFile, 'r');
+        while (($data = fgetcsv($handler, 5000, ';')) !== FALSE) {
+            $dataArray[] = $data;
+        }
+        return $dataArray;
+    }
 }
