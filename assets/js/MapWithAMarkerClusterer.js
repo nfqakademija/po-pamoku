@@ -13,10 +13,13 @@ const MapWithAMarkerClusterer = compose(
     withStateHandlers(() => ({
         id: null,
     }), {
-            onToggleOpen: () => (id) => {  
-
-                return ({
-                    id,
+            onToggleOpen: () => (id) => {
+            return ({
+                id
+            })},
+            onToggleClose: () => () => {
+            return ({
+                id: null
             })}
         }),
     withScriptjs,
@@ -39,9 +42,7 @@ const MapWithAMarkerClusterer = compose(
                         onClick={() => props.onToggleOpen(marker.id)}
                 >
                         {!!props.id && props.id === marker.id &&
-                    <InfoWindow
-                    
-                            onCloseClick={() => props.onToggleOpen(marker)}>
+                    <InfoWindow>
                             <div className="view-box">
                                 <h5>{marker.name}</h5>
                                 <div className="image-box">
