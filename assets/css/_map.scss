@@ -2,6 +2,7 @@
     background: #3ecf8e;
     color: #fff;
     border-radius: 4px;
+    width: 144px;
 }
 .map-btn:hover {
     background: #38bb80;
@@ -13,6 +14,16 @@
 }
 .myPlace-btn:hover {
     background: #e13666;
+    color: #fff;
+}
+.exit-btn {
+    color: #ff3a72;
+    background-color: #f8f9fa;
+    border-color: #f8f9fa;
+    border-radius: 4px;
+    &:hover {
+        background-color: #ededee;
+    }
 }
 .view-box {
     width: 250px;

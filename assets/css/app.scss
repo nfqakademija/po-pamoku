@@ -6,6 +6,7 @@
 @import '_filter.scss';
 @import '_map.scss';
 @import '_rate.scss';
+@import '_comment.scss';
 
 
 body {
@@ -24,7 +25,7 @@ body {
     background: linear-gradient(to left bottom, #2da2c5eb, rgba(126, 85, 189, 0.94)), url("../img/mainBg.jpg");
     background-position: top;
     background-size: cover;
-    min-height: 600px;
+    min-height: 500px;
     position: relative;
     display: flex;
     align-items: center;
@@ -86,7 +87,7 @@ body {
     background-size: cover;
  }
  .min-height{
-    min-height: 40vh;
+    min-height: 300px;
  }
 
 .page {
@@ -133,4 +134,31 @@ textarea {
 }
 .info-item:last-child {
     border: none;
+}
+.info-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    li {
+        padding: 5px 10px;
+        .fas {
+            color: gray;
+            width: 30px;
+        }
+    }
+}
+.border-rad {
+    border-radius: 4px;
+}
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+#myTab {
+    .nav-link {
+        color: #495057;
+    }
+    .nav-link.active {
+        color: #673AB7;
+    }
 }

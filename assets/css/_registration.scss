@@ -1,5 +1,5 @@
 .registration-bg {
-  padding: 80px 0 40px;
+  padding: 80px 0 60px;
   background:  #e8e8e8;
   }
   .registration-aside {
@@ -60,4 +60,24 @@ form ul {
 form li {
   color: #e91e63;
     font-size: 13px;
+}
+#profile div, #change_password div, .login-form div {
+   margin-bottom: 20px;
+ }
+#profile label, #change_password label, .login-form label {
+  min-width: 200px;
+  display: block;
+  margin: 0;
+  font-size: 14px;
+  color: #5f5f5f;
+}
+#profile input, #change_password input, .login-form input {
+  border: none;
+  border-bottom: 1px solid #e5e5e5;
+  width: 100%;
+  background: transparent;
+  &:focus {
+    outline: none;
+  border-bottom: 1px solid #7e55bdf7;
+  }
 }

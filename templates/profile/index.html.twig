@@ -13,6 +13,12 @@
     </div>
 </header>
 <div class="container py-5">
+    {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('admin_profile') }}" class="btn btn-light border-rad mb-3">Atgal</a>
+        {% else %}
+                <a href="/" class="btn btn-light border-rad mb-3">Atgal</a>
+
+        {% endif %}
     <table class="table">
         {% for key, val in profileVars %}
             {% if key != 'Būrelis' %}
@@ -35,8 +41,8 @@
             {% endif %}
         {% endfor %}
     </table>
-      <a href="{{ path('profile_edit') }}" class="btn btn-secondary">Redaguoti profilį</a>
-    <a href="{{ path('change_password') }}" class="btn btn-secondary">Keisti slaptažodį</a>
+      <a href="{{ path('profile_edit') }}" class="btn btn-register mr-3">Redaguoti profilį</a>
+    <a href="{{ path('change_password') }}" class="btn myPlace-btn">Keisti slaptažodį</a>
 </div>
   
 

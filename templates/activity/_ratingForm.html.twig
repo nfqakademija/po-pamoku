@@ -6,15 +6,16 @@
             }
         }) }}
         <div class="rate-area">
-        {% for radioRate in ratingForm.rating %}
-             {# {{ form_label(radioRate, null, {'label_attr': {'class':'radio-inline'}}) }}
-                {{ form_widget(radioRate, {'attr': {'class': 'radio-inline'}}) }} #}
-                {# <i class="fas fa-star star"></i> #}
+            {% for radioRate in ratingForm.rating %}
+                {# {{ form_label(radioRate, null, {'label_attr': {'class':'radio-inline'}}) }}
+                    {{ form_widget(radioRate, {'attr': {'class': 'radio-inline'}}) }} #}
+                    {# <i class="fas fa-star star"></i> #}
 
-                {{ form_widget(radioRate) }}
-                {{ form_label(radioRate, null) }}
-        {% endfor %}
+                    {{ form_widget(radioRate) }}
+                    {{ form_label(radioRate, null) }}
+            {% endfor %}
         </div>
+        <div class="rate-text">Vidutinis įvertinimas: <b>{{ activity.rating|round(2) }}/5</b><br><span class="rate-subText">Įvertinimų skaičius: {{ activity.ratingCount }}</span></div>
 
         {% if rate %}
             <button type="submit" class="btn btn-green" formnovalidate>Pakeisti įvertinimą</button>

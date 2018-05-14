@@ -44,9 +44,10 @@ const MapWithAMarkerClusterer = compose(
                             <div className="view-box">
                                 <h5>{marker.name}</h5>
                                 <div className="image-box">
-                                    <img src={marker.pathToLogo}/>
+                                    {/* <img src={marker.pathToLogo}/> */}
+                                    <img className="img-fluid" src="https://placeimg.com/640/480/any" alt="Card image cap" />
                                 </div>
-                                <p>
+                                <p className="mt-3">
                                     <i className="fas fa-map-marker"></i>
                                     <span className="pl-2">{marker.street} {marker.house}, {marker.city}</span>
                                     

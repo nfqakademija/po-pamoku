@@ -125,7 +125,7 @@ const btnSwitch = (
                 });
             }}>
               <i className="fas fa-map-marker"></i>
-              <span className="location-btn pl-2">Žemėlapis</span>
+      <span className="location-btn pl-2">Žemėlapis</span>
         </button>
       </div>
       );
@@ -183,24 +183,35 @@ const btnSwitch = (
                 {/*<Sort />*/}
                 {this.state.isMap &&
                   <div className="container pt-5" id="map">
-                  <div className="row">
-                    <div className="py-3">
-                      {geo}
-                    </div>
-                  </div>                
+                    <div className="row justify-content-between">
+                      <div className="py-3 col-3">
+                        {geo}
+                      </div>
+                      <div className="py-3 col-2 text-right">
+                        <button className="btn exit-btn"
+                          onClick={() => this.setState({ isMap: false })}>
+                        <i className="fas fa-times"></i>
+                        </button>
+                      </div>
+                      <div className="col-12">
                     <MapComponent query={this.state.query} zoom={this.state.zoom} lat={this.state.lat} lng={this.state.lng} />
+                      </div>
+                    </div>  
                   </div>
                 }
-                <div className="row activities pb-3 pt-5">
+                <div className="row activities py-5">
 
                   {activities.length !== 0 ? (activities.map((activity, index) =>
                     <div key={"currentAct" + index} className="col-xs-6 col-sm-6 col-lg-4 py-3">
                       <div className="activity-card">
                         <div className="card-image">
-                          <img className="img-fluid" src="https://placeimg.com/640/480/any" alt="Card image cap" />
-                          <div className="like-btn">
-                            <i className="far fa-heart"></i>
+                          <div className="overlay">
+                            <a className="card-btn" href={"/activity/" + activity.id}><i className="fas fa-search-plus"></i></a>
                           </div>
+                          <img className="img-fluid" src="https://placeimg.com/640/480/any" alt="Card image cap" />
+                          {/* <div className="like-btn">
+                            <i className="far fa-heart"></i>
+                          </div> */}
                           <div className="price">
                             {activity.priceFrom}-{activity.priceTo} €
                           </div>
@@ -210,25 +221,27 @@ const btnSwitch = (
                           <h5 className="activity-title">
                             {activity.name}
                           </h5>
-                          <p className="location">
+                          <p className="grey-text">
                           {activity.city}, {activity.street} {activity.house}
                           </p>
                           <p className="d-flex justify-content-between align-items-baseline">
-                            <span>{activity.subcategory}</span>
-                            <a className="card-btn" href={"/activity/" + activity.id}> Plačiau </a>
+                            <span className="grey-text">{activity.subcategory}</span>
                           </p>
                          
                         </div>
                       </div>
                     </div>)) : ('Deja, būrelių nėra')}
+                    <div className="col-12 text-center">
+                      <Pagination
+                    bsSize="medium"
+                    items={totalPages}
+                    activepage={this.state.currentPageNumber}
+                    onSelect={this.handleSelect.bind(this)} />
+                    </div>
+                  
                 </div>
         </div>
         </div>
-          <Pagination
-            bsSize="medium"
-            items={totalPages}
-            activepage={this.state.currentPageNumber}
-            onSelect={this.handleSelect.bind(this)} />
         </div>
       </div>
     );
