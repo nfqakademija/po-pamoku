@@ -1,15 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: juste
- * Date: 18.4.7
- * Time: 00.31
- */
 
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -27,7 +20,7 @@ class Activity
     
     /**
      * @ORM\Column(type="string")
-     * @Assert\NotBlank(message="Prašome užpildyti šį lauką")
+     * @Assert\NotBlank()
      * @Assert\Length(
      *      min = 2,
      *      max = 50
@@ -130,7 +123,6 @@ class Activity
     public function __construct()
     {
         $this->timetables = new ArrayCollection();
-        $this->comment = new ArrayCollection();
     }
     
     public function getId()

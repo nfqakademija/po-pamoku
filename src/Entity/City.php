@@ -22,9 +22,7 @@ class City
      * @Assert\NotBlank()
      * @Assert\Length(
      *      min = 2,
-     *      max = 50,
-     *      minMessage = "Miestas negali būti trumpesnis nei {{ limit }} simboliai",
-     *      maxMessage = "Miestas negali būti ilgesnis nei {{ limit }} simboliai"
+     *      max = 50
      * )
      */
     private $name;

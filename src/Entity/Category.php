@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: juste
- * Date: 18.4.7
- * Time: 00.13
- */
 
 namespace App\Entity;
 
@@ -27,10 +21,6 @@ class Category
     /**
      * @ORM\Column(type="string")
      * @Assert\NotBlank()
-     * @Assert\Length(
-     *      min = 2,
-     *      max = 50
-     * )
      */
     private $name;
     

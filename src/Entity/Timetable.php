@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: juste
- * Date: 18.4.7
- * Time: 00.28
- */
 
 namespace App\Entity;
 
@@ -40,9 +34,7 @@ class Timetable
      */
     private $timeTo;
     
-    /**
-     * @return mixed
-     */
+
     public function getWeekday()
     {
         return $this->weekday;
@@ -84,6 +76,5 @@ class Timetable
     {
         return $this->id;
     }
-    
     
 }

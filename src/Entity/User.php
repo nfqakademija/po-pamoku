@@ -9,7 +9,10 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- * @UniqueEntity(fields={"email"}, message="Toks elektroninio pašto addresas jau naudojamas")
+ * @UniqueEntity(
+ *     fields={"email"},
+ *     message="Email is already in use."
+ * )
  */
 class User implements UserInterface
 {
@@ -40,21 +43,30 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string")
      * @Assert\NotBlank()
-     * @Assert\Regex(pattern="/^[\p{L}\s-]+$/u", message="There are illegal symbols in your name.")
+     * @Assert\Regex(
+     *     pattern="/^[\p{L}\s-]+$/u",
+     *     message="There are illegal symbols in your name."
+     * )
      */
     protected $name;
     
     /**
      * @ORM\Column(type="string")
      * @Assert\NotBlank()
-     * @Assert\Regex(pattern="/^[\p{L}\s-]+$/u", message="There are illegal symbols in your surname.")
+     * @Assert\Regex(
+     *     pattern="/^[\p{L}\s-]+$/u",
+     *     message="There are illegal symbols in your surname."
+     * )
      */
     protected $surname;
     
     /**
      * @ORM\Column(type="string")
      * @Assert\NotBlank()
-     * @Assert\Regex(pattern="/(^(\+370)[0-9]{8})|((8)[0-9]{8})$/", message="Phone number format is wronk.")
+     * @Assert\Regex(
+     *     pattern="/(^(\+370)[0-9]{8})|((8)[0-9]{8})$/",
+     *     message="Phone number format is wrong."
+     * )
      */
     protected $phoneNumber;
     
@@ -188,7 +200,7 @@ class User implements UserInterface
         return $this->activity;
     }
     
-    public function setActivity($activity): self
+    public function setActivity(Activity $activity): self
     {
         $this->activity = $activity;
         $activity->setUser($this);

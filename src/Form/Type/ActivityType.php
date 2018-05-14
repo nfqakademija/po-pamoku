@@ -21,7 +21,9 @@ class ActivityType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name', TextType::class)
+        $builder->add('name', TextType::class, [
+            'label' => 'Activity name'
+            ])
             ->add('description', TextareaType::class)
             ->add('location', LocationType::class, ['label' => false])
             ->add('priceFrom', NumberType::class, [
