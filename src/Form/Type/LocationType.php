@@ -17,10 +17,10 @@ class LocationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('city', CityType::class, ['label' => false])
-            ->add('street', TextType::class, ['label' => "Gatvė"])
-            ->add('house', TextType::class, ['label' => "Namo nr."])
+            ->add('street', TextType::class)
+            ->add('house', TextType::class)
             ->add('apartment', TextType::class,
-                ['label' => "Buto nr.", 'required' => false])
+                ['required' => false])
             ->add('lng', HiddenType::class)
             ->add('lat', HiddenType::class)
             ->add('postcode', HiddenType::class);

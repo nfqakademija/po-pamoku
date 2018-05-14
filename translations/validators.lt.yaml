@@ -1,0 +1,11 @@
+This value should not be blank.: Prašome užpildyti šį laukelį.
+Email is already in use.: Toks elektroninio pašto addresas jau naudojamas.
+There are illegal symbols in your name.: Varde yra neleistinų ženklų.
+There are illegal symbols in your surname.: Pavardėje yra neleistinų ženklų.
+Phone number format is wrong.: Telefono numeris įvestas neteisingu formatu.
+Passwords do not match.: Slaptažodžiai nesutampa.
+This value should not be null.: Prašome užpildyti šį laukelį.
+minMessage: Įvesta per trumpa reikšmė. Simbolių kiekis turėtų būti didesnis už {{ limit }}.
+maxMessage: Įvesta per ilga reikšmė. Simbolių kiekis turėtų būti mažesnis už {{ limit }}.
+Comment cannot be blank.: Komentaras negali būti tuščias.
+mimeTypesMessage: Įkeltas neleistino formato failas.

@@ -1,15 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: juste
- * Date: 18.4.7
- * Time: 00.31
- */
 
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -27,19 +20,17 @@ class Activity
     
     /**
      * @ORM\Column(type="string")
-     * @Assert\NotBlank(message="Prašome užpildyti šį lauką")
+     * @Assert\NotBlank()
      * @Assert\Length(
      *      min = 2,
-     *      max = 50,
-     *      minMessage = "Pavadinimas negali būti trumpesnis nei {{ limit }} simboliai",
-     *      maxMessage = "Pavadinimas negali būti ilgesnis nei {{ limit }} simboliai"
+     *      max = 50
      * )
      */
     private $name;
     
     /**
      * @ORM\Column(type="text")
-     * @Assert\NotBlank(message="Prašome aprašyti šį lauką")
+     * @Assert\NotBlank()
      */
     private $description;
     
@@ -51,63 +42,49 @@ class Activity
     
     /**
      * @ORM\Column(type="float")
-     * @Assert\NotNull(message="Prašome užpildyti šį lauką")
-     * @Assert\Type(
-     *     type="float",
-     *     message="Laukelio reikšmė turėtų būti numeris"
-     * )
+     * @Assert\NotNull()
+     * @Assert\Type(type="float")
      * @Assert\Range(
      *      min = 0,
-     *      max = 100,
-     *      minMessage = "Minimali galima kaina 0 Eurų",
-     *      maxMessage = "Maksimaili galima kaina 100 Eurų"
+     *      max = 100
      * )
      */
     private $priceFrom;
     
     /**
      * @ORM\Column(type="float")
-     * @Assert\NotNull(message="Prašome užpildyti šį lauką")
-     * @Assert\Type(
-     *     type="float",
-     *     message="Laukelio reikšmė turėtų būti numeris"
-     * )
+     * @Assert\NotNull()
+     * @Assert\Type(type="float")
      * @Assert\Range(
      *      min = 0,
-     *      max = 100,
-     *      minMessage = "Minimali galima kaina 0 Eurų",
-     *      maxMessage = "Maksimaili galima kaina 100 Eurų"
+     *      max = 100
      * )
      */
     private $priceTo;
     
     /**
      * @ORM\Column(type="integer")
-     * @Assert\NotNull(message="Prašome užpildyti šį lauką")
+     * @Assert\NotNull()
      * @Assert\Range(
      *      min = 1,
-     *      max = 90,
-     *      minMessage = "Minimalus galimas amžius 1 metai",
-     *      maxMessage = "Maksimailus galimas amžius 90 metų"
+     *      max = 90
      * )
      */
     private $ageFrom;
     
     /**
      * @ORM\Column(type="integer")
-     * @Assert\NotNull(message="Prašome užpildyti šį lauką")
+     * @Assert\NotNull()
      * @Assert\Range(
      *      min = 1,
-     *      max = 90,
-     *      minMessage = "Minimalus galimas amžius 1 metas",
-     *      maxMessage = "Maksimailus galimas amžius 90 metų"
+     *      max = 90
      * )
      */
     private $ageTo;
     
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Assert\File(mimeTypes={ "image/*"}, mimeTypesMessage="Failas turi būti paveikslėlio formato" )
+     * @Assert\File(mimeTypes={ "image/*"})
      */
     private $pathToLogo;
     
@@ -146,7 +123,6 @@ class Activity
     public function __construct()
     {
         $this->timetables = new ArrayCollection();
-        $this->comment = new ArrayCollection();
     }
     
     public function getId()

@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: juste
- * Date: 18.4.7
- * Time: 00.27
- */
 
 namespace App\Entity;
 
@@ -26,12 +20,6 @@ class Weekday
     /**
      * @ORM\Column(type="string")
      * @Assert\NotBlank()
-     * @Assert\Length(
-     *      min = 2,
-     *      max = 50,
-     *      minMessage = "Pavadinimas negali būti trumpesnis nei {{ limit }} simboliai",
-     *      maxMessage = "Pavadinimas negali būti ilgesnis nei {{ limit }} simboliai"
-     * )
      */
     private $name;
     

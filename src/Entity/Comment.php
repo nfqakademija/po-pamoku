@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Entity;
 
 
@@ -32,7 +31,11 @@ class Comment
 
     /**
      * @ORM\Column(type="text")
-     * @Assert\NotNull(message="Komentaras negali būti tuščias.")
+     * @Assert\NotNull(message="Comment cannot be blank.")
+     * @Assert\Length(
+     *     min = 2,
+     *     max = 300
+     * )
      */
     protected $commentText;
 

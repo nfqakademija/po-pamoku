@@ -12,7 +12,7 @@ class CityType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name', TextType::class, ['label' => "Miestas"]);
+        $builder->add('name', TextType::class, ['label' => "City"]);
 
     }
     

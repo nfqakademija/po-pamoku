@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: juste
- * Date: 18.4.7
- * Time: 00.31
- */
 
 namespace App\Entity;
 
@@ -30,22 +24,19 @@ class Location
     
     /**
      * @ORM\Column(type="string")
-     * @Assert\NotBlank(message="Prašome užpildyti šį lauką")
+     * @Assert\NotBlank()
      * @Assert\Length(
      *      min = 2,
-     *      max = 50,
-     *      minMessage = "Gatvė negali būti trumpesnis nei {{ limit }} simboliai",
-     *      maxMessage = "Gatvė negali būti ilgesnis nei {{ limit }} simboliai"
+     *      max = 50
      * )
      */
     private $street;
     
     /**
      * @ORM\Column(type="string")
-     * @Assert\NotBlank(message="Prašome užpildyti šį lauką")
+     * @Assert\NotBlank()
      * @Assert\Length(
-     *      max = 5,
-     *      maxMessage = "Namo nr. negali būti ilgesnis nei {{ limit }} simboliai"
+     *      max = 5
      * )
      */
     private $house;
