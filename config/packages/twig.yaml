@@ -1,4 +1,7 @@
 twig:
-    paths: ['%kernel.project_dir%/templates']
+    paths:
+        '%kernel.project_dir%/templates': templates
+        '%kernel.project_dir%/templates/bundles/FOSMessageBundle': FOSMessageBundle
+        '%kernel.project_dir%/vendor/friendsofsymfony/message-bundle/FOS/MessageBundle/Resources/views': FOSMessageBundle
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
