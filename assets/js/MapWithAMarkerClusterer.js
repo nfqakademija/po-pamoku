@@ -13,11 +13,10 @@ const MapWithAMarkerClusterer = compose(
     withStateHandlers(() => ({
         id: null,
     }), {
-            onToggleOpen: () => (id) => {
-
-                return ({
-                    id,
-                })
+        onToggleOpen: () => (id) => {
+            return ({
+                id,
+            })
             }
         }),
     withScriptjs,
