@@ -22,16 +22,16 @@ body {
 }
 
  .hero {
-    background: linear-gradient(to left bottom, #2da2c5eb, rgba(126, 85, 189, 0.94)), url("../img/mainBg.jpg");
+    // background: linear-gradient(to left bottom, #2da2c5eb, rgba(126, 85, 189, 0.94)), url("../img/mainBg.jpg");
     background-position: top;
     background-size: cover;
-    min-height: 500px;
+    min-height: 400px;
     position: relative;
     display: flex;
     align-items: center;
  }
  .hero-title {
-   color: #ffffff;
+//    color: #ffffff;
     text-align: center;
     font-size: 60px;
  }

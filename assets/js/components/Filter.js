@@ -60,10 +60,9 @@ class Filter extends React.Component {
         const { onChange } = this.props;
         const { categories, cities, times, weekdays, category, cityId, time, weekday, search, age, price, subcategories, subcategory } = this.state;
         return (
-
-            <div className="">
+            <div className="row">
                      <div className="pt-2">
-                    <label>Pavadinimas</label><br />
+                    <label>Pavadinimas</label>
                     <input className="filter" name="search" type="text" onChange={(event) => {
                         this.setState({ search: event.currentTarget.value }, () => {
                             let copy = Object.assign({ category, cityId, time, weekday, search, age, price, subcategory }, this.state);
@@ -74,7 +73,7 @@ class Filter extends React.Component {
                 </div>
             <div className="d-flex">
                 <div className="pt-2 mr-4">
-                    <label>Kaina</label><br />
+                    <label>Kaina</label>
                         <input className="filter filter-small" name="price" type="number" onChange={(event) => {
                         this.setState({ price: event.target.value }, () => {
                             let copy = Object.assign({ category, cityId, time, weekday, search, age, price, subcategory }, this.state);
@@ -86,7 +85,7 @@ class Filter extends React.Component {
             
                 </div>
                 <div className="pt-2">
-                    <label>Amžius</label><br />
+                    <label>Amžius</label>
                     <input className="filter filter-small" name="age" type="number" onChange={(event) => {
                         this.setState({ age: event.target.value }, () => {
                             let copy = Object.assign({ category, cityId, time, weekday, search, age, price, subcategory }, this.state);
@@ -98,7 +97,7 @@ class Filter extends React.Component {
                 </div>
             </div>
                 <div className="pt-2 mr-2">
-                    <label>Miestas</label><br />
+                    <label>Miestas</label>
 
                     <select name="city" className="filter filter-select" onChange={(event) => {
 
@@ -134,7 +133,7 @@ class Filter extends React.Component {
                     </select>
                 </div>
                 <div className="pt-2 mr-2">
-                    <label>Kategorija</label><br/>
+                    <label>Kategorija</label>
                     <select name="category" className="filter filter-select" onChange={(event) => {
 
                         function filterByName(item) {
@@ -215,7 +214,7 @@ class Filter extends React.Component {
                 </div> */}
 
                 <div className="pt-2 mr-2">
-                <label>Savaitės dienos</label><br />
+                <label>Savaitės dienos</label>
                     <select name="weekday" className="filter filter-select" onChange={(event) => {
                     if (event.target.value === 'Savaitės diena') {
                         this.setState({ weekday: '' }, () => {
@@ -242,7 +241,7 @@ class Filter extends React.Component {
                 </select>
             </div>
                 <div className="pt-2 mr-2">
-                <label>Būrelio laikas</label><br />
+                <label>Būrelio laikas</label>
                     <select name="time" className="filter filter-select" onChange={(event) => {
                     if (event.target.value === 'Laikas') {
                         this.setState({ time: '' }, () => {

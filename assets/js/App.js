@@ -169,36 +169,60 @@ const btnSwitch = (
               {btnSwitch}
 
           </div> */}
-      <div className="container">
-      <div className="row" id="rowRelative">
-        <div className="col-3 pt-5" id="filter">
-                {btnSwitch}
-            <Filter
-              onChange={this.onFilterChange} />
+      
+        <div className="col-12 pt-5 search-panel">            
                 <div id="toTop"></div>
-                
-        </div>
-        <div id="spacer"></div>
-        <div className="col-9">
-                {/*<Sort />*/}
-                {this.state.isMap &&
-                  <div className="container pt-5" id="map">
-                    <div className="row justify-content-between">
-                      <div className="py-3 col-3">
-                        {geo}
-                      </div>
-                      <div className="py-3 col-2 text-right">
-                        <button className="btn exit-btn"
-                          onClick={() => this.setState({ isMap: false })}>
-                        <i className="fas fa-times"></i>
-                        </button>
-                      </div>
-                      <div className="col-12">
-                    <MapComponent query={this.state.query} zoom={this.state.zoom} lat={this.state.lat} lng={this.state.lng} />
-                      </div>
-                    </div>  
+                <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Paieška</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="map-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false"
+                      onClick={() => {
+                        this.setState({ isMap: !this.state.isMap });
+                        let top = document.getElementById('toTop').offsetTop;
+                        window.scrollTo({
+                          top: top
+                        });
+                      }}>
+                      Žemėlapis
+                    </a>
+                  </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                  <div className="container">
+                  <Filter
+                    onChange={this.onFilterChange} />
                   </div>
-                }
+                  </div>
+                  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                    {this.state.isMap &&
+                      <div className="pt-5" id="map">
+                        <div className="row justify-content-between">
+                          <div className="py-3 col-3">
+                            {geo}
+                          </div>
+                          <div className="py-3 col-2 text-right">
+                            <button className="btn exit-btn"
+                              onClick={() => this.setState({ isMap: false })}>
+                              <i className="fas fa-times"></i>
+                            </button>
+                          </div>
+                          <div className="col-12">
+                            <MapComponent query={this.state.query} zoom={this.state.zoom} lat={this.state.lat} lng={this.state.lng} />
+                          </div>
+                        </div>
+                      </div>
+                    }
+                  </div>
+                </div>
+        </div>
+        {/* <div id="spacer"></div> */}
+          <div className="container">
+            <div className="row">
+        <div className="col-12">
+                {/*<Sort />*/}
                 <div className="row activities py-5">
 
                   {activities.length !== 0 ? (activities.map((activity, index) =>
