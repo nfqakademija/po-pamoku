@@ -1,0 +1,6 @@
+fos_message:
+    db_driver: orm
+    thread_class: App\Entity\Thread
+    message_class: App\Entity\Message
+    new_thread_form:
+        type: App\Form\Type\NewThreadMessageFormType

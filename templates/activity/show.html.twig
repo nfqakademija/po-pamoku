@@ -32,6 +32,7 @@
                 <li><span><i class="fas fa-user"></i></span>{{ activity.ageFrom }} - {{ activity.ageTo }}</li>
                 <li><span><i class="fas fa-map-marker"></i></span>{{ activity.location.street }} {{ activity.location.house }}{% if activity.location.apartment %}-{{ activity.location.apartment }}{% endif %},
                             {{ activity.location.city.name }}</li>
+                <li><span><a href="{{ path('fos_message_thread_new') }}">Siųsti žinutę</a></span></li>
                 <li><span><i class="fas fa-calendar-alt"></i>Tvarkaraštis</span>
                     <ul>
                          {% for timetable in activity.timetables %}

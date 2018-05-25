@@ -47,6 +47,26 @@ services:
         tags:
             - {name: doctrine.event_subscriber}
 
+    app.user_to_username_transformer:
+        class: App\Form\DataTransformer\UserToUsernameTransformer
+        arguments: ['@doctrine']
+
+    fos_user.user_to_username_transformer:
+        alias: app.user_to_username_transformer
+
+    app.form.type.username:
+        class: App\Form\Type\UsernameFormType
+        arguments: ['@app.user_to_username_transformer']
+        tags:
+            - { name: form.type }
+
+    app.thread_manager:
+        class: App\EntityManager\ThreadManager
+        arguments: ['@doctrine.orm.entity_manager', App\Entity\Thread,
+         App\Entity\ThreadMetadata, '@fos_message.message_manager']
+
+    fos_message.thread_manager:
+        alias: app.thread_manager
 
 
     # add more service definitions when explicit configuration is needed
