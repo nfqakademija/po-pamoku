@@ -58,13 +58,6 @@ class NewThreadMessageFormType extends AbstractType
             });
     }
 
-    private function getIdFromReferer(string $referer): string
-    {
-        $pathComponents = explode('/', $referer);
-
-        return $pathComponents[sizeof($pathComponents) - 1];
-    }
-
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
@@ -75,5 +68,16 @@ class NewThreadMessageFormType extends AbstractType
     public function getBlockPrefix()
     {
         return 'new_thread_message';
+    }
+
+    /**
+     * @param string $referer
+     * @return string
+     */
+    private function getIdFromReferer(string $referer): string
+    {
+        $pathComponents = explode('/', $referer);
+
+        return $pathComponents[sizeof($pathComponents) - 1];
     }
 }

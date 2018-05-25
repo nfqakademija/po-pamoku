@@ -1,0 +1,17 @@
+fos_message:
+  recipient:
+    blank: Nenurodytas teisingas gavėjas
+  recipients:
+    blank: Nenurodyti teisingi gavėjai
+  subject:
+    blank: Įveskite temos pavadinimą
+    short: Temos pavadinimas per trumpas|Temos pavadinimas per trumpas
+    long: Temos pavadinimas per ilgas|Temos pavadinimas per ilgas
+  body:
+    blank: Įveskite žinutės tekstą
+    short: Žinutė per trumpa
+    spam: Atsiprašome, jūsų žinutė pernelyg panaši į brukalą
+  not_authorized: Jūs negalite išsiųsti šios žinutės
+  reply_not_authorized: Jūs negalite atsakyti į šią žinutę
+  self_recipient: Jūs negalite išsiųsti žinutės sau
+

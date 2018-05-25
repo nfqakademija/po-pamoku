@@ -1,0 +1,28 @@
+messenger:      Žinutės
+inbox:          Gautieji
+sent:           Išsiųstieji
+deleted:        Šiukšliadėžė
+send_new:       Siųsti naują žinutę
+search:         Pairška
+threads_found:  "rasta %num% gija | rasta %num% gijų"
+
+message_info:   "Siuntėjas: %sender%, data: %date%"
+reply:          Atsakyti
+
+subject:        Tema
+starter:        Temą pradėjo
+startdate:      Pirmos žinutės data
+messages:       Žinutės
+last_message:   Paskutinė žinutė
+actions:        Veiksmai
+new:            Nauja
+goto_last:      Pereiti prie paskutinės žinutės
+on:             "Data: %date%"
+by:             "Siuntėjas: %sender%"
+no_thread:      Gijų nėra
+delete:         Ištrinti
+undelete:       Atstatyti
+recipient:      Gavėjas
+recipients:     Gavėjai
+body:           Žinutės tekstas
+participant:    Adresatas

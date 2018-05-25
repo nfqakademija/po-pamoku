@@ -7,7 +7,8 @@
 <form action="{{ url('fos_message_thread_new') }}" method="post">
     {{ form_widget(form) }}
 
-    <input type="submit" />
+    <button type="submit" class="btn btn-green" formnovalidate>Siųsti žinutę</button>
+
 </form>
 
 {% endblock %}
