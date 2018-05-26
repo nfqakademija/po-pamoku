@@ -28,6 +28,7 @@
                         {% else %}
                             <a href="{{ path('profile') }}" class="nav-link">{{ app.user.email }}</a>
                         {% endif %}
+                        <a href="{{ path('fos_message_inbox') }}" class="nav-link">Inbox</a>
                     </li>
                 {% endif %}
             </ul>
