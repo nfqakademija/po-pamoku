@@ -75,7 +75,6 @@ class Utils
         $results = $data['results'];
         if (isset($results[0])) {
             $results = $results[0];
-            dump($results);
             $location = $results['geometry']['location'];
             $lat = $location['lat'];
             $lng = $location['lng'];
