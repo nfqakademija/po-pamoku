@@ -1,27 +1,20 @@
 ﻿![](https://avatars0.githubusercontent.com/u/4995607?v=3&s=100)
 
-NFQ Akademija
+NFQ Akademija (Po pamokų)
 ============
 
 # Intro
 
-Sveiki! Tai yra Jūsų startinis projekto "template". 
 Šioje repositorijoje rasite Symfony `4.0.6` minimalų projekto paketą su jau paruoštais 
 visais reikalingais failais ir įrankiais darbui:
  
 - Lokalaus development'o aplinka (docker) (PHP 7.2, MySql DB, Nginx)
-- Pradinis bundle (AppBundle) kartu su stiliaus failais.
 - Įdiegtas bootstrap
 - Asset'ų buildinimas (npm, yarn, sass)
 - Travis CI template
 
 
 # Paleidimo instrukcija
-
-Metai iš metų studentai maldavo jog galėtų dirbti su Windows'ais akademijos metu.
- Bet nepaisant nieko, tolerancijos ir palaikymo Windows operacinei niekada nebuvo ir nebus.  
-
-> Perspėjimas: Itin kieti profesionalai nenaudoja niekam tikusių operacinių sistemų. 
 
 ### Reikės dokerio
 
@@ -33,9 +26,6 @@ Parsisiunčiate ir įsidiegiate įrankį iš [čia](https://docs.docker.com/inst
 
 Parsisiunčiate ir įsidiegiate `docker-compose` iš [čia](https://github.com/docker/compose/releases).
 
-Taip pat reikia įsidiegti [Kitematic](https://github.com/docker/kitematic/releases).
- Šis įrankis padės geriau organizuoti dokerio konteinerius. 
-
 #### Versijų reikalavimai
 * docker: `18.x-ce`
 * docker-compose: `1.20.1`
@@ -43,9 +33,7 @@ Taip pat reikia įsidiegti [Kitematic](https://github.com/docker/kitematic/relea
 
 ### Projekto paleidimas (projekto kūrimui lokaliai)
 Parsisiunčiate šią repositoriją. Taip taip, viršuje kairėje rasite žalią mygtuką ant kurio parašyta "Download", tada pasirenkate zip failo parsisiuntimą.
- 
-> Akademijos projektui nereikia forkinti, klonuoti ar dar išrasti kokių nors kitų veiksmų, tik parsisiųsti.
- 
+  
 Extractinat turinį į savo mėgstamą projektų direktoriją.
 
 Einate į šią direktoriją su terminalu. Paprastai bus komanda `cd <path>`.
@@ -85,6 +73,8 @@ docker exec -it php.symfony bash
   * Pirmą kartą paleidus (įsirašome PHP bibliotekas):
   ```
   composer install
+  bin/console d:m:m
+  bin/console d:f:l
   ```
   * Jei pakeitimai neatsinaujina:
   ```
@@ -133,6 +123,8 @@ docker exec -it prod.php.symfony bash
   * Pirmą kartą paleidus (įsirašome PHP bibliotekas):
   ```
   composer install
+  bin/console d:m:m
+  bin/console d:f:l
   ```
   * Jei pakeitimai neatsinaujina (**skiriasi nuo dev aplinkos**):
   ```
@@ -196,8 +188,3 @@ docker rmi -f kickstartmaster_frontend.symfony
 docker rmi -f kickstartmaster_prod.php.symfony
 docker rmi -f kickstartmaster_php.symfony
 ```
-
-### Feedbackas
-
-Jeigu taip nutiktų, kad repositorijoje, projekto template ar instrukcijoje rastumėte klaidą, tai nesišnibždėkite vieni tarp kitų, o sukurkite "issue". 
-O jei atidarysite "pull requestą" su fixu, gausite iškart 1000 karmos taškų.
