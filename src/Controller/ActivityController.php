@@ -25,6 +25,7 @@ class ActivityController extends Controller
      */
     public function index()
     {
+
         return $this->render('activity/index.html.twig');
     }
     

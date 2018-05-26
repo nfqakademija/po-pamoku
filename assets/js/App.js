@@ -26,6 +26,14 @@ class App extends React.Component {
     // this.onFilterChange = this.onFilterChange.bind(this);
     // this.my = this.my.bind(this);
   // }
+
+  componentDidMount() {
+    // this.getActivities(1);
+
+    const { onRequest } = this.props;
+
+    onRequest();
+  }
 //  getActivities(page) {
 //    axios.get('/api/activity?page=' + page + '&limit=12')
 //      .then(function (response) {
@@ -58,9 +66,7 @@ class App extends React.Component {
   //     });
   // }
 
-  // componentDidMount() {
-  //   this.getActivities(1);
-  // }
+
 
   // handleSelect(number) {
   //   this.setState({ currentPageNumber: number });
@@ -173,7 +179,7 @@ class App extends React.Component {
                 } */}
                 <div className="row activities py-5">
                 {console.log(activities)}
-                  { activities.length !== 0 ? (activities.map((activity, index) =>
+                  { !!activities && !!activities.length ? (activities.map((activity, index) =>
                     <div key={"currentAct" + index} className="col-xs-6 col-sm-6 col-lg-4 py-3">
                       <div className="activity-card">
                         <div className="card-image">
@@ -219,14 +225,16 @@ class App extends React.Component {
     );
     }
   }
-function mapStateToProps(state) {
-  return {
-    activities: state.activities || [],
-  }
-}
-function mapDispatchToProps(dispatch) {
-  return {
-    onRequest: () => dispatch(onRequest()),
-  }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+
+const mapStateToProps = (state) => ({
+  activities: state.activities,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onRequest: () => dispatch(onRequest()),
+});
+
+export default connect(
+  mapStateToProps, 
+  mapDispatchToProps
+)(App);

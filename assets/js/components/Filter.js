@@ -136,30 +136,13 @@ class Filter extends React.Component {
                 <div className="pt-2 mr-2">
                     <label>Kategorija</label><br/>
                     <select name="category" className="filter filter-select" onChange={(event) => {
+                        
+                        const selectedCategory = categories.find((item) => item.name == event.target.value);
 
-                        function filterByName(item) {
-                            if (item.name == event.target.value) {
-                                return true;
-                            } else {
-                                return false;
-                            }
-                        }
-                        let selectedCategory = categories.filter(filterByName);
-                        if (selectedCategory.length === 0) {
-                            this.setState({ category: '', subcategory: '' }, () => {
-                                let copy = Object.assign({ category, cityId, time, weekday, search, age, price, subcategory }, this.state);
-                                onChange(copy);
-                            });
-                        } else {
-
-                            this.setState({ category: selectedCategory[0].id, subcategory: '' }, () => {
-                                this.getSubcategories(this.state.category);
-                                let copy = Object.assign({ category, cityId, time, weekday, search, age, price, subcategory }, this.state);
-                                onChange(copy);
-                            }
-                            );
-                        }
-
+                        this.setState({
+                            category: selectedCategory ? selectedCategory.id : '', 
+                            subcategory: '',
+                        }, () => onChange({ ...this.state }));
                     }}>
                         <option name="categoryPlaceholder">Visos</option>
                         {
