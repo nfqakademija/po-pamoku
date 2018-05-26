@@ -6,6 +6,7 @@
         "ext-iconv": "*",
         "friendsofsymfony/message-bundle": "dev-symfony4",
         "knplabs/knp-paginator-bundle": "^2.7",
+        "monolog/monolog": "^1.23",
         "oneup/uploader-bundle": "^2.0",
         "phpmd/phpmd": "2.6.0",
         "sensio/framework-extra-bundle": "^5.1",
