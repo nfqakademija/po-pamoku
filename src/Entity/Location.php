@@ -19,6 +19,7 @@ class Location
     
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\City",cascade={"persist"})
+     * @Assert\Valid()
      */
     private $city;
     
