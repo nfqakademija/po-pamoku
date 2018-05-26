@@ -2,14 +2,9 @@
 ###> symfony/framework-bundle ###
 /.env
 /public/bundles/
-/public/uploads/
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
-
-###> symfony/web-server-bundle ###
-/.web-server-pid
-###< symfony/web-server-bundle ###
 
 ###> symfony/webpack-encore-pack ###
 /node_modules/
@@ -18,9 +13,40 @@ npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-pack ###
 
+###> Old symfony and common infrastructure ###
+/.docker/mysql-data
+/app/config/parameters.yml
+/var/*
+!/var/cache
+/var/cache/*
+!var/cache/.gitkeep
+!/var/logs
+/var/logs/*
+!var/logs/.gitkeep
+!/var/sessions
+/var/sessions/*
+!var/sessions/.gitkeep
+!var/SymfonyRequirements.php
+/vendor/
+/web/bundles/
+/web/css
+/web/js
+/web/fonts
+/node_modules
+.env
+.idea
+npm-debug.log
+/project.tar.gz
+/.deploy/*.retry
+###< Old symfony and common infrastructure ###
 
-/.idea
+###> symfony/web-server-bundle ###
+/.web-server-pid
+###< symfony/web-server-bundle ###
+
 /.DS_Store
-/src/.DS_Store
-/src/DataFixtures/.DS_Store
+/assets/.DS_Store
+/config/.DS_Store
 /public/.DS_Store
+/src/.DS_Store
+/templates/.DS_Store
