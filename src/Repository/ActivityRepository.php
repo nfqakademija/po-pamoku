@@ -24,7 +24,7 @@ class ActivityRepository extends ServiceEntityRepository
     public function fetchFilteredData($criteria = [], $orderBy = ["name" => "ASC"])
     {
         $qb = $this->createQueryBuilder('a')
-            ->select('a.id as id', 'a.name as name', 'a.priceFrom as priceFrom', 'a.priceTo as priceTo',
+            ->select('a.id as id', 'a.rating as rating', 'a.name as name', 'a.priceFrom as priceFrom', 'a.priceTo as priceTo',
                 'a.pathToLogo as pathToLogo', 'a.ageFrom as ageFrom', 'a.ageTo as ageTo', 'c.name as city',
                 'l.street as street', 'l.house as house', 'l.apartment as apartment', 'l.postcode as postcode',
                 'l.lat as lat', 'l.lng as lng', 'ca.name as category', 'sc.name as subcategory')
@@ -102,6 +102,12 @@ class ActivityRepository extends ServiceEntityRepository
             $qb = $qb
                 ->andWhere('c.id = :city')
                 ->setParameter('city', $this->filters["city"]);
+        }
+        if (!empty($this->filters["rating"])) {
+            $qb = $qb
+                ->andWhere('a.rating <= 5')
+                ->andWhere('a.rating >= :rating')
+                ->setParameter('rating', $this->filters["rating"]);
         }
         
         return $qb;

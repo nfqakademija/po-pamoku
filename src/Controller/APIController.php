@@ -28,6 +28,7 @@ class APIController extends Controller
         $paramsAttr = [
             "page",
             "sort",
+            "rating",
             "sortBy",
             "limit",
             "search",
