@@ -30,14 +30,14 @@ class LocationType extends AbstractType
             function (FormEvent $event) {
     
                 $location = $event->getData();
-                
+                dump($location);
                 $address = $location["street"] . ' ' . $location['house'] . ', ' . $location["city"]["name"];
                 $data = Utils::fetchLocationByAddress($address);
                 $location['lng'] = $data['lng'];
                 $location['lat'] = $data['lat'];
                 $location['postcode'] = $data['postcode'];
                 $location['street'] = $data['street'];
-                $location['city'] = $data['city'];
+                $location['city']['name'] = $data['city'];
                 $event->setData($location);
 
             });
