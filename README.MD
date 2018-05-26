@@ -73,6 +73,7 @@ docker exec -it php.symfony bash
   * Pirmą kartą paleidus (įsirašome PHP bibliotekas):
   ```
   composer install
+  bin/console d:d:c
   bin/console d:m:m
   bin/console d:f:l
   ```
@@ -123,6 +124,7 @@ docker exec -it prod.php.symfony bash
   * Pirmą kartą paleidus (įsirašome PHP bibliotekas):
   ```
   composer install
+  bin/console d:d:c
   bin/console d:m:m
   bin/console d:f:l
   ```
