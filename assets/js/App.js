@@ -180,10 +180,6 @@ const btnSwitch = (
                 <a className="nav-link" id="map-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false"
                       onClick={() => {
                         this.setState({ isMap: true });
-                        let top = document.getElementById('toTop').offsetTop;
-                        window.scrollTo({
-                          top: top
-                        });
                       }}>
                       Žemėlapis
                     </a>
