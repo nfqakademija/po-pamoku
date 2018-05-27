@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\City;
 use App\Entity\Location;
 use App\Form\Type\RegistrationType;
 use App\Security\LoginFormAuthenticator;
@@ -51,6 +52,13 @@ class RegistrationController extends Controller
                 
                 if ($locationFound) {
                     $userData->getActivity()->setLocation($locationFound);
+                }
+
+                $city = $location->getCity();
+                $cityFound = $em->getRepository(City::class)->findOneBy(['name' => $city->getName()]);
+
+                if ($cityFound) {
+                    $userData->getActivity()->getLocation()->setCity($cityFound);
                 }
             }
 
