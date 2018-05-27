@@ -47,12 +47,12 @@
     {{ form_start(form) }}
         {% if user.isblocked == true %}
             {{ form_row(form.blockAction, {
-                'label': "Unblock",
+                'label': "Atblokuoti",
                 'attr': {'class': 'btn btn-green'}
             }) }}
         {% else %}
             {{ form_row(form.blockAction, {
-                'label': "Block",
+                'label': "Blokuoti",
                 'attr': {'class': 'btn btn-danger border-rad'}
             }) }}
         {% endif %}
