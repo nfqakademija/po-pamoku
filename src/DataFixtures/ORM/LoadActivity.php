@@ -37,9 +37,9 @@ class LoadActivity extends Fixture implements DependentFixtureInterface
             ->setDescription("Mūsų teikiamos būrelio paslaugos yra vedamos profesionalių dėstytojų,
              kvalifikuotų bei atestuotų specelistų. Kiekvieno užsiemimo metu mokiniui suteikiamos tiek teorinės,
              tiek praktinės žinios apie vykdomą būrelio užsiemimą. Motyvuodami mokinius lankyti užsiemimą rengiame
-             kiekvieno mėsneio pabaigoje motyvacines dovanas, prizus. Visi ". $activity->getAgeFrom() . " - " .
-                $activity->getAgeTo() . "mokyniai norintys lankyti užsiemimą gali kreiptis į mus žinute arba atvykus
-                pas mus kreiptis į administraciją. Laukiame jūsų pas mūsų.")
+             kiekvieno mėsnesio pabaigoje motyvacines dovanas, prizus. Visi ". $activity->getAgeFrom() . " - " .
+                $activity->getAgeTo() . " metų mokyniai norintys lankyti užsiemimą gali kreiptis į mus žinute arba atvykus
+                pas mus nurodytu adresu.")
             ->setLocation($this->getReference($index+101))
             ->setName($activityData[0])
             ->setPathToLogo('')
