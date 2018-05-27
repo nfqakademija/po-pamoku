@@ -18,8 +18,11 @@
                 {% if not app.user %}
                     <p class="col-12 text-left text-lg-center pl-4 px-lg-0"></p>
                     <a href="{{ path('registration', {'role': 'user'}) }}" class="btn btn-main-register ml-4 ml-lg-0 mr-3">Vartotojo registracija</a>
-                    <a href="{{ path('registration', {'role': 'owner'}) }}" class="btn btn-main-register ml-4 ml-sm-0">Būrelio registracija</a>
+                    <a href="{{ path('registration', {'role': 'owner'}) }}" class="btn btn-main-register ml-4 ml-sm-0 btn-reg-activity">Būrelio registracija</a>
                 {% endif %}
+                    <div class="col-12 text-left text-lg-center">
+                        <a class='text-white btn btn-main-register mt-2 mt-sm-3 ml-2 ml-lg-0' onclick="scrollToView()" name="#scroll">Ieškoti būrelio</a>
+                    </div>
             </div>
         </div>
     </div>
@@ -29,5 +32,14 @@
 {% endblock %}
 
 {% block javascripts %}
+    <script>
+        function scrollToView() {
+            const filter = document.getElementById('filterTop').offsetTop;
+                window.scrollTo({
+                  top: filter - 68,
+                  behavior: "smooth"
+                });
+        }
+    </script>
 {% endblock %}
 
