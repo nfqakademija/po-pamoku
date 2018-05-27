@@ -119,10 +119,10 @@ const btnSwitch = (
             className="btn map-btn mt-3"
             onClick={() => {
                 this.setState({ isMap: !this.state.isMap });
-                let top = document.getElementById('toTop').offsetTop;
-                window.scrollTo({
-                  top: top
-                });
+                // let top = document.getElementById('toTop').offsetTop;
+                // window.scrollTo({
+                //   top: top
+                // });
             }}>
               <i className="fas fa-map-marker"></i>
       <span className="location-btn pl-2">Žemėlapis</span>

@@ -16,9 +16,9 @@
                     <div class="foto2">
                     </div>
                 {% if not app.user %}
-                    <p class="col-12 text-left text-lg-center pl-4 px-lg-0">REGISTRACIJA</p>
-                    <a href="{{ path('registration', {'role': 'user'}) }}" class="btn btn-main-register ml-4 ml-lg-0 mr-3">Ieškau būrelio</a>
-                    <a href="{{ path('registration', {'role': 'owner'}) }}" class="btn btn-main-register">Siūlau būrelį</a>
+                    <p class="col-12 text-left text-lg-center pl-4 px-lg-0"></p>
+                    <a href="{{ path('registration', {'role': 'user'}) }}" class="btn btn-main-register ml-4 ml-lg-0 mr-3">Vartotojo registracija</a>
+                    <a href="{{ path('registration', {'role': 'owner'}) }}" class="btn btn-main-register ml-4 ml-sm-0">Būrelio registracija</a>
                 {% endif %}
             </div>
         </div>
