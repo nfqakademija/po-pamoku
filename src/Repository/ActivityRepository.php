@@ -109,6 +109,17 @@ class ActivityRepository extends ServiceEntityRepository
                 ->andWhere('a.rating >= :rating')
                 ->setParameter('rating', $this->filters["rating"]);
         }
+    
+        if (!empty($this->filters["subcategoryName"])) {
+            $qb = $qb
+                ->andWhere('sc.name = :subcategory')
+                ->setParameter('subcategory', $this->filters["subcategoryName"]);
+        }
+        if (!empty($this->filters["cityName"])) {
+            $qb = $qb
+                ->andWhere('c.name = :city')
+                ->setParameter('city', $this->filters["cityName"]);
+        }
         
         return $qb;
     }
