@@ -4,6 +4,12 @@
     border-radius: 4px;
     width: 144px;
 }
+.geo-btn {
+    position: absolute;
+    z-index: 1;
+    top: -6px;
+    left: 164px;
+}
 .map-btn:hover {
     background: #38bb80;
 }
@@ -41,5 +47,11 @@
     overflow: hidden;
     img {
         width: 250px;
+    }
+}
+@media screen and (max-width: 375px) {
+    .geo-btn {
+        top: 36px;
+        left: 10px;
     }
 }

@@ -169,49 +169,73 @@ const btnSwitch = (
               {btnSwitch}
 
           </div> */}
-      <div className="container">
-      <div className="row" id="rowRelative">
-        <div className="col-3 pt-5" id="filter">
-                {btnSwitch}
-            <Filter
-              onChange={this.onFilterChange} />
+      
+        <div className="col-12 search-panel">            
                 <div id="toTop"></div>
-                
-        </div>
-        <div id="spacer"></div>
-        <div className="col-9">
-                {/*<Sort />*/}
-                {this.state.isMap &&
-                  <div className="container pt-5" id="map">
-                    <div className="row justify-content-between">
-                      <div className="py-3 col-3">
-                        {geo}
-                      </div>
-                      <div className="py-3 col-2 text-right">
-                        <button className="btn exit-btn"
-                          onClick={() => this.setState({ isMap: false })}>
-                        <i className="fas fa-times"></i>
-                        </button>
-                      </div>
-                      <div className="col-12">
-                    <MapComponent query={this.state.query} zoom={this.state.zoom} lat={this.state.lat} lng={this.state.lng} />
-                      </div>
-                    </div>  
+            <ul className="nav nav-tabs justify-content-center" id="searchTab" role="tablist">
+              <li className="nav-item">
+                <a className="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Paieška</a>
+                  </li>
+              <li className="nav-item">
+                <a className="nav-link" id="map-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false"
+                      onClick={() => {
+                        this.setState({ isMap: true });
+                        let top = document.getElementById('toTop').offsetTop;
+                        window.scrollTo({
+                          top: top
+                        });
+                      }}>
+                      Žemėlapis
+                    </a>
+                  </li>
+                </ul>
+            <div className="tab-content" id="searchTabContent">
+              <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                  <div className="container">
+                  <Filter
+                    onChange={this.onFilterChange} />
                   </div>
-                }
-                <div className="row activities py-5">
+                  </div>
+              <div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                    {this.state.isMap &&
+                      <div className="" id="map">
+                        <div className="row justify-content-between position-relative">
+                          <div className="py-3 col-3 geo-btn">
+                            {geo}
+                          </div>
+                          {/* <div className="py-3 col-2 text-right">
+                            <button className="btn exit-btn"
+                              onClick={() => this.setState({ isMap: false })}>
+                              <i className="fas fa-times"></i>
+                            </button>
+                          </div> */}
+                          <div className="col-12">
+                            <MapComponent query={this.state.query} zoom={this.state.zoom} lat={this.state.lat} lng={this.state.lng} />
+                          </div>
+                        </div>
+                      </div>
+                    }
+                  </div>
+                </div>
+        </div>
+        {/* <div id="spacer"></div> */}
+          <div className="container">
+            <div className="row">
+        <div className="col-12">
+                {/*<Sort />*/}
+                <div className="row activities pb-5">
 
                   {activities.length !== 0 ? (activities.map((activity, index) =>
                     <div key={"currentAct" + index} className="col-xs-6 col-sm-6 col-lg-4 py-3">
                       <div className="activity-card">
                         <div className="card-image">
-                          <div className="overlay">
-                            <a className="card-btn" href={"/activity/" + activity.id}><i className="fas fa-search-plus"></i></a>
-                          </div>
+                          
+                            <a className="card-btn overlay" href={"/activity/" + activity.id}><i className="fas fa-search-plus"></i></a>
+                          
                           <img className="img-fluid" src="https://placeimg.com/640/480/any" alt="Card image cap" />
-                          {/* <div className="like-btn">
+                          <div className="like-btn">
                             <i className="far fa-heart"></i>
-                          </div> */}
+                          </div>
                           <div className="price">
                             {activity.priceFrom}-{activity.priceTo} €
                           </div>

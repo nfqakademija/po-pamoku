@@ -1,29 +1,24 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Activities{% endblock %}
+{% block title %}Po pamokų{% endblock %}
 
 {% block body %}
 <div class="main">
     <div class="hero">
         <div class="container pt-4">
-            <div class="row justify-content-center">
-                <div class="col-12">
-                    <h1 class="hero-title">Po pamokų</h1>
-                </div>
+            <div class="row justify-content-start justify-content-lg-center hero-row">
                 <div class="col-12 col-md-6">
-                    <p class="text-white text-center">Visi būreliai vienoje vietoje.<br> Raskite įdomiausius būrelius ir po pamokines veiklas!</p>
-                    
+                    <h1 class="hero-title text-left text-md-center">Po pamokų</h1>
+                    <p class="text-left text-lg-center mx-0 mx-md-auto pt-4 hero-text">Visi būreliai vienoje vietoje.<br> Raskite įdomiausius būrelius ir po pamokines veiklas!</p>
                 </div>
-            </div>
-            <div class="row justify-content-center">
+                    <div class="foto1">
+                    </div>
+                    <div class="foto2">
+                    </div>
                 {% if not app.user %}
-                <p class="col-12 text-center text-white">REGISTRACIJA</p>
-                            <a href="{{ path('registration', {'role': 'user'}) }}" class="btn btn-main-register mr-2">Ieškau būrelio</a>
-
-                        <a href="{{ path('registration', {'role': 'owner'}) }}" class="btn btn-main-register mr-2">Siūlau būrelį</a>
-                    {# <div class="col-12 col-sm-6">
-                        <a href="{{ path('login') }}" class="btn btn-green">Prisijungti</a>
-                    </div> #}
+                    <p class="col-12 text-left text-lg-center pl-4 px-lg-0">REGISTRACIJA</p>
+                    <a href="{{ path('registration', {'role': 'user'}) }}" class="btn btn-main-register ml-4 ml-lg-0 mr-3">Ieškau būrelio</a>
+                    <a href="{{ path('registration', {'role': 'owner'}) }}" class="btn btn-main-register">Siūlau būrelį</a>
                 {% endif %}
             </div>
         </div>

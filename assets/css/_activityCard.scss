@@ -45,7 +45,11 @@
     padding: 5px 8px 3px;
     border-radius: 50%;
     font-size: 18px;
-    z-index: 2;
+    z-index: 4;
+    cursor: pointer;
+}
+.like-btn:hover {
+  box-shadow: 0 0 20px #E91E63;
 }
 .price {
   position: absolute;
@@ -55,7 +59,6 @@
     padding: 4px 8px 4px 4px;
     font-size: 14px;
     background: #0000006e;
-    border-bottom-left-radius: 10px;
 }
 .overlay {
   position: absolute;
@@ -71,6 +74,9 @@
     cursor: pointer;
     z-index: 3;
     transition: all, 0.3s;
+}
+.overlay:hover {
+  text-decoration: none;
 }
 .activity-card:hover .overlay {
   opacity: 1;

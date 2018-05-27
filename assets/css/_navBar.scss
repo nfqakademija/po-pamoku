@@ -8,18 +8,18 @@ font-size: 28px;
   nav {
    transition: all 300ms;
  }
- nav a:hover {
-   color: #fff;
- }
+//  nav a:hover {
+//    color: #fff;
+//  }
  .nav-trans a:hover > span {
    border-bottom: 2px solid #fff;
     padding-bottom: 4px;
  }
 .nav-trans {
-background: transparent;
+background: #fff;
 }
 .nav-trans a {
-  color: #fff;
+  color: #673AB7;
 }
 .nav-white {
 background: #fff;

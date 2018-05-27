@@ -16,13 +16,13 @@ body {
 .card {
   border: none!important;
   box-shadow: 1px 1px 8px 0px rgba(0, 0, 0, 0.2);
-  margin: 10px;
+  margin-top: 10px;
   width: 100%;
   border-radius: 0!important;
 }
 
  .hero {
-    background: linear-gradient(to left bottom, #2da2c5eb, rgba(126, 85, 189, 0.94)), url("../img/mainBg.jpg");
+    // background: linear-gradient(to left bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../img/mainBg.jpg");
     background-position: top;
     background-size: cover;
     min-height: 500px;
@@ -30,19 +30,53 @@ body {
     display: flex;
     align-items: center;
  }
+ .foto1 {
+     background: url("../img/girl1.png") no-repeat left;
+     background-size: cover;
+     max-width: 360px;
+     height: 432px;
+     width: 100%;
+     position: absolute;
+     z-index: -1;
+    left: 0;
+    top: -50px;
+ }
+ .foto2 {
+     background: url("../img/girl2.png") no-repeat right;
+     background-size: cover;
+     max-width: 360px;
+     height: 432px;
+     width: 100%;
+     position: absolute;
+     z-index: -1;
+    right: 0;
+    top: -50px;
+ }
+ .hero-row {
+     position: relative;
+     min-height: 300px;
+     align-items: center;
+ }
  .hero-title {
-   color: #ffffff;
     text-align: center;
-    font-size: 60px;
+    font-size: 70px;
+    font-family: 'Pacifico', cursive;
+ }
+ .hero-text {
+     font-size: 18px;
+     padding: 0 10px;
+     max-width: 430px;
+    margin: 0 auto;
  }
  .btn.btn-main-register {
-  color: #fff;
-  border: 2px solid #fff;
-  border-radius: .25rem;
+    color: #ffffff;
+    border-radius: .25rem;
+    font-size: 16px;
+    background: #673AB7;
+    width: 130px;
  }
  .btn.btn-main-register:hover {
-  background: #fff;
-  color: #35a1c5;
+  background: #4b2b85;
  }
  .btn.btn-green {
    color: #fff;
@@ -77,12 +111,12 @@ body {
 }
 
  .bg-blue {
-    background: linear-gradient(to left bottom, #2da2c5f5, #7e55bdf7), url("../img/mainBg.jpg");
+    background: linear-gradient(to left bottom, #2da2c5f5, #7e55bdf7);
     background-position: center;
     background-size: cover;
  }
   .bg-profile {
-    background: linear-gradient(to left bottom, #2da2c5f5, #7e55bdf7), url("../img/mainBg.jpg");
+    background: linear-gradient(to left bottom, #2da2c5f5, #7e55bdf7);
     background-position: center;
     background-size: cover;
  }
@@ -151,14 +185,43 @@ textarea {
     border-radius: 4px;
 }
 .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
+    border: none;
+    border-bottom: 2px solid #673AB7;
 }
-#myTab {
+.nav-tabs .nav-link:hover, .nav-tabs .nav-link.active:hover, .nav-tabs .nav-link:focus {
+    background: #f8f9fa;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    border-top-color: transparent;
+}
+#searchTab, #activityTab {
     .nav-link {
         color: #495057;
     }
     .nav-link.active {
         color: #673AB7;
+    }
+}
+@media screen and (max-width: 992px) {
+    .foto1 {
+        display: none;
+    }
+    .foto2 {
+        background-position: left;
+        width: 100%;
+        max-width: 100%;
+    }
+}
+@media screen and (max-width: 767px) {
+    .foto2 {
+        top: -64px;
+    }
+}
+@media screen and (max-width: 492px) {
+    .hero-title {
+        font-size: 55px;
+    }
+    .foto2 {
+        top: -60px;
     }
 }

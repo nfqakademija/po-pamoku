@@ -1,8 +1,13 @@
 .registration-bg {
   padding: 80px 0 60px;
-  background:  #e8e8e8;
+  background:  #eee;
   }
   .registration-aside {
+   background-color: transparent;
+    padding: 60px 30px;
+    color: #fff;
+ }
+ .login-aside {
    background-color: transparent;
     padding: 60px 30px;
     color: #fff;
@@ -13,15 +18,15 @@
  .registration-form {
    padding: 60px;
  }
- .btn.btn-register {
-   /* background-color: #f7e9a5; */
-    color: #464646;
+ .btn-register {
     color: #fff;
-    background-color: #3ecf8e;
+    border: 2px solid #fff;
     border-radius: .25rem;
+    font-size: 16px;
  }
- .btn.btn-register:hover {
-       background-color: #38bb80;
+ .btn-register:hover {
+   color: #7e55bdf7;
+   background: #fff;
  }
 .registration-form div {
    margin-bottom: 20px;
@@ -80,4 +85,21 @@ form li {
     outline: none;
   border-bottom: 1px solid #7e55bdf7;
   }
+}
+@media screen and (max-width: 576px) {
+  .registration-aside {
+    padding: 20px 15px;
+}
+  .registration-form {
+    padding: 20px 15px;
+  }
+  .registration-bg {
+    padding: 59px 0 0;
+}
+  .registration-cont {
+    padding: 0;
+  }
+  .login-col {
+   padding: 0;
+ }
 }
