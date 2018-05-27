@@ -63,9 +63,9 @@ class ActivityController extends Controller
             }
         }
         
-        $city = $activity->getLocation()->getCity()->getName();
-        $subcategory = $activity->getSubcategory()->getName();
-        $criteria = ["cityName" => $city, "subcategoryName" => $subcategory];
+        $city = $activity->getLocation()->getCity()->getId();
+        $category = $activity->getSubcategory()->getCategory()->getId();
+        $criteria = ["city" => $city, "category" => $category, 'id' => $id];
         $activities = $activityRepository->fetchFilteredData($criteria, ["rating" => "DESC"]);
         $similar = array_slice($activities, 0, 3);
 

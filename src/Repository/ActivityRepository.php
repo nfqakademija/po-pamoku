@@ -53,13 +53,8 @@ class ActivityRepository extends ServiceEntityRepository
         if (!empty($this->filters["search"])) {
             $search = "%" . $this->filters["search"] . "%";
             $qb = $qb
-                ->orWhere('a.name like :name OR w.name like :weekday')
-                ->orWhere('l.street like :street')
-                ->orWhere('l.postcode like :postcode')
-                ->setParameter('name', $search)
-                ->setParameter('street', $search)
-                ->setParameter('postcode', $search)
-                ->setParameter('weekday', $search);
+                ->orWhere('a.name like :name')
+                ->setParameter('name', $search);
         }
         
         if (!empty($this->filters["price"]) && is_numeric($this->filters["price"])) {
@@ -109,16 +104,11 @@ class ActivityRepository extends ServiceEntityRepository
                 ->andWhere('a.rating >= :rating')
                 ->setParameter('rating', $this->filters["rating"]);
         }
-    
-        if (!empty($this->filters["subcategoryName"])) {
+        
+        if (!empty($this->filters["id"])) {
             $qb = $qb
-                ->andWhere('sc.name = :subcategory')
-                ->setParameter('subcategory', $this->filters["subcategoryName"]);
-        }
-        if (!empty($this->filters["cityName"])) {
-            $qb = $qb
-                ->andWhere('c.name = :city')
-                ->setParameter('city', $this->filters["cityName"]);
+                ->andWhere('a.id NOT IN (:id)')
+                ->setParameter('id', $this->filters["id"]);
         }
         
         return $qb;

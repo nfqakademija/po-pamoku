@@ -34,17 +34,12 @@ class LoadActivity extends Fixture implements DependentFixtureInterface
         $activity
             ->setAgeFrom(rand(1, 17))
             ->setAgeTo(18)
-            ->setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-            Nam dictum erat lorem, ac elementum nunc molestie vitae.
-            Aliquam purus felis, blandit non maximus quis, lacinia ut nibh. Mauris vel maximus est. 
-            Etiam congue mauris nec ligula pellentesque sagittis. 
-            Duis elementum rutrum orci, ut sollicitudin eros commodo sed. 
-            Donec et pulvinar est. Integer imperdiet non arcu vel feugiat. 
-            Mauris vehicula justo at diam pharetra, in egestas ex congue. 
-            Donec lobortis cursus ipsum, at pellentesque neque pretium eget. 
-            Ut dignissim metus ut nisi venenatis, quis porttitor magna ornare. 
-            Pellentesque mollis erat quis orci ullamcorper, sed volutpat lorem ultrices. 
-            Nunc vehicula, nibh quis imperdiet iaculis, ante lectus rhoncus lectus, eu ultricies ligula lacus ac purus.")
+            ->setDescription("Mūsų teikiamos būrelio paslaugos yra vedamos profesionalių dėstytojų,
+             kvalifikuotų bei atestuotų specelistų. Kiekvieno užsiemimo metu mokiniui suteikiamos tiek teorinės,
+             tiek praktinės žinios apie vykdomą būrelio užsiemimą. Motyvuodami mokinius lankyti užsiemimą rengiame
+             kiekvieno mėsneio pabaigoje motyvacines dovanas, prizus. Visi ". $activity->getAgeFrom() . " - " .
+                $activity->getAgeTo() . "mokyniai norintys lankyti užsiemimą gali kreiptis į mus žinute arba atvykus
+                pas mus kreiptis į administraciją. Laukiame jūsų adresu " . $this->getReference($index+101) . ".")
             ->setLocation($this->getReference($index+101))
             ->setName($activityData[0])
             ->setPathToLogo('')
