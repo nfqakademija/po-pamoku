@@ -10,13 +10,13 @@
             </div>
             <div class="col-12 col-sm-4">
                 <div>
-                    <a class="footer-link" href="">Registracija ieškantiems būrelio</a>
+                    <a class="footer-link" href="{{ path('registration', {'role': 'user'}) }}">Registracija ieškantiems būrelio</a>
                 </div>
                 <div>
-                    <a class="footer-link" href="">Registracija būrelio vadovui</a>
+                    <a class="footer-link" href="{{ path('registration', {'role': 'owner'}) }}">Registracija būrelio vadovui</a>
                 </div>
                 <div>
-                    <a class="footer-link" href="">Prisijungti</a>
+                    <a class="footer-link" href="{{ path('login') }}">Prisijungti</a>
                 </div>
             </div>
             <div class="col-12 col-sm-4">

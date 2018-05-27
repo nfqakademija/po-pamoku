@@ -5,6 +5,8 @@
                 'id': 'ratingForm'
             }
         }) }}
+        <div class="py-4 px-2 col-12" id="rating">
+        <h3 class="pb-3">Reitingas</h3>
         <div class="rate-area">
             {% for radioRate in ratingForm.rating %}
                 {# {{ form_label(radioRate, null, {'label_attr': {'class':'radio-inline'}}) }}
@@ -22,6 +24,6 @@
         {% else %}
             <button type="submit" class="btn btn-green" formnovalidate>Įvertinti</button>
         {% endif %}
-
+</div>
     {{ form_end(ratingForm) }}
 {% endif %}

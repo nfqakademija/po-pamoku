@@ -36,19 +36,19 @@
         {% if 'ROLE_OWNER' in user.roles %}
             <tr>
                 <th>Būrelis</th>
-                <td><a href="{{ path('activity_show', {'id': user.activity}) }}" class="btn btn-register">Peržiūrėti</a></td>
+                <td><a href="{{ path('activity_show', {'id': user.activity}) }}" class="btn btn-green">Peržiūrėti</a></td>
             </tr>
         {% endif %}
         <tr>
             <th>Komentarai</th>
-            <td><a href="{{ path('admin_user_comments_action', {'id': user.id}) }}" class="btn btn-register">Peržiūrėti</a></td>
+            <td><a href="{{ path('admin_user_comments_action', {'id': user.id}) }}" class="btn btn-green">Peržiūrėti</a></td>
         </tr>
     </table>
     {{ form_start(form) }}
         {% if user.isblocked == true %}
             {{ form_row(form.blockAction, {
                 'label': "Unblock",
-                'attr': {'class': 'btn btn-register'}
+                'attr': {'class': 'btn btn-green'}
             }) }}
         {% else %}
             {{ form_row(form.blockAction, {

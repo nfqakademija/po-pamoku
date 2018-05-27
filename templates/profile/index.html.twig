@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{% endblock %}
+{% block title %}Po pamokų{% endblock %}
 
 {% block body %}
 <header class="bg-profile">
@@ -41,7 +41,7 @@
             {% endif %}
         {% endfor %}
     </table>
-      <a href="{{ path('profile_edit') }}" class="btn btn-register mr-3">Redaguoti profilį</a>
+      <a href="{{ path('profile_edit') }}" class="btn btn-green mr-1 mr-md-3">Redaguoti profilį</a>
     <a href="{{ path('change_password') }}" class="btn myPlace-btn">Keisti slaptažodį</a>
 </div>
   

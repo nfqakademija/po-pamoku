@@ -6,23 +6,34 @@
             Po pamokų
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile-nav">
-            <span class="navbar-toggle-icon"></span>
+            <span class="navbar-toggle-icon"><i class="fas fa-bars"></i></span>
         </button>
 
         <div class="collapse navbar-collapse" id="mobile-nav">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
+                <li class="nav-item text-center">
                     <a href="/" class="nav-link">Pagrindinis</a>
                 </li>
                 {% if not app.user %}
                     <li class="nav-item">
                         <a href="{{ path('login') }}" class="nav-link btn btn-green">Prisijungti</a>
                     </li>
+                    <li class="nav-item ml-0 my-2 my-sm-0 ml-sm-2">
+                        <div class="dropdown">
+                            <a class="nav-link btn btn-green dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Registruotis
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="{{ path('registration', {'role': 'user'}) }}">Ieškau būrelio</a>
+                                <a class="dropdown-item" href="{{ path('registration', {'role': 'owner'}) }}">Siūlau būrelį</a>
+                            </div>
+                        </div>
+                    </li>
                 {% else %}
-                    <li class="nav-item">
+                    <li class="nav-item text-center">
                         <a href="{{ path('logout') }}" class="nav-link">Atsijungti</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item text-center">
                         {% if is_granted('ROLE_ADMIN') %}
                             <a href="{{ path('admin_profile') }}" class="nav-link">Admin</a>
                         {% else %}

@@ -41,89 +41,52 @@ class Filter extends React.Component {
                 console.error(error);
             });
     }
-    // /api/filter/subcategory/{category}
-    getSubcategories(category) {
-        axios.get('/api/filter/subcategory/' + category)
-            .then(function (response) {
-                this.setState({
-                    subcategories: response.data
-                }, () => {
-                    // console.log("getSubcategories callback: " + this.state.subcategories)
-                });
-            }.bind(this))
-            .catch(function (error) {
-                console.error(error);
-            });
-    }
-
+    // getSubcategories(category) {
+    //     axios.get('/api/filter/subcategory/' + category)
+    //         .then(function (response) {
+    //             this.setState({
+    //                 subcategories: response.data
+    //             }, () => {
+    //             });
+    //         }.bind(this))
+    //         .catch(function (error) {
+    //             console.error(error);
+    //         });
+    // }
     render() {
         const { onChange } = this.props;
         const { categories, cities, times, weekdays, category, cityId, time, weekday, search, age, price, subcategories, subcategory } = this.state;
         return (
-            <div className="row">
-                     <div className="pt-2">
-                    <label>Pavadinimas</label>
-                    <input className="filter" name="search" type="text" onChange={(event) => {
-                        this.setState({ search: event.currentTarget.value }, () => {
-                            let copy = Object.assign({ category, cityId, time, weekday, search, age, price, subcategory }, this.state);
-                            onChange(copy);
-                        });
-
-                    }} />
-                </div>
-            <div className="d-flex">
-                <div className="pt-2 mr-4">
-                    <label>Kaina</label>
-                        <input className="filter filter-small" name="price" type="number" onChange={(event) => {
-                        this.setState({ price: event.target.value }, () => {
-                            let copy = Object.assign({ category, cityId, time, weekday, search, age, price, subcategory }, this.state);
-                            onChange(copy);
-                        }
+            <div className="row pt-3 pb-4">
+                <div className="col-6 col-md-4 col-lg-3 py-2">
+                    <input className="filter" name="search" type="text" placeholder="Pavadinimas" onChange={(event) => {
+                        this.setState({ search: event.currentTarget.value }, 
+                            () => onChange({ ...this.state })
                         );
-
                     }} />
-            
                 </div>
-                <div className="pt-2">
-                    <label>Amžius</label>
-                    <input className="filter filter-small" name="age" type="number" onChange={(event) => {
-                        this.setState({ age: event.target.value }, () => {
-                            let copy = Object.assign({ category, cityId, time, weekday, search, age, price, subcategory }, this.state);
-                            onChange(copy);
-                        }
+                <div className="col-6 col-md-4 col-lg-3 py-2">
+                        <input className="filter filter-small" name="price" type="number" placeholder="Kaina" onChange={(event) => {
+                        this.setState({ price: event.target.value }, 
+                            () => onChange({ ...this.state })
                         );
-
                     }} />
                 </div>
-            </div>
-                <div className="pt-2 mr-2">
-                    <label>Miestas</label>
-
+                <div className="col-6 col-md-4 col-lg-3 py-2">
+                    <input className="filter filter-small" name="age" type="number" placeholder="Amžius" onChange={(event) => {
+                        this.setState({ age: event.target.value },
+                            () => onChange({ ...this.state })
+                        );
+                    }} />
+                </div>
+                <div className="col-6 col-md-4 col-lg-3 py-2">
                     <select name="city" className="filter filter-select" onChange={(event) => {
-
-                        function filterByName(item) {
-                            if (item.name == event.target.value) {
-                                return true;
-                            } else {
-                                return false;
-                            }
-                        }
-                        let selectedCity = cities.filter(filterByName);
-                        if (selectedCity.length === 0) {
-                            this.setState({ cityId: '' }, () => {
-                                let copy = Object.assign({ category, cityId, time, weekday, search, age, price, subcategory }, this.state);
-                                onChange(copy);
-                            });
-                        } else {
-                            this.setState({ cityId: selectedCity[0].id }, () => {
-                                let copy = Object.assign({ category, cityId, time, weekday, search, age, price, subcategory }, this.state);
-                                onChange(copy);
-                            });
-                        }
-
-                    }}>
-                        <option name="cityPlaceholder">Visi</option>
-
+                        const selectedCity = cities.find((item) => item.name == event.target.value);
+                        this.setState({
+                            cityId: selectedCity ? selectedCity.id : '',
+                            }, () => onChange({ ...this.state }));
+                        }}>
+                        <option name="cityPlaceholder">Miestas</option>
                         {
                             cities.length !== 0 ? (cities.map((city, index) =>
                                 <option key={"city" + index}>
@@ -132,44 +95,23 @@ class Filter extends React.Component {
                         }
                     </select>
                 </div>
-                <div className="pt-2 mr-2">
-                    <label>Kategorija</label>
+                <div className="col-6 col-md-4 col-lg-3 py-2">
                     <select name="category" className="filter filter-select" onChange={(event) => {
-
-                        function filterByName(item) {
-                            if (item.name == event.target.value) {
-                                return true;
-                            } else {
-                                return false;
-                            }
-                        }
-                        let selectedCategory = categories.filter(filterByName);
-                        if (selectedCategory.length === 0) {
-                            this.setState({ category: '', subcategory: '' }, () => {
-                                let copy = Object.assign({ category, cityId, time, weekday, search, age, price, subcategory }, this.state);
-                                onChange(copy);
-                            });
-                        } else {
-
-                            this.setState({ category: selectedCategory[0].id, subcategory: '' }, () => {
-                                this.getSubcategories(this.state.category);
-                                let copy = Object.assign({ category, cityId, time, weekday, search, age, price, subcategory }, this.state);
-                                onChange(copy);
-                            }
-                            );
-                        }
-
-                    }}>
-                        <option name="categoryPlaceholder">Visos</option>
+                        const selectedCategory = categories.find((item) => item.name == event.target.value);
+                        this.setState({
+                            category: selectedCategory ? selectedCategory.id : '',
+                            subcategory: '',
+                            }, () => onChange({ ...this.state }));
+                        }}>
+                        <option name="categoryPlaceholder">Kategorija</option>
                         {
                             categories.length !== 0 ? (categories.map((category, index) =>
                                 <option key={"category" + index}>
                                     {category.name}
-                                </option>)) : ('no data')
+                                </option>)) : ('')
                         }
                     </select>
                 </div>
-
                 {/* <div>
                     {
                         category !== '' ? (
@@ -198,8 +140,6 @@ class Filter extends React.Component {
                                             onChange(copy);
                                         });
                                     }
-
-
                                 }}>
                                     <option name="subcategoryPlaceholder">Visi</option>
                                     {subcategories.map((subcategory, index) =>
@@ -213,25 +153,16 @@ class Filter extends React.Component {
                     }
                 </div> */}
 
-                <div className="pt-2 mr-2">
-                <label>Savaitės dienos</label>
+                <div className="col-6 col-md-4 col-lg-3 py-2">
                     <select name="weekday" className="filter filter-select" onChange={(event) => {
-                    if (event.target.value === 'Savaitės diena') {
-                        this.setState({ weekday: '' }, () => {
-                            let copy = Object.assign({ category, cityId, time, weekday, search, age, price, subcategory }, this.state);
-                            onChange(copy);
-                        }
-                        );
-                    } else {
-                        this.setState({ weekday: weekdays.indexOf(event.target.value) + 1 }, () => {
-                            let copy = Object.assign({ category, cityId, time, weekday, search, age, price, subcategory }, this.state);
-                            onChange(copy);
-                        }
-                        );
-                    }
-
+                        this.setState({
+                            weekday: event.target.value === 'Savaitės diena' ? '' : (weekdays.indexOf(event.target.value) + 1),
+                        }, () => {
+                            console.log(this.state.weekday);
+                            onChange({ ...this.state })
+                        });
                 }}>
-                    <option name="weekdayPlaceholder">Visos</option>
+                    <option name="weekdayPlaceholder">Savaitės diena</option>
                     {
                         weekdays.length !== 0 ? (weekdays.map((weekday, index) =>
                             <option key={"weekday" + index}>
@@ -240,25 +171,15 @@ class Filter extends React.Component {
                     }
                 </select>
             </div>
-                <div className="pt-2 mr-2">
-                <label>Būrelio laikas</label>
+                <div className="col-6 col-md-4 col-lg-3 py-2">
                     <select name="time" className="filter filter-select" onChange={(event) => {
-                    if (event.target.value === 'Laikas') {
-                        this.setState({ time: '' }, () => {
-                            let copy = Object.assign({ category, cityId, time, weekday, search, age, price, subcategory }, this.state);
-                            onChange(copy);
-                        }
-                        );
-                    } else {
-                        this.setState({ time: event.target.value }, () => {
-                            let copy = Object.assign({ category, cityId, time, weekday, search, age, price, subcategory }, this.state);
-                            onChange(copy);
-                        }
-                        );
-                    }
-
+                        this.setState({
+                            time: event.target.value === 'Laikas' ? '' : event.target.value,
+                        }, () => {
+                            console.log(this.state.time);
+                            onChange({ ...this.state })});
                 }}>
-                    <option name="timePlaceholder">Pradžia</option>
+                    <option name="timePlaceholder">Laikas</option>
                     {
                         times.length !== 0 ? (times.map((time, index) =>
                             <option key={"time" + index}>
@@ -266,8 +187,7 @@ class Filter extends React.Component {
                             </option>)) : ('no data')
                     }
                 </select>
-            </div>
-
+                </div>
             </div>
         )
     }

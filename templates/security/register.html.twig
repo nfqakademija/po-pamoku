@@ -2,21 +2,24 @@
 
 {% block body %}
 <div class="registration-bg">
-    <div class="container">
+    <div class="container registration-cont">
         <div class="card">
+        <div class="container">
             <div class="row">
-                <div class="col-12 col-md-5 bg-blue">
-                    <div class="registration-aside">
+                <div class="col-12 col-lg-5 bg-blue">
+                    <div class="registration-aside row no-gutters">
                         <h1 class="registration-header">Registracija</h1>
                         <p class="lead">Po pamokų - tai platforma skirta atrasti įdomiausius būreliu ir po pamokines veiklas. 
                         Smagiausi užsiėmimai skirti įvairių amžiaus grupių vaikams bei jaunuoliams.</p>
                         <p>Registruokitės, kad galėtumėte susisiekti su būrelių vadovais, palikti atsiliepimus bei įventinti išbandytas veiklas.</p>
                         <p>Jeigu esate būrelio vadovas, registruokitės, norėdami sukurti savo būrelio profilį.</p>
-                        <p>Jau registravotės?</p>
-                        <a href="{{ path('login') }}" class="btn btn-main-register mr-2">Prisijungti</a>
+                        <div class="col-12">
+                            <p>Jau registravotės?</p>
+                            <a href="{{ path('login') }}" class="btn btn-register mr-2">Prisijungti</a>
+                        </div>
                     </div>
                 </div>
-                <div class="col-12 col-md-7">
+                <div class="col-12 col-lg-7 bg-white">
                     <div class="registration-form">
                         {{ form_start(form) }}
                         {{ form_row(form.name) }}
@@ -28,9 +31,10 @@
                         {% for child in form.children %}
                             {{ form_row(child) }}
                         {% endfor %}
-                        <button type="submit" class="btn btn-register" formnovalidate>Registruotis</button>
+                        <button type="submit" class="btn btn-green" formnovalidate>Registruotis</button>
                         {{ form_end(form) }}
                     </div>
+                </div>
                 </div>
             </div>
         </div>
