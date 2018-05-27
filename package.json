@@ -1,6 +1,7 @@
 {
   "devDependencies": {
     "@symfony/webpack-encore": "^0.17.0",
+    "popper.js": "1.12.9",
     "babel-eslint": "^8.2.3",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",

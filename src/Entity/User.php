@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use FOS\MessageBundle\Model\ParticipantInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -14,7 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
  *     message="Email is already in use."
  * )
  */
-class User implements UserInterface
+class User implements UserInterface, ParticipantInterface
 {
     /**
      * @ORM\Id()

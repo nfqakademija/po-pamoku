@@ -83,9 +83,13 @@ class Utils
                 if (in_array('postal_code', $component['types'])) {
                     $postcode = $component['short_name'];
                 }
+                if (in_array('route', $component['types'])) {
+                    $street = $component['short_name'];
+                }
+                if (in_array('locality', $component['types'])) {
+                    $city = $component['short_name'];
+                }
             }
-            $street = $address_components[2]['short_name'];
-            $city = $address_components[3]['short_name'];
             if (!isset($postcode)) {
                 $postcode = null;
             }

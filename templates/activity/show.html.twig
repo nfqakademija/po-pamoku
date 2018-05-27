@@ -32,6 +32,7 @@
                 <li><span><i class="fas fa-user"></i></span>{{ activity.ageFrom }} - {{ activity.ageTo }}</li>
                 <li><span><i class="fas fa-map-marker"></i></span>{{ activity.location.street }} {{ activity.location.house }}{% if activity.location.apartment %}-{{ activity.location.apartment }}{% endif %},
                             {{ activity.location.city.name }}</li>
+                <li><span><a href="{{ path('fos_message_thread_new') }}">Siųsti žinutę</a></span></li>
                 <li><span><i class="fas fa-calendar-alt"></i>Tvarkaraštis</span>
                     <ul>
                          {% for timetable in activity.timetables %}
@@ -59,14 +60,16 @@
                 </div>
                 <div class="tab-pane fade" id="reviewTab" role="tabpanel" aria-labelledby="review-tab">
                     <div class="row">
-                        
+
                             {{ include('activity/_ratingForm.html.twig') }}
-                        
+
                         <div class="py-4 px-2 col-12" id="comment">
                             <h3 class="pb-3">Komentarai</h3>
-                            {{ include('activity/_commentForm.html.twig') }}
+                                <div>
+                                    {{ include('activity/_commentForm.html.twig') }}
+                                </div>
+                            <div id="comments"></div>
                         </div>
-                        <div id="comments"></div>
                     </div>
                 </div>
             </div>

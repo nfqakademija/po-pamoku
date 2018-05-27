@@ -34,7 +34,9 @@ class ActivityController extends Controller
      */
     public function show($id, Request $request)
     {
-        $activity = $this->getDoctrine()->getRepository(Activity::class)->find($id);
+        $activityRepository = $this->getDoctrine()->getRepository(Activity::class);
+        $activity = $activityRepository->find($id);
+        
         $form = $this->createForm(CommentType::class);
         $user = $this->getUser();
         $ratingrepo = $this->getDoctrine()->getRepository(Rating::class);
@@ -60,19 +62,26 @@ class ActivityController extends Controller
                 $em->flush();
             }
         }
+        
+        $city = $activity->getLocation()->getCity()->getName();
+        $subcategory = $activity->getSubcategory()->getName();
+        $criteria = ["cityName" => $city, "subcategoryName" => $subcategory];
+        $activities = $activityRepository->fetchFilteredData($criteria, ["rating" => "DESC"]);
+        $similar = array_slice($activities, 0, 3);
 
-            if (!isset($response)) {
-                return $this->render('activity/show.html.twig', [
-                    'activity' => $activity,
-                    'form' => $form->createView(),
-                    'post' => $this->userCanPostComments($id),
-                    'rate' => $this->userDidRate($id),
-                    'ratingForm' => $ratingForm->createView()
-                ]);
-            }
-
-            return $response;
+        if (!isset($response)) {
+            return $this->render('activity/show.html.twig', [
+                'activity' => $activity,
+                'similar' => $similar,
+                'form' => $form->createView(),
+                'post' => $this->userCanPostComments($id),
+                'rate' => $this->userDidRate($id),
+                'ratingForm' => $ratingForm->createView()
+            ]);
         }
+
+        return $response;
+    }
 
     
     /**

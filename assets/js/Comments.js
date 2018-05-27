@@ -28,6 +28,19 @@ class Comments extends React.Component {
         };
     }
 
+    componentWillMount() {
+        this.getData();
+        this.setOnSubmit();
+    }
+
+    componentDidMount() {
+        this.getData();
+    }
+
+    componentDidUpdate() {
+        this.setOnSubmit();
+    }
+
     getData = () => {
         axios.get('/api/comments/'+this.state.id)
             .then(response => this.setState({
@@ -56,18 +69,7 @@ class Comments extends React.Component {
             });
     };
 
-    componentWillMount() {
-        this.getData();
-        this.setOnSubmit();
-    }
 
-    componentDidMount() {
-        this.getData();
-    }
-
-    componentWillUpdate() {
-        this.setOnSubmit();
-    }
 
     render() {
         return (
