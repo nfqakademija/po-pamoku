@@ -3,81 +3,132 @@
 {% block title %}{{ activity.name }}{% endblock %}
 
 {% block body %}
-<header class="bg-profile">
-    <div class="container">
-        <div class="row align-items-end min-height">
-            <div class="col-12">
-                <h1 class="text-white pb-4">{{ activity.name }}</h1>
+    <header class="bg-profile">
+        <div class="container">
+            <div class="row align-items-end min-height">
+                <div class="col-12">
+                    <h1 class="text-white pb-4">{{ activity.name }}</h1>
+                </div>
             </div>
         </div>
-    </div>
-</header>
-<div class="container">
-    <div class="row pb-4 pt-2">
-    {% if activity  %}
-        <div class="col-12 my-3">
-            <a class="btn btn-light border-rad" href="/">Atgal</a>
-        </div>
-        <div class="col-12 col-lg-4">
-            {% if activity.pathToLogo is not empty  %}
-                <img class="img-fluid mb-3" src="{{ asset( activity.pathToLogo) }}"/>
-            {% else %}
-                <img class="card-img-top mb-3" src="https://placeimg.com/640/480/any" alt="Card image cap" />
-            {% endif %}
-            <ul class="info-list">
-                <li>
-                <span>
-                <i class="fas fa-star"></i></span>{{ activity.rating|round(2) }}/5</li>
-                <li><span><i class="fas fa-euro-sign"></i></span>{{ activity.priceFrom }} - {{ activity.priceTo }}</li>
-                <li><span><i class="fas fa-user"></i></span>{{ activity.ageFrom }} - {{ activity.ageTo }}</li>
-                <li><span><i class="fas fa-map-marker"></i></span>{{ activity.location.street }} {{ activity.location.house }}{% if activity.location.apartment %}-{{ activity.location.apartment }}{% endif %},
-                            {{ activity.location.city.name }}</li>
-                <li><span><a href="{{ path('fos_message_thread_new') }}">Siųsti žinutę</a></span></li>
-                <li><span><i class="fas fa-calendar-alt"></i>Tvarkaraštis</span>
-                    <ul>
-                         {% for timetable in activity.timetables %}
-                                <li class="">{{ timetable.weekday.name }}:
-                                {{ timetable.timeFrom|date("H:i") }} - {{ timetable.timeTo|date("H:i") }}</li>
-                                {% endfor %}
-                    </ul>
-                </li>
-                   
-            </ul>
-        </div>
-        <div class="col-1"></div>
-             <div class="col-12 col-lg-6">
-            <ul class="nav nav-tabs" id="activityTab" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Aprašymas</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="review-tab" data-toggle="tab" href="#reviewTab" role="tab" aria-controls="profile" aria-selected="false">Atsiliepimai</a>
-                </li>
-            </ul>
-            <div class="tab-content" id="activityTabContent">
-                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                    <p class="px-2 mt-4 pb-5">{{ activity.description }}</p>
+    </header>
+    <div class="container">
+        <div class="row pb-4 pt-2">
+            {% if activity %}
+                <div class="col-12 my-3">
+                    <a class="btn btn-light border-rad" href="/">Atgal</a>
                 </div>
-                <div class="tab-pane fade" id="reviewTab" role="tabpanel" aria-labelledby="review-tab">
-                    <div class="row">
+                <div class="col-12 col-lg-4">
+                    {% if activity.pathToLogo is not empty %}
+                        <img class="img-fluid mb-3" src="{{ asset( activity.pathToLogo) }}"/>
+                    {% else %}
+                        <img class="card-img-top mb-3" src="https://placeimg.com/640/480/any" alt="Card image cap"/>
+                    {% endif %}
+                    <ul class="info-list">
+                        <li>
+                <span>
+                <i class="fas fa-star"></i></span>Įvertinimas: {{ activity.rating|round(2) }}/5
+                        </li>
+                        <li>
+                            <span><i class="fas fa-euro-sign"></i></span>
+                            Kaina: {{ activity.priceFrom }} - {{ activity.priceTo }}
+                        </li>
+                        <li>
+                            <span><i class="fas fa-user"></i></span>
+                            Amžius: {{ activity.ageFrom }} - {{ activity.ageTo }}
+                        </li>
+                        <li>
+                            <span><i class="fas fa-map-marker"></i></span>
+                            Adresas: {{ activity.location.street }} {{ activity.location.house }}
+                            {% if activity.location.apartment %}-{{ activity.location.apartment }}{% endif %},
+                            {{ activity.location.city.name }}
+                        </li>
+                        <li>
+                            <span><a href="{{ path('fos_message_thread_new') }}">Siųsti žinutę</a></span>
+                        </li>
+                        <li>
+                            <span><i class="fas fa-calendar-alt"></i>Tvarkaraštis</span>
+                            <ul>
+                                {% for timetable in activity.timetables %}
+                                    <li class="">{{ timetable.weekday.name }}:
+                                        {{ timetable.timeFrom|date("H:i") }} - {{ timetable.timeTo|date("H:i") }}</li>
+                                {% endfor %}
+                            </ul>
+                        </li>
 
-                            {{ include('activity/_ratingForm.html.twig') }}
+                    </ul>
+                </div>
+                <div class="col-1"></div>
+                <div class="col-12 col-lg-6">
+                    <ul class="nav nav-tabs" id="activityTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                               aria-controls="home" aria-selected="true">Aprašymas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="review-tab" data-toggle="tab" href="#reviewTab" role="tab"
+                               aria-controls="profile" aria-selected="false">Atsiliepimai</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="activityTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <p class="px-2 mt-4 pb-5">{{ activity.description }}</p>
+                        </div>
+                        <div class="tab-pane fade" id="reviewTab" role="tabpanel" aria-labelledby="review-tab">
+                            <div class="row">
 
-                        <div class="py-4 px-2 col-12" id="comment">
-                            <h3 class="pb-3">Komentarai</h3>
-                                <div>
-                                    {{ include('activity/_commentForm.html.twig') }}
+                                {{ include('activity/_ratingForm.html.twig') }}
+
+                                <div class="py-4 px-2 col-12" id="comment">
+                                    <h3 class="pb-3">Komentarai</h3>
+                                    <div>
+                                        {{ include('activity/_commentForm.html.twig') }}
+                                    </div>
+                                    <div id="comments"></div>
                                 </div>
-                            <div id="comments"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+
+            {% endif %}
         </div>
-    </div>
-        {% endif %}
+        <div class="row pb-5 pt-4 justify-content-center">
+            <div class="col-12 pb-4">
+                <h2 class="text-center">Panašūs būreliai</h2>
+            </div>
+            {% for activity in similar %}
+                <div class="col-xs-6 col-sm-6 col-lg-4">
+                    <div class="activity-card">
+                        <div class="card-image">
+                            <a class="card-btn overlay" href=""><i class="fas fa-search-plus"></i></a>
 
+                            <img class="img-fluid" src="https://placeimg.com/640/480/any" alt="Card image cap"/>
+                            <div class="like-btn">
+                                <i class="far fa-heart"></i>
+                            </div>
+                            <div class="price">
+                                {{ activity.priceFrom }}-{{ activity.priceTo }} €
+                            </div>
+                        </div>
 
+                        <div class="activity-text">
+                            <h5 class="activity-title">
+                                {{ activity.name }}
+                            </h5>
+                            <p class="grey-text">
+                                {{ activity.city }}, {{ activity.street }} {{ activity.house }}
+                            </p>
+                            <p class="d-flex justify-content-between align-items-baseline">
+                                <span class="grey-text">{{ activity.subcategory }}</span>
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+        </div>
 
 </div>
 {% endblock %}
