@@ -13,16 +13,17 @@ cache:
 
 install:
   - cp .env.dist .env
-  - echo "DATABASE_URL=mysql://root@127.0.0.1:3306/symfony" >> .env
+  - echo "DATABASE_URL=mysql://root@127.0.0.1:3306/po_pamoku" >> .env
   - composer install
-  - php bin/console d:d:c
-  - php bin/console d:s:c
-  - php bin/console d:f:l -n
+
 
 before_script:
 # Get the token from github and put it in travis repo under GITHUB_COMPOSER_AUTH ENV variable, then uncomment line below.
 #  - composer config -g github-oauth.github.com $GITHUB_COMPOSER_AUTH
   - composer install --no-interaction --prefer-dist
+  - php bin/console d:d:c
+  - php bin/console d:s:c
+  - php bin/console d:f:l -n
   - yarn
   - yarn run encore production
 
