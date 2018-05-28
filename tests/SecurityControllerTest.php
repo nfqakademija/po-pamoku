@@ -24,7 +24,6 @@ class SecurityControllerTest extends WebTestCase
         ]);
 
         $loginSubmit = $client->submit($loginForm);
-        echo $client->getResponse()->getContent();
         $redirect = $client->followRedirect();
         $this->assertContains('Atsijungti', $client->getResponse()->getContent());
 
