@@ -27,5 +27,13 @@ class SecurityControllerTest extends WebTestCase
         $redirect = $client->followRedirect();
         $this->assertContains('Atsijungti', $client->getResponse()->getContent());
 
+        $logoutLink = $redirect
+            ->filter('a:contains("Atsijungti")')
+            ->link();
+        $logout = $client->click($logoutLink);
+
+        $redirect = $client->followRedirect();
+        $this->assertContains('Prisijungti', $client->getResponse()->getContent());
+
     }
 }
