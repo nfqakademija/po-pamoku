@@ -28,5 +28,5 @@ before_script:
   - yarn run encore production
 
 script:
-  - vendor/bin/phpcs -p --standard=PSR2 --extensions=php ./src
+#  - vendor/bin/phpcs -p --standard=PSR2 --extensions=php ./src #Uncomment for CodeSniffer
   - bin/phpunit
