@@ -1,9 +1,15 @@
-sudo: false
+sudo: required
 language: php
 php:
   - 7.2
 services:
   - mysql
+  - docker
+
+addons:
+  hosts:
+    - nginx.symfony
+    - selenium.symfony
 
 cache:
   yarn: true
@@ -11,22 +17,31 @@ cache:
       - $HOME/.composer/cache/files
       - node_modules
 
-install:
+before_install:
   - cp .env.dist .env
   - echo "DATABASE_URL=mysql://root@127.0.0.1:3306/po_pamoku" >> .env
-  - composer install
+  - docker pull selenium/standalone-chrome:3.11.0-dysprosium
+  - docker run -d -p 127.0.0.1:4444:4444 selenium/standalone-chrome:3.11.0-dysprosium
+  - docker ps -a
 
+install:
+  - cd $TRAVIS_BUILD_DIR && composer install --no-interaction --prefer-dist
+  - cd $TRAVIS_BUILD_DIR && yarn
+  - cd $TRAVIS_BUILD_DIR/acceptance-tests && composer install
 
 before_script:
 # Get the token from github and put it in travis repo under GITHUB_COMPOSER_AUTH ENV variable, then uncomment line below.
 #  - composer config -g github-oauth.github.com $GITHUB_COMPOSER_AUTH
-  - composer install --no-interaction --prefer-dist
-  - php bin/console d:d:c
-  - php bin/console d:s:c
-  - php bin/console d:f:l -n
-  - yarn
-  - yarn run encore production
+  - cd $TRAVIS_BUILD_DIR && php bin/console d:d:c
+  - cd $TRAVIS_BUILD_DIR && php bin/console d:s:c
+  - cd $TRAVIS_BUILD_DIR && php bin/console d:f:l -n
+  - cd $TRAVIS_BUILD_DIR && yarn run encore production
+  - (php -S 172.17.0.1:8000 -t public &> /dev/null) &
 
 script:
-#  - vendor/bin/phpcs -p --standard=PSR2 --extensions=php ./src #Uncomment for CodeSniffer
-  - bin/phpunit
+#  - cd $TRAVIS_BUILD_DIR && vendor/bin/phpcs -p --standard=PSR2 --extensions=php ./src
+  - cd $TRAVIS_BUILD_DIR && bin/phpunit
+  - cd $TRAVIS_BUILD_DIR/acceptance-tests && vendor/bin/codecept run --debug --env=travis
+
+after_failure:
+  - tail -n 5000 $TRAVIS_BUILD_DIR//acceptance-tests/tests/_output/*
