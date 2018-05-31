@@ -119,10 +119,7 @@ const btnSwitch = (
             className="btn map-btn mt-3"
             onClick={() => {
                 this.setState({ isMap: !this.state.isMap });
-                // let top = document.getElementById('toTop').offsetTop;
-                // window.scrollTo({
-                //   top: top
-                // });
+                
             }}>
               <i className="fas fa-map-marker"></i>
       <span className="location-btn pl-2">Žemėlapis</span>
@@ -139,38 +136,7 @@ const btnSwitch = (
     
       return (
       <div>
-      
-          {/* onClick={this.my}
-          >Rasti mano vietą</button>
-      );
-
-      if (this.state.isMap) {
-          return (
-              <div className="container">
-                  <div className="container py-5">
-                      <div id="toTop"></div>
-                      <Filter
-                          onChange={this.onFilterChange}/>
-                      {btnSwitch}
-                      {geo}
-                  </div>
-
-                  <MapComponent zoom={this.state.zoom} lat={this.state.lat} lng={this.state.lng} />
-
-
-              </div>
-          );
-      }    return (
-      <div>
-          <div className="container py-5">
-              <div id="toTop"></div>
-              <Filter
-                  onChange={this.onFilterChange}/>
-              {btnSwitch}
-
-          </div> */}
-      
-        <div className="col-12 search-panel">            
+        <div className="col-12 search-panel" id="filterTop">            
                 <div id="toTop"></div>
             <ul className="nav nav-tabs justify-content-center" id="searchTab" role="tablist">
               <li className="nav-item">
@@ -199,12 +165,6 @@ const btnSwitch = (
                           <div className="py-3 col-3 geo-btn">
                             {geo}
                           </div>
-                          {/* <div className="py-3 col-2 text-right">
-                            <button className="btn exit-btn"
-                              onClick={() => this.setState({ isMap: false })}>
-                              <i className="fas fa-times"></i>
-                            </button>
-                          </div> */}
                           <div className="col-12">
                             <MapComponent query={this.state.query} zoom={this.state.zoom} lat={this.state.lat} lng={this.state.lng} />
                           </div>
@@ -214,7 +174,6 @@ const btnSwitch = (
                   </div>
                 </div>
         </div>
-        {/* <div id="spacer"></div> */}
           <div className="container">
             <div className="row">
         <div className="col-12">

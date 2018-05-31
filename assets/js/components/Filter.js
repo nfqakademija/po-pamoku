@@ -57,29 +57,29 @@ class Filter extends React.Component {
         const { onChange } = this.props;
         const { categories, cities, times, weekdays, category, cityId, time, weekday, search, age, price, subcategories, subcategory } = this.state;
         return (
-            <div className="row pt-3 pb-4">
-                <div className="col-6 col-md-4 col-lg-3 py-2">
+            <div className="row pt-3 pb-4 justify-content-center">
+                <div className="col-12 col-sm-6 col-md py-2 text-center">
                     <input className="filter" name="search" type="text" placeholder="Pavadinimas" onChange={(event) => {
                         this.setState({ search: event.currentTarget.value }, 
                             () => onChange({ ...this.state })
                         );
                     }} />
                 </div>
-                <div className="col-6 col-md-4 col-lg-3 py-2">
+                <div className="col-12 col-sm-6 col-md py-2 text-center">
                         <input className="filter filter-small" name="price" type="number" placeholder="Kaina" onChange={(event) => {
                         this.setState({ price: event.target.value }, 
                             () => onChange({ ...this.state })
                         );
                     }} />
                 </div>
-                <div className="col-6 col-md-4 col-lg-3 py-2">
+                <div className="col-12 col-sm-6 col-md py-2">
                     <input className="filter filter-small" name="age" type="number" placeholder="Amžius" onChange={(event) => {
                         this.setState({ age: event.target.value },
                             () => onChange({ ...this.state })
                         );
                     }} />
                 </div>
-                <div className="col-6 col-md-4 col-lg-3 py-2">
+                <div className="col-12 col-sm-6 col-md py-2">
                     <select name="city" className="filter filter-select" onChange={(event) => {
                         const selectedCity = cities.find((item) => item.name == event.target.value);
                         this.setState({
@@ -95,7 +95,7 @@ class Filter extends React.Component {
                         }
                     </select>
                 </div>
-                <div className="col-6 col-md-4 col-lg-3 py-2">
+                <div className="col-12 col-sm-6 col-md py-2">
                     <select name="category" className="filter filter-select" onChange={(event) => {
                         const selectedCategory = categories.find((item) => item.name == event.target.value);
                         this.setState({
@@ -153,7 +153,7 @@ class Filter extends React.Component {
                     }
                 </div> */}
 
-                <div className="col-6 col-md-4 col-lg-3 py-2">
+                {/* <div className="col-6 col-md-4 col-lg-3 py-2">
                     <select name="weekday" className="filter filter-select" onChange={(event) => {
                         this.setState({
                             weekday: event.target.value === 'Savaitės diena' ? '' : (weekdays.indexOf(event.target.value) + 1),
@@ -187,7 +187,7 @@ class Filter extends React.Component {
                             </option>)) : ('no data')
                     }
                 </select>
-                </div>
+                </div> */}
             </div>
         )
     }
