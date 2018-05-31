@@ -86,7 +86,7 @@ class Activity
      * @ORM\Column(type="string", nullable=true)
      * @Assert\File(mimeTypes={ "image/*"})
      */
-    private $pathToLogo;
+    private $pathToLogo = "/uploads/33e75ff09dd601bbe69f351039152189.jpg";
     
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Subcategory")
