@@ -1,21 +1,21 @@
-Būgnų pamokos;Mušamieji;30;55
-Pianino pamokos;Klavišiniai;25;50
-Smuiko pamokos;Styginiai;25;50
-Fleitos pamokos;Pučiamieji;30;55
-Vokalo pamokos;Dainavimas;15;40
-Muzikos mokykla;Kiti muzikos užsiėmimai;15;40
-Baleto pamokos;Baletas;20;45
-Šiuolaikinių šokių pamokos;Šiuolaikiniai;30;55
-Pramoginių šokių pamokos;Pramoginiai;25;50
-Robotika;Technologijų užsiėmimai;10;35
-Piešimo pamokos;Piešimas;10;35
-Tapybos pamokos;Tapyba;10;35
-Keramikos pamokos;Keramika;10;35
-Dizaino studija;Kiti dailės užsiėmimai;15;40
-Plaukimo pamokos;Plaukimas;30;55
-Krepšinio mokykla;Krepšinis;15;40
-Futbolo mokykla;Futbolas;15;40
-Teniso mokykla;Tenisas;15;40
+Būgnų pamokos;Mušamieji;30;55;37693cfc748049e45d87b8c7d8b9aacd.jpg
+Pianino pamokos;Klavišiniai;25;50;e4da3b7fbbce2345d7772b0674a318d5.jpg
+Smuiko pamokos;Styginiai;25;50;a87ff679a2f3e71d9181a67b7542122c.jpg
+Fleitos pamokos;Pučiamieji;30;55;6364d3f0f495b6ab9dcf8d3b5c6e0b01.jpg
+Vokalo pamokos;Dainavimas;15;40;8e296a067a37563370ded05f5a3bf3ec.jpg
+Muzikos mokykla;Kiti muzikos užsiėmimai;15;40;b53b3a3d6ab90ce0268229151c9bde11.jpg
+Baleto pamokos;Baletas;20;45;c74d97b01eae257e44aa9d5bade97baf.jpg
+Šiuolaikinių šokių pamokos;Šiuolaikiniai;30;55;072b030ba126b2f4b2374f342be9ed44.jpg
+Pramoginių šokių pamokos;Pramoginiai;25;50;1c383cd30b7c298ab50293adfecb7b18.jpg
+Robotika;Technologijų užsiėmimai;10;35;66f041e16a60928b05a7e228a89c3799.jpg
+Piešimo pamokos;Piešimas;10;35;6ea9ab1baa0efb9e19094440c317e21b.jpg
+Tapybos pamokos;Tapyba;10;35;34173cb38f07f89ddbebc2ac9128303f.jpg
+Keramikos pamokos;Keramika;10;35;c81e728d9d4c2f636f067f89cc14862c.jpg
+Dizaino studija;Kiti dailės užsiėmimai;15;40;c4ca4238a0b923820dcc509a6f75849b.jpg
+Plaukimo pamokos;Plaukimas;30;55;c20ad4d76fe97759aa27a0c99bff6710.jpg
+Krepšinio mokykla;Krepšinis;15;40;d645920e395fedad7bbbed0eca3fe2e0.jpg
+Futbolo mokykla;Futbolas;15;40;a5771bce93e200c36f7cd9dfd0e5deaa.jpg
+Teniso mokykla;Tenisas;15;40;a5bfc9e07964f8dddeb95fc584cd965d.jpg
 Karatė pamokos;Kovos menai;15;40
 Slidinėjimo treniruotės;Kiti sporto užsiėmimai;30;55
 Anglų kalbos mokykla;Anglų;20;45
@@ -37,8 +37,8 @@ Piešimo mokykla;Piešimas;10;35
 Skulptūros pamokos;Kiti dailės užsiėmimai;20;45
 Grafikos pamokos;Kiti dailės užsiėmimai;15;40
 Taekwondo pamokos;Kovos menai;20;45
-Sambo imtynės;Kovos menai;25;50
-Dziudo imtynės;Kovos menai;25;50
+Sambo imtynės;Kovos menai;25;50;3416a75f4cea9109507cacd8e2f2aefc.jpg
+Dziudo imtynės;Kovos menai;25;50;3416a75f4cea9109507cacd8e2f2aefc.jpg
 Jiu-jitsu treniruotės;Kovos menai;20;45
 Aikido treniruotės;Kovos menai;15;40
 Regbio užsiėmimai;Kiti sporto užsiėmimai;25;50
