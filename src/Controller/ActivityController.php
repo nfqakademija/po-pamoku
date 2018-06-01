@@ -82,17 +82,7 @@ class ActivityController extends Controller
 
         return $response;
     }
-
     
-    /**
-     * @Route("/map", name="activity_map")
-     * @Method({"GET"})
-     */
-    public function map()
-    {
-        return $this->render('map/map.html.twig');
-    }
-
     public function userCanPostComments($id)
     {
         $user = $this->getUser();
