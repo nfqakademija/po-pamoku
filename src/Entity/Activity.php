@@ -242,6 +242,13 @@ class Activity
     {
         return $this->timetables;
     }
+
+    public function setTimetables($timetables): self
+    {
+        $this->timetables = $timetables;
+
+        return $this;
+    }
     
     public function addTimetable($timetable): self
     {

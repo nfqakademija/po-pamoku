@@ -6,14 +6,28 @@ use App\Entity\Location;
 use App\Utils\Utils;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class LocationType extends AbstractType
 {
+
+    /**
+     * @var RequestStack
+     */
+    private $requestStack;
+
+    public function __construct(RequestStack $requestStack)
+    {
+        $this->requestStack = $requestStack;
+    }
+
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('city', CityType::class, ['label' => false])
@@ -40,6 +54,31 @@ class LocationType extends AbstractType
                 $event->setData($location);
 
             });
+
+
+        $request = $this->requestStack->getCurrentRequest();
+        $path = $request->getPathInfo();
+
+        $builder
+            ->addEventListener(
+                FormEvents::PRE_SET_DATA,
+                function (FormEvent $event) use ($path) {
+                    $form = $event->getForm();
+
+                    if (strpos($path, 'register') !== false) {
+                        $form->add('register', SubmitType::class, [
+                            'attr' => [
+                                'formnovalidate'=>'formnovalidate'
+                            ]
+                        ]);
+                        $form->add('back', SubmitType::class, [
+                            'validation_groups' => false,
+                            'attr' => [
+                                'formnovalidate'=>'formnovalidate'
+                            ]
+                        ]);
+                    }
+                });
     }
     
     public function configureOptions(OptionsResolver $resolver)

@@ -1,20 +1,14 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: juste
- * Date: 18.4.14
- * Time: 19.18
- */
 
 namespace App\Form\Type;
 
 use App\Entity\User;
-use App\Form\Type\ActivityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -64,15 +58,19 @@ class RegistrationType extends AbstractType
                     $form->add('role', HiddenType::class, [
                         'data' => 'ROLE_OWNER',
                     ]);
-                    $form->add('activity', ActivityType::class, [
-                        'label' => false,
-                    ]);
+                    $form->add('next', SubmitType::class);
                 }
                 
                 if ($role == 'user') {
                     $form->add('role', HiddenType::class, [
                         'data' => 'ROLE_USER',
                     ]);
+                    $form->add('register', SubmitType::class, [
+                        'attr' => [
+                            'formnovalidate'=>'formnovalidate'
+                        ]
+                    ]);
+
                 }
             });
     }
