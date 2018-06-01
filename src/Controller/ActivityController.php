@@ -8,7 +8,6 @@ use App\Entity\Rating;
 use App\Entity\User;
 use App\Form\Type\CommentType;
 use App\Form\Type\RatingType;
-use App\Repository\CommentRepository;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,8 +26,7 @@ class ActivityController extends Controller
     {
         return $this->render('activity/index.html.twig');
     }
-    
-    
+
     /**
      * @Route("/activity/{id}", name="activity_show")
      */
@@ -37,30 +35,30 @@ class ActivityController extends Controller
         $activityRepository = $this->getDoctrine()->getRepository(Activity::class);
         $activity = $activityRepository->find($id);
         
-        $form = $this->createForm(CommentType::class);
         $user = $this->getUser();
-        $ratingrepo = $this->getDoctrine()->getRepository(Rating::class);
-        $ratingFound = $ratingrepo->findOneBy(['user' => $user, 'activity' => $activity]);
-        if ($ratingFound) {
-            $ratingForm = $this->createForm(RatingType::class, $ratingFound);
-        } else {
-            $ratingForm = $this->createForm(RatingType::class);
-        }
+        $form = $this->createForm(CommentType::class);
+        $ratingForm = $this->getRatingForm($user, $activity);
 
         if ($request->request->has('comment')) {
             $form->handleRequest($request);
-            $response = $this->commentFormAction($form, $id);
+            $view = 'activity/_commentForm.html.twig';
+            $parameters = [
+                'form' => $form->createView()
+            ];
+
+            $response = $this->formAction($form, $view, $parameters, $id);
         }
 
         if ($request->request->has('rating')) {
             $ratingForm->handleRequest($request);
+            $view = 'activity/_ratingForm.html.twig';
+            $parameters = [
+                'activity' => $activity,
+                'ratingForm' => $ratingForm->createView(),
+                'rate' => $this->userDidRate($id)
+            ];
 
-            if ($ratingForm->isSubmitted() && $ratingForm->isValid()) {
-                $rating = $ratingForm->getData();
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($rating);
-                $em->flush();
-            }
+            $response = $this->formAction($ratingForm, $view, $parameters, $id);
         }
         
         $city = $activity->getLocation()->getCity()->getId();
@@ -82,52 +80,22 @@ class ActivityController extends Controller
 
         return $response;
     }
-    
-    public function userCanPostComments($id)
-    {
-        $user = $this->getUser();
-        if ($user instanceof User) {
-            $repo = $this->getDoctrine()->getRepository(Comment::class)->findAllPastDay($user, $id);
-            if (!$repo) {
-                return true;
-            }
-        }
-        return false;
-    }
 
-    public function userDidRate($id)
-    {
-        $user = $this->getUser();
-        if ($user instanceof User) {
-            $repo = $this->getDoctrine()->getRepository(Rating::class)->findOneBy(['activity' => $id, 'user' => $user->getId()]);
-            if (!$repo) {
-                return false;
-            }
-        }
-        return true;
-
-    }
-
-    public function commentFormAction(Form $form, $id)
-    {
+    private function formAction(Form $form, $view, $parameters, $id) {
         if ($form->isSubmitted() && $form->isValid()) {
-            $comment = $form->getData();
+            $data = $form->getData();
             $em = $this->getDoctrine()->getManager();
-            $em->persist($comment);
+            $em->persist($data);
             $em->flush();
-            $html = $this->renderView('activity/_commentForm.html.twig', [
-                'form' => $form->createView(),
-                'post' => $this->userCanPostComments($id)
-            ]);
+            $parameters['post'] = $this->userCanPostComments($id);
+            $html = $this->renderView($view, $parameters);
 
             return new Response($html, 200);
         }
 
         if ($form->isSubmitted() && !$form->isValid()) {
-            $html =  $this->renderView('activity/_commentForm.html.twig', [
-                'form' => $form->createView(),
-                'post' => $this->userCanPostComments($id)
-            ]);
+            $parameters['post'] = $this->userCanPostComments($id);
+            $html =  $this->renderView($view, $parameters);
 
             return new Response($html, 400);
         }
@@ -135,4 +103,45 @@ class ActivityController extends Controller
         return;
     }
 
+    private function userDidRate($id)
+    {
+        $user = $this->getUser();
+        if ($user instanceof User) {
+            $rating = $this
+                ->getDoctrine()
+                ->getRepository(Rating::class)
+                ->findOneBy(['activity' => $id, 'user' => $user->getId()]);
+            if (!$rating) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private function userCanPostComments($id)
+    {
+        $user = $this->getUser();
+        if ($user instanceof User) {
+            $comments = $this
+                ->getDoctrine()
+                ->getRepository(Comment::class)
+                ->findAllPastDay($user, $id);
+            if (!$comments) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private function getRatingForm(User $user, Activity $activity) {
+        $ratingrepo = $this->getDoctrine()->getRepository(Rating::class);
+        $ratingFound = $ratingrepo->findOneBy(['user' => $user, 'activity' => $activity]);
+        if ($ratingFound) {
+            $ratingForm = $this->createForm(RatingType::class, $ratingFound);
+        } else {
+            $ratingForm = $this->createForm(RatingType::class);
+        }
+
+        return $ratingForm;
+    }
 }
