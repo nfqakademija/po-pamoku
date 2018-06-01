@@ -1,20 +1,20 @@
 {% if not app.user %}
     <p>Tik registruoti vartotojai gali rašyti komentarus</p>
 {% else %}
-    {{ form_start(form, {
-        'class': 'form-inline',
-        'attr': {
-            'id': 'commentForm',
-            'name': 'comment'
-        }
-    }) }}
-    {{ form_row(form.commentText) }}
-    {% if not post %}
-        <p>Komentarą būrelio puslapyje galima palikti kartą per 24h</p>
-    {% else %}
+    {% if post %}
+        {{ form_start(form, {
+            'class': 'form-inline',
+            'attr': {
+                'id': 'commentForm',
+                'name': 'comment'
+            }
+        }) }}
+        {{ form_row(form.commentText) }}
         <button type="submit" class="btn btn-green" formnovalidate>Siųsti atsiliepimą</button>
+        {{ form_end(form) }}
+    {% else %}
+        <p>Komentarą būrelio puslapyje galima palikti kartą per 24h</p>
     {% endif %}
-    {{ form_end(form) }}
 {% endif %}
 
 
