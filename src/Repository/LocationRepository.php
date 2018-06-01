@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: juste
- * Date: 18.4.24
- * Time: 12.31
- */
 
 namespace App\Repository;
 
@@ -21,6 +15,8 @@ class LocationRepository extends EntityRepository
             'house' => $location->getHouse(),
             'apartment' => $location->getApartment(),
             'postcode' => $location->getPostcode(),
+            'lat' => $location->getLat(),
+            'lng' => $location->getLng()
         ]);
     }
     

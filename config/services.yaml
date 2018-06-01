@@ -28,6 +28,7 @@ services:
     form_authenticator:
         class: App\Security\LoginFormAuthenticator
         arguments: ['@router', '@security.password_encoder']
+        public: true
 
     password_hasher:
         class: App\Listeners\PasswordListener
@@ -47,12 +48,20 @@ services:
         tags:
             - {name: doctrine.event_subscriber}
 
+    App\Listeners\RegistrationDataListener:
+        tags:
+            - {name: doctrine.event_subscriber}
+
     app.user_to_username_transformer:
         class: App\Form\DataTransformer\UserToUsernameTransformer
         arguments: ['@doctrine']
 
     fos_user.user_to_username_transformer:
         alias: app.user_to_username_transformer
+
+    security.authentication.guard_handler:
+        class: Symfony\Component\Security\Guard\GuardAuthenticatorHandler
+        public: true
 
     app.form.type.username:
         class: App\Form\Type\UsernameFormType

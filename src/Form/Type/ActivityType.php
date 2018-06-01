@@ -7,8 +7,12 @@ use App\Entity\Subcategory;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\DataTransformer\NumberToLocalizedStringTransformer;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -19,13 +23,23 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class ActivityType extends AbstractType
 {
+
+    /**
+     * @var RequestStack
+     */
+    private $requestStack;
+
+    public function __construct(RequestStack $requestStack)
+    {
+        $this->requestStack = $requestStack;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('name', TextType::class, [
             'label' => 'Activity name'
-            ])
+        ])
             ->add('description', TextareaType::class)
-            ->add('location', LocationType::class, ['label' => false])
             ->add('priceFrom', NumberType::class, [
                 'scale' => 2,
                 'rounding_mode' => NumberToLocalizedStringTransformer::ROUND_DOWN,
@@ -50,8 +64,33 @@ class ActivityType extends AbstractType
                 'entry_options' => [
                     'label' => false
                 ]
-            ])
-        ;
+            ]);
+
+        $request = $this->requestStack->getCurrentRequest();
+        $path = $request->getPathInfo();
+
+        $builder
+            ->addEventListener(
+            FormEvents::PRE_SET_DATA,
+            function (FormEvent $event) use ($path) {
+                $form = $event->getForm();
+
+                if (strpos($path, 'register') !== false) {
+                    $form->add('next', SubmitType::class, [
+                        'attr' => [
+                            'formnovalidate'=>'formnovalidate'
+                        ]
+                    ]);
+                    $form->add('back', SubmitType::class, [
+                        'validation_groups' => false,
+                        'attr' => [
+                            'formnovalidate'=>'formnovalidate'
+                        ]
+                    ]);
+                } else {
+                    $form->add('location', LocationType::class, ['label' => false]);
+                }
+            });
     }
     
     public function configureOptions(OptionsResolver $resolver)
