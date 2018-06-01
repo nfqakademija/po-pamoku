@@ -133,7 +133,7 @@ class ActivityController extends Controller
         return false;
     }
 
-    private function getRatingForm(User $user, Activity $activity) {
+    private function getRatingForm(User $user = null, Activity $activity) {
         $ratingrepo = $this->getDoctrine()->getRepository(Rating::class);
         $ratingFound = $ratingrepo->findOneBy(['user' => $user, 'activity' => $activity]);
         if ($ratingFound) {
