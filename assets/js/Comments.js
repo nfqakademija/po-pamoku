@@ -1,7 +1,5 @@
 import React from 'react';
-
-const axios = require('axios');
-
+import axios from 'axios';
 
 const ViewComments = (props) => {
     let comments = props.comments;

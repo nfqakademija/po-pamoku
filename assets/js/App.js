@@ -1,10 +1,11 @@
 import React from 'react';
 import Filter from './components/Filter.js';
 import Sort from './components/Sort.js';
+import Favorite from './components/Favorite';
 import { Pagination } from '@react-bootstrap/pagination';
 import MapComponent from "./MapComponent";
-
-const axios = require('axios');
+import axios from 'axios';
+import ActivityItem from './ActivityItem.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -19,10 +20,11 @@ class App extends React.Component {
         lat: 55.0,
         lng: 24.0,
         zoom: 7,
-        query: '/api/activity?page=1&limit=99999'
+        query: '/api/activity?page=1&limit=99999',
     };
     this.onFilterChange = this.onFilterChange.bind(this);
     this.my = this.my.bind(this);
+    this.addToFavorite = this.addToFavorite.bind(this);
   }
  getActivities(page) {
    axios.get('/api/activity?page=' + page + '&limit=12')
@@ -76,6 +78,11 @@ class App extends React.Component {
   onFilterChange(value) {
     this.setState({searchValue: value});
     this.searchActivities(1, value);
+  }
+  
+  addToFavorite(activity) {
+    console.log(activity.id)
+    localStorage.setItem('labas', 'id');
   }
 
   my() {
@@ -179,37 +186,11 @@ const btnSwitch = (
         <div className="col-12">
                 {/*<Sort />*/}
                 <div className="row activities pb-5">
-
                   {activities.length !== 0 ? (activities.map((activity, index) =>
-                    <div key={"currentAct" + index} className="col-xs-6 col-sm-6 col-lg-4 py-3">
-                      <div className="activity-card">
-                        <div className="card-image">
-                          
-                            <a className="card-btn overlay" href={"/activity/" + activity.id}><i className="fas fa-search-plus"></i></a>
-                          
-                          <img className="img-fluid" src="https://placeimg.com/640/480/any" alt="Card image cap" />
-                          <div className="like-btn">
-                            <i className="far fa-heart"></i>
-                          </div>
-                          <div className="price">
-                            {activity.priceFrom}-{activity.priceTo} €
-                          </div>
-                        </div>
-
-                        <div className="activity-text">
-                          <h5 className="activity-title">
-                            {activity.name}
-                          </h5>
-                          <p className="grey-text">
-                          {activity.city}, {activity.street} {activity.house}
-                          </p>
-                          <p className="d-flex justify-content-between align-items-baseline">
-                            <span className="grey-text">{activity.subcategory}</span>
-                          </p>
-                         
-                        </div>
-                      </div>
-                    </div>)) : ('Deja, būrelių nėra')}
+                  <ActivityItem
+                  key={"currentAct" + index}
+                  item={activity} />
+                  )) : ('Deja, būrelių nėra')}
                     <div className="col-12 text-center">
                       <Pagination
                     bsSize="medium"

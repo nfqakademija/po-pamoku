@@ -1,6 +1,6 @@
 import React from 'react';
 import MapWithAMarkerClusterer from './MapWithAMarkerClusterer';
-const axios = require('axios');
+import axios from 'axios';
 
 class MapComponent extends React.PureComponent {
     componentWillMount() {

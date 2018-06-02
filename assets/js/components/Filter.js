@@ -1,5 +1,5 @@
 import React from 'react';
-const axios = require('axios');
+import axios from 'axios';
 
 
 class Filter extends React.Component {
@@ -41,18 +41,6 @@ class Filter extends React.Component {
                 console.error(error);
             });
     }
-    // getSubcategories(category) {
-    //     axios.get('/api/filter/subcategory/' + category)
-    //         .then(function (response) {
-    //             this.setState({
-    //                 subcategories: response.data
-    //             }, () => {
-    //             });
-    //         }.bind(this))
-    //         .catch(function (error) {
-    //             console.error(error);
-    //         });
-    // }
     render() {
         const { onChange } = this.props;
         const { categories, cities, times, weekdays, category, cityId, time, weekday, search, age, price, subcategories, subcategory } = this.state;
@@ -112,82 +100,6 @@ class Filter extends React.Component {
                         }
                     </select>
                 </div>
-                {/* <div>
-                    {
-                        category !== '' ? (
-
-                            <div className="col-3 py-2">
-                                <label>Tipas</label>
-                                <select name="subcategory" className="filter" onChange={(event) => {
-                                    function filterByName(item) {
-                                        if (item.name == event.target.value) {
-                                            return true;
-                                        } else {
-                                            return false;
-                                        }
-                                    }
-                                    let selectedSubcategory = subcategories.filter(filterByName);
-                                    if (selectedSubcategory.length === 0) {
-                                        this.setState({ subcategory: '' }, () => {
-                                            let copy = Object.assign({ category, cityId, time, weekday, search, age, price, subcategory }, this.state);
-                                            onChange(copy);
-                                        });
-                                    } else {
-                                        this.setState({
-                                            subcategory: selectedSubcategory[0].id,
-                                        }, () => {
-                                            let copy = Object.assign({ category, cityId, time, weekday, search, age, price, subcategory }, this.state);
-                                            onChange(copy);
-                                        });
-                                    }
-                                }}>
-                                    <option name="subcategoryPlaceholder">Visi</option>
-                                    {subcategories.map((subcategory, index) =>
-                                        <option key={"subcategory" + index}>
-                                            {subcategory.name}
-                                        </option>)
-                                    }
-                                </select>
-                            </div>
-                        ) : ('')
-                    }
-                </div> */}
-
-                {/* <div className="col-6 col-md-4 col-lg-3 py-2">
-                    <select name="weekday" className="filter filter-select" onChange={(event) => {
-                        this.setState({
-                            weekday: event.target.value === 'Savaitės diena' ? '' : (weekdays.indexOf(event.target.value) + 1),
-                        }, () => {
-                            console.log(this.state.weekday);
-                            onChange({ ...this.state })
-                        });
-                }}>
-                    <option name="weekdayPlaceholder">Savaitės diena</option>
-                    {
-                        weekdays.length !== 0 ? (weekdays.map((weekday, index) =>
-                            <option key={"weekday" + index}>
-                                {weekday}
-                            </option>)) : ('no data')
-                    }
-                </select>
-            </div>
-                <div className="col-6 col-md-4 col-lg-3 py-2">
-                    <select name="time" className="filter filter-select" onChange={(event) => {
-                        this.setState({
-                            time: event.target.value === 'Laikas' ? '' : event.target.value,
-                        }, () => {
-                            console.log(this.state.time);
-                            onChange({ ...this.state })});
-                }}>
-                    <option name="timePlaceholder">Laikas</option>
-                    {
-                        times.length !== 0 ? (times.map((time, index) =>
-                            <option key={"time" + index}>
-                                {time}
-                            </option>)) : ('no data')
-                    }
-                </select>
-                </div> */}
             </div>
         )
     }
