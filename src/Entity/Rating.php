@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\RatingRepository")
@@ -28,6 +30,7 @@ class Rating
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotNull(message="Rating must be between 1 and 5")
      */
     private $rating;
 

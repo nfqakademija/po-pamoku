@@ -76,9 +76,10 @@
                         </div>
                         <div class="tab-pane fade" id="reviewTab" role="tabpanel" aria-labelledby="review-tab">
                             <div class="row">
-
-                                {{ include('activity/_ratingForm.html.twig') }}
-
+                                <div id="rating"></div>
+                                <div>
+                                    {{ include('activity/_ratingForm.html.twig') }}
+                                </div>
                                 <div class="py-4 px-2 col-12" id="comment">
                                     <h3 class="pb-3">Komentarai</h3>
                                     <div>

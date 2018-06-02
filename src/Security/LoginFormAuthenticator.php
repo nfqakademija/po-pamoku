@@ -66,18 +66,47 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-        $targetPath = $this->getTargetPath($request->getSession(), $providerKey);
-        
-        if (!$targetPath || strpos($targetPath, 'login') || strpos($targetPath, 'register')) {
-            $targetPath = $this->router->generate('activity_list');
+        $path = $this->redirectAfterRegistration($request, $token, $providerKey);
+
+        if (!$path) {
+            $targetPath = $this->getTargetPath($request->getSession(), $providerKey);
+            if (!$targetPath || strpos($path, 'login') || strpos($path, 'register')) {
+                $path = $this->router->generate('activity_list');
+            }
         }
-        
-        return new RedirectResponse($targetPath);
+
+        return new RedirectResponse($path);
     }
     
     protected function getLoginUrl()
     {
         return $this->router->generate('login');
+    }
+
+    private function redirectAfterRegistration(Request $request, TokenInterface $token, $providerKey)
+    {
+        $session = $request->getSession();
+        $role = $session->get('role');
+        $path = $session->get('redirect');
+        if (!$role) {
+            return null;
+        }
+
+        switch ($role) {
+            case 'owner':
+                $user = $token->getUser();
+                $activity = $user->getActivity()->getId();
+                $path = $this->router->generate('activity_show', ['id' => $activity]);
+                break;
+            case 'user':
+                if (strpos($path, 'login') || strpos($path, 'register')) {
+                    return null;
+                }
+                break;
+        }
+
+        $session->clear();
+        return $path;
     }
     
 }

@@ -42,7 +42,7 @@ class LoadActivity extends Fixture implements DependentFixtureInterface
                 pas mus nurodytu adresu.")
             ->setLocation($this->getReference($index+101))
             ->setName($activityData[0])
-            ->setPathToLogo('')
+            ->setPathToLogo("/uploads/" . $activityData[4])
             ->setPriceFrom($activityData[2])
             ->setPriceTo($activityData[3])
             ->setSubcategory($this->getReference($activityData[1]))

@@ -9,3 +9,4 @@ minMessage: Įvesta per trumpa reikšmė. Simbolių kiekis turėtų būti didesn
 maxMessage: Įvesta per ilga reikšmė. Simbolių kiekis turėtų būti mažesnis už {{ limit }}.
 Comment cannot be blank.: Komentaras negali būti tuščias.
 mimeTypesMessage: Įkeltas neleistino formato failas.
+Rating must be between 1 and 5: Galimos įvertinimo reikšmės yra tarp 1 ir 5.
