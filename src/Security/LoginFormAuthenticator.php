@@ -89,7 +89,8 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         $user = $token->getUser();
         $role = $user->getRole();
         $path = $session->get('redirect');
-        if (!($role && $path) ) {
+        $lastPath = $request->headers->get('referer');
+        if (!($role && $path && strpos($lastPath, 'register')) ) {
             return null;
         }
 

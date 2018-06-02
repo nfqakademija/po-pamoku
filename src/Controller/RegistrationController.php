@@ -89,7 +89,6 @@ class RegistrationController extends Controller
             $activityData = $this->handleImage($activityData);
             $session->set('activity', $activityData);
             $session->set('previousStep', '2');
-            dump($session->get('previousStep'));
             if ($activityForm->get('back')->isClicked()) {
                 return $this->backToPreviousStep(RegistrationType::class, $session, 'user');
             }
@@ -236,7 +235,6 @@ class RegistrationController extends Controller
         $session->remove('user');
         $session->remove('activity');
         $session->remove('location');
-        dump(1);
         return $session;
     }
 }
