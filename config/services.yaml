@@ -76,6 +76,7 @@ services:
 
     fos_message.thread_manager:
         alias: app.thread_manager
+        public: true
 
 
     # add more service definitions when explicit configuration is needed
