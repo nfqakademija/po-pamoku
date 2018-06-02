@@ -2,10 +2,10 @@
 
 {% block fos_message_content %}
 
-<h2>{% trans from 'FOSMessageBundle' %}inbox{% endtrans %}</h2>
+<h2 class="pt-5 pb-3">{% trans from 'FOSMessageBundle' %}inbox{% endtrans %}</h2>
 
-<a href="{{ url('fos_message_thread_new' )}}">{% trans from 'FOSMessageBundle' %}send_new{% endtrans %}</a>
-
+<a class="btn btn-green" href="{{ url('fos_message_thread_new' )}}">{% trans from 'FOSMessageBundle' %}send_new{% endtrans %}</a>
+<div class="mt-3 mb-5 mssg-table">
 {% include 'bundles/FOSMessageBundle/Message/threads_list.html.twig' with {'threads': threads} %}
-
+</div>
 {% endblock %}

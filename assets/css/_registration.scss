@@ -27,6 +27,13 @@
    color: #7e55bdf7;
    background: #fff;
  }
+ .link {
+   color: #fff;
+    text-decoration: underline;
+ }
+ .link:hover {
+   color: #5f5f5f;
+ }
 .registration-form div {
    margin-bottom: 20px;
  }
@@ -81,6 +88,42 @@ form li {
   &:focus {
     outline: none;
   border-bottom: 1px solid #7e55bdf7;
+  }
+}
+
+#activity_back {
+color: #212529;
+    background-color: #f8f9fa;
+    border-color: #f8f9fa;
+    border-radius: 4px;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    padding: 0.5rem 1rem;
+}
+#registration_next, #activity_next, #location_register {
+  color: #fff;
+    background-color: #3ecf8e;
+    border-radius: .25rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    cursor: pointer;
+}
+#registration_next:hover, #activity_next:hover, #location_register:hover {
+    background-color: #38bb80;
+}
+.activity-edit-form {
+  label {
+    display: block;
+  }
+  input, .form-control, #activity_Subcategory, textarea {
+    width: 100%;
+    border-radius: 4px;
+    border: 1px solid #dfdddd;
+    padding: 5px;
+    margin: 5px 0 20px;
   }
 }
 @media screen and (max-width: 576px) {

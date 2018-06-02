@@ -7,6 +7,7 @@
 @import '_map.scss';
 @import '_rate.scss';
 @import '_comment.scss';
+@import '_message.scss';
 
 
 body {
@@ -203,6 +204,9 @@ textarea {
     .nav-link.active {
         color: #673AB7;
     }
+}
+.mssg-table {
+    min-height: 200px;
 }
 @media screen and (max-width: 992px) {
     .foto1 {

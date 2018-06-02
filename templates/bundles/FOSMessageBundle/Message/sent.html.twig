@@ -2,8 +2,8 @@
 
 {% block fos_message_content %}
 
-<h2>{% trans from 'FOSMessageBundle' %}sent{% endtrans %}</h2>
-
+<h2 class="py-5">{% trans from 'FOSMessageBundle' %}sent{% endtrans %}</h2>
+<div class="mb-5 mssg-table">
 {% include 'bundles/FOSMessageBundle/Message/threads_list.html.twig' with {'threads': threads} %}
-
+</div>
 {% endblock %}
