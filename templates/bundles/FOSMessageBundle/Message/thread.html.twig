@@ -5,7 +5,6 @@
     <h2>{{ thread.subject }}</h2>
     <div class="accordion" id="accordion">
         {% for message in thread.messages %}
-            {% dump thread.messages %}
             <div class="messenger_thread_message">
                 <div class="card">
                     <div class="card-header" id="heading{{ message.id }}">
