@@ -219,6 +219,11 @@ textarea {
         top: -64px;
     }
 }
+@media screen and(max-width: 576px) {
+    body {
+  padding-bottom: 200px;
+}
+}
 @media screen and (max-width: 492px) {
     .hero-title {
         font-size: 55px;
