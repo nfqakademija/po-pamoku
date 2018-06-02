@@ -16,16 +16,17 @@
     <div class="row mt-5 py-3">
         <div class="col-12">
             <div class="mb-2">
-                <a class="btn btn-light" href="/">Atgal</a>
+                <a class="btn btn-light border-rad" href="/">Atgal</a>
             </div>
         </div>
         <div class="col-12 col-sm-6">
             {% if pathToLogo is not empty  %}
-                {# <img class="img-fluid" src="{{ asset('uploads/' ~ pathToLogo) }}"/> #}
+                <img class="img-fluid" src="{{ asset(pathToLogo) }}"/>
+                {% else %}
                 <img class="card-img-top" src="https://placeimg.com/640/480/any" alt="Card image cap" />
             {% endif %}
         </div>
-        <div class="col-12">
+        <div class="col-12 activity-edit-form">
             {{ form_start(form) }}
             {{ form_widget(form) }}
             <button type="submit" class="btn btn-green" formnovalidate>Keisti</button>

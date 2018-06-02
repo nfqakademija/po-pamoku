@@ -2,35 +2,29 @@
 
 {% block fos_message_content %}
 
-    <h2>{{ thread.subject }}</h2>
+    <h2 class="py-3">Susirašinėjimo tema: {{ thread.subject }}</h2>
     <div class="accordion" id="accordion">
         {% for message in thread.messages %}
             {% dump thread.messages %}
-            <div class="messenger_thread_message">
-                <div class="card">
-                    <div class="card-header" id="heading{{ message.id }}">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link{{ (loop.last) ? '' : ' collapsed' }}" type="button" data-toggle="collapse" data-target="#collapse{{ message.id }}" aria-expanded="true" aria-controls="collapse{{ message.id }}">
-                                {% trans with {'%sender%': message.sender.name, '%date%': message.createdAt|date} from 'FOSMessageBundle' %}message_info{% endtrans %}
-                            </button>
-                        </h5>
-                    </div>
-                    <div id="collapse{{ message.id }}" class="collapse{{ (loop.last) ? ' show' : '' }}" aria-labelledby="heading{{ message.id }}" data-parent="#accordion">
-                        <div class="card-body">
-                            {{ message.body }}
-                        </div>
+            <div class="messenger_thread_message d-flex mssg-box">
+                <div class="mssg-avatar"></div>
+                <div class="pl-2">
+                    <p class="mb-0 mssg-sender">
+                            {% trans with {'%sender%': message.sender.name, '%date%': message.createdAt|date} from 'FOSMessageBundle' %}message_info{% endtrans %}
+                    </p>
+                    <div class="mssg-text">
+                        {{ message.body }}
                     </div>
                 </div>
-            </div>
         {% endfor %}
     </div>
-    <h3>{% trans from 'FOSMessageBundle' %}reply{% endtrans %}</h3>
-
+    <h3 class="py-3">{% trans from 'FOSMessageBundle' %}reply{% endtrans %}</h3>
+<div class="mb-5 pb-5">
     <form action="{{ url('fos_message_thread_view', {'threadId': thread.id}) }}" method="post">
         {{ form_widget(form) }}
 
         <button type="submit" class="btn btn-green" formnovalidate>Siųsti žinutę</button>
 
     </form>
-
+</div>
 {% endblock %}

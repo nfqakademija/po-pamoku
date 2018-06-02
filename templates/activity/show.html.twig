@@ -44,9 +44,6 @@
                             {{ activity.location.city.name }}
                         </li>
                         <li>
-                            <span><a href="{{ path('fos_message_thread_new') }}">Siųsti žinutę</a></span>
-                        </li>
-                        <li>
                             <span><i class="fas fa-calendar-alt"></i>Tvarkaraštis</span>
                             <ul>
                                 {% for timetable in activity.timetables %}
@@ -69,6 +66,10 @@
                             <a class="nav-link" id="review-tab" data-toggle="tab" href="#reviewTab" role="tab"
                                aria-controls="profile" aria-selected="false">Atsiliepimai</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('fos_message_thread_new') }}">Siųsti žinutę</a>
+                        </li>
+
                     </ul>
                     <div class="tab-content" id="activityTabContent">
                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -81,7 +82,7 @@
                                     {{ include('activity/_ratingForm.html.twig') }}
                                 </div>
                                 <div class="py-4 px-2 col-12" id="comment">
-                                    <h3 class="pb-3">Komentarai</h3>
+                                    <h3 class="pb-3">Atsiliepimai</h3>
                                     <div>
                                         {{ include('activity/_commentForm.html.twig') }}
                                     </div>
@@ -103,8 +104,11 @@
                     <div class="activity-card">
                         <div class="card-image">
                             <a class="card-btn overlay" href=""><i class="fas fa-search-plus"></i></a>
-
-                            <img class="img-fluid" src="https://placeimg.com/640/480/any" alt="Card image cap"/>
+                            {% if activity.pathToLogo is not empty %}
+                                <img class="img-fluid" src="{{ asset( activity.pathToLogo) }}"/>
+                            {% else %}
+                                <img class="img-fluid" src="https://placeimg.com/640/480/any" alt="Card image cap"/>
+                            {% endif %}
                             <div class="like-btn">
                                 <i class="far fa-heart"></i>
                             </div>

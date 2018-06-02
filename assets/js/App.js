@@ -21,10 +21,10 @@ class App extends React.Component {
         lng: 24.0,
         zoom: 7,
         query: '/api/activity?page=1&limit=99999',
+        favorites: []
     };
     this.onFilterChange = this.onFilterChange.bind(this);
     this.my = this.my.bind(this);
-    this.addToFavorite = this.addToFavorite.bind(this);
   }
  getActivities(page) {
    axios.get('/api/activity?page=' + page + '&limit=12')
@@ -78,12 +78,7 @@ class App extends React.Component {
   onFilterChange(value) {
     this.setState({searchValue: value});
     this.searchActivities(1, value);
-  }
-  
-  addToFavorite(activity) {
-    console.log(activity.id)
-    localStorage.setItem('labas', 'id');
-  }
+  }    
 
   my() {
     if (!navigator.geolocation) {
@@ -117,6 +112,7 @@ class App extends React.Component {
       activitiesPerPage,
       lat,
       lng,
+      favorites
     } = this.state;
     let totalPages = Math.ceil(this.state.totalActivities / 12);
 
@@ -140,7 +136,7 @@ const btnSwitch = (
           onClick={this.my}
           >Rasti mano vietą</button>
       );
-    
+    let favoriteList = JSON.parse(localStorage.getItem('favoriteList'));
       return (
       <div>
         <div className="col-12 search-panel" id="filterTop">            
@@ -157,6 +153,14 @@ const btnSwitch = (
                       Žemėlapis
                     </a>
                   </li>
+              <li className="nav-item">
+                <a className="nav-link" id="favorite-tab" data-toggle="tab" href="#favorite" role="tab" aria-controls="favorite" aria-selected="true"
+                  onClick={() => {
+                    favoriteList = JSON.parse(localStorage.getItem('favoriteList'));
+                    this.setState({ favorites: favoriteList });
+                  }}>
+                Mėgstamiausi</a>
+              </li>
                 </ul>
             <div className="tab-content" id="searchTabContent">
               <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -164,7 +168,7 @@ const btnSwitch = (
                   <Filter
                     onChange={this.onFilterChange} />
                   </div>
-                  </div>
+              </div>
               <div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                     {this.state.isMap &&
                       <div className="" id="map">
@@ -179,6 +183,25 @@ const btnSwitch = (
                       </div>
                     }
                   </div>
+              <div className="tab-pane fade" id="favorite" role="tabpanel" aria-labelledby="favorite-tab">
+                <div className="container">
+                  <h2 className="my-5 text-center">Mėgstamiausi būreliai</h2>
+                  <div className="row">
+                  {favorites ? (favorites.map((activity, index) => 
+                    
+                      <ActivityItem
+                      key={"currentAct" + index}
+                      item={activity}/>
+                      
+                    )) : (<div>Nėra išsaugotų būrelių</div>)
+                }
+                    
+                  </div>
+                  < hr />
+                  <h2 className="my-5 text-center">Visi būreliai</h2>
+                  
+                </div>
+              </div>
                 </div>
         </div>
           <div className="container">
