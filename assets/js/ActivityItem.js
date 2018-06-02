@@ -39,6 +39,7 @@ render() {
                             });
                             storageList.push(activity);
                             localStorage.setItem('favoriteList', JSON.stringify(storageList));
+                            this.setState({ favoriteList: storageList });
                         }
 
                         }}>

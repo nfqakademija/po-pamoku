@@ -2,13 +2,11 @@
 
 {% block fos_message_content %}
 
-<h2>{% trans from 'FOSMessageBundle' %}send_new{% endtrans %}</h2>
-
-<form action="{{ url('fos_message_thread_new') }}" method="post">
-    {{ form_widget(form) }}
-
-    <button type="submit" class="btn btn-green" formnovalidate>Siųsti žinutę</button>
-
-</form>
-
+<h2 class="py-5">{% trans from 'FOSMessageBundle' %}send_new{% endtrans %}</h2>
+<div class="pb-5 mb-5">
+    <form action="{{ url('fos_message_thread_new') }}" method="post">
+        {{ form_widget(form) }}
+        <button type="submit" class="btn btn-green" formnovalidate>Siųsti žinutę</button>
+    </form>
+</div>
 {% endblock %}

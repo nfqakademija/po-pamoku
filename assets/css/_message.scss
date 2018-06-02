@@ -1,0 +1,39 @@
+#message {
+    label {
+        display: block;
+    }
+    input {
+        width: 100%;
+        max-width: 500px;
+        border-radius: 4px;
+        border: 1px solid #dfdddd;
+        padding: 5px;
+        margin: 5px 0 20px;
+    }
+    textarea {
+        border-radius: 4px;
+        border-color: #dfdddd;
+        margin: 17px 0 23px;
+        display: block;
+        max-width: 500px;
+        min-height: 200px;
+        padding: 5px;
+    }
+}
+.mssg-box {
+    border-top: 1px solid #ccc;
+    padding: 20px 0;
+}
+.mssg-avatar {
+    width: 30px;
+    height: 30px;
+    background: #E91E63;
+    border-radius: 100%;
+}
+.mssg-sender {
+    font-weight: 600;
+    font-size: 13px;
+}
+.mssg-text {
+    font-size: 16px;
+}

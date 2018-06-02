@@ -4,7 +4,7 @@
         <tr>
             <th>{% trans from 'FOSMessageBundle' %}subject{% endtrans %}</th>
             <th>{% trans from 'FOSMessageBundle' %}participant{% endtrans %}</th>
-            <th>{% trans from 'FOSMessageBundle' %}startdate{% endtrans %}</th>
+            {# <th>{% trans from 'FOSMessageBundle' %}startdate{% endtrans %}</th> #}
             <th>{% trans from 'FOSMessageBundle' %}messages{% endtrans %}</th>
             <th>{% trans from 'FOSMessageBundle' %}last_message{% endtrans %}</th>
             <th>{% trans from 'FOSMessageBundle' %}actions{% endtrans %}</th>
@@ -28,9 +28,9 @@
                 <td>
                     {{ thread.name }}
                 </td>
-                <td>
+                {# <td>
                     {{ thread.0.createdAt|date }}
-                </td>
+                </td> #}
                 <td>
                     {{ thread.0.messages|length }}
                 </td>
@@ -56,7 +56,7 @@
                             {% set submitValue %}{% trans from 'FOSMessageBundle' %}delete{% endtrans %}{% endset %}
                         {% endif %}
                         <form action="{{ formAction }}" method="post">
-                                <input type="submit" value="{{ submitValue }}" />
+                                <input class="btn btn-danger border-rad" type="submit" value="{{ submitValue }}" />
                         </form>
                     {% endif %}
                 </td>

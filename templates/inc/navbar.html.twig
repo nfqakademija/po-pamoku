@@ -29,18 +29,25 @@
                         </div>
                     </li>
                 {% else %}
-                    <li class="nav-item text-center">
-                        <a href="{{ path('logout') }}" class="nav-link">Atsijungti</a>
-                    </li>
-                    <li class="nav-item text-center">
-                        {% if is_granted('ROLE_ADMIN') %}
-                            <a href="{{ path('admin_profile') }}" class="nav-link">Admin</a>
-                        {% else %}
-                            <a href="{{ path('profile') }}" class="nav-link">{{ app.user.email }}</a>
-                        {% endif %}
-                    </li>
-                    <li class="nav-item text-center">
-                        <a href="{{ path('fos_message_inbox') }}" class="nav-link">Inbox</a>
+                    <li class="nav-item ml-0 my-2 my-sm-0 ml-sm-2">
+                        <div class="dropdown">
+                            <a class="nav-link btn btn-green dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    Admin
+                                {% else %}
+                                    {{ app.user.email }}
+                                {% endif %}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <a href="{{ path('admin_profile') }}" class="nav-link">Profilis</a>
+                                {% else %}
+                                    <a href="{{ path('profile') }}" class="nav-link">Profilis</a>
+                                {% endif %}
+                                <a href="{{ path('fos_message_inbox') }}" class="nav-link">Žinutės</a>
+                                <a href="{{ path('logout') }}" class="nav-link">Atsijungti</a>
+                            </div>
+                        </div>
                     </li>
                 {% endif %}
             </ul>
