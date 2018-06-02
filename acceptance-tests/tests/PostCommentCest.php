@@ -31,7 +31,7 @@ class PostCommentCest
         $I->click(self::ACTIVITY_LINK);
         $I->click('#review-tab');
         $I->wait(2);
-        $I->canSee('Komentarai');
+        $I->canSee('Atsiliepimai');
         $I->fillField('comment[commentText]', self::COMMENT_TEXT);
         $I->scrollTo(self::SUBMIT_COMMENT_BUTTON);
         $I->click(self::SUBMIT_COMMENT_BUTTON);
