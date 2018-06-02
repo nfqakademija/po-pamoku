@@ -86,19 +86,19 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     private function redirectAfterRegistration(Request $request, TokenInterface $token, $providerKey)
     {
         $session = $request->getSession();
-        $role = $session->get('role');
+        $user = $token->getUser();
+        $role = $user->getRole();
         $path = $session->get('redirect');
         if (!$role) {
             return null;
         }
 
         switch ($role) {
-            case 'owner':
-                $user = $token->getUser();
+            case 'ROLE_OWNER':
                 $activity = $user->getActivity()->getId();
                 $path = $this->router->generate('activity_show', ['id' => $activity]);
                 break;
-            case 'user':
+            case 'ROLE_USER':
                 if (strpos($path, 'login') || strpos($path, 'register')) {
                     return null;
                 }

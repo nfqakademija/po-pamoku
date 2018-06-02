@@ -24,11 +24,9 @@ class RegistrationController extends Controller
         Request $request,
         SessionInterface $session
     ) {
-
         $redirect = $session->get('redirect');
         if (!$redirect) {
             $session->set('redirect', $request->headers->get('referer'));
-            $session->set('role', $role);
         }
 
         switch ($role) {
@@ -65,15 +63,19 @@ class RegistrationController extends Controller
             return $this->ownerRegistrationLastStep($request, $session);
         }
 
+        $session = $this->refreshSession($session);
+
         $userForm = $this->createForm(RegistrationType::class, $session->get('user'));
         $userForm->handleRequest($request);
 
         if ($userForm->isSubmitted() && $userForm->isValid()) {
             $userData = $userForm->getData();
             $session->set('user', $userData);
-                return $this->ownerRegistrationSecondStep($request, $session);
-        }
+            $session->set('previousStep', '1');
 
+            return $this->ownerRegistrationSecondStep($request, $session);
+        }
+        $session->remove('previousStep');
         return $this->getForm($userForm);
     }
 
@@ -82,19 +84,19 @@ class RegistrationController extends Controller
         $activity = $this->getActivityFromSession($session);
         $activityForm = $this->createForm(ActivityType::class, $activity);
         $activityForm->handleRequest($request);
-
         if ($activityForm->isSubmitted() && $activityForm->isValid()) {
             $activityData = $activityForm->getData();
             $activityData = $this->handleImage($activityData);
             $session->set('activity', $activityData);
-
+            $session->set('previousStep', '2');
+            dump($session->get('previousStep'));
             if ($activityForm->get('back')->isClicked()) {
                 return $this->backToPreviousStep(RegistrationType::class, $session, 'user');
             }
 
             return $this->ownerRegistrationLastStep($request, $session);
         }
-
+        $session->remove('previousStep');
         return $this->getForm($activityForm);
     }
 
@@ -107,7 +109,7 @@ class RegistrationController extends Controller
         if ($locationForm->isSubmitted() && $locationForm->isValid()) {
             $locationData = $locationForm->getData();
             $session->set('location', $locationData);
-
+            $session->set('previousStep', '3');
             if ($locationForm->get('back')->isClicked()) {
                 return $this->backToPreviousStep(ActivityType::class, $session, 'activity');
             }
@@ -119,6 +121,7 @@ class RegistrationController extends Controller
             return $this->addNewUserToDatabaseAndAuthenticate($request, $user);
         }
 
+        $session->remove('previousStep');
         return $this->getForm($locationForm);
     }
 
@@ -164,6 +167,8 @@ class RegistrationController extends Controller
             }
             $activity->setTimetables($newTimetable);
             $activity->setSubcategory($subcategory);
+        } else {
+            $activity = new Activity();
         }
 
         return $activity;
@@ -216,5 +221,22 @@ class RegistrationController extends Controller
         $backForm = $this->createForm($backType, $data);
 
         return $this->getForm($backForm);
+    }
+
+    /**
+     * @param SessionInterface $session
+     * @return SessionInterface
+     */
+    private function refreshSession(SessionInterface $session): SessionInterface
+    {
+        if ($session->get('previousStep')) {
+            return $session;
+        }
+
+        $session->remove('user');
+        $session->remove('activity');
+        $session->remove('location');
+        dump(1);
+        return $session;
     }
 }
