@@ -22,7 +22,7 @@ render() {
 
                 <a className="card-btn overlay" href={"/activity/" + activity.id}><i className="fas fa-search-plus"></i></a>
 
-                <img className="img-fluid" src="https://placeimg.com/640/480/any" alt="Card image cap" />
+                   <img className="img-fluid" src={activity.pathToLogo} alt="Card image cap" />
 
                 <button className="like-btn"
                     onClick={() => {
