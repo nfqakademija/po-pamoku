@@ -34,7 +34,8 @@
   color: #7f7f7f;
 }
 .card-image {
-  height: 235px;
+  min-height: 160px;
+    max-height: 354px;
   position: relative;
 }
 .like-btn {
