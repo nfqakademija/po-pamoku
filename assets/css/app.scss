@@ -23,7 +23,9 @@ body {
   width: 100%;
   border-radius: 0!important;
 }
-
+.img-fluid {
+    width: 100%;
+}
  .hero {
     // background: linear-gradient(to left bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../img/mainBg.jpg");
     background-position: top;

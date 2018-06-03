@@ -23,9 +23,9 @@ render() {
             <div className="card-image">
 
                 <a className="card-btn overlay" href={"/activity/" + activity.id}><i className="fas fa-search-plus"></i></a>
-
-                   <img className="img-fluid" src={activity.pathToLogo} alt="Card image cap" />
-
+                <img className="img-fluid" 
+                src={activity.pathToLogo ? activity.pathToLogo : '/uploads/33e75ff09dd601bbe69f351039152189.jpg'} 
+                alt="Card image cap" />
                 <button className="like-btn"
                     disabled={disabled}
                     onClick={() => {
@@ -50,8 +50,8 @@ render() {
                 </button>
 
                 <div className="price">
-                    {activity.priceFrom}-{activity.priceTo} €
-                          </div>
+                    {activity.priceFrom === activity.priceTo ? (activity.priceFrom) : (activity.priceFrom + "-" + activity.priceTo)} €
+                </div>
             </div>
 
             <div className="activity-text">
