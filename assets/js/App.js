@@ -28,7 +28,6 @@ class App extends React.Component {
 
   componentDidMount() {
     this.getActivities(1);
-    this.getLocalStorage();
   }
 
  getActivities(page) {

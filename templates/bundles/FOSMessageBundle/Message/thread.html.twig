@@ -8,7 +8,7 @@
         {% for message in thread.messages %}
             {% if message.sender == app.user %}
                 <div class="messenger_thread_message col-12">
-                    <div class="col-6">
+                    <div class="col py-3">
                         <p class="mb-0 mssg-sender">
                             {% trans with {
                                 '%sender%' : message.sender.name,
@@ -23,7 +23,7 @@
                 </div>
             {% else %}
                 <div class="messenger_thread_message col-12">
-                    <div class="col-6">
+                    <div class="col bg-light py-3">
                         <p class="mb-0 mssg-sender">
                             {% trans with {
                                 '%sender%' : message.sender.name,
@@ -31,7 +31,7 @@
                             }
                             from 'FOSMessageBundle' %}message_info{% endtrans %}
                         </p>
-                        <p class="mssg-text-oponent">
+                        <p class="mssg-text">
                             {{ message.body }}
                         </p>
                     </div>
