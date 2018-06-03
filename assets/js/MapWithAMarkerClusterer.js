@@ -33,6 +33,7 @@ const MapWithAMarkerClusterer = compose(
             gridSize={60}
         >
             {props.markers.map(marker => {
+                let list = [];
                 return (
                     <Marker
                         key={marker.id}
@@ -41,27 +42,52 @@ const MapWithAMarkerClusterer = compose(
                     >
                         {!!props.id && props.id === marker.id &&
                     <InfoWindow>
-                            <div className="view-box">
-                                <h5>{marker.name}</h5>
-                                <div className="image-box">
-                                    {/* <img src={marker.pathToLogo}/> */}
-                                    <img className="img-fluid" src="https://placeimg.com/640/480/any" alt="Card image cap" />
+                        <div className="activity-card">
+                            <div className="card-image">
+
+                                <a className="card-btn overlay" href={"/activity/" + marker.id}><i className="fas fa-search-plus"></i></a>
+
+                                <img className="img-fluid" src={marker.pathToLogo} alt="Card image cap" />
+
+                                <button className="like-btn"
+                                        onClick={() => {
+                                            list.push(marker);
+                                            let storageList  = JSON.parse(localStorage.getItem('favoriteList'));
+                                            if (storageList == null) {
+                                                localStorage.setItem('favoriteList', JSON.stringify(list));
+                                            } else {
+                                                storageList.forEach((item) => {
+                                                    if (item.id === marker.id) {
+                                                        return;
+                                                    }
+                                                });
+                                                storageList.push(marker);
+                                                localStorage.setItem('favoriteList', JSON.stringify(storageList));
+                                                this.setState({ favoriteList: storageList });
+                                            }
+
+                                        }}>
+                                    <i className="far fa-heart"></i>
+                                </button>
+
+                                <div className="price">
+                                    {marker.priceFrom}-{marker.priceTo} €
                                 </div>
-                                <p className="mt-3">
-                                    <i className="fas fa-map-marker"></i>
-                                    <span className="pl-2">{marker.street} {marker.house}, {marker.city}</span>
-                                    
-                                </p>
-                                <p>
-                                    <i className="fas fa-user"></i>
-                                    <span className="pl-2">Amžius: {marker.ageFrom} - {marker.ageTo}</span>
-                                </p>
-                                <p>
-                                    <i className="fas fa-euro-sign"></i>
-                                    <span className="pl-2">{marker.priceFrom} - {marker.priceTo}</span>
-                                    <a className="float-right" href={"/activity/" + marker.id}> Plačiau </a>
-                                </p>
                             </div>
+
+                            <div className="activity-text">
+                                <h5 className="activity-title">
+                                    {marker.name}
+                                </h5>
+                                <p className="grey-text">
+                                    {marker.city}, {marker.street} {marker.house}
+                                </p>
+                                <p className="d-flex justify-content-between align-items-baseline">
+                                    <span className="grey-text">{marker.subcategory}</span>
+                                </p>
+
+                            </div>
+                        </div>
                     </InfoWindow>}
                 </Marker>
             )})}

@@ -33,7 +33,6 @@ render() {
                         } else {
                             storageList.forEach((item) => {
                                 if (item.id === activity.id) {
-                                    console.log(true);
                                     return;
                                 }
                             });
