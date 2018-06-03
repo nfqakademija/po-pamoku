@@ -1,29 +1,31 @@
 {% if app.user %}
-    {{ form_start(ratingForm, {
-            'name': 'ratingForm',
-            'attr': {
-                'id': 'ratingForm'
-            }
-        }) }}
-        <div class="py-4 px-2 col-12" id="rating">
-        <h3 class="pb-3">Reitingas</h3>
-        <div class="rate-area">
-            {% for radioRate in ratingForm.rating %}
-                {# {{ form_label(radioRate, null, {'label_attr': {'class':'radio-inline'}}) }}
-                    {{ form_widget(radioRate, {'attr': {'class': 'radio-inline'}}) }} #}
-                    {# <i class="fas fa-star star"></i> #}
+    {% if not (app.user.role == 'ROLE_OWNER' and app.user.activity.id == activity.id) %}
+        {{ form_start(ratingForm, {
+                'name': 'ratingForm',
+                'attr': {
+                    'id': 'ratingForm'
+                }
+            }) }}
+            <div class="py-4 px-2 col-12" id="rating">
+            <h3 class="pb-3">Reitingas</h3>
+            <div class="rate-area">
+                {% for radioRate in ratingForm.rating %}
+                    {# {{ form_label(radioRate, null, {'label_attr': {'class':'radio-inline'}}) }}
+                        {{ form_widget(radioRate, {'attr': {'class': 'radio-inline'}}) }} #}
+                        {# <i class="fas fa-star star"></i> #}
 
-                    {{ form_widget(radioRate) }}
-                    {{ form_label(radioRate, null) }}
-            {% endfor %}
-        </div>
-        <div class="rate-text">Vidutinis įvertinimas: <b>{{ activity.rating|round(2) }}/5</b><br><span class="rate-subText">Įvertinimų skaičius: {{ activity.ratingCount }}</span></div>
+                        {{ form_widget(radioRate) }}
+                        {{ form_label(radioRate, null) }}
+                {% endfor %}
+            </div>
+            <div class="rate-text">Vidutinis įvertinimas: <b>{{ activity.rating|round(2) }}/5</b><br><span class="rate-subText">Įvertinimų skaičius: {{ activity.ratingCount }}</span></div>
 
-        {% if rate %}
-            <button type="submit" class="btn btn-green" formnovalidate>Pakeisti įvertinimą</button>
-        {% else %}
-            <button type="submit" class="btn btn-green" formnovalidate>Įvertinti</button>
-        {% endif %}
-</div>
-    {{ form_end(ratingForm) }}
+            {% if rate %}
+                <button type="submit" class="btn btn-green" formnovalidate>Pakeisti įvertinimą</button>
+            {% else %}
+                <button type="submit" class="btn btn-green" formnovalidate>Įvertinti</button>
+            {% endif %}
+            </div>
+        {{ form_end(ratingForm) }}
+    {% endif %}
 {% endif %}

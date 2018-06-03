@@ -23,7 +23,9 @@ body {
   width: 100%;
   border-radius: 0!important;
 }
-
+.img-fluid {
+    width: 100%;
+}
  .hero {
     // background: linear-gradient(to left bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../img/mainBg.jpg");
     background-position: top;
@@ -118,12 +120,12 @@ a.btn.btn-green {
 }
 
  .bg-blue {
-    background: linear-gradient(to left bottom, #2da2c5f5, #7e55bdf7);
+    background: linear-gradient(to left bottom, #2da2c5, #7e55bd);
     background-position: center;
     background-size: cover;
  }
   .bg-profile {
-    background: linear-gradient(to left bottom, #2da2c5f5, #7e55bdf7);
+    background: linear-gradient(to left bottom, #2da2c5, #7e55bd);
     background-position: center;
     background-size: cover;
  }
@@ -212,6 +214,7 @@ textarea {
 .mssg-table {
     min-height: 200px;
 }
+
 @media screen and (max-width: 992px) {
     .foto1 {
         display: none;
@@ -239,6 +242,11 @@ textarea {
     .foto2 {
         top: -60px;
     }
+    #activityTab {
+    .nav-link {
+    padding: 0.5rem;
+}
+}
 }
 @media screen and (max-width: 413px) {
     .btn-reg-activity {

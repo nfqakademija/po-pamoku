@@ -26,6 +26,12 @@ class App extends React.Component {
     this.onFilterChange = this.onFilterChange.bind(this);
     this.my = this.my.bind(this);
   }
+
+  componentDidMount() {
+    this.getActivities(1);
+    this.getLocalStorage();
+  }
+
  getActivities(page) {
    axios.get('/api/activity?page=' + page + '&limit=12')
      .then(function (response) {
@@ -58,10 +64,6 @@ class App extends React.Component {
       });
   }
 
-  componentDidMount() {
-    this.getActivities(1);
-  }
-
   handleSelect(number) {
     this.setState({ currentPageNumber: number });
     if (this.state.addFilter === true) {
@@ -79,7 +81,10 @@ class App extends React.Component {
     this.setState({searchValue: value});
     this.searchActivities(1, value);
   }    
-
+getLocalStorage() {
+  const favoriteList = JSON.parse(localStorage.getItem('favoriteList'));
+  this.setState({ favorites: favoriteList });
+}
   my() {
     if (!navigator.geolocation) {
       alert('Geolocation is not supported by your browser');
@@ -153,7 +158,7 @@ const btnSwitch = (
                 <a className="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Paieška</a>
                   </li>
               <li className="nav-item">
-                <a className="nav-link" id="map-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false"
+                <a className="nav-link" id="map-tab" data-toggle="tab" href="#mapTab" role="tab" aria-controls="profile" aria-selected="false"
                       onClick={() => {
                         this.setState({ isMap: true });
                       }}>
@@ -172,7 +177,7 @@ const btnSwitch = (
                     onChange={this.onFilterChange} />
                   </div>
               </div>
-              <div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+              <div className="tab-pane fade" id="mapTab" role="tabpanel" aria-labelledby="map-tab">
                     {this.state.isMap &&
                       <div className="" id="map">
                         <div className="row justify-content-between position-relative">
@@ -188,10 +193,26 @@ const btnSwitch = (
                   </div>
               <div className="tab-pane fade" id="favorite" role="tabpanel" aria-labelledby="favorite-tab">
                 <div className="container">
+<<<<<<< HEAD
                   <h2 className="my-5 text-center">Mėgstamiausi būreliai</h2>
                   <div className="row">{favs}</div>
+=======
+                  <h2 className="my-5">Mėgstamiausi būreliai</h2>
+                  <div className="row">
+                  {favorites ? (favorites.map((activity, index) => 
+                    
+                      <ActivityItem
+                      key={"currentAct" + index}
+                      item={activity}
+                      />
+                      
+                    )) : (<div>Nėra išsaugotų būrelių</div>)
+                }
+                    
+                  </div>
+>>>>>>> e031a3384c39b6115b728525b5a3f0fe91412593
                   < hr />
-                  <h2 className="my-5 text-center">Visi būreliai</h2>
+                  <h2 className="my-5">Visi būreliai</h2>
                   
                 </div>
               </div>
@@ -207,7 +228,7 @@ const btnSwitch = (
                   key={"currentAct" + index}
                   item={activity} />
                   )) : ('')}
-                    <div className="col-12 text-center">
+                    <div className="col-12 text-center pt-4">
                       <Pagination
                     bsSize="medium"
                     items={totalPages}

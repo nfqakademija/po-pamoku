@@ -3,8 +3,8 @@ inbox:          Gautieji
 sent:           Išsiųstieji
 deleted:        Šiukšliadėžė
 send_new:       Siųsti naują žinutę
-search:         Pairška
-threads_found:  "rasta %num% gija | rasta %num% gijų"
+search:         Paieška
+threads_found:  "rasta %num% susirašinėjimas | rasta %num% susirašinėjimų"
 
 message_info:   "Siuntėjas: %sender%, data: %date%"
 reply:          Atsakyti
@@ -19,7 +19,7 @@ new:            Nauja
 goto_last:      Pereiti prie paskutinės žinutės
 on:             "Data: %date%"
 by:             "Siuntėjas: %sender%"
-no_thread:      Gijų nėra
+no_thread:      Susirašinėjimų nėra
 delete:         Ištrinti
 preview:        peržiūrėti
 undelete:       Atstatyti

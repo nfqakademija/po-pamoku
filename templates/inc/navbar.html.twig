@@ -40,12 +40,12 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 {% if is_granted('ROLE_ADMIN') %}
-                                    <a href="{{ path('admin_profile') }}" class="nav-link">Profilis</a>
+                                <a href="{{ path('admin_profile') }}" class="dropdown-item">Profilis</a>
                                 {% else %}
-                                    <a href="{{ path('profile') }}" class="nav-link">Profilis</a>
+                                <a href="{{ path('profile') }}" class="dropdown-item">Profilis</a>
                                 {% endif %}
-                                <a href="{{ path('fos_message_inbox') }}" class="nav-link">Žinutės</a>
-                                <a href="{{ path('logout') }}" class="nav-link">Atsijungti</a>
+                                <a href="{{ path('fos_message_inbox') }}" class="dropdown-item">Žinutės</a>
+                                <a href="{{ path('logout') }}" class="dropdown-item">Atsijungti</a>
                             </div>
                         </div>
                     </li>

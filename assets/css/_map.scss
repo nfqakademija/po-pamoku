@@ -49,9 +49,15 @@
         width: 250px;
     }
 }
+.info-window {
+    max-width: 300px;
+}
 @media screen and (max-width: 375px) {
     .geo-btn {
         top: 36px;
         left: 10px;
     }
+    .info-window {
+    max-width: 250px;
+}
 }
