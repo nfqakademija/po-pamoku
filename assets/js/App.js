@@ -151,7 +151,7 @@ const btnSwitch = (
                 <a className="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Paieška</a>
                   </li>
               <li className="nav-item">
-                <a className="nav-link" id="map-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false"
+                <a className="nav-link" id="map-tab" data-toggle="tab" href="#mapTab" role="tab" aria-controls="profile" aria-selected="false"
                       onClick={() => {
                         this.setState({ isMap: true });
                       }}>
@@ -174,7 +174,7 @@ const btnSwitch = (
                     onChange={this.onFilterChange} />
                   </div>
               </div>
-              <div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+              <div className="tab-pane fade" id="mapTab" role="tabpanel" aria-labelledby="map-tab">
                     {this.state.isMap &&
                       <div className="" id="map">
                         <div className="row justify-content-between position-relative">

@@ -42,7 +42,7 @@ const MapWithAMarkerClusterer = compose(
                     >
                         {!!props.id && props.id === marker.id &&
                     <InfoWindow>
-                        <div className="activity-card">
+                        <div className="activity-card mt-4 ml-4 mb-2 info-window">
                             <div className="card-image">
 
                                 <a className="card-btn overlay" href={"/activity/" + marker.id}><i className="fas fa-search-plus"></i></a>
