@@ -6,6 +6,7 @@ use App\Form\Type\LoginType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -21,15 +22,18 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     private $router;
     private $encoder;
     private $factory;
+    private $session;
     
     public function __construct(
         RouterInterface $router,
         UserPasswordEncoderInterface $encoder,
-        FormFactoryInterface $factory
+        FormFactoryInterface $factory,
+        SessionInterface $session
     ) {
         $this->router = $router;
         $this->encoder = $encoder;
         $this->factory = $factory;
+        $this->session = $session;
     }
     
     public function supports(Request $request)
@@ -67,14 +71,20 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
         $path = $this->redirectAfterRegistration($request, $token, $providerKey);
+        $loginReferer = $this->session->get('loginReferer');
 
         if (!$path) {
             $targetPath = $this->getTargetPath($request->getSession(), $providerKey);
             if (!$targetPath || strpos($path, 'login') || strpos($path, 'register')) {
-                $path = $this->router->generate('activity_list');
+                if (strpos($loginReferer, 'activity')) {
+                    $path = $loginReferer;
+                } else {
+                    $path = $this->router->generate('activity_list');
+                }
             }
         }
 
+        $this->session->remove('loginReferer');
         return new RedirectResponse($path);
     }
     
@@ -103,6 +113,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
                 if (strpos($path, 'login') || strpos($path, 'register')) {
                     return null;
                 }
+                break;
             default:
                 return null;
         }
@@ -110,5 +121,4 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         $session->clear();
         return $path;
     }
-    
 }
