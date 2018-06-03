@@ -103,7 +103,7 @@ color: #212529;
     vertical-align: middle;
     padding: 0.5rem 1rem;
 }
-#registration_next, #activity_next, #location_register {
+#registration_next, #activity_next, #location_register, #registration_register {
   color: #fff;
     background-color: #3ecf8e;
     border-radius: .25rem;
@@ -111,7 +111,7 @@ color: #212529;
     border: none;
     cursor: pointer;
 }
-#registration_next:hover, #activity_next:hover, #location_register:hover {
+#registration_next:hover, #activity_next:hover, #location_register:hover, #registration_register:hover {
     background-color: #38bb80;
 }
 .activity-edit-form {
@@ -134,7 +134,8 @@ color: #212529;
 }
   .registration-form {
     padding: 20px 15px;
-  }
+    padding-bottom: 60px;
+}
   .registration-bg {
     padding: 59px 0 0;
 }
