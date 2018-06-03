@@ -75,7 +75,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
         if (!$path) {
             $targetPath = $this->getTargetPath($request->getSession(), $providerKey);
-            if (!$targetPath || strpos($path, 'login') || strpos($path, 'register')) {
+            if (!$targetPath || strpos($targetPath, 'login') || strpos($targetPath, 'register')) {
                 if (strpos($loginReferer, 'activity')) {
                     $path = $loginReferer;
                 } else {
