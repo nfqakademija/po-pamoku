@@ -5,6 +5,11 @@
     <h2 class="py-3">Susirašinėjimo tema: {{ thread.subject }}</h2>
     <div class="accordion" id="accordion">
         {% for message in thread.messages %}
+            {#{% if message.sender == app.user %}#}
+                {#do something#}
+            {#{% else %}#}
+                {#do something else#}
+            {#{% endif %}#}
             <div class="messenger_thread_message d-flex mssg-box">
                 <div class="mssg-avatar"></div>
                 <div class="pl-2">

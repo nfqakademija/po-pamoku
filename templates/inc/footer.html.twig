@@ -1,6 +1,7 @@
 <footer id="footer" class="pt-5">
     <div class="container">
         <div class="row justify-content-center">
+            {% if not app.user %}
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                     <a class="btn btn-register w-100 mb-2 mb-md-0" href="{{ path('registration', {'role': 'user'}) }}">Vartotojo registracija</a>
                 </div>
@@ -10,6 +11,7 @@
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                     <a class="btn btn-register w-100" href="{{ path('login') }}">Prisijungti</a>
                 </div>
+            {% endif %}
             <div class="col-12 pt-3">
                 <p class="copyright text-center">Popamoku.lt 2018. Visos teisės saugomos.</p>
             </div>

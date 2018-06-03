@@ -66,9 +66,12 @@
                             <a class="nav-link" id="review-tab" data-toggle="tab" href="#reviewTab" role="tab"
                                aria-controls="profile" aria-selected="false">Atsiliepimai</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('fos_message_thread_new') }}">Siųsti žinutę</a>
-                        </li>
+                        {% if not app.user or
+                            (app.user and not (app.user.role == 'USER_OWNER' and app.user.activity.id != activity.id)) %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('fos_message_thread_new') }}">Siųsti žinutę</a>
+                            </li>
+                        {% endif %}
 
                     </ul>
                     <div class="tab-content" id="activityTabContent">
