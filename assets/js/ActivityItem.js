@@ -23,7 +23,6 @@ render() {
                 src={activity.pathToLogo ? activity.pathToLogo : '/uploads/33e75ff09dd601bbe69f351039152189.jpg'} 
                 alt="Card image cap" />
                 <button className="like-btn"
-                    disabled={disabled}
                     onClick={() => {
                             if (localStorage.getItem('favorite' + activity.id) === null){
                                 localStorage.setItem('favorite' + activity.id, JSON.stringify(activity));
