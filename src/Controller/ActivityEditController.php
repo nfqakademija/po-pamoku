@@ -20,7 +20,7 @@ class ActivityEditController extends Controller
     {
         $activity = $this->getDoctrine()->getRepository(Activity::class)->find($id);
         
-//        $this->denyAccessUnlessGranted('edit', $activity);
+        $this->denyAccessUnlessGranted('edit', $activity);
         
         $form = $this->createForm(ActivityType::class, $activity);
         $pathToLogo = $activity->getPathToLogo();
