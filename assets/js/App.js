@@ -213,7 +213,7 @@ const btnSwitch = (
                   <ActivityItem
                   key={"currentAct" + index}
                   item={activity} />
-                  )) : ('Deja, būrelių nėra')}
+                  )) : ('')}
                     <div className="col-12 text-center">
                       <Pagination
                     bsSize="medium"
