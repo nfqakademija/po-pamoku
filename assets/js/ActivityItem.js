@@ -6,17 +6,13 @@ class ActivityItem extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            favoriteList: [],
-            disabled: false
+            isFav: false
         }
     }
 
 
 render() {
     const { item: activity } = this.props;
-    const { favoriteList } = this.state;
-    let list = [];
-    const disabled = this.state.disabled ? 'disabled' : ''
    return (
    <div className="col-xs-6 col-sm-6 col-lg-4 py-3">
         <div className="activity-card">
@@ -29,24 +25,17 @@ render() {
                 <button className="like-btn"
                     disabled={disabled}
                     onClick={() => {
-                        let storageList  = JSON.parse(localStorage.getItem('favoriteList'));
-                        if (storageList == null) {
-                            list.push(activity);
-                            localStorage.setItem('favoriteList', JSON.stringify(list));
-                            this.setState({disbaled: true});
-                        } else {
-                            storageList.forEach((item) => {
-                                if (item.id === activity.id) {
-                                    return;
-                                }
-                            });
-                            storageList.push(activity);
-                            localStorage.setItem('favoriteList', JSON.stringify(storageList));
-                            this.setState({ favoriteList: storageList,
-                            disabled: true });
-                        }
+                            if (localStorage.getItem('favorite' + activity.id) === null){
+                                localStorage.setItem('favorite' + activity.id, JSON.stringify(activity));
+                                this.setState({ isFav: true });
+                            }
+                            else {
+                                localStorage.removeItem('favorite' + activity.id);
+                                this.setState({ isFav: false });
+                            }
                         }}>
-                    <i className="far fa-heart"></i>
+
+                        <i className={this.state.isFav || localStorage.getItem('favorite' + activity.id) ? 'fas fa-heart' : 'far fa-heart'} ></i>
                 </button>
 
                 <div className="price">

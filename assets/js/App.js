@@ -111,8 +111,8 @@ getLocalStorage() {
   };
 
   render() {
-    const { activities, 
-      currentPage, 
+    const { activities,
+      currentPage,
       activitiesPerPage,
       lat,
       lng,
@@ -126,7 +126,7 @@ const btnSwitch = (
             className="btn map-btn mt-3"
             onClick={() => {
                 this.setState({ isMap: !this.state.isMap });
-                
+
             }}>
               <i className="fas fa-map-marker"></i>
       <span className="location-btn pl-2">Žemėlapis</span>
@@ -140,7 +140,14 @@ const btnSwitch = (
           onClick={this.my}
           >Rasti mano vietą</button>
       );
-    let favoriteList = JSON.parse(localStorage.getItem('favoriteList'));
+    let favs = [];
+    for (let i = 0; i < localStorage.length; i++) {
+        if(localStorage.key( i ).indexOf('favorite') === 0){
+            favs.push(<ActivityItem
+                key={localStorage.key( i )}
+                item={JSON.parse(localStorage.getItem( localStorage.key( i ) ))}/>);
+        }
+    }
       return (
       <div>
         <div className="col-12 search-panel" id="filterTop">            
@@ -158,11 +165,7 @@ const btnSwitch = (
                     </a>
                   </li>
               <li className="nav-item">
-                <a className="nav-link" id="favorite-tab" data-toggle="tab" href="#favorite" role="tab" aria-controls="favorite" aria-selected="true"
-                  onClick={() => {
-                    favoriteList = JSON.parse(localStorage.getItem('favoriteList'));
-                    this.setState({ favorites: favoriteList });
-                  }}>
+                <a className="nav-link" id="favorite-tab" data-toggle="tab" href="#favorite" role="tab" aria-controls="favorite" aria-selected="true">
                 Mėgstamiausi</a>
               </li>
                 </ul>
@@ -189,19 +192,8 @@ const btnSwitch = (
                   </div>
               <div className="tab-pane fade" id="favorite" role="tabpanel" aria-labelledby="favorite-tab">
                 <div className="container">
-                  <h2 className="my-5">Mėgstamiausi būreliai</h2>
-                  <div className="row">
-                  {favorites ? (favorites.map((activity, index) => 
-                    
-                      <ActivityItem
-                      key={"currentAct" + index}
-                      item={activity}
-                      />
-                      
-                    )) : (<div>Nėra išsaugotų būrelių</div>)
-                }
-                    
-                  </div>
+                  <h2 className="my-5 text-center">Mėgstamiausi būreliai</h2>
+                  <div className="row">{favs}</div>
                   < hr />
                   <h2 className="my-5">Visi būreliai</h2>
                   

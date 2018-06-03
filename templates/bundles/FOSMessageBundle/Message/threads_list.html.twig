@@ -36,7 +36,10 @@
                 </td>
                 <td>
                     {% if thread.0.lastMessage %}
-                        <a href="{{ url('fos_message_thread_view', {'threadId': thread.0.id}) }}#message_{{ thread.0.lastMessage.id }}" title="{% trans from 'FOSMessageBundle' %}goto_last{% endtrans %}">
+                        <a
+                            href="{{ url('fos_message_thread_view', {'threadId': thread.0.id}) }}#message_{{ thread.0.lastMessage.id }}"
+                            title="{% trans from 'FOSMessageBundle' %}goto_last{% endtrans %}"
+                        >
                             →
                         </a>
                         {% trans with {'%date%': thread.0.lastMessage.createdAt|date} from 'FOSMessageBundle' %}on{% endtrans %}
@@ -56,13 +59,19 @@
                             {% set submitValue %}{% trans from 'FOSMessageBundle' %}delete{% endtrans %}{% endset %}
                         {% endif %}
                         <form action="{{ formAction }}" method="post">
-                                <input class="btn btn-danger border-rad" type="submit" value="{{ submitValue }}" />
+                            <input class="btn btn-danger border-rad" type="submit" value="{{ submitValue }}" />
+                            <a
+                                class="btn btn-green border-rad"
+                                href="{{ url('fos_message_thread_view', {'threadId': thread.0.id}) }}"
+                            >
+                                {% trans from 'FOSMessageBundle' %}preview{% endtrans %}
+                            </a>
                         </form>
                     {% endif %}
                 </td>
             </tr>
         {% endfor %}
-    {% else %}
+    {% else %}.btn.btn-green
         <tr>
             <td colspan="6">
                 {% trans from 'FOSMessageBundle' %}no_thread{% endtrans %}.

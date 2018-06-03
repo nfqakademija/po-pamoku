@@ -21,6 +21,7 @@ on:             "Data: %date%"
 by:             "Siuntėjas: %sender%"
 no_thread:      Susirašinėjimų nėra
 delete:         Ištrinti
+preview:        peržiūrėti
 undelete:       Atstatyti
 recipient:      Gavėjas
 recipients:     Gavėjai
