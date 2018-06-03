@@ -31,7 +31,7 @@ class App extends React.Component {
     this.getActivities(1);
     this.getLocalStorage();
   }
-  
+
  getActivities(page) {
    axios.get('/api/activity?page=' + page + '&limit=12')
      .then(function (response) {
@@ -218,9 +218,8 @@ const btnSwitch = (
                   {activities.length !== 0 ? (activities.map((activity, index) =>
                   <ActivityItem
                   key={"currentAct" + index}
-                  item={activity}
-                  favoriteList={favorites} />
-                  )) : ('Deja, būrelių nėra')}
+                  item={activity} />
+                  )) : ('')}
                     <div className="col-12 text-center">
                       <Pagination
                     bsSize="medium"
