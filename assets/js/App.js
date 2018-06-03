@@ -193,24 +193,8 @@ const btnSwitch = (
                   </div>
               <div className="tab-pane fade" id="favorite" role="tabpanel" aria-labelledby="favorite-tab">
                 <div className="container">
-<<<<<<< HEAD
                   <h2 className="my-5 text-center">Mėgstamiausi būreliai</h2>
                   <div className="row">{favs}</div>
-=======
-                  <h2 className="my-5">Mėgstamiausi būreliai</h2>
-                  <div className="row">
-                  {favorites ? (favorites.map((activity, index) => 
-                    
-                      <ActivityItem
-                      key={"currentAct" + index}
-                      item={activity}
-                      />
-                      
-                    )) : (<div>Nėra išsaugotų būrelių</div>)
-                }
-                    
-                  </div>
->>>>>>> e031a3384c39b6115b728525b5a3f0fe91412593
                   < hr />
                   <h2 className="my-5">Visi būreliai</h2>
                   
