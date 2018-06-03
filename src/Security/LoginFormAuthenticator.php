@@ -86,6 +86,10 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
             }
         }
 
+        if (strpos($path, 'messages/new')) {
+            $this->session->set('messageReceiver', $loginReferer);
+        }
+
         $this->session->remove('loginReferer');
         return new RedirectResponse($path);
     }

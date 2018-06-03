@@ -11,18 +11,25 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class NewThreadMessageFormType extends AbstractType
 {
     private $requestStack;
     private $ar;
+    private $session;
 
-    public function __construct(RequestStack $requestStack, ActivityRepository $ar)
-    {
+    public function __construct(
+        RequestStack $requestStack,
+        ActivityRepository $ar,
+        SessionInterface $session
+    ) {
         $this->requestStack = $requestStack;
         $this->ar = $ar;
+        $this->session = $session;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -46,7 +53,7 @@ class NewThreadMessageFormType extends AbstractType
             function (FormEvent $event) {
                 $message = $event->getData();
                 $request = $this->requestStack->getCurrentRequest();
-                $previousPath = $request->headers->get('referer');
+                $previousPath = $this->getPreviousPath($request);
 
                 if (strpos($previousPath, 'activity') !== false) {
                     $id = $this->getIdFromReferer($previousPath);
@@ -56,6 +63,21 @@ class NewThreadMessageFormType extends AbstractType
                     $event->setData($message);
                 }
             });
+    }
+
+    private function getPreviousPath(Request $request)
+    {
+        $pathFromReferer = $request->headers->get('referer');
+        $pathFromSession = $this->session->get('messageReceiver');
+
+        if (strpos($pathFromReferer, 'activity')) {
+            return $pathFromReferer;
+        } elseif (strpos($pathFromSession, 'activity')) {
+            $this->session->remove('messageReceiver');
+            return $pathFromSession;
+        }
+
+        return null;
     }
 
     public function configureOptions(OptionsResolver $resolver)
