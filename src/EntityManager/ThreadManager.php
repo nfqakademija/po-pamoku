@@ -15,19 +15,21 @@ class ThreadManager extends BaseManager
 
         return $qb
             ->innerJoin('t.metadata', 'tm')
+            ->innerJoin('t.metadata', 'tm2')
             ->innerJoin('tm.participant', 'p')
-            ->addselect('p.name')
+            ->innerJoin('tm2.participant', 'p2')
+            ->addSelect('p2.name')
             ->where(
                 $qb->expr()->in('tm.thread', $this->getSubqueryForThreadList()->getDQL())
             )
             ->setParameter('participant_id', $participant->getId())
-            ->andWhere('p.id != :user_id')
+            ->andWhere('p.id = :user_id')
             ->setParameter('user_id', $participant->getId())
+            ->andWhere('p.id != p2.id')
             ->andWhere('t.isSpam = :isSpam')
             ->setParameter('isSpam', false, \PDO::PARAM_BOOL)
             ->andWhere('tm.isDeleted = :isDeleted')
             ->setParameter('isDeleted', false, \PDO::PARAM_BOOL)
-            ->andWhere('tm.lastParticipantMessageDate IS NOT NULL')
             ->andWhere('tm.lastMessageDate IS NOT NULL')
             ->orderBy('tm.lastMessageDate', 'DESC')
             ;
@@ -38,21 +40,24 @@ class ThreadManager extends BaseManager
         $qb = $this->repository->createQueryBuilder('t');
 
         return $qb
-            ->select('t')
             ->innerJoin('t.metadata', 'tm')
+            ->innerJoin('t.metadata', 'tm2')
             ->innerJoin('tm.participant', 'p')
-            ->addSelect('p.name')
+            ->innerJoin('tm2.participant', 'p2')
+            ->addSelect('p2.name')
             ->where(
                 $qb->expr()->in('tm.thread', $this->getSubqueryForThreadList()->getDQL())
             )
             ->setParameter('participant_id', $participant->getId())
-            ->andWhere('p.id != :user_id')
+            ->andWhere('p.id = :user_id')
             ->setParameter('user_id', $participant->getId())
+            ->andWhere('p.id != p2.id')
             ->andWhere('t.isSpam = :isSpam')
             ->setParameter('isSpam', false, \PDO::PARAM_BOOL)
             ->andWhere('tm.isDeleted = :isDeleted')
             ->setParameter('isDeleted', false, \PDO::PARAM_BOOL)
-            ->orderBy('tm.lastMessageDate', 'DESC')
+            ->andWhere('tm.lastParticipantMessageDate IS NOT NULL')
+            ->orderBy('tm.lastParticipantMessageDate', 'DESC')
             ;
     }
 
@@ -60,20 +65,24 @@ class ThreadManager extends BaseManager
     {
         $qb = $this->repository->createQueryBuilder('t');
 
-        return $qb
+        $qb = $qb
             ->innerJoin('t.metadata', 'tm')
+            ->innerJoin('t.metadata', 'tm2')
             ->innerJoin('tm.participant', 'p')
-            ->addSelect('p.name')
+            ->innerJoin('tm2.participant', 'p2')
+            ->addSelect('p2.name')
             ->where(
                 $qb->expr()->in('tm.thread', $this->getSubqueryForThreadList()->getDQL())
             )
             ->setParameter('participant_id', $participant->getId())
-            ->andWhere('p.id != :user_id')
+            ->andWhere('p.id = :user_id')
             ->setParameter('user_id', $participant->getId())
+            ->andWhere('p.id != p2.id')
             ->andWhere('tm.isDeleted = :isDeleted')
             ->setParameter('isDeleted', true, \PDO::PARAM_BOOL)
             ->orderBy('tm.lastMessageDate', 'DESC')
             ;
+        return $qb;
     }
 
     private function getSubqueryForThreadList() : QueryBuilder
