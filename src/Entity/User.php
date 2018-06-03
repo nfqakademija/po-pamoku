@@ -62,8 +62,7 @@ class User implements UserInterface, ParticipantInterface
     protected $surname;
     
     /**
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank()
+     * @ORM\Column(type="string", nullable=true)
      * @Assert\Regex(
      *     pattern="/(^(\+3706)[0-9]{7})|((86)[0-9]{7})$/",
      *     message="Phone number format is wrong."
