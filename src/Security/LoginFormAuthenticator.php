@@ -81,6 +81,8 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
                 } else {
                     $path = $this->router->generate('activity_list');
                 }
+            } else {
+                $path = $targetPath;
             }
         }
 
