@@ -42,7 +42,8 @@ class RegistrationType extends AbstractType
             ->add('phoneNumber', TextType::class, [
                 'attr' => [
                     'placeholder' => '860000000, +37060000000'
-                ]
+                ],
+                'required' => false
             ]);
         
         $request = $this->requestStack->getCurrentRequest();

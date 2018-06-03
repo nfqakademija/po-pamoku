@@ -53,7 +53,8 @@ class ActivityType extends AbstractType
             ->add('ageTo', NumberType::class,
                 ['scale' => 0,])
             ->add('pathToLogo', FileType::class, [
-                'data_class' => null])
+                'data_class' => null,
+                'required' => false])
             ->add('Subcategory', EntityType::class, [
                 'class' => Subcategory::class,
             ])
