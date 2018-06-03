@@ -26,6 +26,12 @@ class App extends React.Component {
     this.onFilterChange = this.onFilterChange.bind(this);
     this.my = this.my.bind(this);
   }
+
+  componentDidMount() {
+    this.getActivities(1);
+    this.getLocalStorage();
+  }
+  
  getActivities(page) {
    axios.get('/api/activity?page=' + page + '&limit=12')
      .then(function (response) {
@@ -58,10 +64,6 @@ class App extends React.Component {
       });
   }
 
-  componentDidMount() {
-    this.getActivities(1);
-  }
-
   handleSelect(number) {
     this.setState({ currentPageNumber: number });
     if (this.state.addFilter === true) {
@@ -79,7 +81,10 @@ class App extends React.Component {
     this.setState({searchValue: value});
     this.searchActivities(1, value);
   }    
-
+getLocalStorage() {
+  const favoriteList = JSON.parse(localStorage.getItem('favoriteList'));
+  this.setState({ favorites: favoriteList });
+}
   my() {
     if (!navigator.geolocation) {
       alert('Geolocation is not supported by your browser');
@@ -185,20 +190,21 @@ const btnSwitch = (
                   </div>
               <div className="tab-pane fade" id="favorite" role="tabpanel" aria-labelledby="favorite-tab">
                 <div className="container">
-                  <h2 className="my-5 text-center">Mėgstamiausi būreliai</h2>
+                  <h2 className="my-5">Mėgstamiausi būreliai</h2>
                   <div className="row">
                   {favorites ? (favorites.map((activity, index) => 
                     
                       <ActivityItem
                       key={"currentAct" + index}
-                      item={activity}/>
+                      item={activity}
+                      />
                       
                     )) : (<div>Nėra išsaugotų būrelių</div>)
                 }
                     
                   </div>
                   < hr />
-                  <h2 className="my-5 text-center">Visi būreliai</h2>
+                  <h2 className="my-5">Visi būreliai</h2>
                   
                 </div>
               </div>
@@ -212,7 +218,8 @@ const btnSwitch = (
                   {activities.length !== 0 ? (activities.map((activity, index) =>
                   <ActivityItem
                   key={"currentAct" + index}
-                  item={activity} />
+                  item={activity}
+                  favoriteList={favorites} />
                   )) : ('Deja, būrelių nėra')}
                     <div className="col-12 text-center">
                       <Pagination
