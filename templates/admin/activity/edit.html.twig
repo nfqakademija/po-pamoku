@@ -13,26 +13,26 @@
     </div>
 </header>
 <div class="container">
-    <div class="row mt-5 py-3">
+    <div class="row mt-4 py-3">
         <div class="col-12">
             <div class="mb-2">
                 <a class="btn btn-light border-rad" href="/">Atgal</a>
             </div>
+            <h2>Informacijos redagavimas</h2>
         </div>
-        <div class="col-12 col-sm-6">
-            {% if pathToLogo is not empty  %}
+        <div class="col-12 col-md-6 mb-5 order-md-2">
+            {% if pathToLogo is not empty %}
                 <img class="img-fluid" src="{{ asset(pathToLogo) }}"/>
-                {% else %}
-                <img class="card-img-top" src="https://placeimg.com/640/480/any" alt="Card image cap" />
+            {% else %}
+                <img class="card-img-top" src="https://placeimg.com/640/480/any" alt="Card image cap"/>
             {% endif %}
         </div>
-        <div class="col-12 activity-edit-form">
+        <div class="col-12 col-md-6 activity-edit-form pb-5">
             {{ form_start(form) }}
             {{ form_widget(form) }}
-            <button type="submit" class="btn btn-green" formnovalidate>Keisti</button>
-
+            <button type="submit" class="btn btn-green" formnovalidate="formnovalidate">Išsaugoti</button>
             {{ form_end(form) }}
-        </div>
+        </div>        
     </div>
 </div>
 {% endblock %}

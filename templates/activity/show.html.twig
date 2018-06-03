@@ -22,7 +22,7 @@
                     {% if activity.pathToLogo is not empty %}
                         <img class="img-fluid mb-3" src="{{ asset( activity.pathToLogo) }}"/>
                     {% else %}
-                        <img class="card-img-top mb-3" src="https://placeimg.com/640/480/any" alt="Card image cap"/>
+                        <img class="card-img-top mb-3" src="/uploads/33e75ff09dd601bbe69f351039152189.jpg" alt="Card image cap"/>
                     {% endif %}
                     <ul class="info-list">
                         <li>
@@ -31,7 +31,11 @@
                         </li>
                         <li>
                             <span><i class="fas fa-euro-sign"></i></span>
-                            Kaina: {{ activity.priceFrom }} - {{ activity.priceTo }}
+                            {% if activity.priceFrom == activity.priceTo %}
+                                Kaina: {{ activity.priceFrom }}
+                            {% else %}
+                                Kaina: {{ activity.priceFrom }} - {{ activity.priceTo }}
+                            {% endif %}
                         </li>
                         <li>
                             <span><i class="fas fa-user"></i></span>

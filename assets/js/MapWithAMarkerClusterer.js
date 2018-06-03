@@ -47,7 +47,9 @@ const MapWithAMarkerClusterer = compose(
 
                                 <a className="card-btn overlay" href={"/activity/" + marker.id}><i className="fas fa-search-plus"></i></a>
 
-                                <img className="img-fluid" src={marker.pathToLogo} alt="Card image cap" />
+                                <img className="img-fluid" 
+                                    src={marker.pathToLogo ? marker.pathToLogo : '/uploads/33e75ff09dd601bbe69f351039152189.jpg'}
+                                    alt="Card image cap" />
 
                                 <button className="like-btn"
                                         onClick={() => {
@@ -71,7 +73,7 @@ const MapWithAMarkerClusterer = compose(
                                 </button>
 
                                 <div className="price">
-                                    {marker.priceFrom}-{marker.priceTo} €
+                                        {marker.priceFrom === marker.priceTo ? (marker.priceFrom) : (marker.priceFrom + "-" + marker.priceTo)} €
                                 </div>
                             </div>
 

@@ -48,17 +48,33 @@
     z-index: 4;
     border: none;
     cursor: pointer;
+    transition: all 300ms;
+    &:hover {
+      box-shadow: 0 0 20px #E91E63;
+    }
+    &:focus {
+      outline: none;
+    }
 }
-.like-btn:hover {
-  box-shadow: 0 0 20px #E91E63;
+.like-btn:disabled {
+  cursor: default;
+  background: transparent;
+  color: #ff3a72;
+  .fa-heart {
+    font-weight: 900;
+  }
+} 
+.like-btn:disabled:hover {
+  box-shadow: none;
 }
+
 .price {
   position: absolute;
-    top: 0;
+    top: 1px;
     right: 0;
     color: #fff;
     padding: 4px 8px 4px 4px;
-    font-size: 14px;
+    font-size: 18px;
     background: #0000006e;
 }
 .overlay {
