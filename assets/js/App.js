@@ -1,6 +1,5 @@
 import React from 'react';
 import Filter from './components/Filter.js';
-import Sort from './components/Sort.js';
 import Favorite from './components/Favorite';
 import { Pagination } from '@react-bootstrap/pagination';
 import MapComponent from "./MapComponent";

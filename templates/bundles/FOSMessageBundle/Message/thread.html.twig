@@ -3,25 +3,44 @@
 {% block fos_message_content %}
 
     <h2 class="py-3">Susirašinėjimo tema: {{ thread.subject }}</h2>
-    <div class="accordion" id="accordion">
+    <div class="row">
+
         {% for message in thread.messages %}
-            {#{% if message.sender == app.user %}#}
-                {#do something#}
-            {#{% else %}#}
-                {#do something else#}
-            {#{% endif %}#}
-            <div class="messenger_thread_message d-flex mssg-box">
-                <div class="mssg-avatar"></div>
-                <div class="pl-2">
-                    <p class="mb-0 mssg-sender">
-                            {% trans with {'%sender%': message.sender.name, '%date%': message.createdAt|date} from 'FOSMessageBundle' %}message_info{% endtrans %}
-                    </p>
-                    <div class="mssg-text">
-                        {{ message.body }}
+            {% if message.sender == app.user %}
+                <div class="messenger_thread_message col-12">
+                    <div class="col-6">
+                        <p class="mb-0 mssg-sender">
+                            {% trans with {
+                                '%sender%' : message.sender.name,
+                                '%date%' : message.createdAt | date
+                            }
+                            from 'FOSMessageBundle' %}message_info{% endtrans %}
+                        </p>
+                        <p class="mssg-text">
+                            {{ message.body }}
+                        </p>
                     </div>
                 </div>
+            {% else %}
+                <div class="messenger_thread_message col-12">
+                    <div class="col-6">
+                        <p class="mb-0 mssg-sender">
+                            {% trans with {
+                                '%sender%' : message.sender.name,
+                                '%date%' : message.createdAt | date
+                            }
+                            from 'FOSMessageBundle' %}message_info{% endtrans %}
+                        </p>
+                        <p class="mssg-text-oponent">
+                            {{ message.body }}
+                        </p>
+                    </div>
+                </div>
+            {% endif %}
+
         {% endfor %}
-    </div>
+
+<div class="col-12">
     <h3 class="py-3">{% trans from 'FOSMessageBundle' %}reply{% endtrans %}</h3>
 <div class="mb-5 pb-5">
     <form action="{{ url('fos_message_thread_view', {'threadId': thread.id}) }}" method="post">
@@ -30,5 +49,6 @@
         <button type="submit" class="btn btn-green" formnovalidate>Siųsti žinutę</button>
 
     </form>
+</div>
 </div>
 {% endblock %}
