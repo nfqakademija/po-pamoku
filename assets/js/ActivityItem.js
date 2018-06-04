@@ -10,11 +10,44 @@ class ActivityItem extends React.Component {
         }
     }
 
+    getfavorites = () => {
+        const favoritesValue = localStorage.getItem('favorites');
+        return (!!favoritesValue && JSON.parse(favoritesValue)) || [];
+    }
+
+    isFavorite = (id) => {
+        return this.getfavorites().find((item) => item === id);
+    };
+
+    onFavorite = (id) => {
+        let favorites = this.getfavorites();
+        const { onFavorited } = this.props;
+        const isFavorite = this.isFavorite(id);
+
+        if(!!isFavorite){
+            for(let i = favorites.length - 1; i >= 0; --i) {
+                if(favorites[i] === id) {
+                    favorites.splice(i, 1);
+                }
+            }
+        }
+        else{
+            favorites.push(id);
+        }
+
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+
+        this.setState({ isFav: !isFavorite });
+        onFavorited();
+    };
+
 
 render() {
-    const { item: activity } = this.props;
-   return (
-   <div className="col-xs-6 col-sm-6 col-lg-4 py-3">
+    const { item: activity, isInInfoWindow } = this.props;
+    const isFavorite = this.isFavorite(activity.id);
+
+    return (
+   <div className={!isInInfoWindow ? 'col-xs-6 col-sm-6 col-lg-4 py-3' : ''}>
         <div className="activity-card">
             <div className="card-image">
 
@@ -23,18 +56,10 @@ render() {
                 src={activity.pathToLogo ? activity.pathToLogo : '/uploads/33e75ff09dd601bbe69f351039152189.jpg'} 
                 alt="Card image cap" />
                 <button className="like-btn"
-                    onClick={() => {
-                            if (localStorage.getItem('favorite' + activity.id) === null){
-                                localStorage.setItem('favorite' + activity.id, JSON.stringify(activity));
-                                this.setState({ isFav: true });
-                            }
-                            else {
-                                localStorage.removeItem('favorite' + activity.id);
-                                this.setState({ isFav: false });
-                            }
-                        }}>
+                    onClick={() => this.onFavorite(activity.id)}
+                >
 
-                        <i className={this.state.isFav || localStorage.getItem('favorite' + activity.id) ? 'fas fa-heart' : 'far fa-heart'} ></i>
+                        <i className={isFavorite ? 'fas fa-heart' : 'far fa-heart'} ></i>
                 </button>
 
                 <div className="price">
