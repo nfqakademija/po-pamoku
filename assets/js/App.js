@@ -9,8 +9,11 @@ import ActivityItem from './ActivityItem.js';
 class App extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
         activities: [],
+        allActivities: [],
+        // activities: data.Activities,
         currentPageNumber: 1,
         totalActivities: 1,
         addFilter: false,
@@ -20,7 +23,8 @@ class App extends React.Component {
         lng: 24.0,
         zoom: 7,
         query: '/api/activity?page=1&limit=99999',
-        favorites: []
+        favoritesLength: 0,
+
     };
     this.onFilterChange = this.onFilterChange.bind(this);
     this.my = this.my.bind(this);
@@ -28,28 +32,42 @@ class App extends React.Component {
 
   componentDidMount() {
     this.getActivities(1);
+    this.getLocalStorage();
+
+    this.onFavorited();
+
+
+      axios.get(this.state.query)
+          .then(function (response) {
+              this.setState({
+                  allActivities: Object.keys(response.data).map(i => response.data[i])[1],
+              });
+          }.bind(this))
+          .catch(function (error) {
+              console.error(error);
+          });
   }
 
- getActivities(page) {
-   axios.get('/api/activity?page=' + page + '&limit=12')
-     .then(function (response) {
-       this.setState({
-         activities: Object.keys(response.data).map(i => response.data[i])[1],
-         currentPageNumber: page,
-         totalActivities: Object.keys(response.data).map(i => response.data[i])[0]
-       });
-     }.bind(this))
-     .catch(function (error) {
-       console.error(error);
-     });
+getActivities(page) {
+    axios.get('/api/activity?page=' + page + '&limit=12')
+        .then(function (response) {
+            this.setState({
+                activities: response.data.Activities,
+                currentPageNumber: page,
+                totalActivities: response.data.count
+            });
+        }.bind(this))
+        .catch(function (error) {
+            console.error(error);
+        });
 }
   searchActivities(page, value) {
     axios.get('/api/activity?page=' + page + '&limit=12&search=' + value.search + '&city=' + value.cityId + '&category=' + value.category +
       '&weekday=' + value.weekday + '&time=' + value.time + '&age=' + value.age + '&price=' + value.price + '&subcategory=' + value.subcategory)
       .then(function (response) {
         this.setState({
-            activities: Object.keys(response.data).map(i => response.data[i])[1],
-            totalActivities: Object.keys(response.data).map(i => response.data[i])[0],
+            activities: response.data.Activities,
+            totalActivities: response.data.count,
             addFilter: true,
             isMap: false,
             query: '/api/activity?page=1&limit=99999&search=' + value.search + '&city=' + value.cityId + '&category=' +
@@ -108,14 +126,29 @@ getLocalStorage() {
       //alert("Unable to retrieve your location");
     });
   };
+    onGetFavoritesLength = () => {
+        const favoritesValue = localStorage.getItem('favorites');
+        const favorites =  (favoritesValue && JSON.parse(favoritesValue)) || [];
+
+        return favorites.length;
+    };
+
+    onFavorited = () => {
+        this.setState({
+            favoritesLength: this.onGetFavoritesLength()
+        });
+    };
+
+
 
   render() {
-    const { activities,
+    const {
+        activities,
+        allActivities,
       currentPage,
       activitiesPerPage,
       lat,
       lng,
-      favorites
     } = this.state;
     let totalPages = Math.ceil(this.state.totalActivities / 12);
 
@@ -125,6 +158,7 @@ const btnSwitch = (
             className="btn map-btn mt-3"
             onClick={() => {
                 this.setState({ isMap: !this.state.isMap });
+
 
             }}>
               <i className="fas fa-map-marker"></i>
@@ -139,14 +173,23 @@ const btnSwitch = (
           onClick={this.my}
           >Rasti mano vietą</button>
       );
-    let favs = [];
-    for (let i = 0; i < localStorage.length; i++) {
-        if(localStorage.key( i ).indexOf('favorite') === 0){
+    const favs = [];
+      const favoritesValue = localStorage.getItem('favorites');
+      const favorites =  (!!favoritesValue && JSON.parse(favoritesValue)) || [];
+
+    for (let i = 0; i < allActivities.length; i++) {
+        const isFavorite = favorites.find((item) => parseInt(item) === parseInt(allActivities[i].id));
+
+        if(!!isFavorite){
             favs.push(<ActivityItem
-                key={localStorage.key( i )}
-                item={JSON.parse(localStorage.getItem( localStorage.key( i ) ))}/>);
+                key={'favorited-item-' + allActivities[i].id}
+                item={allActivities[i]}
+                onFavorited={this.onFavorited}
+            />);
+
         }
     }
+
       return (
       <div>
         <div className="col-12 search-panel" id="filterTop">            
@@ -164,7 +207,11 @@ const btnSwitch = (
                     </a>
                   </li>
               <li className="nav-item">
-                <a className="nav-link" id="favorite-tab" data-toggle="tab" href="#favorite" role="tab" aria-controls="favorite" aria-selected="true">
+                <a className="nav-link" id="favorite-tab" data-toggle="tab" href="#favorite" role="tab" aria-controls="favorite" aria-selected="true"
+                   onClick={() => {
+                       this.onFavorited();
+                   }}
+                >
                 Mėgstamiausi</a>
               </li>
                 </ul>
@@ -183,7 +230,7 @@ const btnSwitch = (
                             {geo}
                           </div>
                           <div className="col-12">
-                            <MapComponent query={this.state.query} zoom={this.state.zoom} lat={this.state.lat} lng={this.state.lng} />
+                            <MapComponent query={this.state.query} zoom={this.state.zoom} lat={this.state.lat} lng={this.state.lng} markers={allActivities}/>
                           </div>
                         </div>
                       </div>
@@ -208,7 +255,9 @@ const btnSwitch = (
                   {activities.length !== 0 ? (activities.map((activity, index) =>
                   <ActivityItem
                   key={"currentAct" + index}
-                  item={activity} />
+                  item={activity}
+                  onFavorited={this.onFavorited}
+                  />
                   )) : ('')}
                     <div className="col-12 text-center pt-4">
                       <Pagination
